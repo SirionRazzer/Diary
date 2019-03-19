@@ -1,7 +1,8 @@
-package com.sirionrazzer.diary
+package com.sirionrazzer.diary.history
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.sirionrazzer.diary.R
 
 class HistoryActivity : AppCompatActivity() {
 

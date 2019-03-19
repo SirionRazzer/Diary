@@ -1,12 +1,13 @@
-package com.sirionrazzer.diary
+package com.sirionrazzer.diary.boarding
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.sirionrazzer.diary.R
 
-class TrackItemCreatorActivity : AppCompatActivity() {
+class BoardingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_trackitem_creator)
+        setContentView(R.layout.activity_boarding)
     }
 }
