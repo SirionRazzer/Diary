@@ -2,4 +2,5 @@
     <string name="app_name">Diary</string>
     <string name="sign_in">Sign in</string>
     <string name="your_email">Your email</string>
+    <string name="your_password">Password</string>
 </resources>
