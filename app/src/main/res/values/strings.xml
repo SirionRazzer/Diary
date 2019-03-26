@@ -3,4 +3,5 @@
     <string name="sign_in">Sign in</string>
     <string name="your_email">Your email</string>
     <string name="your_password">Password</string>
+    <string name="app_logo">App logo</string>
 </resources>
