@@ -1,7 +1,6 @@
 package com.sirionrazzer.diary.system.dagger
 
 import com.sirionrazzer.diary.boarding.BoardingActivity
-import com.sirionrazzer.diary.boarding.BoardingViewModel
 import com.sirionrazzer.diary.history.HistoryActivity
 import com.sirionrazzer.diary.history.HistoryViewModel
 import com.sirionrazzer.diary.main.MainActivity
@@ -16,7 +15,6 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [ApiModule::class, StorageModule::class])
 interface AppComponent {
-    fun inject(boardingViewModel: BoardingViewModel)
     fun inject(historyViewModel: HistoryViewModel)
     fun inject(trackItemViewerViewModel: TrackItemViewerViewModel)
     fun inject(trackItemCreatorViewModel: TrackItemCreatorViewModel)

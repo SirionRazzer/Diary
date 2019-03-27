@@ -10,12 +10,8 @@ import org.jetbrains.anko.startActivity
 
 class BoardingActivity : AppCompatActivity() {
 
-    lateinit var boardingViewModel: BoardingViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        boardingViewModel = ViewModelProviders.of(this)[BoardingViewModel::class.java]
 
         setContentView(R.layout.activity_boarding)
 
