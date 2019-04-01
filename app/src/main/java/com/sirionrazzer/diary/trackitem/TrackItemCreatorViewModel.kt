@@ -1,4 +1,6 @@
 package com.sirionrazzer.diary.trackitem
 
-class TrackItemCreatorViewModel {
+import android.arch.lifecycle.ViewModel
+
+class TrackItemCreatorViewModel: ViewModel() {
 }

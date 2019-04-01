@@ -15,6 +15,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [ApiModule::class, StorageModule::class])
 interface AppComponent {
+
     fun inject(historyViewModel: HistoryViewModel)
     fun inject(trackItemViewerViewModel: TrackItemViewerViewModel)
     fun inject(trackItemCreatorViewModel: TrackItemCreatorViewModel)
@@ -25,4 +26,5 @@ interface AppComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(trackItemCreatorActivity: TrackItemCreatorActivity)
     fun inject(trackItemViewerActivity: TrackItemViewerActivity)
+
 }

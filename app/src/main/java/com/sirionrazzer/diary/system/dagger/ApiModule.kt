@@ -18,6 +18,7 @@ import javax.inject.Singleton
 
 @Module
 class ApiModule {
+
     private val API_URL : String =
         "https://diary.someweb.com/api/"
 
@@ -47,6 +48,7 @@ class ApiModule {
             .build()
     }
 
+
     @Provides
     @Singleton
     fun provideGson(): Gson =
@@ -62,6 +64,5 @@ class ApiModule {
                     }
                 })
             .create()
-
 
 }

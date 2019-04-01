@@ -1,6 +1,11 @@
 package com.sirionrazzer.diary.models
 
-data class TrackItem (
+import com.google.gson.annotations.SerializedName
+import io.realm.RealmObject
+
+open class TrackItem (
+    var id: String,
+
     var name: String,
 
     // image from drawables
@@ -13,4 +18,7 @@ data class TrackItem (
     // optional number field
     var hasNumberField: Boolean,
     var numberField: Float?
-)
+) : RealmObject() {
+    // constructor used by Realm
+    constructor() : this("", "", "", false, "", false, 0f)
+}

@@ -1,4 +1,6 @@
 package com.sirionrazzer.diary.history
 
-class HistoryViewModel {
+import android.arch.lifecycle.ViewModel
+
+class HistoryViewModel: ViewModel() {
 }

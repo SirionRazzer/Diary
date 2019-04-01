@@ -10,4 +10,5 @@ class TrackItemCreatorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trackitem_creator)
     }
+
 }
