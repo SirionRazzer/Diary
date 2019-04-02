@@ -6,10 +6,11 @@ import io.realm.RealmObject
 open class TrackItem (
     var id: String,
 
-    var name: String,
+    // TrackItem assigned template
+    var templateId: String,
 
-    // image from drawables
-    var imageResource: String,
+    // on/off status of item
+    var status: Boolean,
 
     // optional text field
     var hasTextField: Boolean,
@@ -17,8 +18,10 @@ open class TrackItem (
 
     // optional number field
     var hasNumberField: Boolean,
-    var numberField: Float?
+    var numberField: Float?,
+
+    var date: Long // Calendar.getInstance().timeInMillis
 ) : RealmObject() {
     // constructor used by Realm
-    constructor() : this("", "", "", false, "", false, 0f)
+    constructor() : this("", "", false, false, "", false, 0f, 0)
 }

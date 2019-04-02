@@ -20,6 +20,7 @@ class MainViewModel: ViewModel() {
         Realm.getDefaultInstance()
     }
 
+
     init {
         Diary.app.appComponent.inject(this)
     }
@@ -39,6 +40,7 @@ class MainViewModel: ViewModel() {
         realm.close()
         super.onCleared()
     }
+
 }
 
 

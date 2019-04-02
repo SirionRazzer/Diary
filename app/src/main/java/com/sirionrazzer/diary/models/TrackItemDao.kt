@@ -12,12 +12,11 @@ class TrackItemDao(val realm: Realm) {
         realm.executeTransactionAsync {
             val item = TrackItem()
             item.id = Calendar.getInstance().timeInMillis.toString() + " " + UUID.randomUUID().toString()
-            item.name = trackItem.name
             item.hasNumberField = trackItem.hasNumberField
             item.numberField = trackItem.numberField
             item.hasTextField = trackItem.hasNumberField
             item.textField = trackItem.textField
-            item.imageResource = trackItem.imageResource
+            item.date = trackItem.date
             it.insert(item)
         }
     }
@@ -29,7 +28,7 @@ class TrackItemDao(val realm: Realm) {
     }
 
 
-    fun deleteItem(id: String) {
+    fun deleteTrackItem(id: String) {
         realm.executeTransactionAsync {
             val result = it.where(TrackItem::class.java).equalTo("id", id).findFirst()
             result?.deleteFromRealm()
