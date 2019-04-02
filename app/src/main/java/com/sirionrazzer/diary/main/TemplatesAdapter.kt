@@ -5,23 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
+import android.widget.TextView
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItemTemplate
+import kotlinx.android.synthetic.main.template_item.view.*
 
-class TemplatesAdapter : BaseAdapter {
+class TemplatesAdapter(private val context: Context) : BaseAdapter() {
 
-    lateinit var trackItemTemplateList: List<TrackItemTemplate>
-
-    var context: Context
-
-    constructor(context: Context, trackItemTemplateList: List<TrackItemTemplate>) : super() {
-        this.context = context
-        this.trackItemTemplateList = trackItemTemplateList
-    }
-
+    lateinit var mainViewModel: MainViewModel
 
     override fun getItem(position: Int): TrackItemTemplate {
-        return trackItemTemplateList[position]
+        return mainViewModel.currentTrackItems[position]
     }
 
 
@@ -31,20 +26,53 @@ class TemplatesAdapter : BaseAdapter {
 
 
     override fun getCount(): Int {
-        return trackItemTemplateList.size
+        return mainViewModel.currentTrackItems.size
     }
 
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val item = trackItemTemplateList[position]
+    override fun getView(position: Int, itemView: View?, parent: ViewGroup?): View {
+        var itemView = itemView
+        val holder: ViewHolder
 
-        var inflator = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val itemView = inflator.inflate(R.layout.template_item, null)
+        if (itemView == null) {
+            holder = ViewHolder()
 
-        // TODO: fill with data
-        //itemView.
+            var inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            itemView = inflater.inflate(R.layout.template_item, null, true)
+
+            holder.ivImage = itemView!!.trackitemImage as ImageView
+            holder.tvName = itemView!!.trackitemName as TextView
+
+            itemView.tag = holder
+        } else {
+            holder = itemView.tag as ViewHolder
+        }
+
+        if (!mainViewModel.currentTrackItems[position].deleted) {
+            holder.ivImage?.setImageResource(mainViewModel.currentTrackItems[position].imageOff)
+            holder.tvName?.text = mainViewModel.currentTrackItems[position].name
+
+            itemView.setOnClickListener {
+                if (holder.status == false) {
+                    holder.ivImage?.setImageResource(mainViewModel.currentTrackItems[position].imageOn)
+                    mainViewModel.currentTrackItems[position].status = true
+                } else {
+                    holder.ivImage?.setImageResource(mainViewModel.currentTrackItems[position].imageOff)
+                    mainViewModel.currentTrackItems[position].status = false
+                }
+
+                // TODO: handle input text/number fields
+            }
+        } else {
+            itemView.visibility = View.GONE
+        }
 
         return itemView
     }
 
+    private inner class ViewHolder {
+        var tvName: TextView? = null
+        var ivImage: ImageView? = null
+        internal var status: Boolean = false
+    }
 }
