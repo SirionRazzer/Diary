@@ -1,11 +1,9 @@
 package com.sirionrazzer.diary.main
 
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.models.*
 import io.realm.Realm
-import io.realm.RealmResults
 import java.util.*
 import javax.inject.Inject
 
@@ -18,19 +16,46 @@ class MainViewModel : ViewModel() {
         Realm.getDefaultInstance()
     }
 
+    var currentTrackItems: MutableList<TrackItem> = mutableListOf()
 
     init {
         Diary.app.appComponent.inject(this)
     }
 
 
-    fun loadTrackItems(): LiveData<RealmResults<TrackItem>> {
-        return realm.trackItemsDao.getAllTrackItems()
+    fun createItemsFromTemplates(): List<TrackItem> {
+        realm.trackItemsTemplatesDao.getAllTrackItemTemplates().let{
+            it.forEach{ it ->
+                val trackItem = TrackItem(
+                    id = UUID.randomUUID().toString(),
+                    deleted = it.deleted,
+                    name = it.name,
+                    imageOn = it.imageOn,
+                    imageOff = it.imageOff,
+                    hasTextField = it.hasTextField,
+                    hasNumberField = it.hasNumberField,
+                    status = false,
+                    textField = "",
+                    numberField = 0f,
+                    date = 0
+                )
+                currentTrackItems.add(trackItem)
+            }
+        }
+
+        return currentTrackItems
     }
 
 
-    fun saveTrackItem(trackItem: TrackItem) {
-        realm.trackItemsDao.addTrackItem(trackItem)
+    fun saveTrackItems() {
+        currentTrackItems.forEach {
+            realm.trackItemsDao.addTrackItem(it)
+        }
+    }
+
+
+    fun getTrackItemsFromTemplates() {
+        realm.trackItemsTemplatesDao.getAllTrackItemTemplates()
     }
 
 
@@ -41,32 +66,32 @@ class MainViewModel : ViewModel() {
 
 
     fun createDefaultTrackItems() {
-        var tit1 = TrackItemTemplate(
+        val tit1 = TrackItemTemplate(
             UUID.randomUUID().toString(),
             false,
             "work",
-            "",
-            "",
-            false,
-            false
+            0,
+            0,
+            hasTextField = false,
+            hasNumberField = false
         )
-        var tit2 = TrackItemTemplate(
+        val tit2 = TrackItemTemplate(
             UUID.randomUUID().toString(),
             false,
             "relax",
-            "",
-            "",
-            false,
-            false
+            0,
+            0,
+            hasTextField = false,
+            hasNumberField = false
         )
-        var tit3 = TrackItemTemplate(
+        val tit3 = TrackItemTemplate(
             UUID.randomUUID().toString(),
             false,
             "friends",
-            "",
-            "",
-            false,
-            false
+            0,
+            0,
+            hasTextField = false,
+            hasNumberField = false
         )
 
         realm.trackItemsTemplatesDao.addTrackItemTemplate(tit1)

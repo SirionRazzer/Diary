@@ -1,27 +1,29 @@
 package com.sirionrazzer.diary.models
 
-import com.google.gson.annotations.SerializedName
-import io.realm.RealmObject
-
 open class TrackItem (
-    var id: String,
-
-    // TrackItem assigned template
-    var templateId: String,
-
-    // on/off status of item
-    var status: Boolean,
-
-    // optional text field
-    var hasTextField: Boolean,
-    var textField: String?,
-
-    // optional number field
-    var hasNumberField: Boolean,
-    var numberField: Float?,
-
-    var date: Long // Calendar.getInstance().timeInMillis
-) : RealmObject() {
+    override var id: String,
+    override var deleted: Boolean,
+    override var name: String,
+    override var imageOn: Int,
+    override var imageOff: Int,
+    override var hasTextField: Boolean,
+    override var hasNumberField: Boolean,
+    open var status: Boolean, // on/off status of item
+    open var textField: String?, // optional text field
+    open var numberField: Float?, // optional number field
+    open var date: Long // creation time like Calendar.getInstance().timeInMillis
+) : TrackItemTemplate(id, deleted, name, imageOn, imageOff, hasTextField, hasNumberField) {
     // constructor used by Realm
-    constructor() : this("", "", false, false, "", false, 0f, 0)
+    constructor() : this("",
+        false,
+        "",
+        0,
+        0,
+        false,
+        false,
+        false,
+        "",
+        0f,
+        0
+        )
 }

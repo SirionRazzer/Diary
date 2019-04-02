@@ -45,8 +45,10 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun saveTrackItem(trackItem: TrackItem) {
-        // TODO
+    private fun save() {
+        var trackItem: TrackItem
+
+        // TODO save all track items
     }
 
 }

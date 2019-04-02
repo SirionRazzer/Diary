@@ -1,22 +1,27 @@
 package com.sirionrazzer.diary.models
 
 import android.arch.lifecycle.LiveData
-import java.util.*
 import io.realm.Realm
 import io.realm.RealmResults
 
 class TrackItemDao(val realm: Realm) {
 
-
     fun addTrackItem(trackItem: TrackItem) {
         realm.executeTransactionAsync {
-            val item = TrackItem()
-            item.id = Calendar.getInstance().timeInMillis.toString() + " " + UUID.randomUUID().toString()
-            item.hasNumberField = trackItem.hasNumberField
-            item.numberField = trackItem.numberField
-            item.hasTextField = trackItem.hasNumberField
-            item.textField = trackItem.textField
-            item.date = trackItem.date
+            //item.id = Calendar.getInstance().timeInMillis.toString() + " " + UUID.randomUUID().toString()
+            val item = TrackItem(
+                id = trackItem.id,
+                deleted = trackItem.deleted,
+                name = trackItem.name,
+                imageOn = trackItem.imageOn,
+                imageOff = trackItem.imageOff,
+                hasTextField = trackItem.hasTextField,
+                hasNumberField = trackItem.hasNumberField,
+                status = trackItem.status,
+                textField = trackItem.textField,
+                numberField = trackItem.numberField,
+                date = trackItem.date
+            )
             it.insert(item)
         }
     }

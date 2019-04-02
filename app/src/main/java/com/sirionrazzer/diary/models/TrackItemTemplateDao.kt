@@ -1,23 +1,22 @@
 package com.sirionrazzer.diary.models
 
 import android.arch.lifecycle.LiveData
-import java.util.*
 import io.realm.Realm
 import io.realm.RealmResults
 
 class TrackItemTemplateDao(val realm: Realm) {
 
-
     fun addTrackItemTemplate(trackItemTemplate: TrackItemTemplate) {
         realm.executeTransactionAsync {
-            val item = TrackItemTemplate()
-            item.id =  trackItemTemplate.id
-            item.deleted = trackItemTemplate.deleted
-            item.name = trackItemTemplate.name
-            item.imageOn = trackItemTemplate.imageOn
-            item.imageOff = trackItemTemplate.imageOff
-            item.hasTextField = trackItemTemplate.hasTextField
-            item.hasNumberField = trackItemTemplate.hasNumberField
+            val item = TrackItemTemplate(
+                id = trackItemTemplate.id,
+                deleted = trackItemTemplate.deleted,
+                name = trackItemTemplate.name,
+                imageOn = trackItemTemplate.imageOn,
+                imageOff = trackItemTemplate.imageOff,
+                hasTextField = trackItemTemplate.hasTextField,
+                hasNumberField = trackItemTemplate.hasNumberField
+            )
             it.insert(item)
         }
     }
@@ -37,9 +36,17 @@ class TrackItemTemplateDao(val realm: Realm) {
     }
 
 
-    fun getAllTrackItemTemplates(): LiveData<RealmResults<TrackItemTemplate>> {
+    fun getAllTrackItemTemplates(): List<TrackItemTemplate> {
         var items = realm.where(TrackItemTemplate::class.java).findAll()
-        return RealmLiveData<TrackItemTemplate>(items)
+        var trackItemTemplates = mutableListOf<TrackItemTemplate>()
+
+        items.let {
+            it.forEach {
+                trackItemTemplates.add(it)
+            }
+        }
+
+        return trackItemTemplates
     }
 
 

@@ -51,5 +51,4 @@ class UserStorage @Inject constructor() {
             updateFunc(this)
         }
     }
-
 }

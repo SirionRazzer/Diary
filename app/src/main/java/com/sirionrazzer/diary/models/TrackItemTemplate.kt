@@ -3,18 +3,14 @@ package com.sirionrazzer.diary.models
 import io.realm.RealmObject
 
 open class TrackItemTemplate (
-    var id: String,
-
-    var deleted: Boolean,
-
-    var name: String,
-
-    var imageOn: String,
-    var imageOff: String,
-
-    var hasTextField: Boolean,
-    var hasNumberField: Boolean
+    open var id: String,
+    open var deleted: Boolean,
+    open var name: String,
+    open var imageOn: Int,
+    open var imageOff: Int,
+    open var hasTextField: Boolean,
+    open var hasNumberField: Boolean
 ) : RealmObject() {
     // constructor used by Realm
-    constructor() : this("", false,"", "", "", false, false)
+    constructor() : this("", false,"", 0, 0, false, false)
 }
