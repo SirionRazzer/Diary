@@ -45,4 +45,11 @@ class UserStorage @Inject constructor() {
         prefs.edit().clear().apply()
     }
 
+
+    fun updateSettings(updateFunc: (LocalUserSettings) -> Unit) {
+        userSettings = userSettings.apply {
+            updateFunc(this)
+        }
+    }
+
 }

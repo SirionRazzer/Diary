@@ -1,14 +1,21 @@
 package com.sirionrazzer.diary.main
 
-import android.arch.lifecycle.ViewModel
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.sirionrazzer.diary.R
+import com.sirionrazzer.diary.models.TrackItem
+import com.sirionrazzer.diary.models.UserStorage
+import com.sirionrazzer.diary.trackitem.TrackItemCreatorActivity
 import kotlinx.android.synthetic.main.toolbar.*
+import org.jetbrains.anko.startActivity
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var purchaseViewModel: MainViewModel
+    lateinit var mainViewModel: MainViewModel
+
+    @Inject
+    lateinit var userStorage: UserStorage
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,9 +24,32 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        val firstTime = userStorage.userSettings.firstTime
+        if (firstTime) {
+            createDefaultTrackItems()
+        } else {
+            userStorage.updateSettings {
+                it.firstTime = false
+            }
+        }
+
     }
 
 
+    private fun createDefaultTrackItems() {
+        // TODO
+    }
 
+
+    private fun createNewTrackItem() {
+        startActivity<TrackItemCreatorActivity>()
+        finish()
+    }
+
+
+    private fun saveTrackItem(trackItem: TrackItem) {
+        // TODO
+    }
 
 }
