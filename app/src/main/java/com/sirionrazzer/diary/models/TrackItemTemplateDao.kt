@@ -11,11 +11,13 @@ class TrackItemTemplateDao(val realm: Realm) {
     fun addTrackItemTemplate(trackItemTemplate: TrackItemTemplate) {
         realm.executeTransactionAsync {
             val item = TrackItemTemplate()
-            item.id = Calendar.getInstance().timeInMillis.toString() + " " + UUID.randomUUID().toString()
+            item.id =  trackItemTemplate.id
             item.deleted = trackItemTemplate.deleted
             item.name = trackItemTemplate.name
             item.imageOn = trackItemTemplate.imageOn
             item.imageOff = trackItemTemplate.imageOff
+            item.hasTextField = trackItemTemplate.hasTextField
+            item.hasNumberField = trackItemTemplate.hasNumberField
             it.insert(item)
         }
     }

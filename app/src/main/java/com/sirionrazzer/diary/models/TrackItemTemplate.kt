@@ -10,8 +10,11 @@ open class TrackItemTemplate (
     var name: String,
 
     var imageOn: String,
-    var imageOff: String
+    var imageOff: String,
+
+    var hasTextField: Boolean,
+    var hasNumberField: Boolean
 ) : RealmObject() {
     // constructor used by Realm
-    constructor() : this("", false,"", "", "")
+    constructor() : this("", false,"", "", "", false, false)
 }

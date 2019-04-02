@@ -27,18 +27,15 @@ class MainActivity : AppCompatActivity() {
 
         val firstTime = userStorage.userSettings.firstTime
         if (firstTime) {
-            createDefaultTrackItems()
+            mainViewModel.createDefaultTrackItems()
         } else {
             userStorage.updateSettings {
                 it.firstTime = false
             }
         }
 
-    }
+        // TODO fill ListView
 
-
-    private fun createDefaultTrackItems() {
-        // TODO
     }
 
 
