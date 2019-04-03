@@ -1,8 +1,7 @@
 package com.sirionrazzer.diary.main
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.google.android.gms.common.api.Api
+import android.support.v7.app.AppCompatActivity
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
