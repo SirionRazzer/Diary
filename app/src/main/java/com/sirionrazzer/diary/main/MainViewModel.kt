@@ -1,5 +1,6 @@
 package com.sirionrazzer.diary.main
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.ViewModel
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.models.*
@@ -7,6 +8,7 @@ import io.realm.Realm
 import java.util.*
 import javax.inject.Inject
 
+@SuppressLint("CheckResult")
 class MainViewModel : ViewModel() {
 
     @Inject

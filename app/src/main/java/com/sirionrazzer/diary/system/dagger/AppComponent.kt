@@ -5,6 +5,7 @@ import com.sirionrazzer.diary.history.HistoryActivity
 import com.sirionrazzer.diary.history.HistoryViewModel
 import com.sirionrazzer.diary.main.MainActivity
 import com.sirionrazzer.diary.main.MainViewModel
+import com.sirionrazzer.diary.models.UserStorage
 import com.sirionrazzer.diary.trackitem.TrackItemCreatorActivity
 import com.sirionrazzer.diary.trackitem.TrackItemCreatorViewModel
 import com.sirionrazzer.diary.trackitem.TrackItemViewerActivity
@@ -21,10 +22,9 @@ interface AppComponent {
     fun inject(trackItemCreatorViewModel: TrackItemCreatorViewModel)
     fun inject(mainViewModel: MainViewModel)
 
+    fun inject(mainActivity: MainActivity)
     fun inject(boardingActivity: BoardingActivity)
     fun inject(historyActivity: HistoryActivity)
-    fun inject(mainActivity: MainActivity)
     fun inject(trackItemCreatorActivity: TrackItemCreatorActivity)
     fun inject(trackItemViewerActivity: TrackItemViewerActivity)
-
 }
