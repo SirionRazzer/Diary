@@ -2,11 +2,13 @@ package com.sirionrazzer.diary.main
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.GridView
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
 import com.sirionrazzer.diary.models.UserStorage
 import com.sirionrazzer.diary.trackitem.TrackItemCreatorActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.startActivity
 import javax.inject.Inject
@@ -18,6 +20,9 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var mainViewModel: MainViewModel
+
+    lateinit var gv: GridView
+    lateinit var adapter: TemplatesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +46,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         // TODO fill ListView
-
+        gv = itemGrid
+        adapter = TemplatesAdapter(this, mainViewModel)
+        gv.adapter = adapter
     }
 
 

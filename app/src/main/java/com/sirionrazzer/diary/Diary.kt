@@ -4,6 +4,7 @@ import android.app.Application
 import com.sirionrazzer.diary.system.dagger.ApiModule
 import com.sirionrazzer.diary.system.dagger.AppComponent
 import com.sirionrazzer.diary.system.dagger.DaggerAppComponent
+import com.sirionrazzer.diary.system.dagger.StorageModule
 import io.realm.Realm
 
 class Diary : Application() {
@@ -12,6 +13,7 @@ class Diary : Application() {
         DaggerAppComponent
             .builder()
             .apiModule(ApiModule())
+            .storageModule(StorageModule(this))
             .build()
     }
 
@@ -28,7 +30,6 @@ class Diary : Application() {
 
     companion object {
         lateinit var app: Diary
-
     }
 
 }

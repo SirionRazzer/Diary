@@ -1,5 +1,6 @@
 package com.sirionrazzer.diary.system.dagger
 
+import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import com.sirionrazzer.diary.Diary
@@ -10,7 +11,7 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
-class StorageModule {
+class StorageModule(val app: Application) {
 
     @Provides
     @Singleton

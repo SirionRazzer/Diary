@@ -3,6 +3,7 @@ package com.sirionrazzer.diary.main
 import android.annotation.SuppressLint
 import android.arch.lifecycle.ViewModel
 import com.sirionrazzer.diary.Diary
+import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.*
 import io.realm.Realm
 import java.util.*
@@ -22,8 +23,6 @@ class MainViewModel : ViewModel() {
     var currentTemplateItems: MutableList<TrackItemTemplate> = mutableListOf()
 
     init {
-        Diary.app.appComponent.inject(this)
-
         realm.trackItemsTemplatesDao.getAllTrackItemTemplates().let{
             it.forEach{ it ->
                 val trackItem = TrackItem(
@@ -55,6 +54,8 @@ class MainViewModel : ViewModel() {
                 currentTemplateItems.add(templateItem)
             }
         }
+
+        Diary.app.appComponent.inject(this)
     }
 
 
@@ -90,7 +91,7 @@ class MainViewModel : ViewModel() {
             UUID.randomUUID().toString(),
             false,
             "relax",
-            0,
+            R.drawable.diary_logo,
             0,
             hasTextField = false,
             hasNumberField = false
