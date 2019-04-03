@@ -1,18 +1,20 @@
 package com.sirionrazzer.diary.models
 
+import io.realm.RealmObject
+
 open class TrackItem (
-    override var id: String,
-    override var deleted: Boolean,
-    override var name: String,
-    override var imageOn: Int,
-    override var imageOff: Int,
-    override var hasTextField: Boolean,
-    override var hasNumberField: Boolean,
+    var id: String,
+    var deleted: Boolean,
+    var name: String,
+    var imageOn: Int,
+    var imageOff: Int,
+    var hasTextField: Boolean,
+    var hasNumberField: Boolean,
     open var status: Boolean, // on/off status of item
     open var textField: String?, // optional text field
     open var numberField: Float?, // optional number field
     open var date: Long // creation time like Calendar.getInstance().timeInMillis
-) : TrackItemTemplate(id, deleted, name, imageOn, imageOff, hasTextField, hasNumberField) {
+) : RealmObject() {
     // constructor used by Realm
     constructor() : this("",
         false,

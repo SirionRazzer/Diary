@@ -17,13 +17,11 @@ class MainViewModel : ViewModel() {
     }
 
     var currentTrackItems: MutableList<TrackItem> = mutableListOf()
+    var currentTemplateItems: MutableList<TrackItemTemplate> = mutableListOf()
 
     init {
         Diary.app.appComponent.inject(this)
-    }
 
-
-    fun createItemsFromTemplates(): List<TrackItem> {
         realm.trackItemsTemplatesDao.getAllTrackItemTemplates().let{
             it.forEach{ it ->
                 val trackItem = TrackItem(
@@ -41,9 +39,20 @@ class MainViewModel : ViewModel() {
                 )
                 currentTrackItems.add(trackItem)
             }
-        }
 
-        return currentTrackItems
+            it.forEach{it->
+                val templateItem = TrackItemTemplate(
+                    id = it.id,
+                    deleted = it.deleted,
+                    name = it.name,
+                    imageOn = it.imageOn,
+                    imageOff = it.imageOff,
+                    hasTextField = it.hasTextField,
+                    hasNumberField = it.hasNumberField
+                )
+                currentTemplateItems.add(templateItem)
+            }
+        }
     }
 
 

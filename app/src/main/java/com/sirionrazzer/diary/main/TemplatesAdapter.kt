@@ -8,6 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.sirionrazzer.diary.R
+import com.sirionrazzer.diary.models.TrackItem
 import com.sirionrazzer.diary.models.TrackItemTemplate
 import kotlinx.android.synthetic.main.template_item.view.*
 
@@ -15,7 +16,7 @@ class TemplatesAdapter(private val context: Context) : BaseAdapter() {
 
     lateinit var mainViewModel: MainViewModel
 
-    override fun getItem(position: Int): TrackItemTemplate {
+    override fun getItem(position: Int): TrackItem {
         return mainViewModel.currentTrackItems[position]
     }
 
