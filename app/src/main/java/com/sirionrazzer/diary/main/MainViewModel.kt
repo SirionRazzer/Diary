@@ -1,6 +1,8 @@
 package com.sirionrazzer.diary.main
 
 import android.annotation.SuppressLint
+import android.app.Application
+import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.ViewModel
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
@@ -82,8 +84,8 @@ class MainViewModel : ViewModel() {
             UUID.randomUUID().toString(),
             false,
             "work",
-            0,
-            0,
+            R.drawable.diary_logo,
+            R.drawable.diary_logo,
             hasTextField = false,
             hasNumberField = false
         )
@@ -92,7 +94,7 @@ class MainViewModel : ViewModel() {
             false,
             "relax",
             R.drawable.diary_logo,
-            0,
+            R.drawable.diary_logo,
             hasTextField = false,
             hasNumberField = false
         )
@@ -100,8 +102,8 @@ class MainViewModel : ViewModel() {
             UUID.randomUUID().toString(),
             false,
             "friends",
-            0,
-            0,
+            R.drawable.diary_logo,
+            R.drawable.diary_logo,
             hasTextField = false,
             hasNumberField = false
         )
