@@ -18,8 +18,4 @@ class StorageModule(val app: Application) {
     @Named("user_prefs")
     fun provideUserPrefs(): SharedPreferences =
         Diary.app.getSharedPreferences("users", Context.MODE_PRIVATE)
-
-    @Provides
-    @Singleton
-    fun provideMainViewModel(): MainViewModel = MainViewModel()
 }

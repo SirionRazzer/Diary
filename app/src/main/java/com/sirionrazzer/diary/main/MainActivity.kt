@@ -12,13 +12,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.startActivity
 import javax.inject.Inject
+import android.arch.lifecycle.ViewModelProviders
 
 class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var userStorage: UserStorage
 
-    @Inject
     lateinit var mainViewModel: MainViewModel
 
     lateinit var gv: GridView
@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         Diary.app.appComponent.inject(this)
+
+        mainViewModel = createViewModel()
 
         val us = userStorage.userSettings
 
@@ -62,6 +64,10 @@ class MainActivity : AppCompatActivity() {
         var trackItem: TrackItem
 
         // TODO save all track items
+    }
+
+    fun createViewModel(): MainViewModel {
+        return ViewModelProviders.of(this).get(MainViewModel::class.java)
     }
 
 }
