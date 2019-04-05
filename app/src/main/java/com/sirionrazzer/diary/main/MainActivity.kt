@@ -1,8 +1,9 @@
 package com.sirionrazzer.diary.main
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.GridView
+import android.support.v7.widget.Toolbar
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
@@ -12,7 +13,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.startActivity
 import javax.inject.Inject
-import android.arch.lifecycle.ViewModelProviders
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,8 +20,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var userStorage: UserStorage
 
     lateinit var mainViewModel: MainViewModel
-
-    lateinit var gv: GridView
     lateinit var adapter: TemplatesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,9 +32,10 @@ class MainActivity : AppCompatActivity() {
 
         val us = userStorage.userSettings
 
+        toolbar.setTitle(R.string.title_my_day)
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
 
         val firstTime = us.firstTime
         if (firstTime) {
@@ -47,10 +46,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // TODO fill ListView
-        gv = itemGrid
         adapter = TemplatesAdapter(this, mainViewModel)
-        gv.adapter = adapter
+        itemGrid.adapter = adapter
     }
 
 

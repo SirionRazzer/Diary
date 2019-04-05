@@ -6,11 +6,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowLightStatusBar">true</item>
-    </style>
-
-    <style name="HeaderBar">
-        <item name="android:background">@color/colorPrimary</item>
     </style>
 
 </resources>
