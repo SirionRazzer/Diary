@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.template_item.view.*
 
 class TemplatesAdapter(private val context: Context, private val mainViewModel: MainViewModel) : BaseAdapter() {
@@ -48,19 +49,22 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
         }
 
         if (!mainViewModel.currentTrackItems[position].deleted) {
-            holder.ivImage?.setImageResource(mainViewModel.currentTrackItems[position].imageOff)
+            Picasso.get().load(mainViewModel.currentTrackItems[position].imageOff).into(holder.ivImage)
+            holder.ivImage?.alpha = 0.4f
             holder.tvName?.text = mainViewModel.currentTrackItems[position].name
 
             itemView.setOnClickListener {
                 if (holder.status == false) {
-                    holder.ivImage?.setImageResource(mainViewModel.currentTrackItems[position].imageOn)
+                    Picasso.get().load(mainViewModel.currentTrackItems[position].imageOn).into(holder.ivImage)
                     mainViewModel.currentTrackItems[position].status = true
                     holder.status = true
+                    holder.ivImage?.alpha = 1.0f
                     Log.d("TemplatesAdapter", "Clicked: " + position + ". track item, the state was false and now is " + holder.status.toString())
                 } else {
-                    holder.ivImage?.setImageResource(mainViewModel.currentTrackItems[position].imageOff)
+                    Picasso.get().load(mainViewModel.currentTrackItems[position].imageOff).into(holder.ivImage)
                     mainViewModel.currentTrackItems[position].status = false
                     holder.status = false
+                    holder.ivImage?.alpha = 0.4f
                     Log.d("TemplatesAdapter", "Clicked: " + position + ". track item, the state was true and now is " + holder.status.toString())
                 }
 
