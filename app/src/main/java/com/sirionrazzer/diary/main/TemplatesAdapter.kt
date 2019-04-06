@@ -49,23 +49,34 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
         }
 
         if (!mainViewModel.currentTrackItems[position].deleted) {
+
             Picasso.get().load(mainViewModel.currentTrackItems[position].imageOff).into(holder.ivImage)
             holder.ivImage?.alpha = 0.4f
             holder.tvName?.text = mainViewModel.currentTrackItems[position].name
 
+            mainViewModel.currentTrackItems[position].status = false
+
             itemView.setOnClickListener {
                 if (holder.status == false) {
                     Picasso.get().load(mainViewModel.currentTrackItems[position].imageOn).into(holder.ivImage)
-                    mainViewModel.currentTrackItems[position].status = true
                     holder.status = true
                     holder.ivImage?.alpha = 1.0f
-                    Log.d("TemplatesAdapter", "Clicked: " + position + ". track item, the state was false and now is " + holder.status.toString())
+                    Log.d(
+                        "TemplatesAdapter",
+                        "Clicked: " + position + ". track item, the state was false and now is " + holder.status.toString()
+                    )
+
+                    mainViewModel.currentTrackItems[position].status = true
                 } else {
                     Picasso.get().load(mainViewModel.currentTrackItems[position].imageOff).into(holder.ivImage)
-                    mainViewModel.currentTrackItems[position].status = false
                     holder.status = false
                     holder.ivImage?.alpha = 0.4f
-                    Log.d("TemplatesAdapter", "Clicked: " + position + ". track item, the state was true and now is " + holder.status.toString())
+                    Log.d(
+                        "TemplatesAdapter",
+                        "Clicked: " + position + ". track item, the state was true and now is " + holder.status.toString()
+                    )
+
+                    mainViewModel.currentTrackItems[position].status = false
                 }
 
                 // TODO: handle input text/number fields
