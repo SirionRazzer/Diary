@@ -30,17 +30,13 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel = createViewModel()
 
-        val us = userStorage.userSettings
-
         toolbar.setTitle(R.string.title_my_day)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
-        val firstTime = us.firstTime
-        if (firstTime) {
+        if (userStorage.userSettings.firstTime) {
             mainViewModel.createDefaultTrackItems()
-        } else {
             userStorage.updateSettings {
                 it.firstTime = false
             }

@@ -7,7 +7,7 @@ import io.realm.RealmResults
 class TrackItemTemplateDao(val realm: Realm) {
 
     fun addTrackItemTemplate(trackItemTemplate: TrackItemTemplate) {
-        realm.executeTransactionAsync {
+        realm.executeTransaction {
             val item = TrackItemTemplate(
                 id = trackItemTemplate.id,
                 deleted = trackItemTemplate.deleted,

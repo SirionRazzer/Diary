@@ -7,7 +7,7 @@ import io.realm.RealmResults
 class TrackItemDao(val realm: Realm) {
 
     fun addTrackItem(trackItem: TrackItem) {
-        realm.executeTransactionAsync {
+        realm.executeTransaction {
             //item.id = Calendar.getInstance().timeInMillis.toString() + " " + UUID.randomUUID().toString()
             val item = TrackItem(
                 id = trackItem.id,

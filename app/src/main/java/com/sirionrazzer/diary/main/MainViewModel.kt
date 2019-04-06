@@ -25,37 +25,7 @@ class MainViewModel : ViewModel() {
     var currentTemplateItems: MutableList<TrackItemTemplate> = mutableListOf()
 
     init {
-        realm.trackItemsTemplatesDao.getAllTrackItemTemplates().let{
-            it.forEach{ it ->
-                val trackItem = TrackItem(
-                    id = UUID.randomUUID().toString(),
-                    deleted = it.deleted,
-                    name = it.name,
-                    imageOn = it.imageOn,
-                    imageOff = it.imageOff,
-                    hasTextField = it.hasTextField,
-                    hasNumberField = it.hasNumberField,
-                    status = false,
-                    textField = "",
-                    numberField = 0f,
-                    date = 0
-                )
-                currentTrackItems.add(trackItem)
-            }
-
-            it.forEach{it->
-                val templateItem = TrackItemTemplate(
-                    id = it.id,
-                    deleted = it.deleted,
-                    name = it.name,
-                    imageOn = it.imageOn,
-                    imageOff = it.imageOff,
-                    hasTextField = it.hasTextField,
-                    hasNumberField = it.hasNumberField
-                )
-                currentTemplateItems.add(templateItem)
-            }
-        }
+        initTrackAndTemplateItems()
 
         Diary.app.appComponent.inject(this)
     }
@@ -111,6 +81,43 @@ class MainViewModel : ViewModel() {
         realm.trackItemsTemplatesDao.addTrackItemTemplate(tit1)
         realm.trackItemsTemplatesDao.addTrackItemTemplate(tit2)
         realm.trackItemsTemplatesDao.addTrackItemTemplate(tit3)
+
+        initTrackAndTemplateItems()
+    }
+
+
+    private fun initTrackAndTemplateItems() {
+        realm.trackItemsTemplatesDao.getAllTrackItemTemplates().let{
+            it.forEach{ it ->
+                val trackItem = TrackItem(
+                    id = UUID.randomUUID().toString(),
+                    deleted = it.deleted,
+                    name = it.name,
+                    imageOn = it.imageOn,
+                    imageOff = it.imageOff,
+                    hasTextField = it.hasTextField,
+                    hasNumberField = it.hasNumberField,
+                    status = false,
+                    textField = "",
+                    numberField = 0f,
+                    date = 0
+                )
+                currentTrackItems.add(trackItem)
+            }
+
+            it.forEach{it->
+                val templateItem = TrackItemTemplate(
+                    id = it.id,
+                    deleted = it.deleted,
+                    name = it.name,
+                    imageOn = it.imageOn,
+                    imageOff = it.imageOff,
+                    hasTextField = it.hasTextField,
+                    hasNumberField = it.hasNumberField
+                )
+                currentTemplateItems.add(templateItem)
+            }
+        }
     }
 
 }
