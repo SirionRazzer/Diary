@@ -1,6 +1,7 @@
 package com.sirionrazzer.diary.main
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,9 +55,13 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
                 if (holder.status == false) {
                     holder.ivImage?.setImageResource(mainViewModel.currentTrackItems[position].imageOn)
                     mainViewModel.currentTrackItems[position].status = true
+                    holder.status = true
+                    Log.d("TemplatesAdapter", "Clicked: " + position + ". track item, the state was false and now is " + holder.status.toString())
                 } else {
                     holder.ivImage?.setImageResource(mainViewModel.currentTrackItems[position].imageOff)
                     mainViewModel.currentTrackItems[position].status = false
+                    holder.status = false
+                    Log.d("TemplatesAdapter", "Clicked: " + position + ". track item, the state was true and now is " + holder.status.toString())
                 }
 
                 // TODO: handle input text/number fields

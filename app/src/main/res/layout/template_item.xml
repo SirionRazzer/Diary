@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/trackitemImage"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:src="@drawable/ic_mail_outline_black_24dp" />
 
     <TextView

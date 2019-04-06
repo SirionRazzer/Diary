@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         tvDate.text = dateUtils.smartDate(dateUtils.dateFromMillis(mainViewModel.date), false)
     }
 
+
     private fun createNewTrackItem() {
         startActivity<TrackItemCreatorActivity>()
         finish()
