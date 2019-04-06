@@ -3,6 +3,8 @@ package com.sirionrazzer.diary.main
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
@@ -61,9 +63,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun save() {
-        var trackItem: TrackItem
-
-        // TODO save all track items
+        mainViewModel.saveTrackItems()
     }
 
 
@@ -71,4 +71,20 @@ class MainActivity : AppCompatActivity() {
         return ViewModelProviders.of(this).get(MainViewModel::class.java)
     }
 
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_save_log, menu)
+        return true
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.mSaveLog) {
+            save()
+            finish()
+        } else {
+            onBackPressed()
+        }
+        return true
+    }
 }
