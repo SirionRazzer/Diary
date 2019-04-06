@@ -2,9 +2,10 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/trackitem"
-    android:layout_width="80dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center"
+    android:layout_gravity="center_horizontal"
     android:orientation="vertical">
 
     <ImageView
@@ -15,8 +16,8 @@
 
     <TextView
         android:id="@+id/trackitemName"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="item name" />
 </LinearLayout>

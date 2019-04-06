@@ -7,6 +7,7 @@ import android.arch.lifecycle.ViewModel
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.*
+import com.sirionrazzer.diary.util.DateUtils
 import io.realm.Realm
 import java.util.*
 import javax.inject.Inject
@@ -23,6 +24,13 @@ class MainViewModel : ViewModel() {
 
     var currentTrackItems: MutableList<TrackItem> = mutableListOf()
     var currentTemplateItems: MutableList<TrackItemTemplate> = mutableListOf()
+
+    val dateUtils = DateUtils()
+    var date: Long?
+        get() = dateUtils.persistDate(Calendar.getInstance().time)
+        set(value) {
+            date = value
+        }
 
     init {
         initTrackAndTemplateItems()
@@ -87,8 +95,8 @@ class MainViewModel : ViewModel() {
 
 
     private fun initTrackAndTemplateItems() {
-        realm.trackItemsTemplatesDao.getAllTrackItemTemplates().let{
-            it.forEach{ it ->
+        realm.trackItemsTemplatesDao.getAllTrackItemTemplates().let {
+            it.forEach { it ->
                 val trackItem = TrackItem(
                     id = UUID.randomUUID().toString(),
                     deleted = it.deleted,
@@ -105,7 +113,7 @@ class MainViewModel : ViewModel() {
                 currentTrackItems.add(trackItem)
             }
 
-            it.forEach{it->
+            it.forEach { it ->
                 val templateItem = TrackItemTemplate(
                     id = it.id,
                     deleted = it.deleted,

@@ -3,12 +3,12 @@ package com.sirionrazzer.diary.main
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
 import com.sirionrazzer.diary.models.UserStorage
 import com.sirionrazzer.diary.trackitem.TrackItemCreatorActivity
+import com.sirionrazzer.diary.util.DateUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.startActivity
@@ -43,9 +43,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         adapter = TemplatesAdapter(this, mainViewModel)
-        itemGrid.adapter = adapter
+        gwTemplates.adapter = adapter
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        val dateUtils = DateUtils()
+        tvDate.text = dateUtils.smartDate(dateUtils.dateFromMillis(mainViewModel.date), false)
+    }
 
     private fun createNewTrackItem() {
         startActivity<TrackItemCreatorActivity>()
@@ -58,6 +64,7 @@ class MainActivity : AppCompatActivity() {
 
         // TODO save all track items
     }
+
 
     fun createViewModel(): MainViewModel {
         return ViewModelProviders.of(this).get(MainViewModel::class.java)
