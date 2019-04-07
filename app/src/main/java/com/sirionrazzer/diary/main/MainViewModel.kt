@@ -158,6 +158,16 @@ class MainViewModel : ViewModel() {
             hasNumberField = true,
             position = 1
         )
+        val tit11 = TrackItemTemplate(
+            UUID.randomUUID().toString(),
+            false,
+            "love",
+            R.drawable.ic_check,
+            R.drawable.ic_uncheck,
+            hasTextField = true,
+            hasNumberField = false,
+            position = 0
+        )
 
         realm.trackItemsTemplatesDao.addTrackItemTemplate(tit1)
         realm.trackItemsTemplatesDao.addTrackItemTemplate(tit2)
@@ -169,6 +179,7 @@ class MainViewModel : ViewModel() {
         realm.trackItemsTemplatesDao.addTrackItemTemplate(tit8)
         realm.trackItemsTemplatesDao.addTrackItemTemplate(tit9)
         realm.trackItemsTemplatesDao.addTrackItemTemplate(tit10)
+        realm.trackItemsTemplatesDao.addTrackItemTemplate(tit11)
 
         initTrackAndTemplateItems()
     }
