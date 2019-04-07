@@ -6,4 +6,5 @@
     <string name="app_logo">App logo</string>
     <string name="skip_now">skip now</string>
     <string name="title_my_day">My day</string>
+    <string name="title_manage_activities">Manage activities</string>
 </resources>

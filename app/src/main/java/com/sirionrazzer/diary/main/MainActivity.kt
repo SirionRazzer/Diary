@@ -10,6 +10,7 @@ import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
 import com.sirionrazzer.diary.models.UserStorage
 import com.sirionrazzer.diary.trackitem.TrackItemCreatorActivity
+import com.sirionrazzer.diary.trackitem.TrackItemViewerActivity
 import com.sirionrazzer.diary.util.DateUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -49,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         gwTemplates.adapter = adapter
 
         btnManageActivities.setOnClickListener{
-            toast("TODO")
+            startActivity<TrackItemViewerActivity>()
         }
     }
 

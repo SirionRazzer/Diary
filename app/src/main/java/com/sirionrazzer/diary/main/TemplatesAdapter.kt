@@ -47,6 +47,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
 
             holder.ivImage = itemView!!.trackitemImage as ImageView
             holder.tvName = itemView!!.trackitemName as TextView
+            holder.ivPencil = itemView!!.ivPencil as ImageView
 
             itemView.tag = holder
         } else {
@@ -59,6 +60,13 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             Log.d("TemplatesAdapter", "position: " + position + " holder.status: " + holder.status.toString())
 
             holder.tvName?.text = mainViewModel.currentTrackItems[position].name
+
+            if (mainViewModel.currentTemplateItems[position].hasTextField ||
+                mainViewModel.currentTemplateItems[position].hasNumberField) {
+                holder.ivPencil?.visibility = View.VISIBLE
+                //Picasso.get().load(R.drawable.ic_pencil).into(holder.ivPencil)
+                holder.ivPencil?.setImageResource(R.drawable.ic_pencil)
+            }
 
             if (!mainViewModel.currentTrackItems[position].status) {
                 Picasso.get().load(mainViewModel.currentTrackItems[position].imageOff).into(holder.ivImage)
@@ -122,6 +130,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
     private inner class ViewHolder {
         var tvName: TextView? = null
         var ivImage: ImageView? = null
+        var ivPencil: ImageView? = null
         internal var status: Boolean = false
     }
 
