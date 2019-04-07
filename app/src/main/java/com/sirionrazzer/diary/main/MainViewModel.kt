@@ -39,7 +39,9 @@ class MainViewModel : ViewModel() {
 
     fun saveTrackItems() {
         currentTrackItems.forEach {
-            realm.trackItemsDao.addTrackItem(it)
+            if (it.status) {
+                realm.trackItemsDao.addTrackItem(it)
+            }
         }
     }
 
@@ -63,7 +65,8 @@ class MainViewModel : ViewModel() {
             R.drawable.ic_check,
             R.drawable.ic_uncheck,
             hasTextField = false,
-            hasNumberField = false
+            hasNumberField = false,
+            position = 10
         )
         val tit2 = TrackItemTemplate(
             UUID.randomUUID().toString(),
@@ -72,7 +75,8 @@ class MainViewModel : ViewModel() {
             R.drawable.ic_check,
             R.drawable.ic_uncheck,
             hasTextField = false,
-            hasNumberField = false
+            hasNumberField = false,
+            position = 9
         )
         val tit3 = TrackItemTemplate(
             UUID.randomUUID().toString(),
@@ -81,7 +85,8 @@ class MainViewModel : ViewModel() {
             R.drawable.ic_check,
             R.drawable.ic_uncheck,
             hasTextField = false,
-            hasNumberField = false
+            hasNumberField = false,
+            position = 8
         )
         val tit4 = TrackItemTemplate(
             UUID.randomUUID().toString(),
@@ -90,7 +95,8 @@ class MainViewModel : ViewModel() {
             R.drawable.ic_check,
             R.drawable.ic_uncheck,
             hasTextField = false,
-            hasNumberField = false
+            hasNumberField = false,
+            position = 7
         )
         val tit5 = TrackItemTemplate(
             UUID.randomUUID().toString(),
@@ -98,8 +104,9 @@ class MainViewModel : ViewModel() {
             "workout",
             R.drawable.ic_check,
             R.drawable.ic_uncheck,
-            hasTextField = false,
-            hasNumberField = false
+            hasTextField = true,
+            hasNumberField = false,
+            position = 6
         )
         val tit6 = TrackItemTemplate(
             UUID.randomUUID().toString(),
@@ -107,8 +114,9 @@ class MainViewModel : ViewModel() {
             "movie",
             R.drawable.ic_check,
             R.drawable.ic_uncheck,
-            hasTextField = false,
-            hasNumberField = false
+            hasTextField = true,
+            hasNumberField = false,
+            position = 5
         )
         val tit7 = TrackItemTemplate(
             UUID.randomUUID().toString(),
@@ -116,8 +124,9 @@ class MainViewModel : ViewModel() {
             "book",
             R.drawable.ic_check,
             R.drawable.ic_uncheck,
-            hasTextField = false,
-            hasNumberField = false
+            hasTextField = true,
+            hasNumberField = false,
+            position = 4
         )
         val tit8 = TrackItemTemplate(
             UUID.randomUUID().toString(),
@@ -126,7 +135,8 @@ class MainViewModel : ViewModel() {
             R.drawable.ic_check,
             R.drawable.ic_uncheck,
             hasTextField = false,
-            hasNumberField = false
+            hasNumberField = true,
+            position = 3
         )
         val tit9 = TrackItemTemplate(
             UUID.randomUUID().toString(),
@@ -135,7 +145,8 @@ class MainViewModel : ViewModel() {
             R.drawable.ic_check,
             R.drawable.ic_uncheck,
             hasTextField = false,
-            hasNumberField = false
+            hasNumberField = true,
+            position = 2
         )
         val tit10 = TrackItemTemplate(
             UUID.randomUUID().toString(),
@@ -144,7 +155,8 @@ class MainViewModel : ViewModel() {
             R.drawable.ic_check,
             R.drawable.ic_uncheck,
             hasTextField = false,
-            hasNumberField = false
+            hasNumberField = true,
+            position = 1
         )
 
         realm.trackItemsTemplatesDao.addTrackItemTemplate(tit1)
@@ -176,7 +188,8 @@ class MainViewModel : ViewModel() {
                     status = false,
                     textField = "",
                     numberField = 0f,
-                    date = 0
+                    date = 0,
+                    position = it.position
                 )
                 currentTrackItems.add(trackItem)
             }
@@ -189,7 +202,8 @@ class MainViewModel : ViewModel() {
                     imageOn = it.imageOn,
                     imageOff = it.imageOff,
                     hasTextField = it.hasTextField,
-                    hasNumberField = it.hasNumberField
+                    hasNumberField = it.hasNumberField,
+                    position = it.position
                 )
                 currentTemplateItems.add(templateItem)
             }

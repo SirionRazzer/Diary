@@ -15,7 +15,8 @@ class TrackItemTemplateDao(val realm: Realm) {
                 imageOn = trackItemTemplate.imageOn,
                 imageOff = trackItemTemplate.imageOff,
                 hasTextField = trackItemTemplate.hasTextField,
-                hasNumberField = trackItemTemplate.hasNumberField
+                hasNumberField = trackItemTemplate.hasNumberField,
+                position = trackItemTemplate.position
             )
             it.insert(item)
         }
@@ -37,8 +38,9 @@ class TrackItemTemplateDao(val realm: Realm) {
 
 
     fun getAllTrackItemTemplates(): List<TrackItemTemplate> {
-        var items = realm.where(TrackItemTemplate::class.java).findAll()
+        var items = realm.where(TrackItemTemplate::class.java).findAll().sort("position")
         var trackItemTemplates = mutableListOf<TrackItemTemplate>()
+
 
         items.let {
             it.forEach {

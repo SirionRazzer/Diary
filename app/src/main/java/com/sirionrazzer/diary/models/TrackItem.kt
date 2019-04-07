@@ -13,7 +13,8 @@ open class TrackItem (
     open var status: Boolean, // on/off status of item
     open var textField: String?, // optional text field
     open var numberField: Float?, // optional number field
-    open var date: Long // creation time like Calendar.getInstance().timeInMillis
+    open var date: Long, // creation time like Calendar.getInstance().timeInMillis
+    open var position: Int
 ) : RealmObject() {
     // constructor used by Realm
     constructor() : this("",
@@ -26,6 +27,7 @@ open class TrackItem (
         false,
         "",
         0f,
+        0,
         0
         )
 }

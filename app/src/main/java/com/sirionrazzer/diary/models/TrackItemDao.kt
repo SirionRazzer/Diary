@@ -20,7 +20,8 @@ class TrackItemDao(val realm: Realm) {
                 status = trackItem.status,
                 textField = trackItem.textField,
                 numberField = trackItem.numberField,
-                date = trackItem.date
+                date = trackItem.date,
+                position = trackItem.position
             )
             it.insert(item)
         }
@@ -43,7 +44,8 @@ class TrackItemDao(val realm: Realm) {
 
     fun getAllTrackItems(): LiveData<RealmResults<TrackItem>> {
         var items = realm.where(TrackItem::class.java).findAll()
-        return RealmLiveData<TrackItem>(items)
+        items.sort("position")
+        return RealmLiveData<TrackItem>(items.sort("position"))
     }
 
 
