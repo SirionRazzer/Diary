@@ -138,7 +138,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
         textInputLayout.addView(input)
 
         val alert = AlertDialog.Builder(context)
-            .setTitle("Take new " + headerText + " note")
+            .setTitle("New " + headerText + " note")
             .setView(textInputLayout)
             .setPositiveButton("Submit") { dialog, _ ->
 

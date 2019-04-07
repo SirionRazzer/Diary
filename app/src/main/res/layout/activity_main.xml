@@ -32,7 +32,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/llDateArea"
         android:orientation="horizontal"
         android:padding="16dp">
@@ -41,7 +41,7 @@
             android:id="@+id/gwTemplates"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center_horizontal|center_vertical"
             android:gravity="center"
             android:numColumns="4"
             android:orientation="horizontal"
@@ -49,4 +49,16 @@
             android:verticalSpacing="10dip" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnManageActivities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button_background_transparent"
+        android:text="Manage activities"
+        android:textColor="@color/colorPrimary" />
+
 </RelativeLayout>

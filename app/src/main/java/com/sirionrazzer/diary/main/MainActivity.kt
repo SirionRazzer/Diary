@@ -14,6 +14,7 @@ import com.sirionrazzer.diary.util.DateUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -46,6 +47,10 @@ class MainActivity : AppCompatActivity() {
 
         adapter = TemplatesAdapter(this, mainViewModel)
         gwTemplates.adapter = adapter
+
+        btnManageActivities.setOnClickListener{
+            toast("TODO")
+        }
     }
 
 
