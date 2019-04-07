@@ -59,4 +59,11 @@ class TrackItemTemplateDao(val realm: Realm) {
         }
     }
 
+
+    fun updateTrackItemTemplate(updatedTemplate: TrackItemTemplate) {
+        realm.beginTransaction()
+        realm.copyToRealmOrUpdate(updatedTemplate)
+        realm.commitTransaction()
+    }
+
 }

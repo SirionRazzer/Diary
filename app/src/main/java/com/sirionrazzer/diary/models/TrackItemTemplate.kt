@@ -1,8 +1,12 @@
 package com.sirionrazzer.diary.models
 
 import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
+import io.realm.annotations.Required
 
 open class TrackItemTemplate (
+    @PrimaryKey
+    @Required // optional, but recommended.
     open var id: String,
     open var deleted: Boolean,
     open var name: String,
