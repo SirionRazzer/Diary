@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/trackitem"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -8,24 +9,42 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/trackitemImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_mail_outline_black_24dp" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp">
+
+
+        <ImageView
+            android:id="@+id/trackitemImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_mail_outline_black_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Space
+            android:id="@+id/space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/trackitemImage"
+            app:layout_constraintEnd_toEndOf="@+id/trackitemImage"
+            app:layout_constraintHorizontal_bias="0.70"
+            app:layout_constraintStart_toStartOf="@+id/trackitemImage"
+            app:layout_constraintTop_toTopOf="@+id/trackitemImage"
+            app:layout_constraintVertical_bias="0.66" />
+        <ImageView
+            android:id="@+id/ivPencil"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:layout_constraintStart_toEndOf="@+id/space"
+            app:layout_constraintTop_toBottomOf="@+id/space" />
+
+    </android.support.constraint.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/ivPencil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            android:layout_marginEnd="2dp"
-            android:layout_marginTop="2dp"/>
 
         <TextView
             android:id="@+id/trackitemName"

@@ -38,7 +38,7 @@ class DateUtils {
     fun smartDate(editDate: Date?, specialText: Boolean): String {
         var smartDate: String
         val currentDate = Date()
-        val df = SimpleDateFormat("MM/dd")
+        val df = SimpleDateFormat("d/M")
         val cal = Calendar.getInstance()
         cal.time = currentDate
 

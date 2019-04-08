@@ -65,7 +65,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
                 mainViewModel.currentTemplateItems[position].hasNumberField) {
                 holder.ivPencil?.visibility = View.VISIBLE
                 //Picasso.get().load(R.drawable.ic_pencil).into(holder.ivPencil)
-                holder.ivPencil?.setImageResource(R.drawable.ic_pencil)
+                holder.ivPencil?.setImageResource(R.drawable.ic_edit_badge)
             }
 
             if (!mainViewModel.currentTrackItems[position].status) {

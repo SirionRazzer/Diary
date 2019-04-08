@@ -28,9 +28,15 @@
             android:textColor="@color/colorPrimaryDark"
             android:layout_centerHorizontal="true"
             android:text="#ME"
-            android:layout_marginBottom="10dp"
-            android:textStyle="bold"
+            android:layout_marginBottom="3dp"
             android:textSize="20sp"/>
+
+        <View
+            android:layout_below="@id/tvMe"
+            android:layout_centerHorizontal="true"
+            android:layout_height="2dp"
+            android:layout_width="70dp"
+            android:background="@color/colorAccent"/>
 
         <TextView
             android:id="@+id/tvDate"
@@ -39,6 +45,7 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/tvMe"
             android:drawableStart="@drawable/ic_calendar"
+            android:layout_marginTop="8dp"
             android:drawablePadding="4dp"
             android:text="19/3"
             android:textColor="@color/colorPrimaryDark"
