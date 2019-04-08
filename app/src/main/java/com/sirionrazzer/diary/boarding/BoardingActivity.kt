@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.history.HistoryActivity
-import com.sirionrazzer.diary.main.MainActivity
 import kotlinx.android.synthetic.main.activity_boarding.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.startActivity
@@ -23,12 +22,12 @@ class BoardingActivity : AppCompatActivity() {
 
         signIn.setOnClickListener{
             // TODO: store values of name and password
-            startActivity<MainActivity>()
+            startActivity<HistoryActivity>()
             finish()
         }
 
         skipSignIn.setOnClickListener{
-            startActivity<MainActivity>()
+            startActivity<HistoryActivity>()
             finish()
         }
     }
