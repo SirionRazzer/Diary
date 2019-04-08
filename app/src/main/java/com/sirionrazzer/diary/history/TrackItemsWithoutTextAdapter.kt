@@ -1,6 +1,7 @@
 package com.sirionrazzer.diary.history
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
+import com.sirionrazzer.diary.stats.TrackItemStatsActivity
 
 class TrackItemsWithoutTextAdapter(private val context: Context, private val trackItems: ArrayList<TrackItem>) : BaseAdapter() {
 
@@ -43,6 +45,13 @@ class TrackItemsWithoutTextAdapter(private val context: Context, private val tra
         }
         val trackItem = getItem(position)
         holder.nameTextView.text = trackItem.name
+
+        val intent = Intent(templateItemView.context, TrackItemStatsActivity::class.java)
+            .putExtra("trackItemName", trackItem.name)
+        templateItemView.setOnLongClickListener {
+            templateItemView.context.startActivity(intent)
+            true
+        }
 
         return templateItemView
     }

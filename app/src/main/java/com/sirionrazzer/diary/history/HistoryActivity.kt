@@ -1,10 +1,12 @@
 package com.sirionrazzer.diary.history
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.widget.Toast
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.main.MainActivity
 import kotlinx.android.synthetic.main.toolbar.*
@@ -40,7 +42,7 @@ class HistoryActivity : AppCompatActivity() {
         val historyItems: ArrayList<ArrayList<TrackItem>> = arrayListOf(trackitems1, trackitems2, trackitems3)
 
         viewManager = LinearLayoutManager(this)
-        viewAdapter = HistoryAdapter(this, historyItems)
+        viewAdapter = HistoryAdapter(this, historyItems) { date: Long -> historyItemClicked(date) }
         recyclerView = findViewById(R.id.historyItemRecyclerView)
         recyclerView.adapter = viewAdapter
         recyclerView.layoutManager = viewManager
@@ -49,5 +51,12 @@ class HistoryActivity : AppCompatActivity() {
         fab.setOnClickListener {
             startActivity<MainActivity>()
         }
+    }
+
+    private fun historyItemClicked(date: Long) {
+        Toast.makeText(this, "a", Toast.LENGTH_LONG).show()
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("date", date)
+        this.startActivity(intent)
     }
 }
