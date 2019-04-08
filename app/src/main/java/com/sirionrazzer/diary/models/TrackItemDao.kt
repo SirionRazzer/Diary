@@ -3,6 +3,7 @@ package com.sirionrazzer.diary.models
 import android.arch.lifecycle.LiveData
 import io.realm.Realm
 import io.realm.RealmResults
+import io.realm.Sort
 
 class TrackItemDao(val realm: Realm) {
 
@@ -39,6 +40,13 @@ class TrackItemDao(val realm: Realm) {
             val result = it.where(TrackItem::class.java).equalTo("id", id).findFirst()
             result?.deleteFromRealm()
         }
+    }
+
+    fun getTrackItemsWithName(name: String): List<TrackItem> {
+        val realmItems =
+            realm.where(TrackItem::class.java).equalTo("name", name).findAllAsync().sort("date", Sort.DESCENDING)
+
+        return realmItems.map { item -> item as TrackItem }
     }
 
 
