@@ -47,7 +47,7 @@ class MainViewModel : ViewModel() {
 
 
     fun getTrackItemsFromTemplates() {
-        realm.trackItemsTemplatesDao.getAllTrackItemTemplates()
+        realm.trackItemsTemplatesDao.getAllTemplates()
     }
 
 
@@ -169,24 +169,24 @@ class MainViewModel : ViewModel() {
             position = 0
         )
 
-        realm.trackItemsTemplatesDao.addTrackItemTemplate(tit1)
-        realm.trackItemsTemplatesDao.addTrackItemTemplate(tit2)
-        realm.trackItemsTemplatesDao.addTrackItemTemplate(tit3)
-        realm.trackItemsTemplatesDao.addTrackItemTemplate(tit4)
-        realm.trackItemsTemplatesDao.addTrackItemTemplate(tit5)
-        realm.trackItemsTemplatesDao.addTrackItemTemplate(tit6)
-        realm.trackItemsTemplatesDao.addTrackItemTemplate(tit7)
-        realm.trackItemsTemplatesDao.addTrackItemTemplate(tit8)
-        realm.trackItemsTemplatesDao.addTrackItemTemplate(tit9)
-        realm.trackItemsTemplatesDao.addTrackItemTemplate(tit10)
-        realm.trackItemsTemplatesDao.addTrackItemTemplate(tit11)
+        realm.trackItemsTemplatesDao.addTemplate(tit1)
+        realm.trackItemsTemplatesDao.addTemplate(tit2)
+        realm.trackItemsTemplatesDao.addTemplate(tit3)
+        realm.trackItemsTemplatesDao.addTemplate(tit4)
+        realm.trackItemsTemplatesDao.addTemplate(tit5)
+        realm.trackItemsTemplatesDao.addTemplate(tit6)
+        realm.trackItemsTemplatesDao.addTemplate(tit7)
+        realm.trackItemsTemplatesDao.addTemplate(tit8)
+        realm.trackItemsTemplatesDao.addTemplate(tit9)
+        realm.trackItemsTemplatesDao.addTemplate(tit10)
+        realm.trackItemsTemplatesDao.addTemplate(tit11)
 
         initTrackAndTemplateItems()
     }
 
 
     private fun initTrackAndTemplateItems() {
-        realm.trackItemsTemplatesDao.getAllTrackItemTemplates().let {
+        realm.trackItemsTemplatesDao.getAllTemplates().let {
             it.forEach { it ->
                 val trackItem = TrackItem(
                     id = UUID.randomUUID().toString(),

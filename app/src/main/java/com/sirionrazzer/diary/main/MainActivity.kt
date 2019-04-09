@@ -7,15 +7,13 @@ import android.view.Menu
 import android.view.MenuItem
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
-import com.sirionrazzer.diary.models.TrackItem
 import com.sirionrazzer.diary.models.UserStorage
-import com.sirionrazzer.diary.trackitem.TrackItemCreatorActivity
-import com.sirionrazzer.diary.trackitem.TrackItemViewerActivity
+import com.sirionrazzer.diary.trackitem.TemplateItemCreatorActivity
+import com.sirionrazzer.diary.trackitem.TemplateItemViewerActivity
 import com.sirionrazzer.diary.util.DateUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -50,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         gwTemplates.adapter = adapter
 
         btnManageActivities.setOnClickListener{
-            startActivity<TrackItemViewerActivity>()
+            startActivity<TemplateItemViewerActivity>()
         }
     }
 
@@ -63,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun createNewTrackItem() {
-        startActivity<TrackItemCreatorActivity>()
+        startActivity<TemplateItemCreatorActivity>()
         finish()
     }
 

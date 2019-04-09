@@ -6,7 +6,7 @@ import io.realm.RealmResults
 
 class TrackItemTemplateDao(val realm: Realm) {
 
-    fun addTrackItemTemplate(trackItemTemplate: TrackItemTemplate) {
+    fun addTemplate(trackItemTemplate: TrackItemTemplate) {
         realm.executeTransaction {
             val item = TrackItemTemplate(
                 id = trackItemTemplate.id,
@@ -23,13 +23,13 @@ class TrackItemTemplateDao(val realm: Realm) {
     }
 
 
-    fun getTrackItemTemplate(id: String): LiveData<RealmResults<TrackItemTemplate>> {
+    fun getTemplate(id: String): LiveData<RealmResults<TrackItemTemplate>> {
         var result = realm.where(TrackItemTemplate::class.java).equalTo("id", id).findAllAsync()
         return RealmLiveData<TrackItemTemplate>(result)
     }
 
 
-    fun deleteTrackItemTemplate(id: String) {
+    fun deleteTemplate(id: String) {
         realm.executeTransactionAsync {
             val result = it.where(TrackItemTemplate::class.java).equalTo("id", id).findFirst()
             result?.deleteFromRealm()
@@ -37,22 +37,22 @@ class TrackItemTemplateDao(val realm: Realm) {
     }
 
 
-    fun getAllTrackItemTemplates(): List<TrackItemTemplate> {
+    fun getAllTemplates(): List<TrackItemTemplate> {
         var items = realm.where(TrackItemTemplate::class.java).findAll().sort("position")
-        var trackItemTemplates = mutableListOf<TrackItemTemplate>()
+        var templates = mutableListOf<TrackItemTemplate>()
 
 
         items.let {
             it.forEach {
-                trackItemTemplates.add(it)
+                templates.add(it)
             }
         }
 
-        return trackItemTemplates
+        return templates
     }
 
 
-    fun deleteAllTrackItemTemplates() {
+    fun deleteAllTemplates() {
         realm.executeTransactionAsync {
             val result = it.where(TrackItem::class.java).findAll()
             result.deleteAllFromRealm()
@@ -60,7 +60,7 @@ class TrackItemTemplateDao(val realm: Realm) {
     }
 
 
-    fun updateTrackItemTemplate(updatedTemplate: TrackItemTemplate) {
+    fun updateTemplate(updatedTemplate: TrackItemTemplate) {
         realm.beginTransaction()
         realm.copyToRealmOrUpdate(updatedTemplate)
         realm.commitTransaction()

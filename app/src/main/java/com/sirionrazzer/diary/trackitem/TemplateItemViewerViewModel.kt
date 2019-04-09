@@ -6,7 +6,7 @@ import com.sirionrazzer.diary.models.TrackItemTemplate
 import com.sirionrazzer.diary.models.TrackItemTemplateDao
 import io.realm.Realm
 
-class TrackItemViewerViewModel: ViewModel() {
+class TemplateItemViewerViewModel: ViewModel() {
 
     val realm: Realm by lazy {
         Realm.getDefaultInstance()
@@ -17,6 +17,8 @@ class TrackItemViewerViewModel: ViewModel() {
 
     init {
         Diary.app.appComponent.inject(this)
+
+        getTemplates()
     }
 
 
@@ -27,12 +29,12 @@ class TrackItemViewerViewModel: ViewModel() {
 
 
     fun getTemplates() {
-        currentTemplateItems = templateDao.getAllTrackItemTemplates().toMutableList()
+        currentTemplateItems = templateDao.getAllTemplates().toMutableList()
     }
 
 
     fun updateTemplate(template: TrackItemTemplate) {
-        templateDao.updateTrackItemTemplate(template)
+        templateDao.updateTemplate(template)
     }
 
 }
