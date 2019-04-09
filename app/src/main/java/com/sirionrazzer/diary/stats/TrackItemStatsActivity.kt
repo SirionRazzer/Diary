@@ -3,6 +3,7 @@ package com.sirionrazzer.diary.stats
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.MenuItem
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
 import com.sirionrazzer.diary.models.TrackItemDao
@@ -91,6 +92,12 @@ class TrackItemStatsActivity : AppCompatActivity() {
         currentTrackItems.add(trackItem)
         currentTrackItems.add(trackItem2)
         currentTrackItems.add(trackItem3)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        onBackPressed()
+        return true
     }
 
     private fun initRecyclerView() {
