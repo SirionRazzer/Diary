@@ -14,6 +14,7 @@ class TemplateItemViewerViewModel: ViewModel() {
 
     var currentTemplateItems: MutableList<TrackItemTemplate> = mutableListOf()
     var templateDao = TrackItemTemplateDao(realm)
+    var hasChanged: Boolean = false
 
     init {
         Diary.app.appComponent.inject(this)

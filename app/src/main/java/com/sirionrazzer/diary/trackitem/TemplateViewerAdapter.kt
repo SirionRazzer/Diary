@@ -50,7 +50,9 @@ class TemplateViewerAdapter(private val context: Context, private val tiViewMode
                 template.hasTextField = tiViewModel.currentTemplateItems[position].hasTextField
                 template.hasNumberField = tiViewModel.currentTemplateItems[position].hasNumberField
                 template.deleted = !isChecked // <-- this
+
                 tiViewModel.updateTemplate(template)
+                tiViewModel.hasChanged = true
             }
         }
     }

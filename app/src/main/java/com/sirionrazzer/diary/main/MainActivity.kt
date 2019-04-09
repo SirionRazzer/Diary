@@ -1,6 +1,7 @@
 package com.sirionrazzer.diary.main
 
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -48,7 +49,9 @@ class MainActivity : AppCompatActivity() {
         gwTemplates.adapter = adapter
 
         btnManageActivities.setOnClickListener{
-            startActivity<TemplateItemViewerActivity>()
+            //startActivity<TemplateItemViewerActivity>()
+            val intent = Intent(this, TemplateItemViewerActivity::class.java)
+            startActivityForResult(intent, 1)
         }
     }
 
@@ -57,14 +60,23 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         val dateUtils = DateUtils()
         tvDate.text = dateUtils.smartDate(dateUtils.dateFromMillis(mainViewModel.date), false)
-        mainViewModel.initTrackAndTemplateItems()
-        adapter.notifyDataSetChanged()
     }
 
 
     private fun createNewTrackItem() {
         startActivity<TemplateItemCreatorActivity>()
         finish()
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode != 1) { // templates are changed
+            mainViewModel.initTrackAndTemplateItems()
+            adapter.notifyDataSetChanged()
+        }
+
     }
 
 
