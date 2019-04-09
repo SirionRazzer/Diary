@@ -57,6 +57,8 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         val dateUtils = DateUtils()
         tvDate.text = dateUtils.smartDate(dateUtils.dateFromMillis(mainViewModel.date), false)
+        mainViewModel.initTrackAndTemplateItems()
+        adapter.notifyDataSetChanged()
     }
 
 

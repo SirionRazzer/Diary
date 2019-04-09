@@ -185,38 +185,45 @@ class MainViewModel : ViewModel() {
     }
 
 
-    private fun initTrackAndTemplateItems() {
+    fun initTrackAndTemplateItems() {
+        currentTrackItems.clear()
+        currentTemplateItems.clear()
+
         realm.trackItemsTemplatesDao.getAllTemplates().let {
             it.forEach { it ->
-                val trackItem = TrackItem(
-                    id = UUID.randomUUID().toString(),
-                    deleted = it.deleted,
-                    name = it.name,
-                    imageOn = it.imageOn,
-                    imageOff = it.imageOff,
-                    hasTextField = it.hasTextField,
-                    hasNumberField = it.hasNumberField,
-                    status = false,
-                    textField = "",
-                    numberField = 0f,
-                    date = 0,
-                    position = it.position
-                )
-                currentTrackItems.add(trackItem)
+                if (!it.deleted) {
+                    val trackItem = TrackItem(
+                        id = UUID.randomUUID().toString(),
+                        deleted = it.deleted,
+                        name = it.name,
+                        imageOn = it.imageOn,
+                        imageOff = it.imageOff,
+                        hasTextField = it.hasTextField,
+                        hasNumberField = it.hasNumberField,
+                        status = false,
+                        textField = "",
+                        numberField = 0f,
+                        date = 0,
+                        position = it.position
+                    )
+                    currentTrackItems.add(trackItem)
+                }
             }
 
             it.forEach { it ->
-                val templateItem = TrackItemTemplate(
-                    id = it.id,
-                    deleted = it.deleted,
-                    name = it.name,
-                    imageOn = it.imageOn,
-                    imageOff = it.imageOff,
-                    hasTextField = it.hasTextField,
-                    hasNumberField = it.hasNumberField,
-                    position = it.position
-                )
-                currentTemplateItems.add(templateItem)
+                if (!it.deleted) {
+                    val templateItem = TrackItemTemplate(
+                        id = it.id,
+                        deleted = it.deleted,
+                        name = it.name,
+                        imageOn = it.imageOn,
+                        imageOff = it.imageOff,
+                        hasTextField = it.hasTextField,
+                        hasNumberField = it.hasNumberField,
+                        position = it.position
+                    )
+                    currentTemplateItems.add(templateItem)
+                }
             }
         }
     }

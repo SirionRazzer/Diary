@@ -13,7 +13,8 @@ import com.sirionrazzer.diary.models.TrackItemTemplate
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.viewer_template_item.view.*
 
-class TemplateViewerAdapter(private val context: Context, private val tiViewModel: TemplateItemViewerViewModel) : RecyclerView.Adapter<TemplateViewerAdapter.ViewHolder>() {
+class TemplateViewerAdapter(private val context: Context, private val tiViewModel: TemplateItemViewerViewModel) :
+    RecyclerView.Adapter<TemplateViewerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.viewer_template_item, parent, false)
@@ -21,7 +22,7 @@ class TemplateViewerAdapter(private val context: Context, private val tiViewMode
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItems(tiViewModel.currentTemplateItems[position])
+        holder.bindItems(tiViewModel, position)
     }
 
     override fun getItemCount(): Int {
@@ -34,15 +35,23 @@ class TemplateViewerAdapter(private val context: Context, private val tiViewMode
         var tvName = itemView.tvName
         var swDeleted = itemView.swDeleted
 
-        fun bindItems(trackItemTemplate: TrackItemTemplate) {
-            Picasso.get().load(trackItemTemplate.imageOn).into(ivImage)
-            tvName.text = trackItemTemplate.name
-            swDeleted.isChecked = trackItemTemplate.deleted
+        fun bindItems(tiViewModel: TemplateItemViewerViewModel, position: Int) {
+            Picasso.get().load(tiViewModel.currentTemplateItems[position].imageOn).into(ivImage)
+            tvName.text = tiViewModel.currentTemplateItems[position].name
+            swDeleted.isChecked = !tiViewModel.currentTemplateItems[position].deleted
 
             swDeleted.setOnCheckedChangeListener { _, isChecked ->
-                trackItemTemplate.deleted = !isChecked
+                var template = TrackItemTemplate()
+                template.id = tiViewModel.currentTemplateItems[position].id
+                template.name = tiViewModel.currentTemplateItems[position].name
+                template.imageOn = tiViewModel.currentTemplateItems[position].imageOn
+                template.imageOff = tiViewModel.currentTemplateItems[position].imageOff
+                template.position = tiViewModel.currentTemplateItems[position].position
+                template.hasTextField = tiViewModel.currentTemplateItems[position].hasTextField
+                template.hasNumberField = tiViewModel.currentTemplateItems[position].hasNumberField
+                template.deleted = !isChecked // <-- this
+                tiViewModel.updateTemplate(template)
             }
         }
     }
-
 }
