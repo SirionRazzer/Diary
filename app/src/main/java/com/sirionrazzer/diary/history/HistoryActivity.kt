@@ -42,7 +42,7 @@ class HistoryActivity : AppCompatActivity() {
         val historyItems: ArrayList<ArrayList<TrackItem>> = arrayListOf(trackitems1, trackitems2, trackitems3)
 
         viewManager = LinearLayoutManager(this)
-        viewAdapter = HistoryAdapter(this, historyItems) { date: Long -> historyItemClicked(date) }
+        viewAdapter = HistoryAdapter(this, historyItems) { trackItemsIds: ArrayList<String> -> historyItemClicked(trackItemsIds) }
         recyclerView = findViewById(R.id.historyItemRecyclerView)
         recyclerView.adapter = viewAdapter
         recyclerView.layoutManager = viewManager
@@ -53,10 +53,10 @@ class HistoryActivity : AppCompatActivity() {
         }
     }
 
-    private fun historyItemClicked(date: Long) {
+    private fun historyItemClicked(trackItemsIds: ArrayList<String>) {
         Toast.makeText(this, "a", Toast.LENGTH_LONG).show()
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("date", date)
+        intent.putExtra("trackItemsIds", trackItemsIds)
         this.startActivity(intent)
     }
 }

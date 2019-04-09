@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/historyItemLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="16dp">
 
     <GridView
         android:id="@+id/trackItemWithoutText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
         android:gravity="center"
         android:columnWidth="80dp"
-        android:numColumns="auto_fit"
+        android:numColumns="4"
+        android:orientation="horizontal"
+        android:stretchMode="none"
         android:verticalSpacing="10dp"
-        android:horizontalSpacing="10dp"
-        android:stretchMode="spacingWidthUniform">
+        android:horizontalSpacing="10dp">
     </GridView>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/trackItemWithText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        android:paddingTop="10dp"/>
 
 
 </LinearLayout>
