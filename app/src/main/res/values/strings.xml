@@ -7,4 +7,5 @@
     <string name="skip_now">skip now</string>
     <string name="title_my_day">My day</string>
     <string name="title_manage_activities">Manage activities</string>
+    <string name="edit_history_item">Edit</string>
 </resources>

@@ -8,20 +8,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.*
 import com.sirionrazzer.diary.R
+import com.sirionrazzer.diary.main.MainActivity
 import com.sirionrazzer.diary.models.TrackItem
 import com.sirionrazzer.diary.stats.TrackItemStatsActivity
+import com.sirionrazzer.diary.util.DateUtils
 
 class HistoryAdapter(
     private val context: Context,
-    private val dataSource: ArrayList<ArrayList<TrackItem>>,
-    private val clickListener: (ArrayList<String>) -> Unit)
+    private val dataSource: ArrayList<ArrayList<TrackItem>>)
     : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
-    class ViewHolder(val historyItemLayout: LinearLayout) : RecyclerView.ViewHolder(historyItemLayout) {
-        fun bind(trackItemsIds: ArrayList<String>, clickListener: (ArrayList<String>) -> Unit) {
-            historyItemLayout.setOnClickListener { clickListener(trackItemsIds) }
-        }
-    }
+    private val dateUtils = DateUtils()
+
+    class ViewHolder(val historyItemLayout: LinearLayout) : RecyclerView.ViewHolder(historyItemLayout)
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -35,10 +34,11 @@ class HistoryAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val historyItem = holder.historyItemLayout
+        val allTrackItems = dataSource[position]
+
         val gridLayout = historyItem.findViewById<GridView>(R.id.trackItemWithoutText)
         val recyclerView = historyItem.findViewById<RecyclerView>(R.id.trackItemWithText)
 
-        val allTrackItems = dataSource[position]
         val trackItemsWithoutText: ArrayList<TrackItem> = arrayListOf()
         val trackItemsWithText: ArrayList<TrackItem> = arrayListOf()
         val trackItemsIds: ArrayList<String> = arrayListOf()
@@ -51,18 +51,22 @@ class HistoryAdapter(
                 trackItemsWithoutText.add(it)
             }
         }
-//        Toast.makeText(context, trackItemsWithText.size.toString(), Toast.LENGTH_LONG).show()
+
         gridLayout.adapter = TrackItemsWithoutTextAdapter(gridLayout.context, trackItemsWithoutText)
         recyclerView.adapter = TrackItemsWithTextAdapter(recyclerView.context, trackItemsWithText) { trackItemName: String -> trackItemClicked(trackItemName) }
         recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
 
-        holder.bind(trackItemsIds, clickListener)
-//        val intent = Intent(historyItem.context, MainActivity::class.java)
-//        intent.putExtra("date", allTrackItems[0].date)
-//        historyItem.setOnClickListener {
-//            Toast.makeText(context, "a", Toast.LENGTH_LONG).show()
-//            context.startActivity(intent)
-//        }
+        if (!allTrackItems.isEmpty()) {
+            val date = historyItem.findViewById<TextView>(R.id.historyItemDate)
+            date.text = dateUtils.smartDate(dateUtils.dateFromMillis(allTrackItems[0].date), false)
+
+            val editButton: Button = historyItem.findViewById(R.id.btnEditHistoryItem)
+            editButton.setOnClickListener {
+                val intent = Intent(context, MainActivity::class.java)
+                intent.putExtra("trackItemsIds", trackItemsIds)
+                context.startActivity(intent)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
