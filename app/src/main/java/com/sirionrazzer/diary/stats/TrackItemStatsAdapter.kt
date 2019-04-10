@@ -4,12 +4,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
 import com.sirionrazzer.diary.util.DateUtils
-import com.squareup.picasso.Picasso
 
 class TrackItemStatsAdapter(private val stats: List<TrackItem>) :
     RecyclerView.Adapter<TrackItemStatsAdapter.ViewHolder>() {
@@ -28,7 +26,6 @@ class TrackItemStatsAdapter(private val stats: List<TrackItem>) :
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var date = itemView.findViewById<TextView>(R.id.tvStatItemDate)
-        private var ivImage = itemView.findViewById<ImageView>(R.id.ivTrackItemImage)
         private var tvNumber = itemView.findViewById<TextView>(R.id.tvStatItemNumber)
         private var tvText = itemView.findViewById<TextView>(R.id.tvStatItemText)
         private val dateUtils = DateUtils()
@@ -47,13 +44,6 @@ class TrackItemStatsAdapter(private val stats: List<TrackItem>) :
                 tvText.visibility = View.GONE
             }
 
-            if (!item.status) {
-                Picasso.get().load(item.imageOff).into(ivImage)
-                ivImage?.alpha = 0.4f
-            } else {
-                Picasso.get().load(item.imageOn).into(ivImage)
-                ivImage?.alpha = 1f
-            }
         }
     }
 

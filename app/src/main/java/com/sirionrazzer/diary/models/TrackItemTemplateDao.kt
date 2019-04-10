@@ -28,6 +28,10 @@ class TrackItemTemplateDao(val realm: Realm) {
         return RealmLiveData<TrackItemTemplate>(result)
     }
 
+    fun getTemplateByName(name: String): TrackItemTemplate? {
+        return realm.where(TrackItemTemplate::class.java).equalTo("name", name).findFirst()
+    }
+
 
     fun deleteTemplate(id: String) {
         realm.executeTransactionAsync {

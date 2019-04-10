@@ -7,7 +7,10 @@ import android.view.MenuItem
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
 import com.sirionrazzer.diary.models.TrackItemDao
+import com.sirionrazzer.diary.models.TrackItemTemplate
+import com.sirionrazzer.diary.models.TrackItemTemplateDao
 import com.sirionrazzer.diary.util.DateUtils
+import com.squareup.picasso.Picasso
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_trackitem_stats.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -18,6 +21,7 @@ class TrackItemStatsActivity : AppCompatActivity() {
     var currentTrackItems: MutableList<TrackItem> = mutableListOf()
     private lateinit var viewManager: LinearLayoutManager
     private lateinit var viewAdapter: TrackItemStatsAdapter
+    private lateinit var template: TrackItemTemplate
 
     val realm: Realm by lazy {
         Realm.getDefaultInstance()
@@ -29,14 +33,16 @@ class TrackItemStatsActivity : AppCompatActivity() {
 
         val trackItemName = intent.getStringExtra("trackItemName")
 
-        toolbar.title = "$trackItemName stats"
+        toolbar.title = "Overview"
         setSupportActionBar(toolbar)
+        template = realm.trackItemsTemplatesDao.getTemplateByName(trackItemName)!!
+        tvTemplateStatName.text = template.name
+        Picasso.get().load(template.imageOn).into(ivTemplateStatImage)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         initTrackItems()
 
-//        val trackItemName = "work"
         initTrackAndTemplateItems(trackItemName)
         initRecyclerView()
     }
@@ -122,5 +128,9 @@ class TrackItemStatsActivity : AppCompatActivity() {
 private val Realm.trackItemsDao: TrackItemDao
     get() {
         return TrackItemDao(this)
+    }
+private val Realm.trackItemsTemplatesDao: TrackItemTemplateDao
+    get() {
+        return TrackItemTemplateDao(this)
     }
 
