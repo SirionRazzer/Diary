@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
 import com.sirionrazzer.diary.history.HistoryActivity
 import kotlinx.android.synthetic.main.activity_boarding.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -38,7 +39,12 @@ class BoardingActivity : AppCompatActivity() {
                         login()
                         //TODO: load stuff from firebase save
                     } else {
-                        showDialog(auth, email, pw)
+                        val e = task.exception as FirebaseAuthException
+                        if (e.errorCode == "ERROR_WRONG_PASSWORD") {
+                            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                        } else {
+                            showDialog(auth, email, pw)
+                        }
                     }
 
                 }
