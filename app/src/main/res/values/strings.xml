@@ -8,4 +8,14 @@
     <string name="title_my_day">My day</string>
     <string name="title_manage_activities">Manage activities</string>
     <string name="edit_history_item">Edit</string>
+    <string name="backup_diary_data">Backup Diary data</string>
+    <string name="restore_diary_data">Restore Diary data</string>
+    <string name="error_backup_upload">Something went wrong. Upload failed.</string>
+    <string name="success_backup_upload">Successfully backed up!</string>
+    <string name="success_backup_download">Successfully downloaded from backup!</string>
+    <string name="error_backup_download">Something went wrong. Download failed.</string>
+    <string name="logout">Logout</string>
+    <string name="please_backup">Please sign up to backup the diary.</string>
+    <string name="success_logged_out">You\'ve been logged out successfully</string>
+    <string name="login">Login</string>
 </resources>
