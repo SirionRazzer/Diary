@@ -6,10 +6,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
+import android.view.MenuItem
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import kotlinx.android.synthetic.main.activity_templateitem_viewer.*
 import kotlinx.android.synthetic.main.toolbar.*
+import org.jetbrains.anko.startActivity
 
 class TemplateItemViewerActivity : AppCompatActivity() {
 
@@ -19,7 +22,6 @@ class TemplateItemViewerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_templateitem_viewer)
-
 
         Diary.app.appComponent.inject(this)
 
@@ -35,18 +37,37 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         rvTemplates.layoutManager = LinearLayoutManager(this)
     }
 
+
     override fun onResume() {
         super.onResume()
         adapter.notifyDataSetChanged()
     }
+
 
     fun createViewModel(): TemplateItemViewerViewModel {
         return ViewModelProviders.of(this).get(TemplateItemViewerViewModel::class.java)
     }
 
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_create_activity_template, menu)
+        return true
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.mAddTemplate) {
+            startActivity<TemplateItemCreatorActivity>()
+            finish()
+        } else {
+            onBackPressed()
+        }
+        return true
+    }
+
+
     override fun onBackPressed() {
-        //super.onBackPressed()
+        // TODO change result also if user created new activity!
 
         var intent = Intent()
 
@@ -55,6 +76,7 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         } else {
             setResult(1, intent)
         }
+
         finish()
     }
 }
