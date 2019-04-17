@@ -11,14 +11,11 @@ import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.main.MainActivity
 import com.sirionrazzer.diary.models.TrackItem
 import com.sirionrazzer.diary.stats.TrackItemStatsActivity
-import com.sirionrazzer.diary.util.DateUtils
 
 class HistoryAdapter(
     private val context: Context,
-    private val dataSource: ArrayList<ArrayList<TrackItem>>)
+    private val historyViewModel: HistoryViewModel)
     : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
-
-    private val dateUtils = DateUtils()
 
     class ViewHolder(val historyItemLayout: LinearLayout) : RecyclerView.ViewHolder(historyItemLayout)
 
@@ -34,7 +31,8 @@ class HistoryAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val historyItem = holder.historyItemLayout
-        val allTrackItems = dataSource[position]
+        val date = historyViewModel.dates[position]
+        val allTrackItems = historyViewModel.trackItemsByDate[date]
 
         val gridLayout = historyItem.findViewById<GridView>(R.id.trackItemWithoutText)
         val recyclerView = historyItem.findViewById<RecyclerView>(R.id.trackItemWithText)
@@ -42,7 +40,7 @@ class HistoryAdapter(
         val trackItemsWithoutText: ArrayList<TrackItem> = arrayListOf()
         val trackItemsWithText: ArrayList<TrackItem> = arrayListOf()
         val trackItemsIds: ArrayList<String> = arrayListOf()
-        allTrackItems.forEach {
+        allTrackItems!!.forEach {
             trackItemsIds.add(it.id)
             if (it.hasTextField or it.hasNumberField) {
                 trackItemsWithText.add(it)
@@ -56,21 +54,19 @@ class HistoryAdapter(
         recyclerView.adapter = TrackItemsWithTextAdapter(recyclerView.context, trackItemsWithText) { trackItemName: String -> trackItemClicked(trackItemName) }
         recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
 
-        if (!allTrackItems.isEmpty()) {
-            val date = historyItem.findViewById<TextView>(R.id.historyItemDate)
-            date.text = dateUtils.smartDate(dateUtils.dateFromMillis(allTrackItems[0].date), false)
+        val dateTextView = historyItem.findViewById<TextView>(R.id.historyItemDate)
+        dateTextView.text = date
 
-            val editButton: Button = historyItem.findViewById(R.id.btnEditHistoryItem)
-            editButton.setOnClickListener {
-                val intent = Intent(context, MainActivity::class.java)
-                intent.putExtra("trackItemsIds", trackItemsIds)
-                context.startActivity(intent)
-            }
+        val editButton: Button = historyItem.findViewById(R.id.btnEditHistoryItem)
+        editButton.setOnClickListener {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.putExtra("trackItemsIds", trackItemsIds)
+            context.startActivity(intent)
         }
     }
 
     override fun getItemCount(): Int {
-        return dataSource.size
+        return historyViewModel.dates.size
     }
 
     private fun trackItemClicked(trackItemName: String) {

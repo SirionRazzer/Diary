@@ -1,5 +1,6 @@
 package com.sirionrazzer.diary.history
 
+import android.arch.lifecycle.ViewModelProviders
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
@@ -15,7 +16,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.boarding.BoardingActivity
 import com.sirionrazzer.diary.main.MainActivity
-import com.sirionrazzer.diary.models.TrackItem
 import io.realm.Realm
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.startActivity
@@ -23,9 +23,8 @@ import java.io.File
 
 class HistoryActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
-    private lateinit var viewManager: RecyclerView.LayoutManager
+    lateinit var historyViewModel: HistoryViewModel
+
     private lateinit var popupMenu: PopupMenu
     val realm: Realm by lazy {
         Realm.getDefaultInstance()
@@ -35,27 +34,14 @@ class HistoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
 
+        historyViewModel = createViewModel()
+
         setSupportActionBar(toolbar)
         toolbar.title = ""
 
-        val item1 = TrackItem("1", false, "item 1", 1, 1, false, false, true, null, null, 123, 0)
-        val item2 = TrackItem("2", false, "item 2", 1, 1, false, false, false, null, null, 123, 0)
-        val item3 = TrackItem("3", false, "item 3", 1, 1, false, false, true, null, null, 123, 0)
-        val item4 = TrackItem("4", false, "item 4", 1, 1, false, false, true, null, null, 123, 0)
-        val item5 = TrackItem("5", false, "item 5", 1, 1, false, false, true, null, null, 123, 0)
-        val item6 = TrackItem("6", false, "item 6", 1, 1, false, false, false, null, null, 123, 0)
-        val item7 = TrackItem("7", false, "item 7", 1, 1, false, false, true, null, null, 123, 0)
-        val item10 = TrackItem("10", false, "item 10", 1, 1, true, false, true, "some text", null, 123, 0)
-        val item11 = TrackItem("11", false, "item 11", 1, 1, true, false, false, "some text", null, 123, 0)
-        val item12 = TrackItem("12", false, "item 12", 1, 1, false, true, true, null, 42.toFloat(), 123, 0)
-        val trackitems1: ArrayList<TrackItem> = arrayListOf(item1, item2, item3, item4, item5, item6, item7, item10)
-        val trackitems2: ArrayList<TrackItem> = arrayListOf(item1, item2, item3)
-        val trackitems3: ArrayList<TrackItem> = arrayListOf(item4, item5, item6, item7, item10, item11, item12)
-        val historyItems: ArrayList<ArrayList<TrackItem>> = arrayListOf(trackitems1, trackitems2, trackitems3)
-
-        viewManager = LinearLayoutManager(this)
-        viewAdapter = HistoryAdapter(this, historyItems)
-        recyclerView = findViewById(R.id.historyItemRecyclerView)
+        val viewManager = LinearLayoutManager(this)
+        val viewAdapter = HistoryAdapter(this, historyViewModel)
+        val recyclerView = findViewById<RecyclerView>(R.id.historyItemRecyclerView)
         recyclerView.adapter = viewAdapter
         recyclerView.layoutManager = viewManager
 
@@ -63,6 +49,10 @@ class HistoryActivity : AppCompatActivity() {
         fab.setOnClickListener {
             startActivity<MainActivity>()
         }
+    }
+
+    private fun createViewModel(): HistoryViewModel {
+        return ViewModelProviders.of(this).get(HistoryViewModel::class.java)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
