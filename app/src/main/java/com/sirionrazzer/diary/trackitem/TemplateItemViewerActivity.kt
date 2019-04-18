@@ -58,7 +58,6 @@ class TemplateItemViewerActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.mAddTemplate) {
             startActivity<TemplateItemCreatorActivity>()
-            finish()
         } else {
             onBackPressed()
         }

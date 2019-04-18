@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/mCreateTemplate"
+        android:title="Save"
+        android:icon="@drawable/done_24_px"
+        app:showAsAction="always"/>/
+</menu>

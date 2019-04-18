@@ -18,4 +18,15 @@
     <string name="please_backup">Please sign up to backup the diary.</string>
     <string name="success_logged_out">You\'ve been logged out successfully</string>
     <string name="login">Login</string>
+    <string name="title_creator_activity">Activity Builder</string>
+    <string name="message_leave_without_save">Do you want to leave without saving?</string>
+    <string name="caption_activity_not_saved">Acivity is not saved</string>
+    <string name="hint_activity_name">Name your activity</string>
+
+    <string-array name="input_fields">
+        <item>None</item>
+        <item>Text</item>
+        <item>Number</item>
+    </string-array>
+
 </resources>
