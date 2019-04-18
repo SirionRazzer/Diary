@@ -57,7 +57,7 @@ class HistoryAdapter(
         val dateTextView = historyItem.findViewById<TextView>(R.id.historyItemDate)
         dateTextView.text = date
 
-        val editButton: Button = historyItem.findViewById(R.id.btnEditHistoryItem)
+        val editButton: ImageButton = historyItem.findViewById(R.id.btnEditHistoryItem)
         editButton.setOnClickListener {
             val intent = Intent(context, MainActivity::class.java)
             intent.putExtra("trackItemsIds", trackItemsIds)

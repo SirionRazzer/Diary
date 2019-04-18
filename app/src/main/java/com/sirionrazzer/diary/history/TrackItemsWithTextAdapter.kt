@@ -5,9 +5,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.widget.TextView
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
+import com.squareup.picasso.Picasso
 
 class TrackItemsWithTextAdapter(
     private val context: Context,
@@ -33,9 +35,26 @@ class TrackItemsWithTextAdapter(
     }
 
     override fun onBindViewHolder(holder: TrackItemsWithTextAdapter.ViewHolder, position: Int) {
+        val trackItem = trackItems[position]
         val templateItemLayout = holder.templateItemLayout
+
         val nameTextView = templateItemLayout.findViewById<TextView>(R.id.trackItemName)
-        nameTextView.text = trackItems[position].name
+        nameTextView.text = trackItem.name
+        val textTextView = templateItemLayout.findViewById<TextView>(R.id.tvTrackItemText)
+        if (trackItem.hasTextField) {
+            textTextView.text = trackItem.textField
+        }
+        else if (trackItem.hasNumberField) {
+            textTextView.text = trackItem.numberField.toString()
+        }
+        val imageImageView = templateItemLayout.findViewById<ImageView>(R.id.ivTrackItemImage)
+        if (trackItem.status) {
+            Picasso.get().load(trackItem.imageOn).into(imageImageView)
+            imageImageView?.alpha = 1f
+        } else {
+            Picasso.get().load(trackItem.imageOff).into(imageImageView)
+            imageImageView?.alpha = 0.3f
+        }
 
         holder.bind(trackItems[position].name, clickListener)
     }

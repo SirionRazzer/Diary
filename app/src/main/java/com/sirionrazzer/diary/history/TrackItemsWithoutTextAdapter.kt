@@ -8,13 +8,15 @@ import android.view.View
 import android.widget.TextView
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
 import com.sirionrazzer.diary.stats.TrackItemStatsActivity
+import com.squareup.picasso.Picasso
 
 class TrackItemsWithoutTextAdapter(private val context: Context, private val trackItems: ArrayList<TrackItem>) : BaseAdapter() {
 
-    class ViewHolder(val nameTextView: TextView) : RecyclerView.ViewHolder(nameTextView)
+    class ViewHolder(val nameTextView: TextView, val image: ImageView) : RecyclerView.ViewHolder(nameTextView)
 
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -37,7 +39,8 @@ class TrackItemsWithoutTextAdapter(private val context: Context, private val tra
 
         if (templateItemView == null) {
             templateItemView = inflater.inflate(R.layout.template_item, parent, false)
-            holder = ViewHolder(templateItemView!!.findViewById(R.id.trackitemName) as TextView)
+            holder = ViewHolder(templateItemView!!.findViewById(R.id.trackitemName) as TextView,
+                templateItemView.findViewById(R.id.trackitemImage) as ImageView)
             templateItemView.tag = holder
         }
         else {
@@ -45,6 +48,13 @@ class TrackItemsWithoutTextAdapter(private val context: Context, private val tra
         }
         val trackItem = getItem(position)
         holder.nameTextView.text = trackItem.name
+        if (trackItem.status) {
+            Picasso.get().load(trackItem.imageOn).into(holder.image)
+            holder.image?.alpha = 1f
+        } else {
+            Picasso.get().load(trackItem.imageOff).into(holder.image)
+            holder.image?.alpha = 0.3f
+        }
 
         val intent = Intent(templateItemView.context, TrackItemStatsActivity::class.java)
             .putExtra("trackItemName", trackItem.name)
