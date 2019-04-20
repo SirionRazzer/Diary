@@ -1,6 +1,6 @@
 package com.sirionrazzer.diary.history
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.models.TrackItem
 import com.sirionrazzer.diary.models.TrackItemDao

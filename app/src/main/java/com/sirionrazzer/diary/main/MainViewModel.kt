@@ -1,7 +1,7 @@
 package com.sirionrazzer.diary.main
 
 import android.annotation.SuppressLint
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.*

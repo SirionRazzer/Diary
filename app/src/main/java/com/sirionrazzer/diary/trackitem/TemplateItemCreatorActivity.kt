@@ -1,8 +1,8 @@
 package com.sirionrazzer.diary.trackitem
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -80,10 +80,9 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
 
 
     override fun onBackPressed() {
-        if (creatorViewModel.hasChanged || etName.text.isNotEmpty()) {
+        if (creatorViewModel.hasChanged || etName.text!!.toString().isNotEmpty()) {
             alert(getString(R.string.message_leave_without_save), getString(R.string.caption_activity_not_saved)) {
                 yesButton { super.onBackPressed() }
-                noButton {}
             }.show()
         } else {
             super.onBackPressed()

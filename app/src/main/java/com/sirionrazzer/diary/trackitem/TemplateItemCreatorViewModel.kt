@@ -1,6 +1,6 @@
 package com.sirionrazzer.diary.trackitem
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItemTemplate

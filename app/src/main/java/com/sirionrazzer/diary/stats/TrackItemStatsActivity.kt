@@ -1,8 +1,8 @@
 package com.sirionrazzer.diary.stats
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.MenuItem
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem

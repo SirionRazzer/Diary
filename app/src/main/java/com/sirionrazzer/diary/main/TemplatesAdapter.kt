@@ -1,8 +1,8 @@
 package com.sirionrazzer.diary.main
 
 import android.content.Context
-import android.support.design.widget.TextInputLayout
-import android.support.v7.app.AlertDialog
+import com.google.android.material.textfield.TextInputLayout
+import androidx.appcompat.app.AlertDialog
 import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,7 +16,7 @@ import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.template_item.view.*
-import android.databinding.ObservableField
+import androidx.databinding.ObservableField
 
 class TemplatesAdapter(private val context: Context, private val mainViewModel: MainViewModel) : BaseAdapter() {
 

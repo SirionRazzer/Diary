@@ -1,6 +1,6 @@
 package com.sirionrazzer.diary.models
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import io.realm.Realm
 import io.realm.RealmResults
 
