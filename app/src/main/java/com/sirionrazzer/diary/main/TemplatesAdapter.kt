@@ -191,7 +191,11 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
 
                 val stringNum = input.text.toString()
                 mainViewModel.currentTrackItems[itemPosition].hasNumberField = true
-                mainViewModel.currentTrackItems[itemPosition].numberField = stringNum.toFloat()
+                if (stringNum.isNotEmpty()) {
+                    mainViewModel.currentTrackItems[itemPosition].numberField = stringNum.toFloat()
+                } else {
+                    mainViewModel.currentTrackItems[itemPosition].numberField = 0f
+                }
                 enableItemStatus(itemPosition, holder)
 
                 dialog.cancel()

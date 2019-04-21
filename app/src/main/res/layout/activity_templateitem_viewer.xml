@@ -9,11 +9,72 @@
 
     <include layout="@layout/toolbar" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTemplates"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/toolbar"/>
+        android:layout_below="@id/toolbar">
 
+        <RelativeLayout
+            android:id="@+id/llHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/background_heading_rounded"
+            android:elevation="8dp"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="16dp">
+
+            <ImageView
+                android:id="@+id/ivInfo"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_info"
+                android:layout_alignParentEnd="true"
+                />
+
+            <TextView
+                android:id="@+id/tvHeading"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_toStartOf="@+id/ivInfo"
+                android:text="Arrange your activities or create a new one"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tvCaption"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvHeading"
+                android:layout_marginBottom="20dp"
+                android:text="Changes will be used in new diary entries only"
+                android:textColor="@color/colorPrimaryLight" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_below="@id/llHeading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:gravity="center_horizontal"
+            android:paddingTop="16dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTemplates"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

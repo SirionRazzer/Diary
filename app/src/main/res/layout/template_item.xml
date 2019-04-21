@@ -24,6 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <Space
             android:id="@+id/space"
             android:layout_width="wrap_content"
@@ -34,6 +35,7 @@
             app:layout_constraintStart_toStartOf="@+id/trackitemImage"
             app:layout_constraintTop_toTopOf="@+id/trackitemImage"
             app:layout_constraintVertical_bias="0.66" />
+
         <ImageView
             android:id="@+id/ivPencil"
             android:layout_width="16dp"

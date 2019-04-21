@@ -35,11 +35,21 @@ class TemplateViewerAdapter(private val context: Context, private val tiViewMode
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var ivImage = itemView.ivTemplate
+        var ivPencil = itemView.ivPencil
         var tvName = itemView.tvName
         var swDeleted = itemView.swDeleted
 
         fun bindItems(tiViewModel: TemplateItemViewerViewModel, position: Int) {
             Picasso.get().load(tiViewModel.currentTemplateItems[position].imageOn).into(ivImage)
+            //Picasso.get().load(R.drawable.ic_edit_badge).into(ivPencil)
+            if (tiViewModel.currentTemplateItems[position].hasNumberField ||
+                tiViewModel.currentTemplateItems[position].hasTextField
+            ) {
+                ivPencil.visibility = View.VISIBLE
+                ivPencil.setImageResource(R.drawable.ic_edit_badge)
+            } else {
+                ivPencil.visibility = View.INVISIBLE
+            }
             tvName.text = tiViewModel.currentTemplateItems[position].name
             swDeleted.isChecked = !tiViewModel.currentTemplateItems[position].deleted
 
