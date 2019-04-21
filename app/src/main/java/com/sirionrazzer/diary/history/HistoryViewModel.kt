@@ -13,6 +13,7 @@ class HistoryViewModel: ViewModel() {
     val realm: Realm by lazy {
         Realm.getDefaultInstance()
     }
+
     private val trackItemDao: TrackItemDao = realm.trackItemDao
     private val dateUtils = DateUtils()
 
@@ -20,18 +21,20 @@ class HistoryViewModel: ViewModel() {
     var trackItemsByDate: HashMap<String, ArrayList<TrackItem>> = hashMapOf()
 
     init {
-        var trackItems: List<TrackItem>? = trackItemDao.getAllTrackItemsSortByDate().value
+        var trackItems: List<TrackItem>? = trackItemDao.getAllTrackItemsSortByDate()
 //        var trackItems: List<TrackItem>? = trackItemDao.getAllTrackItemsSortByDate()
         if (trackItems == null) {
             trackItems = arrayListOf()
         }
-        var date: String
+
         trackItems.forEach {
-            date = dateUtils.smartDate(dateUtils.dateFromMillis(it.date), false)
+            val date = dateUtils.smartDate(dateUtils.dateFromMillis(it.date), false)
+
             if (!trackItemsByDate.containsKey(date)) {
                 trackItemsByDate[date] = arrayListOf()
                 dates.add(date)
             }
+
             trackItemsByDate[date]!!.add(it)
         }
 

@@ -61,10 +61,9 @@ class TrackItemDao(val realm: Realm) {
         return RealmLiveData<TrackItem>(items.sort("position"))
     }
 
-    fun getAllTrackItemsSortByDate(): LiveData<RealmResults<TrackItem>> {
-
-        var items = realm.where(TrackItem::class.java).findAll()
-        return RealmLiveData(items.sort("date"))
+    fun getAllTrackItemsSortByDate(): List<TrackItem> {
+        var items = realm.where(TrackItem::class.java).findAll().sort("date")
+        return items.map { item -> item as TrackItem}
     }
 
 //    fun getAllTrackItemsSortByDate(): List<TrackItem> {

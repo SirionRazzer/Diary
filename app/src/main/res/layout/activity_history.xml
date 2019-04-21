@@ -11,11 +11,11 @@
 
         <include layout="@layout/toolbar" />
 
-        <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/historyItemRecyclerView"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvHistoryItems"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="vertical" />
+            android:scrollbars="none" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

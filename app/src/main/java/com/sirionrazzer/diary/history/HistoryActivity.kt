@@ -17,6 +17,7 @@ import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.boarding.BoardingActivity
 import com.sirionrazzer.diary.main.MainActivity
 import io.realm.Realm
+import kotlinx.android.synthetic.main.activity_history.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.startActivity
 import java.io.File
@@ -36,16 +37,15 @@ class HistoryActivity : AppCompatActivity() {
 
         historyViewModel = createViewModel()
 
+        toolbar.title = "History"
         setSupportActionBar(toolbar)
-        toolbar.title = ""
 
         val viewManager = LinearLayoutManager(this)
         val viewAdapter = HistoryAdapter(this, historyViewModel)
-        val recyclerView = findViewById<RecyclerView>(R.id.historyItemRecyclerView)
-        recyclerView.adapter = viewAdapter
-        recyclerView.layoutManager = viewManager
 
-        val fab = findViewById<FloatingActionButton>(R.id.fab)
+        rvHistoryItems.adapter = viewAdapter
+        rvHistoryItems.layoutManager = viewManager
+
         fab.setOnClickListener {
             startActivity<MainActivity>()
         }
