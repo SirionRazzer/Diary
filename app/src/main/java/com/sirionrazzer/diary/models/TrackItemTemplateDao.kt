@@ -41,9 +41,12 @@ class TrackItemTemplateDao(val realm: Realm) {
     }
 
 
-    fun getAllTemplates(): List<TrackItemTemplate> {
+    fun getAllTemplates(): MutableList<TrackItemTemplate> {
+        realm.beginTransaction()
         var items = realm.where(TrackItemTemplate::class.java).findAll().sort("position")
-        return items.map { item -> item as TrackItemTemplate }
+        realm.commitTransaction()
+        val list = items.map { item -> item as TrackItemTemplate }
+        return list.toMutableList()
     }
 
 

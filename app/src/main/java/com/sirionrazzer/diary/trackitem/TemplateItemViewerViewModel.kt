@@ -13,14 +13,14 @@ class TemplateItemViewerViewModel: ViewModel() {
     }
 
     var currentTemplateItems: MutableList<TrackItemTemplate> = mutableListOf()
-    var templateDao = TrackItemTemplateDao(realm)
+    private var templateDao = TrackItemTemplateDao(realm)
     var hasChanged: Boolean = false
 
 
     init {
         Diary.app.appComponent.inject(this)
 
-        getTemplates()
+        currentTemplateItems = getTemplates()
     }
 
 
@@ -30,8 +30,8 @@ class TemplateItemViewerViewModel: ViewModel() {
     }
 
 
-    fun getTemplates() {
-        currentTemplateItems = templateDao.getAllTemplates().toMutableList()
+    private fun getTemplates(): MutableList<TrackItemTemplate> {
+        return templateDao.getAllTemplates().toMutableList()
     }
 
 

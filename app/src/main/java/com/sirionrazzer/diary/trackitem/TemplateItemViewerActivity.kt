@@ -1,25 +1,29 @@
 package com.sirionrazzer.diary.trackitem
 
-import android.app.Activity
 import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
+import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemDragListener
+import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListener
+import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnListScrollListener
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
+import com.sirionrazzer.diary.models.TrackItemTemplate
 import kotlinx.android.synthetic.main.activity_templateitem_viewer.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 
 class TemplateItemViewerActivity : AppCompatActivity() {
 
     lateinit var tiViewModel: TemplateItemViewerViewModel
-    lateinit var adapter: TemplateViewerAdapter
+    lateinit var adapter: TemplateAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +38,113 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
-        adapter = TemplateViewerAdapter(this, tiViewModel)
-        rvTemplates.adapter = adapter
+        adapter = TemplateAdapter(tiViewModel.currentTemplateItems, tiViewModel)
         rvTemplates.layoutManager = GridLayoutManager(this, 4, RecyclerView.VERTICAL, false)
+        rvTemplates.adapter = adapter
+        rvTemplates.orientation = DragDropSwipeRecyclerView.ListOrientation.GRID_LIST_WITH_HORIZONTAL_SWIPING
+        rvTemplates.orientation?.removeSwipeDirectionFlag(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.RIGHT)
+        rvTemplates.orientation?.removeSwipeDirectionFlag(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.LEFT)
+        rvTemplates.swipeListener = onItemSwipeListener
+        rvTemplates.dragListener = onItemDragListener
+        rvTemplates.scrollListener = onListScrollListener
+    }
+
+    private val onItemSwipeListener = object : OnItemSwipeListener<TrackItemTemplate> {
+        override fun onItemSwiped(
+            position: Int,
+            direction: OnItemSwipeListener.SwipeDirection,
+            item: TrackItemTemplate
+        ): Boolean {
+            // Handle action of item swiped
+            // Return false to indicate that the swiped item should be removed from the adapter's data set (default behaviour)
+            // Return true to stop the swiped item from being automatically removed from the adapter's data set (in this case, it will be your responsibility to manually update the data set as necessary)
+            return false
+        }
+    }
+
+    private val onItemDragListener = object : OnItemDragListener<TrackItemTemplate> {
+        override fun onItemDragged(previousPosition: Int, newPosition: Int, item: TrackItemTemplate) {
+            // Handle action of item being dragged from one position to another
+        }
+
+        override fun onItemDropped(initialPosition: Int, finalPosition: Int, item: TrackItemTemplate) {
+            // Handle action of item dropped
+            toast("${item.position} from: $initialPosition to: $finalPosition")
+
+            // Move items between initial and final position by -1
+            if (initialPosition < finalPosition) {
+                tiViewModel.currentTemplateItems.forEach {
+                    if (it.position in (initialPosition + 1)..finalPosition) {
+                        var template = TrackItemTemplate()
+                        template.id = it.id
+                        template.name = it.name
+                        template.imageOn = it.imageOn
+                        template.imageOff = it.imageOff
+                        template.position = it.position - 1
+                        template.hasTextField = it.hasTextField
+                        template.hasNumberField = it.hasNumberField
+                        template.deleted = it.deleted
+
+                        tiViewModel.updateTemplate(template)
+                    }
+
+                    if (it.position == initialPosition) {
+                        var template = TrackItemTemplate()
+                        template.id = it.id
+                        template.name = it.name
+                        template.imageOn = it.imageOn
+                        template.imageOff = it.imageOff
+                        template.position = finalPosition
+                        template.hasTextField = it.hasTextField
+                        template.hasNumberField = it.hasNumberField
+                        template.deleted = it.deleted
+
+                        tiViewModel.updateTemplate(template)
+                    }
+                }
+                tiViewModel.hasChanged = true
+            }
+
+            // Move items between initial and final position by +1
+            if (initialPosition > finalPosition) {
+                tiViewModel.currentTemplateItems.forEach {
+                    if (it.position in (finalPosition) until initialPosition) {
+                        var template = TrackItemTemplate()
+                        template.id = it.id
+                        template.name = it.name
+                        template.imageOn = it.imageOn
+                        template.imageOff = it.imageOff
+                        template.position = it.position + 1
+                        template.hasTextField = it.hasTextField
+                        template.hasNumberField = it.hasNumberField
+                        template.deleted = it.deleted
+
+                        tiViewModel.updateTemplate(template)
+                    }
+
+                    if (it.position == initialPosition) {
+                        var template = TrackItemTemplate()
+                        template.id = it.id
+                        template.name = it.name
+                        template.imageOn = it.imageOn
+                        template.imageOff = it.imageOff
+                        template.position = finalPosition
+                        template.hasTextField = it.hasTextField
+                        template.hasNumberField = it.hasNumberField
+                        template.deleted = it.deleted
+
+                        tiViewModel.updateTemplate(template)
+                    }
+                }
+                tiViewModel.hasChanged = true
+            }
+        }
+    }
+
+    private val onListScrollListener = object : OnListScrollListener {
+        override fun onListScrolled(scrollDirection: OnListScrollListener.ScrollDirection, distance: Int) {
+            // Handle scrolling
+        }
     }
 
 
@@ -70,7 +178,7 @@ class TemplateItemViewerActivity : AppCompatActivity() {
     override fun onBackPressed() {
         // TODO change result also if user created new activity!
 
-        var intent = Intent()
+        val intent = Intent()
 
         if (tiViewModel.hasChanged) {
             setResult(0, intent)

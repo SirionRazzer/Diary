@@ -70,10 +70,11 @@
             android:gravity="center_horizontal"
             android:paddingTop="16dp">
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
                 android:id="@+id/rvTemplates"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                app:item_layout="@layout/viewer_template_item"/>
 
         </LinearLayout>
     </RelativeLayout>
