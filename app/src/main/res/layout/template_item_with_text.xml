@@ -28,7 +28,8 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/ivTrackItemImage"
             android:text="item name"
-            android:textColor="@color/secondaryText"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
             android:textSize="16sp"/>
 
     </RelativeLayout>

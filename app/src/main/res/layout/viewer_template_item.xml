@@ -4,9 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:gravity="center"
     android:layout_marginBottom="16dp"
+    android:background="?attr/selectableItemBackgroundBorderless"
     android:clickable="true"
+    android:focusable="true"
+    android:gravity="center"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,9 +54,10 @@
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="item name"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/secondaryText"
+            android:text="item name"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
             android:textSize="16sp" />
 
         <Switch

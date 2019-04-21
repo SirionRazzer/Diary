@@ -1,6 +1,8 @@
 package com.sirionrazzer.diary.main
 
 import android.content.Context
+import android.graphics.Color
+import android.provider.CalendarContract
 import com.google.android.material.textfield.TextInputLayout
 import androidx.appcompat.app.AlertDialog
 import android.text.InputType
@@ -17,6 +19,7 @@ import com.sirionrazzer.diary.models.TrackItem
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.template_item.view.*
 import androidx.databinding.ObservableField
+import org.jetbrains.anko.colorAttr
 
 class TemplatesAdapter(private val context: Context, private val mainViewModel: MainViewModel) : BaseAdapter() {
 
@@ -73,9 +76,11 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             if (!mainViewModel.currentTrackItems[position].status) {
                 Picasso.get().load(mainViewModel.currentTrackItems[position].imageOff).into(holder.ivImage)
                 holder.ivImage?.alpha = 0.4f
+                holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimaryLight))
             } else {
                 Picasso.get().load(mainViewModel.currentTrackItems[position].imageOn).into(holder.ivImage)
                 holder.ivImage?.alpha = 1f
+                holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimaryDark))
             }
 
             itemView.setOnClickListener {
@@ -96,6 +101,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
                     Picasso.get().load(mainViewModel.currentTrackItems[position].imageOff).into(holder.ivImage)
                     holder.status = false
                     holder.ivImage?.alpha = 0.4f
+                    holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimaryLight))
                     Log.d(
                         "TemplatesAdapter",
                         "Clicked: " + position + ". track item, the state was true and now is " + holder.status.toString()
@@ -119,6 +125,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
         Picasso.get().load(mainViewModel.currentTrackItems[position].imageOn).into(holder.ivImage)
         holder.status = true
         holder.ivImage?.alpha = 1.0f
+        holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimaryDark))
         Log.d(
             "TemplatesAdapter",
             "Clicked: " + position + ". track item, the state was false and now is " + holder.status.toString()

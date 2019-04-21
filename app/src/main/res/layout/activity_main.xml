@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
             android:layout_centerHorizontal="true"
+            android:textStyle="bold"
             android:text="#ME"
             android:layout_marginBottom="3dp"
             android:textSize="20sp"/>
@@ -34,8 +35,8 @@
         <View
             android:layout_below="@id/tvMe"
             android:layout_centerHorizontal="true"
-            android:layout_height="2dp"
-            android:layout_width="70dp"
+            android:layout_height="3dp"
+            android:layout_width="80dp"
             android:background="@color/colorAccent"/>
 
         <TextView
@@ -48,6 +49,7 @@
             android:layout_marginTop="8dp"
             android:drawablePadding="4dp"
             android:text="19/3"
+            android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp" />
 
