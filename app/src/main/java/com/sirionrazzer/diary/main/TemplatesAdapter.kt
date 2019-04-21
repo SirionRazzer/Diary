@@ -66,6 +66,8 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
                 holder.ivPencil?.visibility = View.VISIBLE
                 //Picasso.get().load(R.drawable.ic_pencil).into(holder.ivPencil)
                 holder.ivPencil?.setImageResource(R.drawable.ic_edit_badge)
+            } else {
+                holder.ivPencil?.visibility = View.INVISIBLE
             }
 
             if (!mainViewModel.currentTrackItems[position].status) {
@@ -98,7 +100,6 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
                         "TemplatesAdapter",
                         "Clicked: " + position + ". track item, the state was true and now is " + holder.status.toString()
                     )
-
                     mainViewModel.currentTrackItems[position].status = false
                     mainViewModel.currentTrackItems[position].hasTextField = false
                     mainViewModel.currentTrackItems[position].hasNumberField = false

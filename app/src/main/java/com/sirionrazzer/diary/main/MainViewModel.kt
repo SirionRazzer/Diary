@@ -1,6 +1,7 @@
 package com.sirionrazzer.diary.main
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
@@ -21,7 +22,9 @@ class MainViewModel : ViewModel() {
     }
 
     var currentTrackItems: MutableList<TrackItem> = mutableListOf()
+    var deletedTrackItems: MutableList<TrackItem> = mutableListOf()
     var currentTemplateItems: MutableList<TrackItemTemplate> = mutableListOf()
+    var deletedTemplateItems: MutableList<TrackItemTemplate> = mutableListOf()
 
     val dateUtils = DateUtils()
     var date: Long?
@@ -38,11 +41,25 @@ class MainViewModel : ViewModel() {
 
 
     fun saveTrackItems() {
+        Log.d(
+            "MainViewModel",
+            "Current count of track items in database is " + realm.trackItemsDao.getCountOfTrackItems()
+        )
+
         currentTrackItems.forEach {
-            if (it.status) {
-                realm.trackItemsDao.addTrackItem(it)
-            }
+            it.date = date!!
+            realm.trackItemsDao.addTrackItem(it)
         }
+
+        deletedTrackItems.forEach {
+            it.date = date!!
+            realm.trackItemsDao.addTrackItem(it)
+        }
+
+        Log.d(
+            "MainViewModel",
+            "Current count of track items in database is " + realm.trackItemsDao.getCountOfTrackItems()
+        )
     }
 
 
@@ -187,47 +204,52 @@ class MainViewModel : ViewModel() {
 
     fun initTrackAndTemplateItems() {
         currentTrackItems.clear()
+        deletedTrackItems.clear()
         currentTemplateItems.clear()
+        deletedTemplateItems.clear()
 
         realm.trackItemsTemplatesDao.getAllTemplates().let {
             it.forEach { it ->
+                val trackItem = TrackItem(
+                    id = UUID.randomUUID().toString(),
+                    deleted = it.deleted,
+                    name = it.name,
+                    imageOn = it.imageOn,
+                    imageOff = it.imageOff,
+                    hasTextField = it.hasTextField,
+                    hasNumberField = it.hasNumberField,
+                    status = false,
+                    textField = "",
+                    numberField = 0f,
+                    date = 0,
+                    position = it.position
+                )
                 if (!it.deleted) {
-                    val trackItem = TrackItem(
-                        id = UUID.randomUUID().toString(),
-                        deleted = it.deleted,
-                        name = it.name,
-                        imageOn = it.imageOn,
-                        imageOff = it.imageOff,
-                        hasTextField = it.hasTextField,
-                        hasNumberField = it.hasNumberField,
-                        status = false,
-                        textField = "",
-                        numberField = 0f,
-                        date = 0,
-                        position = it.position
-                    )
                     currentTrackItems.add(trackItem)
+                } else {
+                    deletedTrackItems.add(trackItem)
                 }
             }
 
             it.forEach { it ->
+                val templateItem = TrackItemTemplate(
+                    id = it.id,
+                    deleted = it.deleted,
+                    name = it.name,
+                    imageOn = it.imageOn,
+                    imageOff = it.imageOff,
+                    hasTextField = it.hasTextField,
+                    hasNumberField = it.hasNumberField,
+                    position = it.position
+                )
                 if (!it.deleted) {
-                    val templateItem = TrackItemTemplate(
-                        id = it.id,
-                        deleted = it.deleted,
-                        name = it.name,
-                        imageOn = it.imageOn,
-                        imageOff = it.imageOff,
-                        hasTextField = it.hasTextField,
-                        hasNumberField = it.hasNumberField,
-                        position = it.position
-                    )
                     currentTemplateItems.add(templateItem)
+                } else {
+                    deletedTemplateItems.add(templateItem)
                 }
             }
         }
     }
-
 }
 
 

@@ -1,5 +1,6 @@
 package com.sirionrazzer.diary.history
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.models.TrackItem
@@ -33,6 +34,8 @@ class HistoryViewModel: ViewModel() {
             }
             trackItemsByDate[date]!!.add(it)
         }
+
+        Log.d("HistoryViewModel", trackItems.size.toString())
 
         Diary.app.appComponent.inject(this)
     }

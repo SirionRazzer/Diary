@@ -50,6 +50,11 @@ class TrackItemDao(val realm: Realm) {
     }
 
 
+    fun getCountOfTrackItems(): Long {
+        return realm.where(TrackItem::class.java).count()
+    }
+
+
     fun getAllTrackItems(): LiveData<RealmResults<TrackItem>> {
         var items = realm.where(TrackItem::class.java).findAll()
         items.sort("position")

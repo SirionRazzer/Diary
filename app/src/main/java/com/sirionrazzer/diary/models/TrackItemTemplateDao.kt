@@ -43,16 +43,7 @@ class TrackItemTemplateDao(val realm: Realm) {
 
     fun getAllTemplates(): List<TrackItemTemplate> {
         var items = realm.where(TrackItemTemplate::class.java).findAll().sort("position")
-        var templates = mutableListOf<TrackItemTemplate>()
-
-
-        items.let {
-            it.forEach {
-                templates.add(it)
-            }
-        }
-
-        return templates
+        return items.map { item -> item as TrackItemTemplate }
     }
 
 
