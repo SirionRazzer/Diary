@@ -21,13 +21,16 @@ class TemplateViewerAdapter(private val context: Context, private val tiViewMode
         return ViewHolder(v)
     }
 
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(tiViewModel, position)
     }
 
+
     override fun getItemCount(): Int {
         return tiViewModel.currentTemplateItems.size
     }
+
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -40,20 +43,29 @@ class TemplateViewerAdapter(private val context: Context, private val tiViewMode
             tvName.text = tiViewModel.currentTemplateItems[position].name
             swDeleted.isChecked = !tiViewModel.currentTemplateItems[position].deleted
 
-            swDeleted.setOnCheckedChangeListener { _, isChecked ->
-                var template = TrackItemTemplate()
-                template.id = tiViewModel.currentTemplateItems[position].id
-                template.name = tiViewModel.currentTemplateItems[position].name
-                template.imageOn = tiViewModel.currentTemplateItems[position].imageOn
-                template.imageOff = tiViewModel.currentTemplateItems[position].imageOff
-                template.position = tiViewModel.currentTemplateItems[position].position
-                template.hasTextField = tiViewModel.currentTemplateItems[position].hasTextField
-                template.hasNumberField = tiViewModel.currentTemplateItems[position].hasNumberField
-                template.deleted = !isChecked // <-- this
-
-                tiViewModel.updateTemplate(template)
-                tiViewModel.hasChanged = true
+            itemView.setOnClickListener {
+                updateTemplate(tiViewModel, position, !swDeleted.isChecked)
+                swDeleted.isChecked = !swDeleted.isChecked
             }
+
+            swDeleted.setOnCheckedChangeListener { _, isChecked ->
+                updateTemplate(tiViewModel, position, isChecked)
+            }
+        }
+
+        private fun updateTemplate(tiViewModel: TemplateItemViewerViewModel, position: Int, isChecked: Boolean) {
+            var template = TrackItemTemplate()
+            template.id = tiViewModel.currentTemplateItems[position].id
+            template.name = tiViewModel.currentTemplateItems[position].name
+            template.imageOn = tiViewModel.currentTemplateItems[position].imageOn
+            template.imageOff = tiViewModel.currentTemplateItems[position].imageOff
+            template.position = tiViewModel.currentTemplateItems[position].position
+            template.hasTextField = tiViewModel.currentTemplateItems[position].hasTextField
+            template.hasNumberField = tiViewModel.currentTemplateItems[position].hasNumberField
+            template.deleted = !isChecked // <-- this
+
+            tiViewModel.updateTemplate(template)
+            tiViewModel.hasChanged = true
         }
     }
 }

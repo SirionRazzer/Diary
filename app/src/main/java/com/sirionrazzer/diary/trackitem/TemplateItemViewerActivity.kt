@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import kotlinx.android.synthetic.main.activity_templateitem_viewer.*
@@ -34,7 +36,7 @@ class TemplateItemViewerActivity : AppCompatActivity() {
 
         adapter = TemplateViewerAdapter(this, tiViewModel)
         rvTemplates.adapter = adapter
-        rvTemplates.layoutManager = LinearLayoutManager(this)
+        rvTemplates.layoutManager = GridLayoutManager(this, 4, RecyclerView.VERTICAL, false)
     }
 
 
