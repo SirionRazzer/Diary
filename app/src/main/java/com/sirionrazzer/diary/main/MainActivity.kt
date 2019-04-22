@@ -60,6 +60,16 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         val dateUtils = DateUtils()
         tvDate.text = dateUtils.smartDate(dateUtils.dateFromMillis(mainViewModel.date), false)
+
+        when (dateUtils.dayInWeek()) {
+            2 -> tvMonday.setTextColor(resources.getColor(R.color.colorAccent))
+            3 -> tvTuesday.setTextColor(resources.getColor(R.color.colorAccent))
+            4 -> tvWednesday.setTextColor(resources.getColor(R.color.colorAccent))
+            5 -> tvThursday.setTextColor(resources.getColor(R.color.colorAccent))
+            6 -> tvFriday.setTextColor(resources.getColor(R.color.colorAccent))
+            0 -> tvSaturday.setTextColor(resources.getColor(R.color.colorAccent))
+            1 -> tvSunday.setTextColor(resources.getColor(R.color.colorAccent))
+        }
     }
 
 

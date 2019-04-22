@@ -3,6 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/mCreateTemplate"
         android:title="Save"
-        android:icon="@drawable/done_24_px"
+        android:icon="@drawable/ic_done"
         app:showAsAction="always"/>/
 </menu>

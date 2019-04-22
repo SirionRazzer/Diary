@@ -67,4 +67,11 @@ class DateUtils {
 
         return smartDate
     }
+
+    /**
+     * Sunday = 0, Monday = 1, ..., Saturday = 6
+     */
+    fun dayInWeek(): Int {
+        return Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
+    }
 }
