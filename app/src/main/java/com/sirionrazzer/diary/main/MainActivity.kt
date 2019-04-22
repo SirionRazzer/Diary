@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.google.android.material.snackbar.Snackbar
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.UserStorage
@@ -85,6 +86,9 @@ class MainActivity : AppCompatActivity() {
         if (resultCode != 1) { // templates are changed
             mainViewModel.initTrackAndTemplateItems()
             adapter.notifyDataSetChanged()
+
+            val snackbar = Snackbar.make(clMain, "Activities updated", Snackbar.LENGTH_SHORT)
+            snackbar.show()
         }
 
     }

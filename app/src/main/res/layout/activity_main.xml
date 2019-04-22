@@ -3,123 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/clMain"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/grey_lt"
     tools:context=".main.MainActivity">
 
     <include
-        layout="@layout/toolbar_dark"
+        layout="@layout/toolbar"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/llDateArea"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        card_view:cardCornerRadius="5dp"
-        card_view:cardElevation="8dp"
-        card_view:contentPadding="16dp"
-        card_view:layout_constraintEnd_toEndOf="parent"
-        card_view:layout_constraintStart_toStartOf="parent"
-        card_view:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-
-            <LinearLayout
-                android:id="@+id/upperDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="8dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvDate"
-                    style="@style/TextAppearance.MaterialComponents.Headline6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_calendar"
-                    android:drawablePadding="4dp"
-                    android:text="19/3"
-                    android:textColor="@color/primaryText"
-
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <!--<View-->
-            <!--android:layout_width="80dp"-->
-            <!--android:layout_height="3dp"-->
-            <!--android:layout_below="@id/upperDate"-->
-            <!--android:background="@color/colorAccent" />-->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/upperDate"
-                android:layout_centerHorizontal="true"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvMonday"
-                    style="@style/DayField"
-                    android:text="mon" />
-
-                <TextView
-                    android:id="@+id/tvTuesday"
-                    style="@style/DayField"
-                    android:text="tue" />
-
-                <TextView
-                    android:id="@+id/tvWednesday"
-                    style="@style/DayField"
-                    android:text="wed" />
-
-                <TextView
-                    android:id="@+id/tvThursday"
-                    style="@style/DayField"
-                    android:text="thu" />
-
-                <TextView
-                    android:id="@+id/tvFriday"
-                    style="@style/DayField"
-                    android:text="fri" />
-
-                <TextView
-                    android:id="@+id/tvSaturday"
-                    style="@style/DayField"
-                    android:text="sat" />
-
-                <TextView
-                    android:id="@+id/tvSunday"
-                    style="@style/DayField"
-                    android:text="sun" />
-            </LinearLayout>
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
-
 
     <LinearLayout
         android:id="@+id/llTemplates"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/white"
-        android:elevation="8dp"
-        android:gravity="center"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/background_white_sheet_rounded"
+        android:elevation="4dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingStart="16dp"
         android:paddingTop="32dp"
@@ -128,13 +28,111 @@
         app:layout_constraintBottom_toTopOf="@+id/btnManageActivities"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llDateArea">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cvDateArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
+            card_view:cardCornerRadius="5dp"
+            card_view:cardElevation="0dp"
+            card_view:contentPadding="16dp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:id="@+id/upperDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvDate"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_calendar"
+                        android:drawablePadding="4dp"
+                        android:text="19/3"
+                        android:textColor="@color/primaryText"
+
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!--<View-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="3dp"-->
+                <!--android:layout_below="@id/upperDate"-->
+                <!--android:background="@color/colorAccent" />-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/upperDate"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvMonday"
+                        style="@style/DayField"
+                        android:text="mon" />
+
+                    <TextView
+                        android:id="@+id/tvTuesday"
+                        style="@style/DayField"
+                        android:text="tue" />
+
+                    <TextView
+                        android:id="@+id/tvWednesday"
+                        style="@style/DayField"
+                        android:text="wed" />
+
+                    <TextView
+                        android:id="@+id/tvThursday"
+                        style="@style/DayField"
+                        android:text="thu" />
+
+                    <TextView
+                        android:id="@+id/tvFriday"
+                        style="@style/DayField"
+                        android:text="fri" />
+
+                    <TextView
+                        android:id="@+id/tvSaturday"
+                        style="@style/DayField"
+                        android:text="sat" />
+
+                    <TextView
+                        android:id="@+id/tvSunday"
+                        style="@style/DayField"
+                        android:text="sun" />
+                </LinearLayout>
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <GridView
             android:id="@+id/gwTemplates"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
             android:gravity="center_horizontal"
             android:numColumns="4"
             android:orientation="horizontal"
@@ -146,13 +144,11 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnManageActivities"
         style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/llTemplates"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/button_background_transparent"
+        android:layout_marginBottom="4dp"
         android:text="Manage activities"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
