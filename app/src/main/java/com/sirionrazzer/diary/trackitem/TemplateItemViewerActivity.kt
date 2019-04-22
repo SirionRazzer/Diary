@@ -19,7 +19,7 @@ import com.sirionrazzer.diary.models.TrackItemTemplate
 import kotlinx.android.synthetic.main.activity_templateitem_viewer.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
+
 
 class TemplateItemViewerActivity : AppCompatActivity() {
 

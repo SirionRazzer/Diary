@@ -1,5 +1,6 @@
 package com.sirionrazzer.diary.trackitem
 
+import android.util.Log
 import android.view.View
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeAdapter
 import com.sirionrazzer.diary.R
@@ -7,7 +8,10 @@ import com.sirionrazzer.diary.models.TrackItemTemplate
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.viewer_template_item.view.*
 
-class TemplateAdapter(currentTemplateItems: MutableList<TrackItemTemplate>, val tiViewModel: TemplateItemViewerViewModel) :
+class TemplateAdapter(
+    currentTemplateItems: MutableList<TrackItemTemplate>,
+    val tiViewModel: TemplateItemViewerViewModel
+) :
     DragDropSwipeAdapter<TrackItemTemplate, TemplateAdapter.ViewHolder>(currentTemplateItems) {
 
     class ViewHolder(itemView: View) : DragDropSwipeAdapter.ViewHolder(itemView) {
@@ -40,8 +44,11 @@ class TemplateAdapter(currentTemplateItems: MutableList<TrackItemTemplate>, val 
 //            swDeleted.isChecked = !swDeleted.isChecked
 //        }
 //
-        viewHolder.swDeleted.setOnCheckedChangeListener { _, isChecked ->
-            updateTemplate(item, isChecked)
+        viewHolder.swDeleted.setOnCheckedChangeListener { compoundButton, isChecked ->
+            if (compoundButton.isShown) {
+                updateTemplate(item, isChecked)
+                Log.d("FAKE CLICK", " I SEE YOU SUCKER!")
+            }
         }
     }
 
