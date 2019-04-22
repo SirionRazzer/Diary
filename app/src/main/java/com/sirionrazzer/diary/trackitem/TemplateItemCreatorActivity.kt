@@ -1,5 +1,6 @@
 package com.sirionrazzer.diary.trackitem
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -70,6 +71,14 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
         if (item?.itemId == R.id.mCreateTemplate) {
             creatorViewModel.template.name = etName.text.toString()
             creatorViewModel.saveNewTemplate()
+
+            val intent = Intent()
+            if (creatorViewModel.hasChanged) {
+                setResult(0, intent)
+            } else {
+                setResult(1, intent)
+            }
+
             finish()
         } else {
             onBackPressed()
@@ -82,9 +91,13 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
     override fun onBackPressed() {
         if (creatorViewModel.hasChanged || etName.text!!.toString().isNotEmpty()) {
             alert(getString(R.string.message_leave_without_save), getString(R.string.caption_activity_not_saved)) {
-                yesButton { super.onBackPressed() }
+                yesButton {
+                    setResult(1, intent)
+                    super.onBackPressed()
+                }
             }.show()
         } else {
+            setResult(1, intent)
             super.onBackPressed()
         }
     }

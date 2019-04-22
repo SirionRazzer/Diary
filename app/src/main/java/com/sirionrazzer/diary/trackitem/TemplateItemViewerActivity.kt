@@ -13,6 +13,7 @@ import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
 import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemDragListener
 import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListener
 import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnListScrollListener
+import com.google.android.material.snackbar.Snackbar
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItemTemplate
@@ -161,11 +162,24 @@ class TemplateItemViewerActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.mAddTemplate) {
-            startActivity<TemplateItemCreatorActivity>()
+            val intent = Intent(this, TemplateItemCreatorActivity::class.java)
+            startActivityForResult(intent, 1)
         } else {
             onBackPressed()
         }
         return true
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode != 1) { // templates are changed
+            tiViewModel.refreshTemplateList()
+            rvTemplates.adapter?.notifyDataSetChanged()
+            val snackbar = Snackbar.make(rlMain, "Activity added", Snackbar.LENGTH_SHORT)
+            snackbar.show()
+        }
     }
 
 
