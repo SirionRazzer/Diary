@@ -39,4 +39,9 @@ class TemplateItemViewerViewModel: ViewModel() {
         templateDao.updateTemplate(template)
     }
 
+
+    fun refreshTemplateList() {
+        currentTemplateItems.clear()
+        currentTemplateItems = getTemplates()
+    }
 }

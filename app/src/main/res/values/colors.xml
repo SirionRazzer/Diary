@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--OLD COLOR SET:
     <color name="colorPrimaryLight">#b4d7e0</color>
     <color name="colorPrimary">#51a1b6</color>
     <color name="colorPrimaryDark">#067997</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#D81B60</color>-->
+
+    <!--MATERIAL A700 COLOR SET-->
+    <color name="colorPrimaryLight">#00B8D4</color>
+    <color name="colorPrimary">#0091EA</color>
+    <color name="colorPrimaryDark">#304FFE</color>
+    <color name="colorAccent">#C51162</color>
 
     <color name="white">#FFFFFF</color>
     <color name="grey_lt">#F0F0F0</color>

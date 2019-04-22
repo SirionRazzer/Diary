@@ -3,6 +3,7 @@ package com.sirionrazzer.diary.trackitem
 import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -49,6 +50,7 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         rvTemplates.scrollListener = onListScrollListener
     }
 
+
     private val onItemSwipeListener = object : OnItemSwipeListener<TrackItemTemplate> {
         override fun onItemSwiped(
             position: Int,
@@ -62,6 +64,7 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         }
     }
 
+
     private val onItemDragListener = object : OnItemDragListener<TrackItemTemplate> {
         override fun onItemDragged(previousPosition: Int, newPosition: Int, item: TrackItemTemplate) {
             // Handle action of item being dragged from one position to another
@@ -69,38 +72,30 @@ class TemplateItemViewerActivity : AppCompatActivity() {
 
         override fun onItemDropped(initialPosition: Int, finalPosition: Int, item: TrackItemTemplate) {
             // Handle action of item dropped
-            toast("${item.position} from: $initialPosition to: $finalPosition")
 
             // Move items between initial and final position by -1
             if (initialPosition < finalPosition) {
                 tiViewModel.currentTemplateItems.forEach {
-                    if (it.position in (initialPosition + 1)..finalPosition) {
-                        var template = TrackItemTemplate()
-                        template.id = it.id
-                        template.name = it.name
-                        template.imageOn = it.imageOn
-                        template.imageOff = it.imageOff
-                        template.position = it.position - 1
-                        template.hasTextField = it.hasTextField
-                        template.hasNumberField = it.hasNumberField
-                        template.deleted = it.deleted
-
-                        tiViewModel.updateTemplate(template)
-                    }
+                    val template = TrackItemTemplate(
+                        it.id,
+                        it.deleted,
+                        it.name,
+                        it.imageOn,
+                        it.imageOff,
+                        it.hasTextField,
+                        it.hasNumberField,
+                        it.position
+                    )
 
                     if (it.position == initialPosition) {
-                        var template = TrackItemTemplate()
-                        template.id = it.id
-                        template.name = it.name
-                        template.imageOn = it.imageOn
-                        template.imageOff = it.imageOff
                         template.position = finalPosition
-                        template.hasTextField = it.hasTextField
-                        template.hasNumberField = it.hasNumberField
-                        template.deleted = it.deleted
-
-                        tiViewModel.updateTemplate(template)
                     }
+
+                    if (it.position in (initialPosition + 1)..finalPosition) {
+                        template.position = it.position - 1
+                    }
+
+                    tiViewModel.updateTemplate(template)
                 }
                 tiViewModel.hasChanged = true
             }
@@ -108,38 +103,37 @@ class TemplateItemViewerActivity : AppCompatActivity() {
             // Move items between initial and final position by +1
             if (initialPosition > finalPosition) {
                 tiViewModel.currentTemplateItems.forEach {
-                    if (it.position in (finalPosition) until initialPosition) {
-                        var template = TrackItemTemplate()
-                        template.id = it.id
-                        template.name = it.name
-                        template.imageOn = it.imageOn
-                        template.imageOff = it.imageOff
-                        template.position = it.position + 1
-                        template.hasTextField = it.hasTextField
-                        template.hasNumberField = it.hasNumberField
-                        template.deleted = it.deleted
-
-                        tiViewModel.updateTemplate(template)
-                    }
+                    val template = TrackItemTemplate(
+                        it.id,
+                        it.deleted,
+                        it.name,
+                        it.imageOn,
+                        it.imageOff,
+                        it.hasTextField,
+                        it.hasNumberField,
+                        it.position
+                    )
 
                     if (it.position == initialPosition) {
-                        var template = TrackItemTemplate()
-                        template.id = it.id
-                        template.name = it.name
-                        template.imageOn = it.imageOn
-                        template.imageOff = it.imageOff
                         template.position = finalPosition
-                        template.hasTextField = it.hasTextField
-                        template.hasNumberField = it.hasNumberField
-                        template.deleted = it.deleted
-
-                        tiViewModel.updateTemplate(template)
                     }
+
+                    if (it.position in finalPosition until initialPosition) {
+                        template.position = it.position + 1
+                    }
+
+                    tiViewModel.updateTemplate(template)
                 }
                 tiViewModel.hasChanged = true
             }
+
+            if (tiViewModel.hasChanged && initialPosition != finalPosition) {
+                tiViewModel.refreshTemplateList()
+                rvTemplates.adapter?.notifyDataSetChanged()
+            }
         }
     }
+
 
     private val onListScrollListener = object : OnListScrollListener {
         override fun onListScrolled(scrollDirection: OnListScrollListener.ScrollDirection, distance: Int) {

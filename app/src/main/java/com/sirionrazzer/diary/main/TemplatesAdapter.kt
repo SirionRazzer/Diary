@@ -76,11 +76,11 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             if (!mainViewModel.currentTrackItems[position].status) {
                 Picasso.get().load(mainViewModel.currentTrackItems[position].imageOff).into(holder.ivImage)
                 holder.ivImage?.alpha = 0.4f
-                holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimaryLight))
+                holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimary))
             } else {
                 Picasso.get().load(mainViewModel.currentTrackItems[position].imageOn).into(holder.ivImage)
                 holder.ivImage?.alpha = 1f
-                holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimaryDark))
+                holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimary))
             }
 
             itemView.setOnClickListener {
@@ -101,7 +101,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
                     Picasso.get().load(mainViewModel.currentTrackItems[position].imageOff).into(holder.ivImage)
                     holder.status = false
                     holder.ivImage?.alpha = 0.4f
-                    holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimaryLight))
+                    holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimary))
                     Log.d(
                         "TemplatesAdapter",
                         "Clicked: " + position + ". track item, the state was true and now is " + holder.status.toString()
@@ -125,7 +125,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
         Picasso.get().load(mainViewModel.currentTrackItems[position].imageOn).into(holder.ivImage)
         holder.status = true
         holder.ivImage?.alpha = 1.0f
-        holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimaryDark))
+        holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimary))
         Log.d(
             "TemplatesAdapter",
             "Clicked: " + position + ". track item, the state was false and now is " + holder.status.toString()
