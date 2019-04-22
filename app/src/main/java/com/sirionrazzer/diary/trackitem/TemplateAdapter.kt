@@ -66,6 +66,7 @@ class TemplateAdapter(currentTemplateItems: MutableList<TrackItemTemplate>, val 
         template.deleted = !isChecked // <-- this
 
         tiViewModel.updateTemplate(template)
+        tiViewModel.refreshTemplateList()
         tiViewModel.hasChanged = true
     }
 

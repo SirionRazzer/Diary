@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/grey_lt"
     tools:context=".trackitem.TemplateItemViewerActivity">
 
     <include layout="@layout/toolbar" />
@@ -12,6 +12,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/background_white_sheet_rounded"
+        android:elevation="4dp"
         android:layout_below="@id/toolbar">
 
         <RelativeLayout
