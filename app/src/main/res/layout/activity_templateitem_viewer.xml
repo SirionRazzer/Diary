@@ -6,7 +6,7 @@
     android:id="@+id/rlMain"
     android:layout_height="match_parent"
     android:background="@color/grey_lt"
-    tools:context=".trackitem.TemplateItemViewerActivity">
+    tools:context=".viewer.TemplateItemViewerActivity">
 
     <include layout="@layout/toolbar" />
 

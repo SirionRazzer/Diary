@@ -1,4 +1,4 @@
-package com.sirionrazzer.diary.trackitem
+package com.sirionrazzer.diary.creator
 
 import androidx.lifecycle.ViewModel
 import com.sirionrazzer.diary.Diary
@@ -51,5 +51,11 @@ class TemplateItemCreatorViewModel: ViewModel() {
 
     fun saveNewTemplate() {
         templateDao.addTemplate(template)
+    }
+
+
+    fun setImageResource(id: Int) {
+        template.imageOn = id
+        template.imageOff = id
     }
 }

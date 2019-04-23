@@ -10,8 +10,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.UserStorage
-import com.sirionrazzer.diary.trackitem.TemplateItemCreatorActivity
-import com.sirionrazzer.diary.trackitem.TemplateItemViewerActivity
+import com.sirionrazzer.diary.creator.TemplateItemCreatorActivity
+import com.sirionrazzer.diary.viewer.TemplateItemViewerActivity
 import com.sirionrazzer.diary.util.DateUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*

@@ -5,11 +5,10 @@ import com.sirionrazzer.diary.history.HistoryActivity
 import com.sirionrazzer.diary.history.HistoryViewModel
 import com.sirionrazzer.diary.main.MainActivity
 import com.sirionrazzer.diary.main.MainViewModel
-import com.sirionrazzer.diary.models.UserStorage
-import com.sirionrazzer.diary.trackitem.TemplateItemCreatorActivity
-import com.sirionrazzer.diary.trackitem.TemplateItemCreatorViewModel
-import com.sirionrazzer.diary.trackitem.TemplateItemViewerActivity
-import com.sirionrazzer.diary.trackitem.TemplateItemViewerViewModel
+import com.sirionrazzer.diary.creator.TemplateItemCreatorActivity
+import com.sirionrazzer.diary.creator.TemplateItemCreatorViewModel
+import com.sirionrazzer.diary.viewer.TemplateItemViewerActivity
+import com.sirionrazzer.diary.viewer.TemplateItemViewerViewModel
 import dagger.Component
 import javax.inject.Singleton
 

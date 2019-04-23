@@ -1,4 +1,4 @@
-package com.sirionrazzer.diary.trackitem
+package com.sirionrazzer.diary.creator
 
 import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
@@ -15,13 +15,10 @@ import com.sirionrazzer.diary.models.UserStorage
 import kotlinx.android.synthetic.main.activity_templateitem_creator.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.alert
-import org.jetbrains.anko.noButton
-import org.jetbrains.anko.toast
 import org.jetbrains.anko.yesButton
 import javax.inject.Inject
 
 class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
-
 
     @Inject
     lateinit var userStorage: UserStorage
@@ -52,6 +49,12 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
             // Apply the adapter to the spinner
             spExtra.adapter = adapter
             spExtra.onItemSelectedListener = this
+        }
+
+        ibImage.setOnClickListener {
+            val fm = supportFragmentManager
+            val fragment = ImagePickerDialog(creatorViewModel)
+            fragment.show(fm, "Choose icon")
         }
     }
 

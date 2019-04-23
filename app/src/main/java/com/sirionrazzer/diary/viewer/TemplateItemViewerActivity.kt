@@ -1,9 +1,8 @@
-package com.sirionrazzer.diary.trackitem
+package com.sirionrazzer.diary.viewer
 
 import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -16,10 +15,10 @@ import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnListScrollListen
 import com.google.android.material.snackbar.Snackbar
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
+import com.sirionrazzer.diary.creator.TemplateItemCreatorActivity
 import com.sirionrazzer.diary.models.TrackItemTemplate
 import kotlinx.android.synthetic.main.activity_templateitem_viewer.*
 import kotlinx.android.synthetic.main.toolbar.*
-import org.jetbrains.anko.startActivity
 
 
 class TemplateItemViewerActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.sirionrazzer.diary.trackitem
+package com.sirionrazzer.diary.viewer
 
 import androidx.lifecycle.ViewModel
 import com.sirionrazzer.diary.Diary
