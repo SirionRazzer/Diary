@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/colorPrimaryDark">
 
     <include layout="@layout/toolbar" />
 
@@ -13,20 +13,23 @@
         android:layout_height="110dp"
         android:layout_marginStart="16dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
         android:contentDescription="@string/app_logo"
         android:src="@drawable/ic_td_logo" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/ivLogo"
-        android:background="@color/white"
+        android:layout_marginTop="-2dp"
+        android:background="@drawable/background_white_sheet_rounded"
+        android:elevation="8dp"
         android:paddingStart="16dp"
+
         android:paddingTop="36dp"
 
         android:paddingEnd="16dp"
-
         android:paddingBottom="16dp">
 
         <TextView
