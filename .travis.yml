@@ -1,0 +1,24 @@
+language: android
+    components:
+    - tools
+    - platform-tools
+    licenses:
+    - 'android-sdk-preview-license-52d11cd2'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+jdk:
+  - oraclejdk8
+
+before_install:
+  - sdkmanager tools
+
+install: ./gradlew clean build assembleAndroidTest --stacktrace
+
+notifications:
+  email: true
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.gradle
