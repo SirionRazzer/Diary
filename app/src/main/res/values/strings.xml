@@ -27,6 +27,7 @@
     <string name="new_credentials_or_existing_account_message">Enter your new credentials or use an existing account</string>
     <string name="welcome">Welcome!</string>
     <string name="empty_pw_email">Password or Email fields are empty.</string>
+    <string name="invalid_pa_email">Email of password is invalid.</string>
 
     <string-array name="input_fields">
         <item>None</item>
