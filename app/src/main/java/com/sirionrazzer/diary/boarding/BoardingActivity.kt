@@ -2,13 +2,14 @@ package com.sirionrazzer.diary.boarding
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
+import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.history.HistoryActivity
 import kotlinx.android.synthetic.main.activity_boarding.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -33,22 +34,27 @@ class BoardingActivity : AppCompatActivity() {
         signIn.setOnClickListener {
             val email = etEmail.text.toString()
             val pw = etPassword.text.toString()
-            auth.signInWithEmailAndPassword(email, pw)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        login()
-                        //TODO: load stuff from firebase save
-                    } else {
-                        val e = task.exception as FirebaseAuthException
-                        if (e.errorCode == "ERROR_WRONG_PASSWORD") {
-                            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+            if (!email.isBlank() && !pw.isBlank()) {
+                auth.signInWithEmailAndPassword(email, pw)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            login()
+                            //TODO: load stuff from firebase save
                         } else {
-                            showDialog(auth, email, pw)
+                            val e = task.exception as FirebaseAuthException
+                            if (e.errorCode == "ERROR_WRONG_PASSWORD") {
+                                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                            } else {
+                                showDialog(auth, email, pw)
+                            }
                         }
+
                     }
 
-                }
+            } else {
+                Toast.makeText(this, getString(R.string.empty_pw_email), Toast.LENGTH_SHORT).show()
 
+            }
         }
 
         skipSignIn.setOnClickListener {

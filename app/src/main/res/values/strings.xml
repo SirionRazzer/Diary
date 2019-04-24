@@ -24,6 +24,9 @@
     <string name="hint_activity_name">Name your activity</string>
     <string name="hint_your_email">Your email</string>
     <string name="hint_your_password">Your password</string>
+    <string name="new_credentials_or_existing_account_message">Enter your new credentials or use an existing account</string>
+    <string name="welcome">Welcome!</string>
+    <string name="empty_pw_email">Password or Email fields are empty.</string>
 
     <string-array name="input_fields">
         <item>None</item>
