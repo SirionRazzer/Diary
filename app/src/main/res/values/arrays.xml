@@ -23,7 +23,6 @@
         <item>Dumptruck</item>
         <item>Eco Fuel</item>
         <item>Email</item>
-        <item>Ereader</item>
     </array>
 
     <array name="img_template_drawables">
@@ -46,6 +45,5 @@
         <item>@drawable/z_circlecolor_dumptruck</item>
         <item>@drawable/z_circlecolor_eco_fuel</item>
         <item>@drawable/z_circlecolor_email</item>
-        <item>@drawable/z_circlecolor_ereader</item>
     </array>
 </resources>
