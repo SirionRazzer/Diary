@@ -24,7 +24,7 @@ class BoardingActivity : AppCompatActivity() {
         FirebaseApp.initializeApp(this)
 
         val auth = FirebaseAuth.getInstance()
-        setContentView(com.sirionrazzer.diary.R.layout.activity_boarding)
+        setContentView(R.layout.activity_boarding)
 
         login()
         setSupportActionBar(toolbar)
@@ -34,7 +34,7 @@ class BoardingActivity : AppCompatActivity() {
         signIn.setOnClickListener {
             val email = etEmail.text.toString()
             val pw = etPassword.text.toString()
-            if (!email.isBlank() && !pw.isBlank()) {
+            if (isValidEmail(email) && !pw.isBlank()) {
                 auth.signInWithEmailAndPassword(email, pw)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
@@ -52,7 +52,8 @@ class BoardingActivity : AppCompatActivity() {
                     }
 
             } else {
-                Toast.makeText(this, getString(R.string.empty_pw_email), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.invalid_pa_email), Toast.LENGTH_SHORT)
+                    .show()
 
             }
         }
@@ -82,6 +83,10 @@ class BoardingActivity : AppCompatActivity() {
         val alert = builder.create()
         alert.show()
         builder.show()
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        return if (email.isBlank()) false else android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     private fun login() {
