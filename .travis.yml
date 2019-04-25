@@ -18,7 +18,7 @@ licenses:
   - '.+'
 
 before_install:
-  #- yes | sdkmanager tools
+  - yes | sdkmanager tools
   #- yes | sdkmanager 'system-images;android-28;default;armeabi-v7a'
   - chmod +x gradlew
   #- android-wait-for-emulator
