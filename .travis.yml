@@ -39,7 +39,7 @@ before_install:
   # - adb shell input keyevent 82 &
 
 #install: ./gradlew clean build assembleAndroidTest --stacktrace
-install: ./gradlew build --stacktrace
+install: ./gradlew build --warning-mode=all --stacktrace
 
 notifications:
   email: true
