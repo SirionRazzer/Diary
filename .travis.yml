@@ -1,4 +1,9 @@
+sudo: false
 language: android
+
+jdk:
+  - oraclejdk8
+
 android:
     components:
     - tools
@@ -6,19 +11,24 @@ android:
     - build-tools-28
     - android-28
 
-jdk:
-  - oraclejdk8
+
+licenses:
+  - '.+'
 
 before_install:
-  - sdkmanager tools
+  - yes | sdkmanager tools
+  - yes | sdkmanager 'system-images;android-28;default;armeabi-v7a'
+  - chmod +x gradlew
+  - android-wait-for-emulator
+  - adb shell input keyevent 82
 
 install: ./gradlew clean build assembleAndroidTest --stacktrace
 
 notifications:
   email: true
 
-sudo: false
-
 cache:
   directories:
-    - $HOME/.gradle
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache/
