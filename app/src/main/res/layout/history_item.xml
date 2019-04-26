@@ -17,12 +17,13 @@
         card_view:cardElevation="4dp"
         card_view:contentPadding="4dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/rlHistoryItemHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -51,12 +52,13 @@
 
             </RelativeLayout>
 
-            <GridView
+            <com.sirionrazzer.diary.view.StaticGridView
                 android:id="@+id/trackItemWithoutText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:gravity="center"
+                android:layout_below="@+id/rlHistoryItemHeader"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
                 android:numColumns="4"
                 android:orientation="horizontal"
                 android:stretchMode="columnWidth"
@@ -68,10 +70,11 @@
                 android:id="@+id/trackItemWithText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/trackItemWithoutText"
                 android:paddingTop="10dp"
                 android:scrollbars="vertical" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 

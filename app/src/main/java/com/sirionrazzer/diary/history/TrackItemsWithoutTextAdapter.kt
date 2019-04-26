@@ -14,7 +14,7 @@ import com.sirionrazzer.diary.models.TrackItem
 import com.sirionrazzer.diary.stats.TrackItemStatsActivity
 import com.squareup.picasso.Picasso
 
-class TrackItemsWithoutTextAdapter(private val context: Context, private val trackItems: ArrayList<TrackItem>) : BaseAdapter() {
+class TrackItemsWithoutTextAdapter(context: Context, private val trackItems: ArrayList<TrackItem>) : BaseAdapter() {
 
     class ViewHolder(val nameTextView: TextView, val image: ImageView) : RecyclerView.ViewHolder(nameTextView)
 
@@ -26,7 +26,7 @@ class TrackItemsWithoutTextAdapter(private val context: Context, private val tra
     }
 
     override fun getItemId(position: Int): Long {
-        return 0
+        return position.toLong()
     }
 
     override fun getItem(position: Int): TrackItem {
@@ -50,10 +50,10 @@ class TrackItemsWithoutTextAdapter(private val context: Context, private val tra
         holder.nameTextView.text = trackItem.name
         if (trackItem.status) {
             Picasso.get().load(trackItem.imageOn).into(holder.image)
-            holder.image?.alpha = 1f
+            holder.image.alpha = 1f
         } else {
             Picasso.get().load(trackItem.imageOff).into(holder.image)
-            holder.image?.alpha = 0.3f
+            holder.image.alpha = 0.3f
         }
 
         val intent = Intent(templateItemView.context, TrackItemStatsActivity::class.java)
