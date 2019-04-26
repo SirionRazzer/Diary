@@ -21,8 +21,14 @@ class HistoryViewModel: ViewModel() {
     var trackItemsByDate: HashMap<String, ArrayList<TrackItem>> = hashMapOf()
 
     init {
+        Diary.app.appComponent.inject(this)
+    }
+
+    fun loadData() {
+        dates = arrayListOf()
+        trackItemsByDate = hashMapOf()
+
         var trackItems: List<TrackItem>? = trackItemDao.getAllTrackItemsSortByDate()
-//        var trackItems: List<TrackItem>? = trackItemDao.getAllTrackItemsSortByDate()
         if (trackItems == null) {
             trackItems = arrayListOf()
         }
@@ -39,8 +45,6 @@ class HistoryViewModel: ViewModel() {
         }
 
         Log.d("HistoryViewModel", trackItems.size.toString())
-
-        Diary.app.appComponent.inject(this)
     }
 }
 

@@ -3,10 +3,8 @@ package com.sirionrazzer.diary.history
 import androidx.lifecycle.ViewModelProviders
 import android.net.Uri
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.PopupMenu
@@ -26,6 +24,8 @@ class HistoryActivity : AppCompatActivity() {
 
     lateinit var historyViewModel: HistoryViewModel
 
+    lateinit var viewAdapter: HistoryAdapter
+
     private lateinit var popupMenu: PopupMenu
     val realm: Realm by lazy {
         Realm.getDefaultInstance()
@@ -41,7 +41,7 @@ class HistoryActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val viewManager = LinearLayoutManager(this)
-        val viewAdapter = HistoryAdapter(this, historyViewModel)
+        viewAdapter = HistoryAdapter(this, historyViewModel)
 
         rvHistoryItems.adapter = viewAdapter
         rvHistoryItems.layoutManager = viewManager
@@ -49,6 +49,12 @@ class HistoryActivity : AppCompatActivity() {
         fab.setOnClickListener {
             startActivity<MainActivity>()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        historyViewModel.loadData()
+        viewAdapter.notifyDataSetChanged()
     }
 
     private fun createViewModel(): HistoryViewModel {
