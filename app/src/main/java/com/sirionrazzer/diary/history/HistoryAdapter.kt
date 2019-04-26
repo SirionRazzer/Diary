@@ -40,7 +40,7 @@ class HistoryAdapter(
         val trackItemsIds: ArrayList<String> = arrayListOf()
         allTrackItems!!.forEach {
             trackItemsIds.add(it.id)
-            if (it.hasTextField or it.hasNumberField) {
+            if (it.status and (it.hasTextField or it.hasNumberField)) {
                 trackItemsWithText.add(it)
             }
             else {
@@ -67,9 +67,10 @@ class HistoryAdapter(
         return historyViewModel.dates.size
     }
 
-    private fun trackItemClicked(trackItemName: String) {
+    private fun trackItemClicked(trackItemName: String): Boolean {
         val intent = Intent(context, TrackItemStatsActivity::class.java)
         intent.putExtra("trackItemName", trackItemName)
         context.startActivity(intent)
+        return true
     }
 }
