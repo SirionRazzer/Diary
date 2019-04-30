@@ -43,7 +43,7 @@ class TemplateItemCreatorViewModel: ViewModel() {
             R.drawable.z_circlecolor_dumptruck,
             hasTextField = false,
             hasNumberField = false,
-            position = position.inc()
+            position = position
         )
     }
 
