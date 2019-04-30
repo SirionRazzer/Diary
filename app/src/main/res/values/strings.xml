@@ -28,6 +28,13 @@
     <string name="welcome">Welcome!</string>
     <string name="empty_pw_email">Password or Email fields are empty.</string>
     <string name="invalid_pa_email">Email of password is invalid.</string>
+    <string name="short_password">Your password is too short, it needs to be at least 6 characters long.</string>
+    <string name="new_account_or_incorrect_input">Would you like to create a new account? If you are not new, then your credentials were incorrect.</string>
+    <string name="boarding_greetings">Hey there</string>
+    <string name="success_signup_message">Thank you for signing up.</string>
+    <string name="success_login_message">You\'ve been successfully logged in!</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <string-array name="input_fields">
         <item>None</item>
