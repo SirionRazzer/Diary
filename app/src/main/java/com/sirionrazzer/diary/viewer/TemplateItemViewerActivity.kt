@@ -175,7 +175,9 @@ class TemplateItemViewerActivity : AppCompatActivity() {
 
         if (resultCode != 1) { // templates are changed
             tiViewModel.refreshTemplateList()
-            rvTemplates.adapter?.notifyDataSetChanged()
+            tiViewModel.hasChanged = true
+            adapter = TemplateAdapter(tiViewModel.currentTemplateItems, tiViewModel)
+            rvTemplates.adapter = adapter
             val snackbar = Snackbar.make(rlMain, "Activity added", Snackbar.LENGTH_SHORT)
             snackbar.show()
         }
