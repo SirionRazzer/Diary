@@ -9,19 +9,23 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.fragment.app.DialogFragment
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.UserStorage
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_templateitem_creator.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.yesButton
 import javax.inject.Inject
 
-class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, ImagePickerDialog.ImagePickerDialogListener {
 
     @Inject
     lateinit var userStorage: UserStorage
+
+    lateinit var fragment: ImagePickerDialog
 
     lateinit var creatorViewModel: TemplateItemCreatorViewModel
 
@@ -53,13 +57,13 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
 
         ibImage.setOnClickListener {
             val fm = supportFragmentManager
-            val fragment = ImagePickerDialog(creatorViewModel)
+            fragment = ImagePickerDialog(creatorViewModel)
             fragment.show(fm, "Choose icon")
         }
     }
 
 
-    fun createViewModel(): TemplateItemCreatorViewModel {
+    private fun createViewModel(): TemplateItemCreatorViewModel {
         return ViewModelProviders.of(this).get(TemplateItemCreatorViewModel::class.java)
     }
 
@@ -129,5 +133,11 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
                 creatorViewModel.template.hasTextField = false
             }
         }
+    }
+
+
+    override fun onImagePicked(dialog: DialogFragment) {
+        dialog.dismiss()
+        Picasso.get().load(creatorViewModel.template.imageOn).into(ibImage)
     }
 }

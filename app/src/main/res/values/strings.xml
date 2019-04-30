@@ -5,8 +5,8 @@
     <string name="your_password">Password</string>
     <string name="app_logo">App logo</string>
     <string name="skip_now">skip now</string>
-    <string name="title_my_day">My day</string>
-    <string name="title_manage_activities">Manage activities</string>
+    <string name="title_my_day">My Day</string>
+    <string name="title_manage_activities">Manage Activities</string>
     <string name="edit_history_item">Edit</string>
     <string name="backup_diary_data">Backup Diary data</string>
     <string name="restore_diary_data">Restore Diary data</string>

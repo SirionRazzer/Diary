@@ -18,13 +18,14 @@
 
         <ImageButton
             android:id="@+id/ibImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerInside"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="30dp"
             android:background="@color/transparent"
             android:contentDescription="@string/app_logo"
-            android:src="@drawable/diary_logo" />
+            android:src="@drawable/z_circlecolor_dumptruck" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilName"
@@ -32,8 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/ibImage"
-            android:layout_marginBottom="16dp"
-            android:background="@color/grey_lt">
+            android:layout_marginBottom="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etName"
