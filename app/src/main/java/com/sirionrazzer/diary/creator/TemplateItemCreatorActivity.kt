@@ -22,6 +22,9 @@ import javax.inject.Inject
 
 class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, ImagePickerDialog.ImagePickerDialogListener {
 
+    private val TEXT_EXTRA = 1
+    private val NUMBER_EXTRA = 2
+
     @Inject
     lateinit var userStorage: UserStorage
 
@@ -60,6 +63,23 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
             fragment = ImagePickerDialog(creatorViewModel)
             fragment.show(fm, "Choose icon")
         }
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        if (creatorViewModel.hasChanged) {
+            if (creatorViewModel.template.hasTextField) spExtra.setSelection(TEXT_EXTRA)
+            if (creatorViewModel.template.hasNumberField) spExtra.setSelection(NUMBER_EXTRA)
+            Picasso.get().load(creatorViewModel.template.imageOn).into(ibImage)
+            etName.setText(creatorViewModel.template.name)
+        }
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        creatorViewModel.template.name = etName.text.toString()
     }
 
 
@@ -118,12 +138,12 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
 
     override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         when (position) {
-            1 -> {
+            TEXT_EXTRA -> {
                 creatorViewModel.template.hasNumberField = false
                 creatorViewModel.template.hasTextField = true
                 creatorViewModel.hasChanged = true
             }
-            2 -> {
+            NUMBER_EXTRA -> {
                 creatorViewModel.template.hasNumberField = true
                 creatorViewModel.template.hasTextField = false
                 creatorViewModel.hasChanged = true
@@ -139,5 +159,6 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
     override fun onImagePicked(dialog: DialogFragment) {
         dialog.dismiss()
         Picasso.get().load(creatorViewModel.template.imageOn).into(ibImage)
+        creatorViewModel.hasChanged = true
     }
 }

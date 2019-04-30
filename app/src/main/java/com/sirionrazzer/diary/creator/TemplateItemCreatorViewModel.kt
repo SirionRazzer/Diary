@@ -14,7 +14,6 @@ class TemplateItemCreatorViewModel: ViewModel() {
         Realm.getDefaultInstance()
     }
 
-
     var templateDao = TrackItemTemplateDao(realm)
     var hasChanged: Boolean = false
 
@@ -40,8 +39,8 @@ class TemplateItemCreatorViewModel: ViewModel() {
             UUID.randomUUID().toString(),
             false,
             "",
-            R.drawable.diary_logo,
-            R.drawable.diary_logo,
+            R.drawable.z_circlecolor_dumptruck,
+            R.drawable.z_circlecolor_dumptruck,
             hasTextField = false,
             hasNumberField = false,
             position = position.inc()
