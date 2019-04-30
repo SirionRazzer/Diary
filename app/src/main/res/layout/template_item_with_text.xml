@@ -6,53 +6,68 @@
     android:orientation="horizontal"
     android:paddingTop="10dp">
 
+    <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        card_view:cardBackgroundColor="@color/grey_lt"
+        card_view:cardCornerRadius="24dp">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="6dp">
 
-        <ImageView
-            android:id="@+id/ivTrackItemImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginEnd="15dp"
-            android:src="@drawable/ic_mail_outline_black_24dp" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/trackItemName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/ivTrackItemImage"
-            android:text="item name"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp"/>
+                <ImageView
+                    android:id="@+id/ivTrackItemImage"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_mail_outline_black_24dp" />
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/trackItemName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ivTrackItemImage"
+                    android:layout_centerHorizontal="true"
+                    android:text="item name"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:baselineAligned="true"
-        android:paddingStart="10dp">
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tvTrackItemText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:textSize="16sp" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:baselineAligned="true"
+                android:minHeight="50dp"
+                android:paddingStart="10dp">
 
-        <TextView
-            android:id="@+id/tvTrackItemNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:textSize="16sp" />
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvTrackItemText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvTrackItemNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
