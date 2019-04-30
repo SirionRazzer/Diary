@@ -48,7 +48,6 @@ class BoardingActivity : AppCompatActivity() {
                                 showDialog(auth, email, pw)
                             }
                         }
-
                     }
 
             } else {
