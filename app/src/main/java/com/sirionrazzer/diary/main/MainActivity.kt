@@ -1,18 +1,18 @@
 package com.sirionrazzer.diary.main
 
-import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
-import com.sirionrazzer.diary.models.UserStorage
 import com.sirionrazzer.diary.creator.TemplateItemCreatorActivity
-import com.sirionrazzer.diary.viewer.TemplateItemViewerActivity
+import com.sirionrazzer.diary.models.UserStorage
 import com.sirionrazzer.diary.util.DateUtils
+import com.sirionrazzer.diary.viewer.TemplateItemViewerActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.startActivity
@@ -49,9 +49,10 @@ class MainActivity : AppCompatActivity() {
         adapter = TemplatesAdapter(this, mainViewModel)
         gwTemplates.adapter = adapter
 
-        btnManageActivities.setOnClickListener{
+        btnManageActivities.setOnClickListener {
             //startActivity<TemplateItemViewerActivity>()
             val intent = Intent(this, TemplateItemViewerActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivityForResult(intent, 1)
         }
     }
@@ -87,7 +88,8 @@ class MainActivity : AppCompatActivity() {
             mainViewModel.initTrackAndTemplateItems()
             adapter.notifyDataSetChanged()
 
-            val snackbar = Snackbar.make(clMain, resources.getString(R.string.activities_updated), Snackbar.LENGTH_SHORT)
+            val snackbar =
+                Snackbar.make(clMain, resources.getString(R.string.activities_updated), Snackbar.LENGTH_SHORT)
             snackbar.show()
         }
 
