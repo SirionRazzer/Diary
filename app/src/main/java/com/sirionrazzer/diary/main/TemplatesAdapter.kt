@@ -155,9 +155,9 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
         textInputLayout.addView(input)
 
         val alert = AlertDialog.Builder(context)
-            .setTitle("New " + headerText + " note")
+            .setTitle(context.resources.getString(R.string.activity_note_first_part) + headerText + context.resources.getString(R.string.activity_note_second_part))
             .setView(textInputLayout)
-            .setPositiveButton("Submit") { dialog, _ ->
+            .setPositiveButton(context.resources.getString(R.string.submit)) { dialog, _ ->
 
                 mainViewModel.currentTrackItems[itemPosition].textField = input.text.toString()
                 mainViewModel.currentTrackItems[itemPosition].hasTextField = true
@@ -165,7 +165,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
 
                 dialog.cancel()
             }
-            .setNegativeButton("Cancel") { dialog, _ ->
+            .setNegativeButton(context.resources.getString(R.string.cancel)) { dialog, _ ->
                 dialog.cancel()
             }.create()
 
@@ -185,9 +185,9 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
         textInputLayout.addView(input)
 
         val alert = AlertDialog.Builder(context)
-            .setTitle("Take new " + headerText + " note")
+            .setTitle(context.resources.getString(R.string.activity_note_first_part) + headerText + context.resources.getString(R.string.activity_note_second_part))
             .setView(textInputLayout)
-            .setPositiveButton("Submit") { dialog, _ ->
+            .setPositiveButton(context.resources.getString(R.string.submit)) { dialog, _ ->
 
                 val stringNum = input.text.toString()
                 mainViewModel.currentTrackItems[itemPosition].hasNumberField = true
@@ -200,7 +200,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
 
                 dialog.cancel()
             }
-            .setNegativeButton("Cancel") { dialog, _ ->
+            .setNegativeButton(context.resources.getString(R.string.cancel)) { dialog, _ ->
                 dialog.cancel()
             }.create()
 

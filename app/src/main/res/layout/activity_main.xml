@@ -80,37 +80,37 @@
                     <TextView
                         android:id="@+id/tvMonday"
                         style="@style/DayField"
-                        android:text="mon" />
+                        android:text="@string/mon" />
 
                     <TextView
                         android:id="@+id/tvTuesday"
                         style="@style/DayField"
-                        android:text="tue" />
+                        android:text="@string/tue" />
 
                     <TextView
                         android:id="@+id/tvWednesday"
                         style="@style/DayField"
-                        android:text="wed" />
+                        android:text="@string/wed" />
 
                     <TextView
                         android:id="@+id/tvThursday"
                         style="@style/DayField"
-                        android:text="thu" />
+                        android:text="@string/thu" />
 
                     <TextView
                         android:id="@+id/tvFriday"
                         style="@style/DayField"
-                        android:text="fri" />
+                        android:text="@string/fri" />
 
                     <TextView
                         android:id="@+id/tvSaturday"
                         style="@style/DayField"
-                        android:text="sat" />
+                        android:text="@string/sat" />
 
                     <TextView
                         android:id="@+id/tvSunday"
                         style="@style/DayField"
-                        android:text="sun" />
+                        android:text="@string/sun" />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -148,7 +148,7 @@
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom|end"
 
-            android:text="Manage activities" />
+            android:text="@string/manage_activities" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

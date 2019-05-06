@@ -61,7 +61,7 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
         ibImage.setOnClickListener {
             val fm = supportFragmentManager
             fragment = ImagePickerDialog(creatorViewModel)
-            fragment.show(fm, "Choose icon")
+            fragment.show(fm, resources.getString(R.string.choose_icon))
         }
     }
 

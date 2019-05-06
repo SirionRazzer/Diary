@@ -7,6 +7,7 @@
     <string name="skip_now">skip now</string>
     <string name="title_my_day">My Day</string>
     <string name="title_manage_activities">Manage Activities</string>
+    <string name="manage_activities">Manage Activities</string>
     <string name="edit_history_item">Edit</string>
     <string name="backup_diary_data">Backup Diary data</string>
     <string name="restore_diary_data">Restore Diary data</string>
@@ -18,7 +19,9 @@
     <string name="please_backup">Please sign up to backup the diary.</string>
     <string name="success_logged_out">You\'ve been logged out successfully</string>
     <string name="login">Login</string>
+    <string name="title_history_activity">History</string>
     <string name="title_creator_activity">Activity Designer</string>
+    <string name="title_stats_activity">Stats</string>
     <string name="message_leave_without_save">Do you want to leave without saving?</string>
     <string name="caption_activity_not_saved">Acivity is not saved</string>
     <string name="hint_activity_name">Name your activity</string>
@@ -35,6 +38,25 @@
     <string name="success_login_message">You\'ve been successfully logged in!</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="activity_name">Activity name</string>
+    <string name="extra_input">Extra input</string>
+    <string name="creator_new_activity_will_be_in_new_records">Activity will appear in all new records</string>
+    <string name="creator_instructions">Rearrange, disable or create a new activity</string>
+    <string name="changes_won_t_harm_your_old_entries">Changes won\'t harm your old entries ☺</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="choose_icon">Choose icon</string>
+    <string name="activities_updated">Activities updated</string>
+    <string name="activity_note_first_part">Take new\u0020</string>
+    <string name="activity_note_second_part">\u0020note</string>
+    <string name="mon">mon</string>
+    <string name="tue">tue</string>
+    <string name="wed">wed</string>
+    <string name="thu">thu</string>
+    <string name="fri">fri</string>
+    <string name="sat">sat</string>
+    <string name="sun">sun</string>
+    <string name="pick_activity_image">Pick activity image</string>
 
     <string-array name="input_fields">
         <item>None</item>

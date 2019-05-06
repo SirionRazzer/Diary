@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Image icons for templates-->
+    <!--Add icon's name to the img_template_names array and image itself to img_template_drawable array -->
+    <array name="img_template_names">
+        <item>Počítadlo</item>
+        <item>Kytara</item>
+        <item>Budík</item>
+        <item>Audio</item>
+        <item>Pláž</item>
+        <item>Kolo</item>
+        <item>Biologie</item>
+        <item>Brainstorming</item>
+        <item>Peníze</item>
+        <item>Pokladna</item>
+        <item>Chat</item>
+        <item>Kostel</item>
+        <item>Úředník</item>
+        <item>Úředník 2</item>
+        <item>Kreditní karta</item>
+        <item>Kapka</item>
+        <item>Sklápěč</item>
+        <item>Ekologické palivo</item>
+        <item>Email</item>
+    </array>
+
+    <array name="img_template_drawables">
+        <item>@drawable/z_circlecolor_abacus</item>
+        <item>@drawable/z_circlecolor_acoustic_guitar</item>
+        <item>@drawable/z_circlecolor_alarmclock</item>
+        <item>@drawable/z_circlecolor_audio</item>
+        <item>@drawable/z_circlecolor_beach</item>
+        <item>@drawable/z_circlecolor_bicycle</item>
+        <item>@drawable/z_circlecolor_biology</item>
+        <item>@drawable/z_circlecolor_brainstorm</item>
+        <item>@drawable/z_circlecolor_cash</item>
+        <item>@drawable/z_circlecolor_cash_register</item>
+        <item>@drawable/z_circlecolor_chat</item>
+        <item>@drawable/z_circlecolor_church</item>
+        <item>@drawable/z_circlecolor_clerk</item>
+        <item>@drawable/z_circlecolor_clerk_</item>
+        <item>@drawable/z_circlecolor_credit_card</item>
+        <item>@drawable/z_circlecolor_drop</item>
+        <item>@drawable/z_circlecolor_dumptruck</item>
+        <item>@drawable/z_circlecolor_eco_fuel</item>
+        <item>@drawable/z_circlecolor_email</item>
+    </array>
+</resources>

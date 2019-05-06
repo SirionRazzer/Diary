@@ -43,7 +43,7 @@ class ImagePickerDialog(val creatorViewModel: TemplateItemCreatorViewModel) : Di
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_image_picker, container, false)
-        getDialog().setTitle("Choose icon")
+        getDialog().setTitle(resources.getString(R.string.choose_icon))
 
         imageIds = resources.obtainTypedArray(R.array.img_template_drawables)
         imageNames = resources.getStringArray(R.array.img_template_names)

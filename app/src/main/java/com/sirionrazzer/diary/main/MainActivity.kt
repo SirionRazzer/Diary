@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
             mainViewModel.initTrackAndTemplateItems()
             adapter.notifyDataSetChanged()
 
-            val snackbar = Snackbar.make(clMain, "Activities updated", Snackbar.LENGTH_SHORT)
+            val snackbar = Snackbar.make(clMain, resources.getString(R.string.activities_updated), Snackbar.LENGTH_SHORT)
             snackbar.show()
         }
 

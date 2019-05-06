@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name">Diář</string>
+    <string name="sign_in">Přihlásit se</string>
+    <string name="your_email">Email</string>
+    <string name="your_password">Heslo</string>
+    <string name="app_logo">Logo aplikace</string>
+    <string name="skip_now">Přeskočit</string>
+    <string name="title_my_day">Můj den</string>
+    <string name="title_manage_activities">Správa aktivit</string>
+    <string name="manage_activities">Správa aktivit</string>
+    <string name="edit_history_item">Upravit</string>
+    <string name="backup_diary_data">Zazálohovat data diáře</string>
+    <string name="restore_diary_data">Obnovit data diáře</string>
+    <string name="error_backup_upload">Něco se pokazilo. Zálohování selhalo.</string>
+    <string name="success_backup_upload">Úspěšně zazálohováno!</string>
+    <string name="success_backup_download">Úspěšně obnoveno ze zálohy!</string>
+    <string name="error_backup_download">Něco se pokazilo. Stahování selhalo.</string>
+    <string name="logout">Odhlásit se</string>
+    <string name="please_backup">Pro zazálohování diáře se prosím přihlašte.</string>
+    <string name="success_logged_out">Odhlášení proběhlo úspěšně.</string>
+    <string name="login">Přihlášení</string>
+    <string name="title_history_activity">Historie</string>
+    <string name="title_creator_activity">Návrh aktivit</string>
+    <string name="title_stats_activity">Statistiky</string>
+    <string name="message_leave_without_save">Chcete odejít bez uložení?</string>
+    <string name="caption_activity_not_saved">Akivita nebyla uložena.</string>
+    <string name="hint_activity_name">Název nové aktivity</string>
+    <string name="hint_your_email">Email</string>
+    <string name="hint_your_password">Heslo</string>
+    <string name="new_credentials_or_existing_account_message">Zadejte přihlašovací údaje nebo použijte existující účet</string>
+    <string name="welcome">Vítejte!</string>
+    <string name="empty_pw_email">Není vyplněno heslo nebo email.</string>
+    <string name="invalid_pa_email">Chybné heslo nebo email.</string>
+    <string name="short_password">Heslo je příliš krátké, je potřeba alespoň 6 znaků.</string>
+    <string name="new_account_or_incorrect_input">Přejete si vytvořit nový účet? Pokud nejste nový, zadal jste chybné přihlašovací údaje.</string>
+    <string name="boarding_greetings">Zdravím</string>
+    <string name="success_signup_message">Děkujeme za registraci.</string>
+    <string name="success_login_message">Přihlášení proběhlo úspěšně!</string>
+    <string name="yes">Ano</string>
+    <string name="no">Ne</string>
+    <string name="activity_name">Název aktivity</string>
+    <string name="extra_input">Další vstup</string>
+    <string name="creator_new_activity_will_be_in_new_records">Aktivita se objeví ve všech nových záznamech</string>
+    <string name="creator_instructions">Uspořádejte, zakažte nebo přidejte nové aktivity</string>
+    <string name="changes_won_t_harm_your_old_entries">Změny neovlivní uložená data ☺</string>
+    <string name="cancel">Zrušit</string>
+    <string name="submit">Potvrdit</string>
+    <string name="choose_icon">Vyberte ikonu</string>
+    <string name="activities_updated">Aktivity byly aktualizovány</string>
+    <string name="activity_note_first_part">Nová poznámka k aktivitě\u0020</string>
+    <string name="activity_note_second_part"></string>
+    <string name="mon">po</string>
+    <string name="tue">út</string>
+    <string name="wed">st</string>
+    <string name="thu">čt</string>
+    <string name="fri">pá</string>
+    <string name="sat">so</string>
+    <string name="sun">ne</string>
+    <string name="pick_activity_image">Zvolte obrázek aktivity</string>
+
+    <string-array name="input_fields">
+        <item>Žádný</item>
+        <item>Text</item>
+        <item>Číslo</item>
+    </string-array>
+
+</resources>

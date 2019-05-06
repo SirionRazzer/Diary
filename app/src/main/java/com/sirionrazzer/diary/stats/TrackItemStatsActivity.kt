@@ -33,7 +33,7 @@ class TrackItemStatsActivity : AppCompatActivity() {
 
         val trackItemName = intent.getStringExtra("trackItemName")
 
-        toolbar.title = "Overview"
+        toolbar.setTitle(R.string.title_stats_activity)
         setSupportActionBar(toolbar)
         template = realm.trackItemsTemplatesDao.getTemplateByName(trackItemName)!!
         tvTemplateStatName.text = template.name

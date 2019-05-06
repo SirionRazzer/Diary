@@ -54,7 +54,7 @@
             android:id="@+id/trackitemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="item name"
+            android:text=""
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp" />

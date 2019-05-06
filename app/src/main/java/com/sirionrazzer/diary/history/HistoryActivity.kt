@@ -37,7 +37,7 @@ class HistoryActivity : AppCompatActivity() {
 
         historyViewModel = createViewModel()
 
-        toolbar.title = "History"
+        toolbar.setTitle(R.string.title_history_activity)
         setSupportActionBar(toolbar)
 
         val viewManager = LinearLayoutManager(this)

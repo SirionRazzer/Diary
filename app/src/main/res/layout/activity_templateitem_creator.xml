@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/ic_label"
-                android:hint="Activity name"
+                android:hint="@string/activity_name"
                 android:textColor="@color/primaryText"
                 android:layout_marginBottom="-8dp"
                 android:textColorHint="@color/hintText" />
@@ -64,7 +64,7 @@
                 android:layout_marginTop="7dp"
                 android:letterSpacing="0.03"
                 android:lineSpacingExtra="3.9sp"
-                android:text="Extra input"
+                android:text="@string/extra_input"
                 android:textColor="@color/hintText"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/clExtra"
             android:layout_marginStart="4dp"
-            android:text="Activity will appear in all new records"
+            android:text="@string/creator_new_activity_will_be_in_new_records"
             android:textColor="@color/secondaryText"
             android:textSize="14sp" />
 
