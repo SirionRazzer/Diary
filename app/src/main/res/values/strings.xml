@@ -57,6 +57,15 @@
     <string name="sat">sat</string>
     <string name="sun">sun</string>
     <string name="pick_activity_image">Pick activity image</string>
+    <string name="title_activity_options">Options</string>
+    <string name="user">User</string>
+    <string name="your_name"> Name Your</string>
+    <string name="sync_automatically">Sync Automatically</string>
+    <string name="settings">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="other_settings">Other Settings</string>
+    <string name="deleteHistoryButton">Delete History</string>
+    <string name="history_deleted">History was successfully deleted.</string>
 
     <string-array name="input_fields">
         <item>None</item>

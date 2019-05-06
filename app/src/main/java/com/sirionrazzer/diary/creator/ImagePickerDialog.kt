@@ -3,10 +3,9 @@ package com.sirionrazzer.diary.creator
 import android.content.Context
 import android.content.res.TypedArray
 import android.os.Bundle
-import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
+import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,7 +42,7 @@ class ImagePickerDialog(val creatorViewModel: TemplateItemCreatorViewModel) : Di
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_image_picker, container, false)
-        getDialog().setTitle(resources.getString(R.string.choose_icon))
+        dialog?.setTitle(resources.getString(R.string.choose_icon))
 
         imageIds = resources.obtainTypedArray(R.array.img_template_drawables)
         imageNames = resources.getStringArray(R.array.img_template_names)
@@ -59,10 +58,10 @@ class ImagePickerDialog(val creatorViewModel: TemplateItemCreatorViewModel) : Di
 
     override fun onResume() {
         super.onResume()
-        val params = dialog.window!!.attributes
+        val params = dialog?.window!!.attributes
         params.width = ViewGroup.LayoutParams.MATCH_PARENT
         params.height = ViewGroup.LayoutParams.MATCH_PARENT
-        dialog.window!!.attributes = params as android.view.WindowManager.LayoutParams
+        dialog?.window!!.attributes = params as android.view.WindowManager.LayoutParams
 
         btnDismiss.setOnClickListener { dismiss() }
     }

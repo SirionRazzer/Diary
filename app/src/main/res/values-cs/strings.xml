@@ -57,6 +57,15 @@
     <string name="sat">so</string>
     <string name="sun">ne</string>
     <string name="pick_activity_image">Zvolte obrázek aktivity</string>
+    <string name="title_activity_options">Nastaveni</string>
+    <string name="settings">Nastaveni</string>
+    <string name="user">Uživatel</string>
+    <string name="your_name"> Tvoje Jmeno</string>
+    <string name="sync_automatically">Automaticka synchroniazace</string>
+    <string name="title_activity_settings">Nastaveni</string>
+    <string name="other_settings">Dalsi Nastaveni</string>
+    <string name="deleteHistoryButton">Vymaz historii</string>
+    <string name="history_deleted">Historia bola uspesne vymazana.</string>
 
     <string-array name="input_fields">
         <item>Žádný</item>

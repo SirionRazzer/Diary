@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/options_button"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/settings"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/sync_button"
         android:icon="@android:drawable/ic_menu_save"
         android:title="@string/backup_diary_data"
