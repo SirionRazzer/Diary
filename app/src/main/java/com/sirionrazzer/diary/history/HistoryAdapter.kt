@@ -2,11 +2,15 @@ package com.sirionrazzer.diary.history
 
 import android.content.Context
 import android.content.Intent
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.GridView
+import android.widget.ImageButton
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.main.MainActivity
 import com.sirionrazzer.diary.models.TrackItem
@@ -14,13 +18,15 @@ import com.sirionrazzer.diary.stats.TrackItemStatsActivity
 
 class HistoryAdapter(
     private val context: Context,
-    private val historyViewModel: HistoryViewModel)
-    : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+    private val historyViewModel: HistoryViewModel
+) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     class ViewHolder(val historyItemLayout: LinearLayout) : RecyclerView.ViewHolder(historyItemLayout)
 
-    override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): HistoryAdapter.ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder {
 
         val historyItem = LayoutInflater.from(context).inflate(R.layout.history_item, parent, false) as LinearLayout
 
@@ -38,18 +44,26 @@ class HistoryAdapter(
         val trackItemsWithoutText: ArrayList<TrackItem> = arrayListOf()
         val trackItemsWithText: ArrayList<TrackItem> = arrayListOf()
         val trackItemsIds: ArrayList<String> = arrayListOf()
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        val showOnlyFilled = prefs.getBoolean("show_only_filled_items", false)
+
         allTrackItems!!.forEach {
-            trackItemsIds.add(it.id)
-            if (it.status and (it.hasTextField or it.hasNumberField)) {
-                trackItemsWithText.add(it)
-            }
-            else {
-                trackItemsWithoutText.add(it)
+            if (it.status || !showOnlyFilled) {
+                trackItemsIds.add(it.id)
+                if (it.status and (it.hasTextField or it.hasNumberField)) {
+                    trackItemsWithText.add(it)
+                } else {
+                    trackItemsWithoutText.add(it)
+                }
+
             }
         }
 
         gridLayout.adapter = TrackItemsWithoutTextAdapter(gridLayout.context, trackItemsWithoutText)
-        recyclerView.adapter = TrackItemsWithTextAdapter(recyclerView.context, trackItemsWithText) { trackItemName: String -> trackItemClicked(trackItemName) }
+        recyclerView.adapter = TrackItemsWithTextAdapter(
+            recyclerView.context,
+            trackItemsWithText
+        ) { trackItemName: String -> trackItemClicked(trackItemName) }
         recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
 
         val dateTextView = historyItem.findViewById<TextView>(R.id.historyItemDate)

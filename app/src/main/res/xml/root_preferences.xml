@@ -19,7 +19,7 @@
     <PreferenceCategory app:title="@string/user">
 
         <EditTextPreference
-            app:key="name"
+            app:key="username"
             app:title="@string/your_name"
             app:useSimpleSummaryProvider="true" />
 
@@ -28,15 +28,16 @@
     <PreferenceCategory app:title="@string/other_settings">
 
         <SwitchPreferenceCompat
-            app:key="sync"
+            app:key="auto_sync"
             app:title="@string/sync_automatically" />
         <SwitchPreferenceCompat
-            app:key="filled_items"
+            app:key="show_only_filled_items"
             app:title="Show only filled items" />
         <SwitchPreferenceCompat
-            app:key="compact"
+            app:key="compact_ui"
             app:title="Compact UI" />
         <Preference
+            app:icon="@android:drawable/ic_menu_delete"
             app:key="@string/deleteHistoryButton"
             app:title="Delete History" />
 
