@@ -9,6 +9,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".stats.ChooseTrackItemStatActivity"></activity>
         <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/title_activity_settings"
@@ -16,7 +17,6 @@
         <activity
             android:name=".history.HistoryActivity"
             android:launchMode="singleTask" />
-
         <activity
             android:name=".main.MainActivity"
             android:launchMode="singleTask" />

@@ -66,6 +66,8 @@
     <string name="other_settings">Dalsi Nastaveni</string>
     <string name="deleteHistoryButton">Vymaz historii</string>
     <string name="history_deleted">Historia bola uspesne vymazana.</string>
+    <string name="statistics">Statistky</string>
+    <string name="choose_activity">Vyber aktivitu</string>
 
     <string-array name="input_fields">
         <item>Žádný</item>

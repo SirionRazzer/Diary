@@ -15,6 +15,7 @@ import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.boarding.BoardingActivity
 import com.sirionrazzer.diary.main.MainActivity
 import com.sirionrazzer.diary.settings.SettingsActivity
+import com.sirionrazzer.diary.stats.ChooseTrackItemStatActivity
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_history.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -112,6 +113,9 @@ class HistoryActivity : AppCompatActivity() {
                 }
                 item?.itemId == R.id.options_button -> {
                     startActivity<SettingsActivity>()
+                }
+                item?.itemId == R.id.stats_button -> {
+                    startActivity<ChooseTrackItemStatActivity>()
                 }
                 else -> Toast.makeText(this, getString(R.string.please_backup), Toast.LENGTH_SHORT).show()
             }

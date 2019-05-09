@@ -7,6 +7,10 @@
         android:title="@string/settings"
         app:showAsAction="never" />
     <item
+        android:id="@+id/stats_button"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/statistics" />
+    <item
         android:id="@+id/sync_button"
         android:icon="@android:drawable/ic_menu_save"
         android:title="@string/backup_diary_data"

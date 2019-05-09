@@ -66,6 +66,8 @@
     <string name="other_settings">Other Settings</string>
     <string name="deleteHistoryButton">Delete History</string>
     <string name="history_deleted">History was successfully deleted.</string>
+    <string name="statistics">Statistics</string>
+    <string name="choose_activity">Choose Activity</string>
 
     <string-array name="input_fields">
         <item>None</item>
