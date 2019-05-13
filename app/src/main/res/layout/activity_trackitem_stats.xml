@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,6 +10,7 @@
     <include layout="@layout/toolbar" />
 
     <LinearLayout
+        android:id="@+id/statTemplateBadge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -30,8 +31,30 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTrackItemStats"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/statTemplateBadge"
+        android:layout_marginStart="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barChart"
+                android:layout_width="match_parent"
+                android:layout_height="150pt"
+                android:layout_marginEnd="20dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTrackItemStats"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/barChart" />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+</RelativeLayout>

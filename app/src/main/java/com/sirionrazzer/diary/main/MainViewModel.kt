@@ -26,9 +26,8 @@ class MainViewModel : ViewModel() {
     var currentTemplateItems: MutableList<TrackItemTemplate> = mutableListOf()
     var deletedTemplateItems: MutableList<TrackItemTemplate> = mutableListOf()
 
-    val dateUtils = DateUtils()
     var date: Long?
-        get() = dateUtils.persistDate(Calendar.getInstance().time)
+        get() = DateUtils.persistDate(Calendar.getInstance().time)
         set(value) {
             date = value
         }

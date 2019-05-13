@@ -15,7 +15,6 @@ class HistoryViewModel: ViewModel() {
     }
 
     private val trackItemDao: TrackItemDao = realm.trackItemDao
-    private val dateUtils = DateUtils()
 
     var dates: ArrayList<String> = arrayListOf()
     var trackItemsByDate: HashMap<String, ArrayList<TrackItem>> = hashMapOf()
@@ -34,7 +33,7 @@ class HistoryViewModel: ViewModel() {
         }
 
         trackItems.forEach {
-            val date = dateUtils.smartDate(dateUtils.dateFromMillis(it.date), false)
+            val date = DateUtils.smartDate(DateUtils.dateFromMillis(it.date), false)
 
             if (!trackItemsByDate.containsKey(date)) {
                 trackItemsByDate[date] = arrayListOf()

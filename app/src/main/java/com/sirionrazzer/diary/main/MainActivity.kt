@@ -60,10 +60,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val dateUtils = DateUtils()
-        tvDate.text = dateUtils.smartDate(dateUtils.dateFromMillis(mainViewModel.date), false)
+        tvDate.text = DateUtils.smartDate(DateUtils.dateFromMillis(mainViewModel.date), false)
 
-        when (dateUtils.dayInWeek()) {
+        when (DateUtils.dayInWeek()) {
             2 -> tvMonday.setTextColor(resources.getColor(R.color.colorAccent))
             3 -> tvTuesday.setTextColor(resources.getColor(R.color.colorAccent))
             4 -> tvWednesday.setTextColor(resources.getColor(R.color.colorAccent))
