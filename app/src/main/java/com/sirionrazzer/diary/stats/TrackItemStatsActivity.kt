@@ -1,9 +1,18 @@
 package com.sirionrazzer.diary.stats
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import android.view.MenuItem
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
 import com.sirionrazzer.diary.models.TrackItemDao
@@ -14,7 +23,6 @@ import com.squareup.picasso.Picasso
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_trackitem_stats.*
 import kotlinx.android.synthetic.main.toolbar.*
-import java.util.*
 
 class TrackItemStatsActivity : AppCompatActivity() {
 
@@ -22,6 +30,11 @@ class TrackItemStatsActivity : AppCompatActivity() {
     private lateinit var viewManager: LinearLayoutManager
     private lateinit var viewAdapter: TrackItemStatsAdapter
     private lateinit var template: TrackItemTemplate
+    private val milisecondsInWeek = 604800000f
+
+    private var barMap: HashMap<Long, Float> = HashMap()
+
+    private lateinit var itemsGrouped: Map<String, MutableList<TrackItem>>
 
     val realm: Realm by lazy {
         Realm.getDefaultInstance()
@@ -41,65 +54,82 @@ class TrackItemStatsActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        initTrackItems()
-
         initTrackAndTemplateItems(trackItemName)
+
         initRecyclerView()
     }
 
-    private fun initTrackItems() {
-        val cal = Calendar.getInstance()
-        val trackItem = TrackItem(
-            id = UUID.randomUUID().toString(),
-            deleted = false,
-            name = "work",
-            imageOn = R.drawable.ic_check,
-            imageOff = R.drawable.ic_uncheck,
-            hasTextField = true,
-            hasNumberField = true,
-            status = true,
-            textField = "dnes som stravil v praci tolko casu",
-            numberField = 123.323f,
-            date = DateUtils().persistDate(cal.time)!!,
-            position = 1
-        )
-        cal.add(Calendar.DATE, -1)
-        val trackItem2 = TrackItem(
-            id = UUID.randomUUID().toString(),
-            deleted = false,
-            name = "work",
-            imageOn = R.drawable.ic_check,
-            imageOff = R.drawable.ic_uncheck,
-            hasTextField = true,
-            hasNumberField = false,
-            status = false,
-            textField = "dnes som spravil android appku",
-            numberField = 0f,
-            date = DateUtils().persistDate(cal.time)!!,
-            position = 2
-        )
-        cal.add(Calendar.DATE, -1)
+    private fun initBarChart() {
+        barChart.setDrawGridBackground(false)
 
-        val trackItem3 = TrackItem(
-            id = UUID.randomUUID().toString(),
-            deleted = false,
-            name = "work",
-            imageOn = R.drawable.ic_check,
-            imageOff = R.drawable.ic_uncheck,
-            hasTextField = false,
-            hasNumberField = true,
-            status = true,
-            textField = "",
-            numberField = 231.24f,
-            date = DateUtils().persistDate(cal.time)!!,
-            position = 3
-        )
+        barChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+        barChart.xAxis.granularity = 1f
+//        barChart.xAxis.axisMinimum = barMap.keys.min()!!.toFloat()-604800f
+//        barChart.xAxis.axisMaximum = barMap.keys.max()!!.toFloat()+604800f
+        barChart.xAxis.setDrawGridLines(false)
+//        barChart.xAxis.labelCount = 7
+        barChart.xAxis.valueFormatter = object : ValueFormatter() {
+            override fun getFormattedValue(value: Float): String {
 
-        currentTrackItems.add(trackItem)
-        currentTrackItems.add(trackItem2)
-        currentTrackItems.add(trackItem3)
+                val pair = DateUtils.getWeekAndYearPair(value.toLong())
+                return "${pair.first}-${pair.second}"
+            }
+        }
+
+
+        barChart.axisLeft.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
+        barChart.axisLeft.setDrawGridLines(false)
+        barChart.axisLeft.spaceTop = 15f
+//        barChart.axisLeft.axisMinimum = 0f
+        barChart.axisLeft.valueFormatter = CustomFormatter(barChart)
+
+        barChart.axisRight.isEnabled = false
+
+        setData()
     }
 
+    private fun getTrackItemsGroupedByTimeUnit(): Map<String, MutableList<TrackItem>> {
+
+        val map = HashMap<String, MutableList<TrackItem>>()
+        currentTrackItems.forEach {
+
+            val pair = DateUtils.getWeekAndYearPair(it.date)
+            val key = "${pair.first}-${pair.second}"
+            if (!map.containsKey(key)) {
+                map[key] = mutableListOf()
+            }
+            map[key]!!.add(it)
+
+        }
+        return map
+    }
+
+    private fun setData() {
+        val values = mutableListOf<BarEntry>()
+
+//        values.add(BarEntry(1000f, 20f))
+
+        for (i in 1..20) {
+            val f = Math.random() * 11
+
+            values.add(BarEntry(i.toFloat(), f.toFloat()))
+
+        }
+//        barMap.forEach { (key, value) ->
+//            values.add(BarEntry(key.toFloat(), value))
+//        }
+        val dataSet = BarDataSet(values, template.name)
+        dataSet.setDrawIcons(false)
+
+        val data = BarData(mutableListOf<IBarDataSet>(dataSet))
+        data.setValueTextSize(10f)
+
+        data.setValueTypeface(Typeface.DEFAULT)
+        data.barWidth = 0.8f
+        barChart.data = data
+
+
+    }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         onBackPressed()
@@ -116,6 +146,22 @@ class TrackItemStatsActivity : AppCompatActivity() {
 
     private fun initTrackAndTemplateItems(name: String) {
         currentTrackItems.addAll(realm.trackItemsDao.getTrackItemsWithName(name))
+        if (template.hasNumberField) {
+            itemsGrouped = getTrackItemsGroupedByTimeUnit()
+
+            itemsGrouped.forEach { (key, value) ->
+                var sum = 0f
+                value.forEach {
+                    sum += it.numberField!!
+                }
+                barMap[DateUtils.getFirstDayOfTheWeekInMiliseconds(value[0].date)] = sum / value.count()
+            }
+            initBarChart()
+
+        } else {
+            barChart.visibility = View.GONE
+        }
+
     }
 
     override fun onDestroy() {

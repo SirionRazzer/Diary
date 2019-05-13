@@ -1,10 +1,10 @@
 package com.sirionrazzer.diary.stats
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
 import com.sirionrazzer.diary.util.DateUtils
@@ -28,11 +28,10 @@ class TrackItemStatsAdapter(private val stats: List<TrackItem>) :
         private var date = itemView.findViewById<TextView>(R.id.tvStatItemDate)
         private var tvNumber = itemView.findViewById<TextView>(R.id.tvStatItemNumber)
         private var tvText = itemView.findViewById<TextView>(R.id.tvStatItemText)
-        private val dateUtils = DateUtils()
 
         fun bind(item: TrackItem) {
 
-            date.text = dateUtils.smartDate(dateUtils.dateFromMillis(item.date), false)
+            date.text = DateUtils.smartDate(DateUtils.dateFromMillis(item.date), false)
             if (item.hasNumberField) {
                 tvNumber.text = item.numberField.toString()
             } else {
