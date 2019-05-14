@@ -17,7 +17,7 @@ class XDateFormatter(
     private val months = arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 
     override fun getFormattedValue(value: Float): String {
-        if (barData.count() > 0) {
+        if (barData.count() > 0 && barData.count() > value.toInt()) {
             val pair = barData[value.toInt()]
             val cal = Calendar.getInstance()
             var pairNow: Pair<Int, Int> = Pair(0, 0)

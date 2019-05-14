@@ -81,6 +81,7 @@
     <string name="sum_each_week">sum for each week</string>
     <string name="sum_each_month">sum for each month</string>
     <string name="entry_list">Entry list</string>
+    <string name="no_entries">No entries.</string>
 
     <string-array name="input_fields">
         <item>None</item>

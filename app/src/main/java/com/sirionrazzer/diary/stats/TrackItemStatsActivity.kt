@@ -56,7 +56,7 @@ class TrackItemStatsActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        currentTrackItems.addAll(realm.trackItemsDao.getTrackItemsWithName(trackItemName))
+        currentTrackItems.addAll(realm.trackItemsDao.getTrackItemsWithName(trackItemName))//TODO netusim preco to realm nefiltruje
 
         if (template.hasNumberField) {
             val sum = currentTrackItems.sumByDouble { it.numberField!!.toDouble() }
@@ -68,14 +68,14 @@ class TrackItemStatsActivity : AppCompatActivity() {
             refreshChartData()
 
         } else {
-            barChart.visibility = View.GONE
+            cvBarChart.visibility = View.GONE
+            cvStatInfo.visibility = View.GONE
         }
         initSpinners()
 
         initRecyclerView()
 
     }
-
 
     private fun initSpinners() {
         ArrayAdapter.createFromResource(
@@ -176,11 +176,16 @@ class TrackItemStatsActivity : AppCompatActivity() {
 
         val data = BarData(mutableListOf<IBarDataSet>(dataSet))
         data.setValueTextSize(10f)
-
+        val timeUnit = if (selectedTimeUnit == 0) {
+            R.string.week
+        } else {
+            R.string.month
+        }
         data.setValueTypeface(Typeface.DEFAULT)
         data.barWidth = 0.8f
         barChart.data = data
         barChart.invalidate()
+        barChart.xAxis.valueFormatter = XDateFormatter(barChart, barData, timeUnit, this)
     }
 
     private fun initRecyclerView() {
@@ -188,12 +193,15 @@ class TrackItemStatsActivity : AppCompatActivity() {
         viewAdapter = TrackItemStatsAdapter(currentTrackItems)
         rvTrackItemStats.adapter = viewAdapter
         rvTrackItemStats.layoutManager = viewManager
+        if (currentTrackItems.count() > 0) {
+            tvEmptyStatsMessage.visibility = View.GONE
+        }
         rvTrackItemStats.addItemDecoration(
             DividerItemDecoration(
                 this,
                 DividerItemDecoration.VERTICAL
             )
-        );
+        )
     }
 
     private fun getTrackItemsGroupedByTimeUnit(): Map<String, MutableList<TrackItem>> {
@@ -224,7 +232,6 @@ class TrackItemStatsActivity : AppCompatActivity() {
         realm.close()
         super.onDestroy()
     }
-
 }
 
 private val Realm.trackItemsDao: TrackItemDao
