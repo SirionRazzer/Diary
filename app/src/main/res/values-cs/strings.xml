@@ -72,9 +72,15 @@
     <string name="last_time_unit">Minuly</string>
     <string name="month">mesic</string>
     <string name="week">tyden</string>
+    <string name="select_time_unit">Vyberte časovou jednotku</string>
+    <string name="select_grouping_operation">Vyberte operaci seskupení</string>
+    <string name="overall_average">Celkový průměr:</string>
+    <string name="total_sum">Celkový součet:</string>
     <string name="average_each_week">průměr pro každý týden</string>
-    <string name="select_time_unit">Select time unit</string>
-    <string name="select_grouping_operation">Select grouping operation</string>
+    <string name="average_each_month">průměr pro kazdý měsíc</string>
+    <string name="sum_each_month">součet pro kazdý měsíc</string>
+    <string name="sum_each_week">součet pro každý týden</string>
+
 
     <string-array name="input_fields">
         <item>Žádný</item>

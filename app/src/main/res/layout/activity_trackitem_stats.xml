@@ -35,7 +35,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/statTemplateBadge"
-        android:layout_marginStart="20dp">
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -74,7 +75,9 @@
 
                 </RelativeLayout>
 
+
                 <RelativeLayout
+                    android:id="@+id/rlGroupByOperationSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/rlUnitSpinner"
@@ -92,6 +95,54 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="10dp" />
                 </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlHistoryItemHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rlGroupByOperationSpinner">
+
+                    <RelativeLayout
+                        android:id="@+id/rlTotalSum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/total_sum" />
+
+                        <TextView
+                            android:id="@+id/tvStatSumNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="30dp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlTotalAverage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/rlTotalSum"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/overall_average" />
+
+                        <TextView
+                            android:id="@+id/tvStatAverageNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="30dp" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
 
             </RelativeLayout>
 

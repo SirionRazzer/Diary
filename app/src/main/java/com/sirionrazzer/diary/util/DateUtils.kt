@@ -80,6 +80,10 @@ class DateUtils {
             return dateFromMillis(dateInMilliseconds)?.let { getWeekAndYearPair(it) }!!
         }
 
+        fun getMonthAndYearPair(dateInMilliseconds: Long): Pair<Int, Int> {
+            return dateFromMillis(dateInMilliseconds)?.let { getMonthAndYearPair(it) }!!
+        }
+
         fun getWeekAndYearPair(date: Date): Pair<Int, Int> {
 
             val cal = Calendar.getInstance()
@@ -89,6 +93,16 @@ class DateUtils {
 
         fun getWeekYearString(weekYear: Pair<Int, Int>): String {
             return formatAsString(weekYear.first, weekYear.second)
+        }
+
+        fun getWeekYearString(date: Long): String {
+            val pair = getWeekAndYearPair(date)
+            return formatAsString(pair.first, pair.second)
+        }
+
+        fun getMonthYearString(date: Long): String {
+            val pair = getMonthAndYearPair(date)
+            return formatAsString(pair.first, pair.second)
         }
 
         fun getMonthAndYearPair(date: Date): Pair<Int, Int> {

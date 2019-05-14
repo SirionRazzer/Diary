@@ -72,9 +72,14 @@
     <string name="last_time_unit">Last</string>
     <string name="month">month</string>
     <string name="week">week</string>
-    <string name="average_each_week">average each week</string>
     <string name="select_time_unit">Select time unit</string>
     <string name="select_grouping_operation">Select grouping operation</string>
+    <string name="overall_average">Overall average:</string>
+    <string name="total_sum">Total sum:</string>
+    <string name="average_each_week">average for each week</string>
+    <string name="average_each_month">average for each month</string>
+    <string name="sum_each_week">sum for each week</string>
+    <string name="sum_each_month">sum for each month</string>
 
     <string-array name="input_fields">
         <item>None</item>

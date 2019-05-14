@@ -31,7 +31,7 @@
     </array>
     <array name="stat_group_by_operations_array">
         <item>average</item>
-        <item>summary</item>
+        <item>sum</item>
     </array>
 
 

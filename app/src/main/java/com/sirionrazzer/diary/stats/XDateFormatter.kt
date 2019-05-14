@@ -14,25 +14,30 @@ class XDateFormatter(
     private val context: Context
 ) :
     ValueFormatter() {
+    private val months = arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+
     override fun getFormattedValue(value: Float): String {
-        val pair = barData[value.toInt()]
-        val cal = Calendar.getInstance()
-        var pairNow: Pair<Int, Int> = Pair(0, 0)
-        var pairHash = ""
-        if (timeUnit == R.string.week) {
-            pairNow = DateUtils.getWeekAndYearPair(cal.time)
-            pairHash = DateUtils.getWeekYearString(pairNow)
-        } else if (timeUnit == R.string.month) {
-            pairNow = DateUtils.getMonthAndYearPair(cal.time)
-            pairHash = DateUtils.getMonthYearString(pairNow)
-        }
-        if (pairHash == pair.second) {
-            return "${context.getString(R.string.this_time_unit)} ${context.getString(timeUnit)}"
-        } else if ("${pairNow.first - 1}-${pairNow.second}" == pair.second) {
-            return "${context.getString(R.string.last_time_unit)} ${context.getString(timeUnit)}"
-        }
+        if (barData.count() > 0) {
+            val pair = barData[value.toInt()]
+            val cal = Calendar.getInstance()
+            var pairNow: Pair<Int, Int> = Pair(0, 0)
+            var pairHash = ""
+            if (timeUnit == R.string.week) {
+                pairNow = DateUtils.getWeekAndYearPair(cal.time)
+                pairHash = DateUtils.getWeekYearString(pairNow)
+            } else if (timeUnit == R.string.month) {
+                pairNow = DateUtils.getMonthAndYearPair(cal.time)
+                pairHash = DateUtils.getMonthYearString(pairNow)
+            }
+            if (pairHash == pair.second) {
+                return "${context.getString(R.string.this_time_unit)} ${context.getString(timeUnit)}"
+            } else if ("${pairNow.first - 1}-${pairNow.second}" == pair.second) {
+                return "${context.getString(R.string.last_time_unit)} ${context.getString(timeUnit)}"
+            }
 
-        return pair.second
+            return pair.second
 
+        }
+        return value.toString()
     }
 }

@@ -25,6 +25,15 @@
         <item>Email</item>
     </array>
 
+    <array name="time_unit_array">
+        <item>týden</item>
+        <item>měsíc</item>
+    </array>
+    <array name="stat_group_by_operations_array">
+        <item>průměr</item>
+        <item>součet</item>
+    </array>
+
     <array name="img_template_drawables">
         <item>@drawable/z_circlecolor_abacus</item>
         <item>@drawable/z_circlecolor_acoustic_guitar</item>

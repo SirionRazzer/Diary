@@ -25,15 +25,17 @@ import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_trackitem_stats.*
 import kotlinx.android.synthetic.main.toolbar.*
 
-class TrackItemStatsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class TrackItemStatsActivity : AppCompatActivity() {
 
 
     var currentTrackItems: MutableList<TrackItem> = mutableListOf()
     private lateinit var viewManager: LinearLayoutManager
     private lateinit var viewAdapter: TrackItemStatsAdapter
     private lateinit var template: TrackItemTemplate
+    private var selectedTimeUnit: Int = 0
+    private var selectedGroupByOperation: Int = 0
 
-    var barData: MutableList<Pair<Float, String>> = mutableListOf()
+    private var barData: MutableList<Pair<Float, String>> = mutableListOf()
 
     val realm: Realm by lazy {
         Realm.getDefaultInstance()
@@ -53,17 +55,26 @@ class TrackItemStatsActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        currentTrackItems.addAll(realm.trackItemsDao.getTrackItemsWithName(trackItemName))
+
+        if (template.hasNumberField) {
+            val sum = currentTrackItems.sumByDouble { it.numberField!!.toDouble() }
+            val average = sum / currentTrackItems.count()
+            tvStatAverageNumber.text = String.format("%.2f", average)
+            tvStatSumNumber.text = String.format("%.2f", sum)
+
+            initBarChart()
+            refreshChartData()
+
+        } else {
+            barChart.visibility = View.GONE
+        }
         initSpinners()
-        initTrackAndTemplateItems(trackItemName)
 
         initRecyclerView()
+
     }
 
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-    }
-
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-    }
 
     private fun initSpinners() {
         ArrayAdapter.createFromResource(
@@ -71,20 +82,38 @@ class TrackItemStatsActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
             R.array.time_unit_array,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             timeUnitSpinner.adapter = adapter
+        }
+        timeUnitSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                selectedTimeUnit = position
+                refreshChartData()
+
+            }
+
         }
         ArrayAdapter.createFromResource(
             this,
             R.array.stat_group_by_operations_array,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             statGroupBySpinner.adapter = adapter
+
+        }
+        statGroupBySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                selectedGroupByOperation = position
+                refreshChartData()
+            }
+
         }
 
     }
@@ -96,39 +125,52 @@ class TrackItemStatsActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         barChart.xAxis.granularity = 1f
         barChart.xAxis.setDrawGridLines(false)
         barChart.xAxis.valueFormatter = XDateFormatter(barChart, barData, R.string.week, this)
+
         barChart.axisLeft.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
         barChart.axisLeft.setDrawGridLines(false)
         barChart.axisLeft.spaceTop = 15f
-        barChart.axisLeft.valueFormatter = StringFormatter(barChart)
-
+        barChart.axisLeft.valueFormatter = StringFormatter()
         barChart.axisRight.isEnabled = false
+        barChart.description = null
 
-        setData()
     }
 
-    private fun getTrackItemsGroupedByTimeUnit(): Map<String, MutableList<TrackItem>> {
-
-        val map = HashMap<String, MutableList<TrackItem>>()
-        currentTrackItems.forEach {
-
-            val pair = DateUtils.getWeekAndYearPair(it.date)
-            val key = DateUtils.getWeekYearString(pair)
-            if (!map.containsKey(key)) {
-                map[key] = mutableListOf()
+    private fun refreshChartData() {
+        barData = mutableListOf()
+        getTrackItemsGroupedByTimeUnit().forEach { (key, value) ->
+            var sum = 0f
+            value.forEach {
+                sum += it.numberField!!
             }
-            map[key]!!.add(it)
+            if (selectedGroupByOperation == 0) {
+                barData.add(Pair(sum / value.count(), key))
+            } else {
+                barData.add(Pair(sum, key))
+            }
 
         }
-        return map
-    }
+        barData.sortBy { it.second }
 
-    private fun setData() {
         val values = mutableListOf<BarEntry>()
 
         barData.forEachIndexed { index, pair ->
             values.add(BarEntry(index.toFloat(), pair.first))
         }
-        val dataSet = BarDataSet(values, "${template.name} ${getString(R.string.average_each_week)}")
+        var label = "${template.name} "
+
+        if (selectedGroupByOperation == 0 && selectedTimeUnit == 0) {
+            label += getString(R.string.average_each_week)
+        } else if (selectedGroupByOperation == 0 && selectedTimeUnit == 1) {
+            label += getString(R.string.average_each_month)
+        } else if (selectedGroupByOperation == 1 && selectedTimeUnit == 0) {
+            label += getString(R.string.sum_each_week)
+
+        } else if (selectedGroupByOperation == 1 && selectedTimeUnit == 1) {
+            label += getString(R.string.sum_each_month)
+        }
+
+
+        val dataSet = BarDataSet(values, label)
         dataSet.setDrawIcons(false)
 
         val data = BarData(mutableListOf<IBarDataSet>(dataSet))
@@ -137,28 +179,11 @@ class TrackItemStatsActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         data.setValueTypeface(Typeface.DEFAULT)
         data.barWidth = 0.8f
         barChart.data = data
-    }
+        barChart.invalidate()
 
-    private fun initTrackAndTemplateItems(name: String) {
-        currentTrackItems.addAll(realm.trackItemsDao.getTrackItemsWithName(name))
+//        barChart.data.notifyDataChanged()
+//        barChart.notifyDataSetChanged()
 
-        if (template.hasNumberField) {
-            val itemsGrouped = getTrackItemsGroupedByTimeUnit()
-
-            itemsGrouped.forEach { (key, value) ->
-                var sum = 0f
-                value.forEach {
-                    sum += it.numberField!!
-                }
-
-                barData.add(Pair(sum / value.count(), key))
-            }
-            barData.sortBy { it.second }
-            initBarChart()
-
-        } else {
-            barChart.visibility = View.GONE
-        }
     }
 
     private fun initRecyclerView() {
@@ -166,6 +191,25 @@ class TrackItemStatsActivity : AppCompatActivity(), AdapterView.OnItemSelectedLi
         viewAdapter = TrackItemStatsAdapter(currentTrackItems)
         rvTrackItemStats.adapter = viewAdapter
         rvTrackItemStats.layoutManager = viewManager
+    }
+
+    private fun getTrackItemsGroupedByTimeUnit(): Map<String, MutableList<TrackItem>> {
+
+        val map = HashMap<String, MutableList<TrackItem>>()
+        currentTrackItems.forEach {
+            val key = if (selectedTimeUnit == 0) {
+                DateUtils.getWeekYearString(it.date)
+            } else {
+                DateUtils.getMonthYearString(it.date)
+            }
+
+            if (!map.containsKey(key)) {
+                map[key] = mutableListOf()
+            }
+            map[key]!!.add(it)
+
+        }
+        return map
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
