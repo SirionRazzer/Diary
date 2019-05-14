@@ -68,6 +68,13 @@
     <string name="history_deleted">History was successfully deleted.</string>
     <string name="statistics">Statistics</string>
     <string name="choose_activity">Choose Activity</string>
+    <string name="this_time_unit">This</string>
+    <string name="last_time_unit">Last</string>
+    <string name="month">month</string>
+    <string name="week">week</string>
+    <string name="average_each_week">average each week</string>
+    <string name="select_time_unit">Select time unit</string>
+    <string name="select_grouping_operation">Select grouping operation</string>
 
     <string-array name="input_fields">
         <item>None</item>
