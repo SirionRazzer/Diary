@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".stats.TrackItemStatsActivity">
 
@@ -35,72 +35,101 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/statTemplateBadge"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp">
+        android:background="@color/grey_lt">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/barChart"
-                android:layout_width="match_parent"
-                android:layout_height="150pt"
-                android:layout_marginEnd="20dp" />
-
-            <RelativeLayout
-                android:id="@+id/rlStatSpinners"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvBarChart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/barChart"
-                android:padding="15dp">
+                android:layout_margin="5dp"
+
+                android:background="@color/white"
+                card_view:cardCornerRadius="24dp"
+                card_view:cardElevation="4dp"
+                card_view:contentPadding="4dp">
 
                 <RelativeLayout
-                    android:id="@+id/rlUnitSpinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
+                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/select_time_unit" />
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/barChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="150pt"
+                        android:layout_marginEnd="20dp" />
 
-                    <Spinner
-                        android:id="@+id/timeUnitSpinner"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:id="@+id/rlUnitSpinner"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="10dp" />
+                        android:layout_below="@+id/barChart"
+                        android:layout_marginTop="20dp"
+                        android:padding="10dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/select_time_unit" />
+
+                        <Spinner
+                            android:id="@+id/timeUnitSpinner"
+                            android:layout_width="125dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="10dp" />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlGroupByOperationSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/rlUnitSpinner"
+                        android:padding="10dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/select_grouping_operation" />
+
+                        <Spinner
+                            android:id="@+id/statGroupBySpinner"
+                            android:layout_width="125dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="10dp" />
+                    </RelativeLayout>
 
                 </RelativeLayout>
+            </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvStatInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cvBarChart"
+                android:layout_margin="5dp"
+                android:background="@color/white"
+                card_view:cardCornerRadius="24dp"
+                card_view:cardElevation="4dp"
+                card_view:contentPadding="4dp">
 
                 <RelativeLayout
-                    android:id="@+id/rlGroupByOperationSpinner"
+                    android:id="@+id/rlStatSpinners"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/rlUnitSpinner"
+                    android:layout_below="@+id/cvBarChart"
                     android:padding="10dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/select_grouping_operation" />
-
-                    <Spinner
-                        android:id="@+id/statGroupBySpinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="10dp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/rlHistoryItemHeader"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/rlGroupByOperationSpinner">
 
                     <RelativeLayout
                         android:id="@+id/rlTotalSum"
@@ -141,16 +170,48 @@
                             android:layout_marginEnd="30dp" />
                     </RelativeLayout>
 
+
                 </RelativeLayout>
 
+            </androidx.cardview.widget.CardView>
 
-            </RelativeLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvTrackItemStats"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/rlStatSpinners" />
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cvStatInfo"
+                android:layout_margin="5dp"
+                android:background="@color/white"
+                card_view:cardCornerRadius="24dp"
+                card_view:cardElevation="4dp"
+                card_view:contentPadding="4dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvStatListHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:gravity="center"
+                        android:text="@string/entry_list"
+                        android:textSize="23sp" />
+
+                    <View
+                        android:id="@+id/vStatHeadingDivider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/tvStatListHeading"
+                        android:background="@android:color/darker_gray" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvTrackItemStats"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/vStatHeadingDivider" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
 
 
         </RelativeLayout>

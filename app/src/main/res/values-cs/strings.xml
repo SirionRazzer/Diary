@@ -80,6 +80,7 @@
     <string name="average_each_month">průměr pro kazdý měsíc</string>
     <string name="sum_each_month">součet pro kazdý měsíc</string>
     <string name="sum_each_week">součet pro každý týden</string>
+    <string name="entry_list">Seznam záznamú</string>
 
 
     <string-array name="input_fields">

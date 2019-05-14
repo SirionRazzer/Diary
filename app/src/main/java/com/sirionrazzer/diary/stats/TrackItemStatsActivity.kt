@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -180,10 +181,6 @@ class TrackItemStatsActivity : AppCompatActivity() {
         data.barWidth = 0.8f
         barChart.data = data
         barChart.invalidate()
-
-//        barChart.data.notifyDataChanged()
-//        barChart.notifyDataSetChanged()
-
     }
 
     private fun initRecyclerView() {
@@ -191,6 +188,12 @@ class TrackItemStatsActivity : AppCompatActivity() {
         viewAdapter = TrackItemStatsAdapter(currentTrackItems)
         rvTrackItemStats.adapter = viewAdapter
         rvTrackItemStats.layoutManager = viewManager
+        rvTrackItemStats.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                DividerItemDecoration.VERTICAL
+            )
+        );
     }
 
     private fun getTrackItemsGroupedByTimeUnit(): Map<String, MutableList<TrackItem>> {

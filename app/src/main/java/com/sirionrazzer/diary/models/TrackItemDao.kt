@@ -44,7 +44,7 @@ class TrackItemDao(val realm: Realm) {
 
     fun getTrackItemsWithName(name: String): List<TrackItem> {
         val realmItems =
-            realm.where(TrackItem::class.java).equalTo("name", name).findAllAsync().sort("date", Sort.DESCENDING)
+            realm.where(TrackItem::class.java).equalTo("name", name).findAll().sort("date", Sort.DESCENDING)
 
         return realmItems.map { item -> item as TrackItem }
     }
@@ -63,7 +63,7 @@ class TrackItemDao(val realm: Realm) {
 
     fun getAllTrackItemsSortByDate(): List<TrackItem> {
         var items = realm.where(TrackItem::class.java).findAll().sort("date")
-        return items.map { item -> item as TrackItem}
+        return items.map { item -> item as TrackItem }
     }
 
 //    fun getAllTrackItemsSortByDate(): List<TrackItem> {
