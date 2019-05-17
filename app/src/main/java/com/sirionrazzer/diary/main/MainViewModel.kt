@@ -67,6 +67,10 @@ class MainViewModel : ViewModel() {
     }
 
 
+    fun deleteAllTrackItems() {
+        realm.trackItemsDao.deleteAllTrackItems()
+    }
+
     override fun onCleared() {
         realm.close()
         super.onCleared()

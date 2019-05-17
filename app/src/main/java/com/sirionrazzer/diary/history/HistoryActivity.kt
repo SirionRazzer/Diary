@@ -29,9 +29,6 @@ class HistoryActivity : AppCompatActivity() {
     lateinit var viewAdapter: HistoryAdapter
 
     private lateinit var popupMenu: PopupMenu
-    val realm: Realm by lazy {
-        Realm.getDefaultInstance()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,15 +75,16 @@ class HistoryActivity : AppCompatActivity() {
         if (user != null) {
 
             val filePath = "/user/${user.uid}/backup/default.realm"
+            val realmPath = historyViewModel.realm.path
             when {
                 item?.itemId == R.id.sync_button -> {
                     val storageRef = FirebaseStorage.getInstance().reference
-                    val file = Uri.fromFile(File(realm.path))
+                    val file = Uri.fromFile(File(realmPath))
                     val fileRef = storageRef.child(filePath)
-                    fileRef.putFile(file).addOnSuccessListener { res ->
+                    fileRef.putFile(file).addOnSuccessListener {
                         Toast.makeText(this, getString(R.string.success_backup_upload), Toast.LENGTH_SHORT).show()
 
-                    }.addOnFailureListener { res ->
+                    }.addOnFailureListener {
                         Toast.makeText(this, getString(R.string.error_backup_upload), Toast.LENGTH_LONG).show()
                     }
 
@@ -97,7 +95,13 @@ class HistoryActivity : AppCompatActivity() {
 
                     val ONE_MEGABYTE: Long = 1024 * 1024
                     file.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-                        File(realm.path).writeBytes(it)
+                        val conf = historyViewModel.realm.configuration
+                        historyViewModel.realm.close()
+                        Realm.deleteRealm(conf)
+                        File(realmPath).writeBytes(it)
+                        finish()
+                        startActivity(intent)
+
                         Toast.makeText(this, getString(R.string.success_backup_download), Toast.LENGTH_SHORT).show()
                     }.addOnFailureListener {
                         Toast.makeText(this, getString(R.string.error_backup_download), Toast.LENGTH_LONG).show()
