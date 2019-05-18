@@ -8,13 +8,21 @@ import com.sirionrazzer.diary.models.TrackItemDao
 import com.sirionrazzer.diary.util.DateUtils
 import io.realm.Realm
 
-class HistoryViewModel: ViewModel() {
+class HistoryViewModel : ViewModel() {
 
-    val realm: Realm by lazy {
-        Realm.getDefaultInstance()
-    }
 
-    private val trackItemDao: TrackItemDao = realm.trackItemDao
+    private var _realm: Realm = Realm.getDefaultInstance()
+
+
+    val realm: Realm
+        get() {
+            if (_realm.isClosed) {
+                _realm = Realm.getDefaultInstance()
+            }
+            return _realm
+
+        }
+
 
     var dates: ArrayList<String> = arrayListOf()
     var trackItemsByDate: HashMap<String, ArrayList<TrackItem>> = hashMapOf()
@@ -27,7 +35,7 @@ class HistoryViewModel: ViewModel() {
         dates = arrayListOf()
         trackItemsByDate = hashMapOf()
 
-        var trackItems: List<TrackItem>? = trackItemDao.getAllTrackItemsSortByDate()
+        var trackItems: List<TrackItem>? = realm.trackItemDao.getAllTrackItemsSortByDate()
         if (trackItems == null) {
             trackItems = arrayListOf()
         }
@@ -44,6 +52,11 @@ class HistoryViewModel: ViewModel() {
         }
 
         Log.d("HistoryViewModel", trackItems.size.toString())
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        _realm.close()
     }
 }
 

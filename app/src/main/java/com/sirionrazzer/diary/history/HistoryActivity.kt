@@ -52,6 +52,10 @@ class HistoryActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        reloadData()
+    }
+
+    private fun reloadData() {
         historyViewModel.loadData()
         viewAdapter.notifyDataSetChanged()
     }
@@ -99,14 +103,12 @@ class HistoryActivity : AppCompatActivity() {
                         historyViewModel.realm.close()
                         Realm.deleteRealm(conf)
                         File(realmPath).writeBytes(it)
-                        finish()
-                        startActivity(intent)
+                        reloadData()
 
                         Toast.makeText(this, getString(R.string.success_backup_download), Toast.LENGTH_SHORT).show()
                     }.addOnFailureListener {
                         Toast.makeText(this, getString(R.string.error_backup_download), Toast.LENGTH_LONG).show()
                     }
-                    //TODO: refresh ui after download
                 }
                 item?.itemId == R.id.logout_button -> {
 
