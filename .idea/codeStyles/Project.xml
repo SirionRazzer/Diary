@@ -1,18 +1,9 @@
 <component name="ProjectCodeStyleConfiguration">
   <code_scheme name="Project" version="173">
-    <AndroidXmlCodeStyleSettings>
-      <option name="USE_CUSTOM_SETTINGS" value="true" />
-    </AndroidXmlCodeStyleSettings>
     <JetCodeStyleSettings>
       <option name="CODE_STYLE_DEFAULTS" value="KOTLIN_OFFICIAL" />
     </JetCodeStyleSettings>
-    <XML>
-      <option name="XML_KEEP_LINE_BREAKS" value="false" />
-      <option name="XML_ALIGN_ATTRIBUTES" value="false" />
-      <option name="XML_SPACE_INSIDE_EMPTY_TAG" value="true" />
-    </XML>
     <codeStyleSettings language="XML">
-      <option name="FORCE_REARRANGE_MODE" value="1" />
       <indentOptions>
         <option name="CONTINUATION_INDENT_SIZE" value="4" />
       </indentOptions>
@@ -44,7 +35,7 @@
               <match>
                 <AND>
                   <NAME>.*:id</NAME>
-                  <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>
+                  <XML_NAMESPACE>http://schemas.android.com/apk/res/android\n</XML_NAMESPACE>
                 </AND>
               </match>
             </rule>
@@ -54,7 +45,7 @@
               <match>
                 <AND>
                   <NAME>.*:name</NAME>
-                  <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>
+                  <XML_NAMESPACE>http://schemas.android.com/apk/res/android\n</XML_NAMESPACE>
                 </AND>
               </match>
             </rule>
@@ -95,7 +86,7 @@
               <match>
                 <AND>
                   <NAME>.*</NAME>
-                  <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>
+                  <XML_NAMESPACE>http://schemas.android.com/apk/res/android\n</XML_NAMESPACE>
                 </AND>
               </match>
               <order>ANDROID_ATTRIBUTE_ORDER</order>
