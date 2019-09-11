@@ -4,7 +4,7 @@ import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.Required
 
-open class TrackItemTemplate (
+open class TrackItemTemplate(
     @PrimaryKey
     @Required // optional, but recommended.
     open var id: String,
@@ -17,5 +17,5 @@ open class TrackItemTemplate (
     open var position: Int // relative position in layout, for displaying items in some order
 ) : RealmObject() {
     // constructor used by Realm
-    constructor() : this("", false,"", 0, 0, false, false, 0)
+    constructor() : this("", false, "", 0, 0, false, false, 0)
 }

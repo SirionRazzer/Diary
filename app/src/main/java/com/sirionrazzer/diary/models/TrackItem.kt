@@ -4,7 +4,7 @@ import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.Required
 
-open class TrackItem (
+open class TrackItem(
     @PrimaryKey
     @Required // optional, but recommended.
     var id: String,
@@ -21,7 +21,8 @@ open class TrackItem (
     open var position: Int
 ) : RealmObject() {
     // constructor used by Realm
-    constructor() : this("",
+    constructor() : this(
+        "",
         false,
         "",
         0,
@@ -33,5 +34,5 @@ open class TrackItem (
         0f,
         0,
         0
-        )
+    )
 }
