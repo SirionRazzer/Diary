@@ -52,7 +52,7 @@ class TrackItemsWithTextAdapter(
                 textTextView.text = trackItem.numberField.toString()
             }
         } else {
-            Picasso.get().load(trackItem.imageOff).into(imageImageView)
+            Picasso.get().load(trackItem.imageOn).into(imageImageView)
             imageImageView?.alpha = 0.3f
         }
 

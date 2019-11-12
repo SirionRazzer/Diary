@@ -83,7 +83,6 @@ class MainViewModel : ViewModel() {
             false,
             "work",
             R.drawable.z_circlecolor_workspace,
-            R.drawable.z_circlecolor_workspace,
             hasTextField = false,
             hasNumberField = false,
             position = 10
@@ -92,7 +91,6 @@ class MainViewModel : ViewModel() {
             UUID.randomUUID().toString(),
             false,
             "relax",
-            R.drawable.z_circlecolor_river,
             R.drawable.z_circlecolor_river,
             hasTextField = false,
             hasNumberField = false,
@@ -103,7 +101,6 @@ class MainViewModel : ViewModel() {
             false,
             "friends",
             R.drawable.z_circlecolor_beach,
-            R.drawable.z_circlecolor_beach,
             hasTextField = false,
             hasNumberField = false,
             position = 8
@@ -112,7 +109,6 @@ class MainViewModel : ViewModel() {
             UUID.randomUUID().toString(),
             false,
             "coding",
-            R.drawable.z_circlecolor_abacus,
             R.drawable.z_circlecolor_abacus,
             hasTextField = false,
             hasNumberField = false,
@@ -123,7 +119,6 @@ class MainViewModel : ViewModel() {
             false,
             "workout",
             R.drawable.z_circlecolor_alarmclock,
-            R.drawable.z_circlecolor_alarmclock,
             hasTextField = true,
             hasNumberField = false,
             position = 6
@@ -132,7 +127,6 @@ class MainViewModel : ViewModel() {
             UUID.randomUUID().toString(),
             false,
             "movie",
-            R.drawable.z_circlecolor_photocamera,
             R.drawable.z_circlecolor_photocamera,
             hasTextField = true,
             hasNumberField = false,
@@ -143,7 +137,6 @@ class MainViewModel : ViewModel() {
             false,
             "book",
             R.drawable.z_circlecolor_library,
-            R.drawable.z_circlecolor_library,
             hasTextField = true,
             hasNumberField = false,
             position = 4
@@ -152,7 +145,6 @@ class MainViewModel : ViewModel() {
             UUID.randomUUID().toString(),
             false,
             "calories",
-            R.drawable.z_circlecolor_waste,
             R.drawable.z_circlecolor_waste,
             hasTextField = false,
             hasNumberField = true,
@@ -163,7 +155,6 @@ class MainViewModel : ViewModel() {
             false,
             "water",
             R.drawable.z_circlecolor_drop,
-            R.drawable.z_circlecolor_drop,
             hasTextField = false,
             hasNumberField = true,
             position = 2
@@ -173,7 +164,6 @@ class MainViewModel : ViewModel() {
             false,
             "income",
             R.drawable.z_circlecolor_cash,
-            R.drawable.z_circlecolor_cash,
             hasTextField = false,
             hasNumberField = true,
             position = 1
@@ -182,7 +172,6 @@ class MainViewModel : ViewModel() {
             UUID.randomUUID().toString(),
             false,
             "love",
-            R.drawable.z_circlecolor_forest_2,
             R.drawable.z_circlecolor_forest_2,
             hasTextField = true,
             hasNumberField = false,
@@ -218,7 +207,6 @@ class MainViewModel : ViewModel() {
                     deleted = it.deleted,
                     name = it.name,
                     imageOn = it.imageOn,
-                    imageOff = it.imageOff,
                     hasTextField = it.hasTextField,
                     hasNumberField = it.hasNumberField,
                     status = false,
@@ -240,7 +228,6 @@ class MainViewModel : ViewModel() {
                     deleted = it.deleted,
                     name = it.name,
                     imageOn = it.imageOn,
-                    imageOff = it.imageOff,
                     hasTextField = it.hasTextField,
                     hasNumberField = it.hasNumberField,
                     position = it.position

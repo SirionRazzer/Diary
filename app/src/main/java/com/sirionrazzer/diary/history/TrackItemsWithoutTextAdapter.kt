@@ -52,7 +52,7 @@ class TrackItemsWithoutTextAdapter(context: Context, private val trackItems: Arr
             Picasso.get().load(trackItem.imageOn).into(holder.image)
             holder.image.alpha = 1f
         } else {
-            Picasso.get().load(trackItem.imageOff).into(holder.image)
+            Picasso.get().load(trackItem.imageOn).into(holder.image)
             holder.image.alpha = 0.3f
         }
 

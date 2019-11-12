@@ -11,20 +11,18 @@ open class TrackItem (
     var deleted: Boolean,
     var name: String,
     var imageOn: Int,
-    var imageOff: Int,
-    var hasTextField: Boolean,
-    var hasNumberField: Boolean,
-    open var status: Boolean, // on/off status of item
-    open var textField: String?, // optional text field
-    open var numberField: Float?, // optional number field
-    open var date: Long, // creation time like Calendar.getInstance().timeInMillis
+    var hasTextField: Boolean,          // item has optional text field
+    var hasNumberField: Boolean,        // item has optional number field
+    open var status: Boolean,           // on/off status of item
+    open var textField: String?,        // optional text field
+    open var numberField: Float?,       // optional number field
+    open var date: Long,                // creation time like Calendar.getInstance().timeInMillis
     open var position: Int
 ) : RealmObject() {
     // constructor used by Realm
     constructor() : this("",
         false,
         "",
-        0,
         0,
         false,
         false,

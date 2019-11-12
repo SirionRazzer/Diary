@@ -40,7 +40,6 @@ class TemplateItemCreatorViewModel: ViewModel() {
             false,
             "",
             R.drawable.z_circlecolor_dumptruck,
-            R.drawable.z_circlecolor_dumptruck,
             hasTextField = false,
             hasNumberField = false,
             position = position
@@ -55,6 +54,5 @@ class TemplateItemCreatorViewModel: ViewModel() {
 
     fun setImageResource(id: Int) {
         template.imageOn = id
-        template.imageOff = id
     }
 }

@@ -74,7 +74,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             }
 
             if (!mainViewModel.currentTrackItems[position].status) {
-                Picasso.get().load(mainViewModel.currentTrackItems[position].imageOff).into(holder.ivImage)
+                Picasso.get().load(mainViewModel.currentTrackItems[position].imageOn).into(holder.ivImage)
                 holder.ivImage?.alpha = 0.4f
                 holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimary))
             } else {
@@ -98,7 +98,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
 
 
                 } else {
-                    Picasso.get().load(mainViewModel.currentTrackItems[position].imageOff).into(holder.ivImage)
+                    Picasso.get().load(mainViewModel.currentTrackItems[position].imageOn).into(holder.ivImage)
                     holder.status = false
                     holder.ivImage?.alpha = 0.4f
                     holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimary))

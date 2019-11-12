@@ -81,7 +81,6 @@ class TemplateItemViewerActivity : AppCompatActivity() {
                         it.deleted,
                         it.name,
                         it.imageOn,
-                        it.imageOff,
                         it.hasTextField,
                         it.hasNumberField,
                         it.position
@@ -108,7 +107,6 @@ class TemplateItemViewerActivity : AppCompatActivity() {
                         it.deleted,
                         it.name,
                         it.imageOn,
-                        it.imageOff,
                         it.hasTextField,
                         it.hasNumberField,
                         it.position

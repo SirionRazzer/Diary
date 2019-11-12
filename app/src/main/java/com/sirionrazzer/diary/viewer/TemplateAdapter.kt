@@ -66,7 +66,6 @@ class TemplateAdapter(
         template.id = item.id
         template.name = item.name
         template.imageOn = item.imageOn
-        template.imageOff = item.imageOff
         template.position = item.position
         template.hasTextField = item.hasTextField
         template.hasNumberField = item.hasNumberField
