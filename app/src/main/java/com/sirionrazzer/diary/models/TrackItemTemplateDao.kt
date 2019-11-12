@@ -21,7 +21,6 @@ class TrackItemTemplateDao(val realm: Realm) {
         }
     }
 
-
     fun getTemplate(id: String): LiveData<RealmResults<TrackItemTemplate>> {
         var result = realm.where(TrackItemTemplate::class.java).equalTo("id", id).findAllAsync()
         return RealmLiveData<TrackItemTemplate>(result)
@@ -31,14 +30,12 @@ class TrackItemTemplateDao(val realm: Realm) {
         return realm.where(TrackItemTemplate::class.java).equalTo("name", name).findFirst()
     }
 
-
     fun deleteTemplate(id: String) {
         realm.executeTransactionAsync {
             val result = it.where(TrackItemTemplate::class.java).equalTo("id", id).findFirst()
             result?.deleteFromRealm()
         }
     }
-
 
     fun getAllTemplates(): MutableList<TrackItemTemplate> {
         realm.beginTransaction()
@@ -48,7 +45,6 @@ class TrackItemTemplateDao(val realm: Realm) {
         return list.toMutableList()
     }
 
-
     fun deleteAllTemplates() {
         realm.executeTransactionAsync {
             val result = it.where(TrackItem::class.java).findAll()
@@ -56,11 +52,9 @@ class TrackItemTemplateDao(val realm: Realm) {
         }
     }
 
-
     fun updateTemplate(updatedTemplate: TrackItemTemplate) {
         realm.beginTransaction()
         realm.copyToRealmOrUpdate(updatedTemplate)
         realm.commitTransaction()
     }
-
 }

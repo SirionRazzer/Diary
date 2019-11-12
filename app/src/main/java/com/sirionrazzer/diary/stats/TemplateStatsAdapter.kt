@@ -17,7 +17,10 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.template_item.view.*
 
 
-class TemplatesStatsAdapter(private val context: Context, private val mainViewModel: MainViewModel) : BaseAdapter() {
+class TemplatesStatsAdapter(
+    private val context: Context,
+    private val mainViewModel: MainViewModel
+) : BaseAdapter() {
 
     override fun getItem(position: Int): TrackItem {
         return mainViewModel.currentTrackItems[position]
@@ -38,7 +41,8 @@ class TemplatesStatsAdapter(private val context: Context, private val mainViewMo
         if (view == null) {
             holder = ViewHolder()
 
-            val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val inflater =
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             view = inflater.inflate(R.layout.template_item, null, true)
 
             holder.ivImage = view!!.trackitemImage as ImageView

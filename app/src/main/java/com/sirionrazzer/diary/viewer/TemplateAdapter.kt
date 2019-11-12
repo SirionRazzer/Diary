@@ -75,6 +75,4 @@ class TemplateAdapter(
         tiViewModel.refreshTemplateList()
         tiViewModel.hasChanged = true
     }
-
-
 }

@@ -27,12 +27,10 @@ class TrackItemDao(val realm: Realm) {
         }
     }
 
-
     fun getTrackItem(id: String): LiveData<RealmResults<TrackItem>> {
         var result = realm.where(TrackItem::class.java).equalTo("id", id).findAllAsync()
         return RealmLiveData<TrackItem>(result)
     }
-
 
     fun deleteTrackItem(id: String) {
         realm.executeTransactionAsync {
@@ -43,16 +41,15 @@ class TrackItemDao(val realm: Realm) {
 
     fun getTrackItemsWithName(name: String): List<TrackItem> {
         val realmItems =
-            realm.where(TrackItem::class.java).equalTo("name", name).findAll().sort("date", Sort.DESCENDING)
+            realm.where(TrackItem::class.java).equalTo("name", name).findAll()
+                .sort("date", Sort.DESCENDING)
 
         return realmItems.map { item -> item as TrackItem }
     }
 
-
     fun getCountOfTrackItems(): Long {
         return realm.where(TrackItem::class.java).count()
     }
-
 
     fun getAllTrackItems(): LiveData<RealmResults<TrackItem>> {
         var items = realm.where(TrackItem::class.java).findAll()
@@ -93,7 +90,6 @@ class TrackItemDao(val realm: Realm) {
 //
 //        return historyItems
 //    }
-
 
     fun deleteAllTrackItems() {
         realm.executeTransactionAsync {

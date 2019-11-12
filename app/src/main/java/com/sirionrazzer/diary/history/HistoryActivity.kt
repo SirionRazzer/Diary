@@ -25,10 +25,7 @@ import java.io.File
 class HistoryActivity : AppCompatActivity() {
 
     lateinit var historyViewModel: HistoryViewModel
-
     lateinit var viewAdapter: HistoryAdapter
-
-    private lateinit var popupMenu: PopupMenu
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +70,6 @@ class HistoryActivity : AppCompatActivity() {
         return true
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
@@ -86,10 +82,18 @@ class HistoryActivity : AppCompatActivity() {
                     val file = Uri.fromFile(File(realmPath))
                     val fileRef = storageRef.child(filePath)
                     fileRef.putFile(file).addOnSuccessListener {
-                        Toast.makeText(this, getString(R.string.success_backup_upload), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            getString(R.string.success_backup_upload),
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                     }.addOnFailureListener {
-                        Toast.makeText(this, getString(R.string.error_backup_upload), Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this,
+                            getString(R.string.error_backup_upload),
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
 
                 }
@@ -105,9 +109,17 @@ class HistoryActivity : AppCompatActivity() {
                         File(realmPath).writeBytes(it)
                         reloadData()
 
-                        Toast.makeText(this, getString(R.string.success_backup_download), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            getString(R.string.success_backup_download),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }.addOnFailureListener {
-                        Toast.makeText(this, getString(R.string.error_backup_download), Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this,
+                            getString(R.string.error_backup_download),
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
                 item?.itemId == R.id.logout_button -> {
@@ -115,7 +127,8 @@ class HistoryActivity : AppCompatActivity() {
                     FirebaseAuth.getInstance().signOut()
                     startActivity<BoardingActivity>()
                     finish()
-                    Toast.makeText(this, getString(R.string.success_logged_out), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.success_logged_out), Toast.LENGTH_SHORT)
+                        .show()
                 }
                 item?.itemId == R.id.options_button -> {
                     startActivity<SettingsActivity>()
@@ -123,7 +136,11 @@ class HistoryActivity : AppCompatActivity() {
                 item?.itemId == R.id.stats_button -> {
                     startActivity<ChooseTrackItemStatActivity>()
                 }
-                else -> Toast.makeText(this, getString(R.string.please_backup), Toast.LENGTH_SHORT).show()
+                else -> Toast.makeText(
+                    this,
+                    getString(R.string.please_backup),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         } else {
             if (item?.itemId == R.id.login_history_button) {

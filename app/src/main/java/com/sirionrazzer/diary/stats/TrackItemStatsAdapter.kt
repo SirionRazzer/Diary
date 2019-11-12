@@ -12,7 +12,13 @@ import com.sirionrazzer.diary.util.DateUtils
 class TrackItemStatsAdapter(private val stats: List<TrackItem>) :
     RecyclerView.Adapter<TrackItemStatsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.stat_item, parent, false))
+        return ViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.stat_item,
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int {
@@ -22,7 +28,6 @@ class TrackItemStatsAdapter(private val stats: List<TrackItem>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(stats[position])
     }
-
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var date = itemView.findViewById<TextView>(R.id.tvStatItemDate)
@@ -42,9 +47,6 @@ class TrackItemStatsAdapter(private val stats: List<TrackItem>) :
             } else {
                 tvText.visibility = View.GONE
             }
-
         }
     }
-
-
 }

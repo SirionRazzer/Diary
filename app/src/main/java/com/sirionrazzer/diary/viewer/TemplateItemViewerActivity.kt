@@ -42,14 +42,14 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         adapter = TemplateAdapter(tiViewModel.currentTemplateItems, tiViewModel)
         rvTemplates.layoutManager = GridLayoutManager(this, 4, RecyclerView.VERTICAL, false)
         rvTemplates.adapter = adapter
-        rvTemplates.orientation = DragDropSwipeRecyclerView.ListOrientation.GRID_LIST_WITH_HORIZONTAL_SWIPING
+        rvTemplates.orientation =
+            DragDropSwipeRecyclerView.ListOrientation.GRID_LIST_WITH_HORIZONTAL_SWIPING
         rvTemplates.orientation?.removeSwipeDirectionFlag(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.RIGHT)
         rvTemplates.orientation?.removeSwipeDirectionFlag(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.LEFT)
         rvTemplates.swipeListener = onItemSwipeListener
         rvTemplates.dragListener = onItemDragListener
         rvTemplates.scrollListener = onListScrollListener
     }
-
 
     private val onItemSwipeListener = object : OnItemSwipeListener<TrackItemTemplate> {
         override fun onItemSwiped(
@@ -64,13 +64,20 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         }
     }
 
-
     private val onItemDragListener = object : OnItemDragListener<TrackItemTemplate> {
-        override fun onItemDragged(previousPosition: Int, newPosition: Int, item: TrackItemTemplate) {
+        override fun onItemDragged(
+            previousPosition: Int,
+            newPosition: Int,
+            item: TrackItemTemplate
+        ) {
             // Handle action of item being dragged from one position to another
         }
 
-        override fun onItemDropped(initialPosition: Int, finalPosition: Int, item: TrackItemTemplate) {
+        override fun onItemDropped(
+            initialPosition: Int,
+            finalPosition: Int,
+            item: TrackItemTemplate
+        ) {
             // Handle action of item dropped
 
             // Move items between initial and final position by -1
@@ -132,30 +139,28 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         }
     }
 
-
     private val onListScrollListener = object : OnListScrollListener {
-        override fun onListScrolled(scrollDirection: OnListScrollListener.ScrollDirection, distance: Int) {
+        override fun onListScrolled(
+            scrollDirection: OnListScrollListener.ScrollDirection,
+            distance: Int
+        ) {
             // Handle scrolling
         }
     }
-
 
     override fun onResume() {
         super.onResume()
         adapter.notifyDataSetChanged()
     }
 
-
     fun createViewModel(): TemplateItemViewerViewModel {
         return ViewModelProviders.of(this).get(TemplateItemViewerViewModel::class.java)
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_create_activity_template, menu)
         return true
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.mAddTemplate) {
@@ -166,7 +171,6 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         }
         return true
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -181,7 +185,6 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onBackPressed() {
         // TODO change result also if user created new activity!
 
@@ -192,7 +195,6 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         } else {
             setResult(1, intent)
         }
-
         finish()
     }
 }

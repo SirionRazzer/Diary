@@ -21,14 +21,19 @@ class HistoryAdapter(
     private val historyViewModel: HistoryViewModel
 ) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
-    class ViewHolder(val historyItemLayout: LinearLayout) : RecyclerView.ViewHolder(historyItemLayout)
+    class ViewHolder(val historyItemLayout: LinearLayout) :
+        RecyclerView.ViewHolder(historyItemLayout)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
 
-        val historyItem = LayoutInflater.from(context).inflate(R.layout.history_item, parent, false) as LinearLayout
+        val historyItem = LayoutInflater.from(context).inflate(
+            R.layout.history_item,
+            parent,
+            false
+        ) as LinearLayout
 
         return ViewHolder(historyItem)
     }

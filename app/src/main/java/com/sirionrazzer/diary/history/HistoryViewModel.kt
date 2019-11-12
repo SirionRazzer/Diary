@@ -10,9 +10,7 @@ import io.realm.Realm
 
 class HistoryViewModel : ViewModel() {
 
-
     private var _realm: Realm = Realm.getDefaultInstance()
-
 
     val realm: Realm
         get() {
@@ -22,7 +20,6 @@ class HistoryViewModel : ViewModel() {
             return _realm
 
         }
-
 
     var dates: ArrayList<String> = arrayListOf()
     var trackItemsByDate: HashMap<String, ArrayList<TrackItem>> = hashMapOf()

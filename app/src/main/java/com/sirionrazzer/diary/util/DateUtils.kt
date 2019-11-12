@@ -119,5 +119,4 @@ class DateUtils {
             return formatAsString(pair.first, pair.second)
         }
     }
-
 }

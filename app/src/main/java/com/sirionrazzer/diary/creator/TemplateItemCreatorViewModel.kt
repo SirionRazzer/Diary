@@ -8,7 +8,7 @@ import com.sirionrazzer.diary.models.TrackItemTemplateDao
 import io.realm.Realm
 import java.util.*
 
-class TemplateItemCreatorViewModel: ViewModel() {
+class TemplateItemCreatorViewModel : ViewModel() {
 
     val realm: Realm by lazy {
         Realm.getDefaultInstance()
@@ -25,12 +25,10 @@ class TemplateItemCreatorViewModel: ViewModel() {
         createNewTemplate()
     }
 
-
     override fun onCleared() {
         realm.close()
         super.onCleared()
     }
-
 
     private fun createNewTemplate() {
         var position = templateDao.getAllTemplates().size
@@ -46,11 +44,9 @@ class TemplateItemCreatorViewModel: ViewModel() {
         )
     }
 
-
     fun saveNewTemplate() {
         templateDao.addTemplate(template)
     }
-
 
     fun setImageResource(id: Int) {
         template.image = id

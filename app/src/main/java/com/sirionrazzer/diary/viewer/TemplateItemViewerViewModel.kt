@@ -23,22 +23,18 @@ class TemplateItemViewerViewModel: ViewModel() {
         currentTemplateItems = getTemplates()
     }
 
-
     override fun onCleared() {
         realm.close()
         super.onCleared()
     }
 
-
     private fun getTemplates(): MutableList<TrackItemTemplate> {
         return templateDao.getAllTemplates().toMutableList()
     }
 
-
     fun updateTemplate(template: TrackItemTemplate) {
         templateDao.updateTemplate(template)
     }
-
 
     fun refreshTemplateList() {
         currentTemplateItems.clear()

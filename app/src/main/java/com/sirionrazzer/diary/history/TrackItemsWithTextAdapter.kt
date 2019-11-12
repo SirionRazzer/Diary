@@ -14,22 +14,26 @@ import com.squareup.picasso.Picasso
 class TrackItemsWithTextAdapter(
     private val context: Context,
     private val trackItems: ArrayList<TrackItem>,
-    private val clickListener: (String) -> Boolean)
-    : RecyclerView.Adapter<TrackItemsWithTextAdapter.ViewHolder>() {
+    private val clickListener: (String) -> Boolean
+) : RecyclerView.Adapter<TrackItemsWithTextAdapter.ViewHolder>() {
 
-    class ViewHolder(val templateItemLayout: LinearLayout) : RecyclerView.ViewHolder(templateItemLayout) {
+    class ViewHolder(val templateItemLayout: LinearLayout) :
+        RecyclerView.ViewHolder(templateItemLayout) {
         fun bind(trackItemName: String, clickListener: (String) -> Boolean) {
             templateItemLayout.setOnLongClickListener { clickListener(trackItemName) }
         }
     }
 
-    private val inflater: LayoutInflater
-            = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    private val inflater: LayoutInflater =
+        context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-    override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): TrackItemsWithTextAdapter.ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): TrackItemsWithTextAdapter.ViewHolder {
 
-        val templateItemLayout = inflater.inflate(R.layout.template_item_with_text, parent, false) as LinearLayout
+        val templateItemLayout =
+            inflater.inflate(R.layout.template_item_with_text, parent, false) as LinearLayout
 
         return TrackItemsWithTextAdapter.ViewHolder(templateItemLayout)
     }
@@ -47,8 +51,7 @@ class TrackItemsWithTextAdapter(
             imageImageView?.alpha = 1f
             if (trackItem.hasTextField) {
                 textTextView.text = trackItem.textField
-            }
-            else if (trackItem.hasNumberField) {
+            } else if (trackItem.hasNumberField) {
                 textTextView.text = trackItem.numberField.toString()
             }
         } else {
@@ -62,5 +65,4 @@ class TrackItemsWithTextAdapter(
     override fun getItemCount(): Int {
         return trackItems.size
     }
-
 }

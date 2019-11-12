@@ -20,17 +20,19 @@ import org.jetbrains.anko.alert
 import org.jetbrains.anko.yesButton
 import javax.inject.Inject
 
-class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, ImagePickerDialog.ImagePickerDialogListener {
+class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener,
+    ImagePickerDialog.ImagePickerDialogListener {
 
-    private val TEXT_EXTRA = 1
-    private val NUMBER_EXTRA = 2
+    companion object {
+        private val TEXT_EXTRA = 1
+        private val NUMBER_EXTRA = 2
+    }
 
     @Inject
     lateinit var userStorage: UserStorage
 
-    lateinit var fragment: ImagePickerDialog
-
-    lateinit var creatorViewModel: TemplateItemCreatorViewModel
+    private lateinit var fragment: ImagePickerDialog
+    private lateinit var creatorViewModel: TemplateItemCreatorViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +67,6 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
         }
     }
 
-
     override fun onResume() {
         super.onResume()
         if (creatorViewModel.hasChanged) {
@@ -76,23 +77,19 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
         }
     }
 
-
     override fun onPause() {
         super.onPause()
         creatorViewModel.template.name = etName.text.toString()
     }
 
-
     private fun createViewModel(): TemplateItemCreatorViewModel {
         return ViewModelProviders.of(this).get(TemplateItemCreatorViewModel::class.java)
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_save_template, menu)
         return true
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.mCreateTemplate) {
@@ -114,10 +111,12 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
         return true
     }
 
-
     override fun onBackPressed() {
         if (creatorViewModel.hasChanged || etName.text!!.toString().isNotEmpty()) {
-            alert(getString(R.string.message_leave_without_save), getString(R.string.caption_activity_not_saved)) {
+            alert(
+                getString(R.string.message_leave_without_save),
+                getString(R.string.caption_activity_not_saved)
+            ) {
                 yesButton {
                     setResult(1, intent)
                     super.onBackPressed()
@@ -129,12 +128,10 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
         }
     }
 
-
     override fun onNothingSelected(parent: AdapterView<*>) {
         creatorViewModel.template.hasNumberField = false
         creatorViewModel.template.hasTextField = false
     }
-
 
     override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         when (position) {
@@ -154,7 +151,6 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
             }
         }
     }
-
 
     override fun onImagePicked(dialog: DialogFragment) {
         dialog.dismiss()

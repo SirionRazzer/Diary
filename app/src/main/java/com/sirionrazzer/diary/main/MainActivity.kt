@@ -9,13 +9,11 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
-import com.sirionrazzer.diary.creator.TemplateItemCreatorActivity
 import com.sirionrazzer.diary.models.UserStorage
 import com.sirionrazzer.diary.util.DateUtils
 import com.sirionrazzer.diary.viewer.TemplateItemViewerActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
-import org.jetbrains.anko.startActivity
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -57,7 +55,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onResume() {
         super.onResume()
         tvDate.text = DateUtils.smartDate(DateUtils.dateFromMillis(mainViewModel.date), false)
@@ -73,13 +70,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun createNewTrackItem() {
-        startActivity<TemplateItemCreatorActivity>()
-        finish()
-    }
-
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -88,28 +78,28 @@ class MainActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
 
             val snackbar =
-                Snackbar.make(clMain, resources.getString(R.string.activities_updated), Snackbar.LENGTH_SHORT)
+                Snackbar.make(
+                    clMain,
+                    resources.getString(R.string.activities_updated),
+                    Snackbar.LENGTH_SHORT
+                )
             snackbar.show()
         }
 
     }
 
-
     private fun save() {
         mainViewModel.saveTrackItems()
     }
-
 
     fun createViewModel(): MainViewModel {
         return ViewModelProviders.of(this).get(MainViewModel::class.java)
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_save_log, menu)
         return true
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.mSaveLog) {

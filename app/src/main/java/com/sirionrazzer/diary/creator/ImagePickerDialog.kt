@@ -17,12 +17,11 @@ var imageNames: Array<String>? = null
 
 class ImagePickerDialog(val creatorViewModel: TemplateItemCreatorViewModel) : DialogFragment() {
 
-    public lateinit var listener: ImagePickerDialogListener
+    lateinit var listener: ImagePickerDialogListener
 
     interface ImagePickerDialogListener {
         fun onImagePicked(dialog: DialogFragment)
     }
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -39,8 +38,11 @@ class ImagePickerDialog(val creatorViewModel: TemplateItemCreatorViewModel) : Di
         }
     }
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val rootView = inflater.inflate(R.layout.fragment_image_picker, container, false)
         dialog?.setTitle(resources.getString(R.string.choose_icon))
 
@@ -55,7 +57,6 @@ class ImagePickerDialog(val creatorViewModel: TemplateItemCreatorViewModel) : Di
         return rootView
     }
 
-
     override fun onResume() {
         super.onResume()
         val params = dialog?.window!!.attributes
@@ -65,7 +66,6 @@ class ImagePickerDialog(val creatorViewModel: TemplateItemCreatorViewModel) : Di
 
         btnDismiss.setOnClickListener { dismiss() }
     }
-
 
     override fun onDestroy() {
         imageIds?.recycle()

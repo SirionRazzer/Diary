@@ -12,9 +12,7 @@ import com.sirionrazzer.diary.models.TrackItemDao
 import io.realm.Realm
 import kotlinx.android.synthetic.main.toolbar.*
 
-
 class SettingsActivity : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +43,8 @@ class SettingsActivity : AppCompatActivity() {
             val button = findPreference<Preference>(getString(R.string.deleteHistoryButton))
             button!!.onPreferenceClickListener = Preference.OnPreferenceClickListener {
                 mainViewModel.deleteAllTrackItems()
-                Toast.makeText(context, getString(R.string.history_deleted), Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.history_deleted), Toast.LENGTH_SHORT)
+                    .show()
                 true
             }
         }

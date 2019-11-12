@@ -14,12 +14,14 @@ import com.sirionrazzer.diary.models.TrackItem
 import com.sirionrazzer.diary.stats.TrackItemStatsActivity
 import com.squareup.picasso.Picasso
 
-class TrackItemsWithoutTextAdapter(context: Context, private val trackItems: ArrayList<TrackItem>) : BaseAdapter() {
+class TrackItemsWithoutTextAdapter(context: Context, private val trackItems: ArrayList<TrackItem>) :
+    BaseAdapter() {
 
-    class ViewHolder(val nameTextView: TextView, val image: ImageView) : RecyclerView.ViewHolder(nameTextView)
+    class ViewHolder(val nameTextView: TextView, val image: ImageView) :
+        RecyclerView.ViewHolder(nameTextView)
 
-    private val inflater: LayoutInflater
-            = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    private val inflater: LayoutInflater =
+        context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun getCount(): Int {
         return trackItems.size
@@ -39,11 +41,12 @@ class TrackItemsWithoutTextAdapter(context: Context, private val trackItems: Arr
 
         if (templateItemView == null) {
             templateItemView = inflater.inflate(R.layout.template_item, parent, false)
-            holder = ViewHolder(templateItemView!!.findViewById(R.id.trackitemName) as TextView,
-                templateItemView.findViewById(R.id.trackitemImage) as ImageView)
+            holder = ViewHolder(
+                templateItemView!!.findViewById(R.id.trackitemName) as TextView,
+                templateItemView.findViewById(R.id.trackitemImage) as ImageView
+            )
             templateItemView.tag = holder
-        }
-        else {
+        } else {
             holder = templateItemView.tag as ViewHolder
         }
         val trackItem = getItem(position)
@@ -65,5 +68,4 @@ class TrackItemsWithoutTextAdapter(context: Context, private val trackItems: Arr
 
         return templateItemView
     }
-
 }

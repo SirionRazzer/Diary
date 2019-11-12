@@ -17,7 +17,6 @@ class Diary : Application() {
             .build()
     }
 
-
     override fun onCreate() {
         super.onCreate()
 
@@ -26,7 +25,6 @@ class Diary : Application() {
 
         app = this
     }
-
 
     companion object {
         lateinit var app: Diary

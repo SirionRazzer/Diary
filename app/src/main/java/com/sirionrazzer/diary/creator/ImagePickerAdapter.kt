@@ -22,26 +22,24 @@ class ImagePickerAdapter(
     RecyclerView.Adapter<ImagePickerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
-        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.template_image, viewGroup, false)
+        val view = LayoutInflater.from(viewGroup.context)
+            .inflate(R.layout.template_image, viewGroup, false)
         return ViewHolder(view)
     }
-
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         viewHolder.title.text = names[i]
         viewHolder.img.scaleType = ImageView.ScaleType.FIT_CENTER
         Picasso.get().load(ids.getResourceId(i, -1)).into(viewHolder.img)
-        viewHolder.itemView.setOnClickListener{
+        viewHolder.itemView.setOnClickListener {
             ticViewModel.setImageResource(ids.getResourceId(i, -1))
             listener.onImagePicked(fragment)
         }
     }
 
-
     override fun getItemCount(): Int {
         return names.size
     }
-
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title)

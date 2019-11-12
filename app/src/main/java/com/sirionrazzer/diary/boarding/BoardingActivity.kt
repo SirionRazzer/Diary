@@ -50,11 +50,9 @@ class BoardingActivity : AppCompatActivity() {
                             }
                         }
                     }
-
             } else {
                 Toast.makeText(this, getString(R.string.invalid_pa_email), Toast.LENGTH_SHORT)
                     .show()
-
             }
         }
 
@@ -62,8 +60,6 @@ class BoardingActivity : AppCompatActivity() {
             startActivity<HistoryActivity>()
             finish()
         }
-
-
     }
 
     private fun showDialog(auth: FirebaseAuth, email: String, pw: String) {
@@ -74,7 +70,11 @@ class BoardingActivity : AppCompatActivity() {
             .setPositiveButton(getString(R.string.yes)) { dialog, id ->
                 auth.createUserWithEmailAndPassword(email, pw).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        Toast.makeText(this, getString(R.string.success_signup_message), Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this,
+                            getString(R.string.success_signup_message),
+                            Toast.LENGTH_LONG
+                        ).show()
                         startActivity<HistoryActivity>()
                         finish()
                     }
@@ -97,8 +97,8 @@ class BoardingActivity : AppCompatActivity() {
         if (user != null) {
             startActivity(Intent(this, HistoryActivity::class.java))
             finish()
-            Toast.makeText(this, getString(R.string.success_login_message), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.success_login_message), Toast.LENGTH_SHORT)
+                .show()
         }
     }
-
 }

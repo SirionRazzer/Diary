@@ -38,7 +38,6 @@ class MainViewModel : ViewModel() {
         Diary.app.appComponent.inject(this)
     }
 
-
     fun saveTrackItems() {
         Log.d(
             "MainViewModel",
@@ -61,11 +60,9 @@ class MainViewModel : ViewModel() {
         )
     }
 
-
     fun getTrackItemsFromTemplates() {
         realm.trackItemsTemplatesDao.getAllTemplates()
     }
-
 
     fun deleteAllTrackItems() {
         realm.trackItemsDao.deleteAllTrackItems()
@@ -75,7 +72,6 @@ class MainViewModel : ViewModel() {
         realm.close()
         super.onCleared()
     }
-
 
     fun createDefaultTrackItems() {
         val tit1 = TrackItemTemplate(
@@ -193,7 +189,6 @@ class MainViewModel : ViewModel() {
         initTrackAndTemplateItems()
     }
 
-
     fun initTrackAndTemplateItems() {
         currentTrackItems.clear()
         deletedTrackItems.clear()
@@ -242,12 +237,10 @@ class MainViewModel : ViewModel() {
     }
 }
 
-
 private val Realm.trackItemsDao: TrackItemDao
     get() {
         return TrackItemDao(this)
     }
-
 
 private val Realm.trackItemsTemplatesDao: TrackItemTemplateDao
     get() {

@@ -14,7 +14,8 @@ class XDateFormatter(
     private val context: Context
 ) :
     ValueFormatter() {
-    private val months = arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+    private val months =
+        arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 
     override fun getFormattedValue(value: Float): String {
         if (barData.count() > 0 && barData.count() > value.toInt()) {
@@ -34,9 +35,7 @@ class XDateFormatter(
             } else if ("${pairNow.first - 1}-${pairNow.second}" == pair.second) {
                 return "${context.getString(R.string.last_time_unit)} ${context.getString(timeUnit)}"
             }
-
             return pair.second
-
         }
         return value.toString()
     }

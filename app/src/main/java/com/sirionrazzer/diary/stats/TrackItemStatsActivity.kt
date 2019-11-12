@@ -90,12 +90,15 @@ class TrackItemStatsActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 selectedTimeUnit = position
                 refreshChartData()
-
             }
-
         }
         ArrayAdapter.createFromResource(
             this,
@@ -110,7 +113,12 @@ class TrackItemStatsActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 selectedGroupByOperation = position
                 refreshChartData()
             }
@@ -133,7 +141,6 @@ class TrackItemStatsActivity : AppCompatActivity() {
         barChart.axisLeft.valueFormatter = StringFormatter()
         barChart.axisRight.isEnabled = false
         barChart.description = null
-
     }
 
     private fun refreshChartData() {
@@ -169,7 +176,6 @@ class TrackItemStatsActivity : AppCompatActivity() {
         } else if (selectedGroupByOperation == 1 && selectedTimeUnit == 1) {
             label += getString(R.string.sum_each_month)
         }
-
 
         val dataSet = BarDataSet(values, label)
         dataSet.setDrawIcons(false)
@@ -218,7 +224,6 @@ class TrackItemStatsActivity : AppCompatActivity() {
                 map[key] = mutableListOf()
             }
             map[key]!!.add(it)
-
         }
         return map
     }
