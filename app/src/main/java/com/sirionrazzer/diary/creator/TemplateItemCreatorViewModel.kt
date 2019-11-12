@@ -1,5 +1,6 @@
 package com.sirionrazzer.diary.creator
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
@@ -15,9 +16,8 @@ class TemplateItemCreatorViewModel : ViewModel() {
     }
 
     var templateDao = TrackItemTemplateDao(realm)
+    var template = MutableLiveData<TrackItemTemplate>()
     var hasChanged: Boolean = false
-
-    lateinit var template: TrackItemTemplate
 
     init {
         Diary.app.appComponent.inject(this)
@@ -31,9 +31,8 @@ class TemplateItemCreatorViewModel : ViewModel() {
     }
 
     private fun createNewTemplate() {
-        var position = templateDao.getAllTemplates().size
-
-        template = TrackItemTemplate(
+        val position = templateDao.getAllTemplates().size
+        template.value = TrackItemTemplate(
             UUID.randomUUID().toString(),
             false,
             "",
@@ -45,10 +44,12 @@ class TemplateItemCreatorViewModel : ViewModel() {
     }
 
     fun saveNewTemplate() {
-        templateDao.addTemplate(template)
+        template.value?.let {
+            templateDao.addTemplate(it)
+        }
     }
 
     fun setImageResource(id: Int) {
-        template.image = id
+        template.value?.image = id
     }
 }

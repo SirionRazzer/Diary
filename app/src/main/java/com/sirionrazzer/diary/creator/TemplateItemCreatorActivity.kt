@@ -32,7 +32,7 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
     lateinit var userStorage: UserStorage
 
     private lateinit var fragment: ImagePickerDialog
-    private lateinit var creatorViewModel: TemplateItemCreatorViewModel
+    private lateinit var viewModel: TemplateItemCreatorViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +40,7 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
 
         Diary.app.appComponent.inject(this)
 
-        creatorViewModel = createViewModel()
+        viewModel = createViewModel()
 
         toolbar.setTitle(R.string.title_creator_activity)
         setSupportActionBar(toolbar)
@@ -62,24 +62,24 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
 
         ibImage.setOnClickListener {
             val fm = supportFragmentManager
-            fragment = ImagePickerDialog(creatorViewModel)
+            fragment = ImagePickerDialog(viewModel)
             fragment.show(fm, resources.getString(R.string.choose_icon))
         }
     }
 
     override fun onResume() {
         super.onResume()
-        if (creatorViewModel.hasChanged) {
-            if (creatorViewModel.template.hasTextField) spExtra.setSelection(TEXT_EXTRA)
-            if (creatorViewModel.template.hasNumberField) spExtra.setSelection(NUMBER_EXTRA)
-            Picasso.get().load(creatorViewModel.template.image).into(ibImage)
-            etName.setText(creatorViewModel.template.name)
+        if (viewModel.hasChanged && createViewModel().template.value != null) {
+            if (viewModel.template.value!!.hasTextField) spExtra.setSelection(TEXT_EXTRA)
+            if (viewModel.template.value!!.hasNumberField) spExtra.setSelection(NUMBER_EXTRA)
+            Picasso.get().load(viewModel.template.value!!.image).into(ibImage)
+            etName.setText(viewModel.template.value!!.name)
         }
     }
 
     override fun onPause() {
         super.onPause()
-        creatorViewModel.template.name = etName.text.toString()
+        viewModel.template.value?.name = etName.text.toString()
     }
 
     private fun createViewModel(): TemplateItemCreatorViewModel {
@@ -93,11 +93,11 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.mCreateTemplate) {
-            creatorViewModel.template.name = etName.text.toString()
-            creatorViewModel.saveNewTemplate()
+            viewModel.template.value?.name = etName.text.toString()
+            viewModel.saveNewTemplate()
 
             val intent = Intent()
-            if (creatorViewModel.hasChanged) {
+            if (viewModel.hasChanged) {
                 setResult(0, intent)
             } else {
                 setResult(1, intent)
@@ -112,7 +112,7 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
     }
 
     override fun onBackPressed() {
-        if (creatorViewModel.hasChanged || etName.text!!.toString().isNotEmpty()) {
+        if (viewModel.hasChanged || etName.text!!.toString().isNotEmpty()) {
             alert(
                 getString(R.string.message_leave_without_save),
                 getString(R.string.caption_activity_not_saved)
@@ -129,32 +129,34 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
     }
 
     override fun onNothingSelected(parent: AdapterView<*>) {
-        creatorViewModel.template.hasNumberField = false
-        creatorViewModel.template.hasTextField = false
+        viewModel.template.value?.hasNumberField = false
+        viewModel.template.value?.hasTextField = false
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         when (position) {
             TEXT_EXTRA -> {
-                creatorViewModel.template.hasNumberField = false
-                creatorViewModel.template.hasTextField = true
-                creatorViewModel.hasChanged = true
+                viewModel.template.value?.hasNumberField = false
+                viewModel.template.value?.hasTextField = true
+                viewModel.hasChanged = true
             }
             NUMBER_EXTRA -> {
-                creatorViewModel.template.hasNumberField = true
-                creatorViewModel.template.hasTextField = false
-                creatorViewModel.hasChanged = true
+                viewModel.template.value?.hasNumberField = true
+                viewModel.template.value?.hasTextField = false
+                viewModel.hasChanged = true
             }
             else -> {
-                creatorViewModel.template.hasNumberField = false
-                creatorViewModel.template.hasTextField = false
+                viewModel.template.value?.hasNumberField = false
+                viewModel.template.value?.hasTextField = false
             }
         }
     }
 
     override fun onImagePicked(dialog: DialogFragment) {
         dialog.dismiss()
-        Picasso.get().load(creatorViewModel.template.image).into(ibImage)
-        creatorViewModel.hasChanged = true
+        if (createViewModel().template.value != null) {
+            Picasso.get().load(viewModel.template.value!!.image).into(ibImage)
+        }
+        viewModel.hasChanged = true
     }
 }
