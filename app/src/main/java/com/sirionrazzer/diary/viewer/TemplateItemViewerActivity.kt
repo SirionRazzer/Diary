@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
@@ -39,9 +40,11 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
-        adapter = TemplateAdapter(tiViewModel.currentTemplateItems, tiViewModel)
-        rvTemplates.layoutManager = GridLayoutManager(this, 4, RecyclerView.VERTICAL, false)
-        rvTemplates.adapter = adapter
+        if (tiViewModel.currentTemplateItems.value != null) {
+            adapter = TemplateAdapter(tiViewModel.currentTemplateItems.value!!, tiViewModel, this)
+            rvTemplates.layoutManager = GridLayoutManager(this, 4, RecyclerView.VERTICAL, false)
+            rvTemplates.adapter = adapter
+        }
         rvTemplates.orientation =
             DragDropSwipeRecyclerView.ListOrientation.GRID_LIST_WITH_HORIZONTAL_SWIPING
         rvTemplates.orientation?.removeSwipeDirectionFlag(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.RIGHT)
@@ -49,6 +52,12 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         rvTemplates.swipeListener = onItemSwipeListener
         rvTemplates.dragListener = onItemDragListener
         rvTemplates.scrollListener = onListScrollListener
+
+        tiViewModel.currentTemplateItems.observe(this, Observer { updated ->
+//            if (tiViewModel.currentTemplateItems.value != null) {
+//                if (updated != null) adapter.refresh(updated)
+//            }
+        })
     }
 
     private val onItemSwipeListener = object : OnItemSwipeListener<TrackItemTemplate> {
@@ -82,7 +91,7 @@ class TemplateItemViewerActivity : AppCompatActivity() {
 
             // Move items between initial and final position by -1
             if (initialPosition < finalPosition) {
-                tiViewModel.currentTemplateItems.forEach {
+                tiViewModel.currentTemplateItems.value?.forEach {
                     val template = TrackItemTemplate(
                         it.id,
                         it.deleted,
@@ -108,7 +117,7 @@ class TemplateItemViewerActivity : AppCompatActivity() {
 
             // Move items between initial and final position by +1
             if (initialPosition > finalPosition) {
-                tiViewModel.currentTemplateItems.forEach {
+                tiViewModel.currentTemplateItems.value?.forEach {
                     val template = TrackItemTemplate(
                         it.id,
                         it.deleted,
@@ -178,8 +187,7 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         if (resultCode != 1) { // templates are changed
             tiViewModel.refreshTemplateList()
             tiViewModel.hasChanged = true
-            adapter = TemplateAdapter(tiViewModel.currentTemplateItems, tiViewModel)
-            rvTemplates.adapter = adapter
+            adapter.refresh()
             val snackbar = Snackbar.make(rlMain, "Activity added", Snackbar.LENGTH_SHORT)
             snackbar.show()
         }

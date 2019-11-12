@@ -1,16 +1,20 @@
 package com.sirionrazzer.diary.viewer
 
-import android.util.Log
+import android.content.Context
 import android.view.View
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeAdapter
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItemTemplate
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.viewer_template_item.view.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.noButton
+import org.jetbrains.anko.yesButton
 
 class TemplateAdapter(
     currentTemplateItems: MutableList<TrackItemTemplate>,
-    val tiViewModel: TemplateItemViewerViewModel
+    val tiViewModel: TemplateItemViewerViewModel,
+    val context: Context
 ) :
     DragDropSwipeAdapter<TrackItemTemplate, TemplateAdapter.ViewHolder>(currentTemplateItems) {
 
@@ -18,16 +22,14 @@ class TemplateAdapter(
         var ivImage = itemView.ivTemplate
         var ivPencil = itemView.ivPencil
         var tvName = itemView.tvName
-        var swDeleted = itemView.swDeleted
+        //var swDeleted = itemView.swDeleted
     }
 
     override fun getViewHolder(itemView: View) = ViewHolder(itemView)
 
     override fun onBindViewHolder(item: TrackItemTemplate, viewHolder: ViewHolder, position: Int) {
         // Here we update the contents of the view holder's views to reflect the item's data
-        //viewHolder.itemText.text = item
         Picasso.get().load(item.image).into(viewHolder.ivImage)
-        //Picasso.get().load(R.drawable.ic_edit_badge).into(ivPencil)
         if (item.hasNumberField ||
             item.hasTextField
         ) {
@@ -37,18 +39,20 @@ class TemplateAdapter(
             viewHolder.ivPencil.visibility = View.INVISIBLE
         }
         viewHolder.tvName.text = item.name
-        viewHolder.swDeleted.isChecked = !item.deleted
 
-//        itemView.setOnClickListener {
-//            updateTemplate(tiViewModel, position, !swDeleted.isChecked)
-//            swDeleted.isChecked = !swDeleted.isChecked
-//        }
-//
-        viewHolder.swDeleted.setOnCheckedChangeListener { compoundButton, isChecked ->
-            if (compoundButton.isShown) {
-                updateTemplate(item, isChecked)
-                Log.d("FAKE CLICK", " I SEE YOU SUCKER!")
-            }
+        viewHolder.ivImage.setOnLongClickListener {
+            context.alert(
+                "Delete this activity?",
+                "Your previous records won't be removed"
+            ) {
+                yesButton {
+                    deleteTemplate(item)
+                }
+                noButton {
+                    it.cancel()
+                }
+            }.show()
+            false
         }
     }
 
@@ -61,18 +65,25 @@ class TemplateAdapter(
         return viewHolder.ivImage
     }
 
-    private fun updateTemplate(item: TrackItemTemplate, isChecked: Boolean) {
-        var template = TrackItemTemplate()
+    private fun deleteTemplate(item: TrackItemTemplate) {
+        val template = TrackItemTemplate()
         template.id = item.id
         template.name = item.name
         template.image = item.image
-        template.position = item.position
+        template.position = -1 // <-- this
         template.hasTextField = item.hasTextField
         template.hasNumberField = item.hasNumberField
-        template.deleted = !isChecked // <-- this
+        template.deleted = true // <-- this
 
+        tiViewModel.decreasePositions(item.position + 1)
         tiViewModel.updateTemplate(template)
         tiViewModel.refreshTemplateList()
+        refresh()
         tiViewModel.hasChanged = true
+    }
+
+    fun refresh() {
+        super.dataSet = tiViewModel.currentTemplateItems.value ?: mutableListOf()
+        super.notifyDataSetChanged()
     }
 }

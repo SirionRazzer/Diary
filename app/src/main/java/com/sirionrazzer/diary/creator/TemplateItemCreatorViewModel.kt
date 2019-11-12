@@ -31,7 +31,7 @@ class TemplateItemCreatorViewModel : ViewModel() {
     }
 
     private fun createNewTemplate() {
-        val position = templateDao.getAllTemplates().size
+        val position = templateDao.getAllTemplates().filter { !it.deleted }.size
         template.value = TrackItemTemplate(
             UUID.randomUUID().toString(),
             false,
