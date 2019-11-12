@@ -14,7 +14,7 @@ class TrackItemDao(val realm: Realm) {
                 id = trackItem.id,
                 deleted = trackItem.deleted,
                 name = trackItem.name,
-                imageOn = trackItem.imageOn,
+                image = trackItem.image,
                 hasTextField = trackItem.hasTextField,
                 hasNumberField = trackItem.hasNumberField,
                 status = trackItem.status,

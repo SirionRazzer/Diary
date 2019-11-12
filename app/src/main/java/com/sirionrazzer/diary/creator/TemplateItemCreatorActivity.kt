@@ -71,7 +71,7 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
         if (creatorViewModel.hasChanged) {
             if (creatorViewModel.template.hasTextField) spExtra.setSelection(TEXT_EXTRA)
             if (creatorViewModel.template.hasNumberField) spExtra.setSelection(NUMBER_EXTRA)
-            Picasso.get().load(creatorViewModel.template.imageOn).into(ibImage)
+            Picasso.get().load(creatorViewModel.template.image).into(ibImage)
             etName.setText(creatorViewModel.template.name)
         }
     }
@@ -158,7 +158,7 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
 
     override fun onImagePicked(dialog: DialogFragment) {
         dialog.dismiss()
-        Picasso.get().load(creatorViewModel.template.imageOn).into(ibImage)
+        Picasso.get().load(creatorViewModel.template.image).into(ibImage)
         creatorViewModel.hasChanged = true
     }
 }

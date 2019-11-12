@@ -53,6 +53,6 @@ class TemplateItemCreatorViewModel: ViewModel() {
 
 
     fun setImageResource(id: Int) {
-        template.imageOn = id
+        template.image = id
     }
 }

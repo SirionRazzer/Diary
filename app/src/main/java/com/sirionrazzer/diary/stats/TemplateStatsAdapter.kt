@@ -50,7 +50,7 @@ class TemplatesStatsAdapter(private val context: Context, private val mainViewMo
         }
 
         holder.tvName?.text = mainViewModel.currentTrackItems[position].name
-        Picasso.get().load(mainViewModel.currentTrackItems[position].imageOn).into(holder.ivImage)
+        Picasso.get().load(mainViewModel.currentTrackItems[position].image).into(holder.ivImage)
         holder.ivImage?.alpha = 1f
         holder.tvName?.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary))
 

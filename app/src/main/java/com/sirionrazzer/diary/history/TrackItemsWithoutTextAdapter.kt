@@ -49,10 +49,10 @@ class TrackItemsWithoutTextAdapter(context: Context, private val trackItems: Arr
         val trackItem = getItem(position)
         holder.nameTextView.text = trackItem.name
         if (trackItem.status) {
-            Picasso.get().load(trackItem.imageOn).into(holder.image)
+            Picasso.get().load(trackItem.image).into(holder.image)
             holder.image.alpha = 1f
         } else {
-            Picasso.get().load(trackItem.imageOn).into(holder.image)
+            Picasso.get().load(trackItem.image).into(holder.image)
             holder.image.alpha = 0.3f
         }
 

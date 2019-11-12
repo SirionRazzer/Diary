@@ -12,7 +12,7 @@ class TrackItemTemplateDao(val realm: Realm) {
                 id = trackItemTemplate.id,
                 deleted = trackItemTemplate.deleted,
                 name = trackItemTemplate.name,
-                imageOn = trackItemTemplate.imageOn,
+                image = trackItemTemplate.image,
                 hasTextField = trackItemTemplate.hasTextField,
                 hasNumberField = trackItemTemplate.hasNumberField,
                 position = trackItemTemplate.position

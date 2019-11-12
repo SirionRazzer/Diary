@@ -10,7 +10,7 @@ open class TrackItem (
     var id: String,
     var deleted: Boolean,
     var name: String,
-    var imageOn: Int,
+    var image: Int,
     var hasTextField: Boolean,          // item has optional text field
     var hasNumberField: Boolean,        // item has optional number field
     open var status: Boolean,           // on/off status of item

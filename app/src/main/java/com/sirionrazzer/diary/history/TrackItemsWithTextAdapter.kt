@@ -43,7 +43,7 @@ class TrackItemsWithTextAdapter(
         val textTextView = templateItemLayout.findViewById<TextView>(R.id.tvTrackItemText)
         val imageImageView = templateItemLayout.findViewById<ImageView>(R.id.ivTrackItemImage)
         if (trackItem.status) {
-            Picasso.get().load(trackItem.imageOn).into(imageImageView)
+            Picasso.get().load(trackItem.image).into(imageImageView)
             imageImageView?.alpha = 1f
             if (trackItem.hasTextField) {
                 textTextView.text = trackItem.textField
@@ -52,7 +52,7 @@ class TrackItemsWithTextAdapter(
                 textTextView.text = trackItem.numberField.toString()
             }
         } else {
-            Picasso.get().load(trackItem.imageOn).into(imageImageView)
+            Picasso.get().load(trackItem.image).into(imageImageView)
             imageImageView?.alpha = 0.3f
         }
 

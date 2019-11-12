@@ -31,5 +31,4 @@ class Diary : Application() {
     companion object {
         lateinit var app: Diary
     }
-
 }

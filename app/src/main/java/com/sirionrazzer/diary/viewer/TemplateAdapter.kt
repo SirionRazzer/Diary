@@ -26,7 +26,7 @@ class TemplateAdapter(
     override fun onBindViewHolder(item: TrackItemTemplate, viewHolder: ViewHolder, position: Int) {
         // Here we update the contents of the view holder's views to reflect the item's data
         //viewHolder.itemText.text = item
-        Picasso.get().load(item.imageOn).into(viewHolder.ivImage)
+        Picasso.get().load(item.image).into(viewHolder.ivImage)
         //Picasso.get().load(R.drawable.ic_edit_badge).into(ivPencil)
         if (item.hasNumberField ||
             item.hasTextField
@@ -65,7 +65,7 @@ class TemplateAdapter(
         var template = TrackItemTemplate()
         template.id = item.id
         template.name = item.name
-        template.imageOn = item.imageOn
+        template.image = item.image
         template.position = item.position
         template.hasTextField = item.hasTextField
         template.hasNumberField = item.hasNumberField

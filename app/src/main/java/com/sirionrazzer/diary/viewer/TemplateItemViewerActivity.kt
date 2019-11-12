@@ -80,7 +80,7 @@ class TemplateItemViewerActivity : AppCompatActivity() {
                         it.id,
                         it.deleted,
                         it.name,
-                        it.imageOn,
+                        it.image,
                         it.hasTextField,
                         it.hasNumberField,
                         it.position
@@ -106,7 +106,7 @@ class TemplateItemViewerActivity : AppCompatActivity() {
                         it.id,
                         it.deleted,
                         it.name,
-                        it.imageOn,
+                        it.image,
                         it.hasTextField,
                         it.hasNumberField,
                         it.position

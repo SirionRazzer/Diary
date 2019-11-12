@@ -206,7 +206,7 @@ class MainViewModel : ViewModel() {
                     id = UUID.randomUUID().toString(),
                     deleted = it.deleted,
                     name = it.name,
-                    imageOn = it.imageOn,
+                    image = it.image,
                     hasTextField = it.hasTextField,
                     hasNumberField = it.hasNumberField,
                     status = false,
@@ -227,7 +227,7 @@ class MainViewModel : ViewModel() {
                     id = it.id,
                     deleted = it.deleted,
                     name = it.name,
-                    imageOn = it.imageOn,
+                    image = it.image,
                     hasTextField = it.hasTextField,
                     hasNumberField = it.hasNumberField,
                     position = it.position

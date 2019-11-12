@@ -52,7 +52,7 @@ class TrackItemStatsActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         template = realm.trackItemsTemplatesDao.getTemplateByName(trackItemName)!!
         tvTemplateStatName.text = template.name
-        Picasso.get().load(template.imageOn).into(ivTemplateStatImage)
+        Picasso.get().load(template.image).into(ivTemplateStatImage)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
