@@ -17,7 +17,6 @@ class TemplateItemViewerViewModel : ViewModel() {
     private var templateDao = TrackItemTemplateDao(realm)
     var hasChanged: Boolean = false
 
-
     init {
         Diary.app.appComponent.inject(this)
 
@@ -31,6 +30,10 @@ class TemplateItemViewerViewModel : ViewModel() {
 
     private fun getUndeletedTemplates(): MutableList<TrackItemTemplate> {
         return templateDao.getAllTemplates().toMutableList().filter { !it.deleted } as MutableList<TrackItemTemplate>
+    }
+
+    private fun getDeletedTemplates(): MutableList<TrackItemTemplate> {
+        return templateDao.getAllTemplates().toMutableList().filter { it.deleted } as MutableList<TrackItemTemplate>
     }
 
     fun updateTemplate(template: TrackItemTemplate) {
@@ -62,5 +65,24 @@ class TemplateItemViewerViewModel : ViewModel() {
                 pos += 1
             }
         }
+    }
+
+    /**
+     * Deleted template has deleted == true and negative position
+     */
+    fun deleteTemplate(item: TrackItemTemplate) {
+        val template = TrackItemTemplate()
+        template.id = item.id
+        template.name = item.name
+        template.image = item.image
+        template.position = (-1) * getDeletedTemplates().size // <- negative position
+        template.hasTextField = item.hasTextField
+        template.hasNumberField = item.hasNumberField
+        template.deleted = true // <-- this
+
+        decreasePositions(item.position + 1)
+        updateTemplate(template)
+        refreshTemplateList()
+        hasChanged = true
     }
 }

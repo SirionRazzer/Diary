@@ -66,20 +66,8 @@ class TemplateAdapter(
     }
 
     private fun deleteTemplate(item: TrackItemTemplate) {
-        val template = TrackItemTemplate()
-        template.id = item.id
-        template.name = item.name
-        template.image = item.image
-        template.position = -1 // <-- this
-        template.hasTextField = item.hasTextField
-        template.hasNumberField = item.hasNumberField
-        template.deleted = true // <-- this
-
-        tiViewModel.decreasePositions(item.position + 1)
-        tiViewModel.updateTemplate(template)
-        tiViewModel.refreshTemplateList()
+        tiViewModel.deleteTemplate(item)
         refresh()
-        tiViewModel.hasChanged = true
     }
 
     fun refresh() {

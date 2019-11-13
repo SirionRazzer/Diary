@@ -98,9 +98,9 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
 
             val intent = Intent()
             if (viewModel.hasChanged) {
-                setResult(0, intent)
-            } else {
                 setResult(1, intent)
+            } else {
+                setResult(0, intent)
             }
 
             finish()
@@ -118,7 +118,7 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
                 getString(R.string.caption_activity_not_saved)
             ) {
                 yesButton {
-                    setResult(1, intent)
+                    setResult(0, intent)
                     super.onBackPressed()
                 }
             }.show()
