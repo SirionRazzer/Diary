@@ -196,7 +196,7 @@ class MainViewModel : ViewModel() {
         deletedTemplateItems.clear()
 
         realm.trackItemsTemplatesDao.getAllTemplates().let {
-            it.forEach { it ->
+            it.forEach {
                 val trackItem = TrackItem(
                     id = UUID.randomUUID().toString(),
                     deleted = it.deleted,
@@ -217,7 +217,7 @@ class MainViewModel : ViewModel() {
                 }
             }
 
-            it.forEach { it ->
+            it.forEach {
                 val templateItem = TrackItemTemplate(
                     id = it.id,
                     deleted = it.deleted,

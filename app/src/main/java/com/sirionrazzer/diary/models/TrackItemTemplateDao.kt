@@ -45,6 +45,23 @@ class TrackItemTemplateDao(val realm: Realm) {
         return list.toMutableList()
     }
 
+    fun getAllUndeletedTemplates(): MutableList<TrackItemTemplate> {
+        realm.beginTransaction()
+        var items = realm.where(TrackItemTemplate::class.java).equalTo("deleted", false).sort("position").findAll()
+        realm.commitTransaction()
+        val list = items.map { item -> item as TrackItemTemplate }
+        return list.toMutableList()
+    }
+
+    fun getAllDeletedTemplates(): MutableList<TrackItemTemplate> {
+        realm.beginTransaction()
+        var items = realm.where(TrackItemTemplate::class.java).equalTo("deleted", true).sort("position").findAll()
+        realm.commitTransaction()
+        val list = items.map { item -> item as TrackItemTemplate }
+        return list.toMutableList()
+    }
+
+
     fun deleteAllTemplates() {
         realm.executeTransactionAsync {
             val result = it.where(TrackItem::class.java).findAll()

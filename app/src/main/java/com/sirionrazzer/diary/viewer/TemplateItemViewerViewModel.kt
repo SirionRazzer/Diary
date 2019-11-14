@@ -29,11 +29,11 @@ class TemplateItemViewerViewModel : ViewModel() {
     }
 
     private fun getUndeletedTemplates(): MutableList<TrackItemTemplate> {
-        return templateDao.getAllTemplates().toMutableList().filter { !it.deleted } as MutableList<TrackItemTemplate>
+        return templateDao.getAllUndeletedTemplates()
     }
 
     private fun getDeletedTemplates(): MutableList<TrackItemTemplate> {
-        return templateDao.getAllTemplates().toMutableList().filter { it.deleted } as MutableList<TrackItemTemplate>
+        return templateDao.getAllDeletedTemplates()
     }
 
     fun updateTemplate(template: TrackItemTemplate) {
