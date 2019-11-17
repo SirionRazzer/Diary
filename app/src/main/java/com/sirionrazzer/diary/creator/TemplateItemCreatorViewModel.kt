@@ -17,11 +17,11 @@ class TemplateItemCreatorViewModel : ViewModel() {
 
     var templateDao = TrackItemTemplateDao(realm)
     var template = MutableLiveData<TrackItemTemplate>()
-    var hasChanged: Boolean = false
+    var hasChanged: MutableLiveData<Boolean> = MutableLiveData()
 
     init {
         Diary.app.appComponent.inject(this)
-
+        hasChanged.value = false
         createNewTemplate()
     }
 
@@ -44,8 +44,12 @@ class TemplateItemCreatorViewModel : ViewModel() {
     }
 
     fun saveNewTemplate() {
-        template.value?.let {
-            templateDao.addTemplate(it)
+        hasChanged.value?.let { it ->
+            if (it) {
+                template.value?.let {
+                    templateDao.addTemplate(it)
+                }
+            }
         }
     }
 

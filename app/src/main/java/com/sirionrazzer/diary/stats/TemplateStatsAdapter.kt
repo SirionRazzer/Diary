@@ -1,6 +1,5 @@
 package com.sirionrazzer.diary.stats
 
-
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -16,14 +15,13 @@ import com.sirionrazzer.diary.models.TrackItem
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.template_item.view.*
 
-
 class TemplatesStatsAdapter(
     private val context: Context,
     private val mainViewModel: MainViewModel
 ) : BaseAdapter() {
 
     override fun getItem(position: Int): TrackItem {
-        return mainViewModel.currentTrackItems[position]
+        return mainViewModel.currentTrackItems.value!!.get(position)
     }
 
     override fun getItemId(position: Int): Long {
@@ -31,7 +29,7 @@ class TemplatesStatsAdapter(
     }
 
     override fun getCount(): Int {
-        return mainViewModel.currentTrackItems.size
+        return mainViewModel.currentTrackItems.value!!.size ?: 0
     }
 
     override fun getView(position: Int, itemView: View?, parent: ViewGroup?): View {
@@ -53,14 +51,18 @@ class TemplatesStatsAdapter(
             holder = view.tag as ViewHolder
         }
 
-        holder.tvName?.text = mainViewModel.currentTrackItems[position].name
-        Picasso.get().load(mainViewModel.currentTrackItems[position].image).into(holder.ivImage)
+        holder.tvName?.text = mainViewModel.currentTrackItems.value!!.get(position).name
+        Picasso.get().load(mainViewModel.currentTrackItems.value!!.get(position).image)
+            .into(holder.ivImage)
         holder.ivImage?.alpha = 1f
         holder.tvName?.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary))
 
         view.setOnClickListener {
             val intent = Intent(this.context, TrackItemStatsActivity::class.java)
-                .putExtra("trackItemName", mainViewModel.currentTrackItems[position].name)
+                .putExtra(
+                    "trackItemName",
+                    mainViewModel.currentTrackItems.value!!.get(position).name
+                )
             view.context.startActivity(intent)
         }
         return view

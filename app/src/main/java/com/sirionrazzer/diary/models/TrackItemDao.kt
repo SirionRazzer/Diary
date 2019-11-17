@@ -12,6 +12,7 @@ class TrackItemDao(val realm: Realm) {
             //item.id = Calendar.getInstance().timeInMillis.toString() + " " + UUID.randomUUID().toString()
             val item = TrackItem(
                 id = trackItem.id,
+                templateId = trackItem.templateId,
                 deleted = trackItem.deleted,
                 name = trackItem.name,
                 image = trackItem.image,
@@ -23,13 +24,12 @@ class TrackItemDao(val realm: Realm) {
                 date = trackItem.date,
                 position = trackItem.position
             )
-            it.insert(item)
+            it.insertOrUpdate(item)
         }
     }
 
-    fun getTrackItem(id: String): LiveData<RealmResults<TrackItem>> {
-        var result = realm.where(TrackItem::class.java).equalTo("id", id).findAllAsync()
-        return RealmLiveData<TrackItem>(result)
+    fun getTrackItemById(id: String): TrackItem? {
+        return realm.where(TrackItem::class.java).equalTo("id", id).findFirst()
     }
 
     fun deleteTrackItem(id: String) {

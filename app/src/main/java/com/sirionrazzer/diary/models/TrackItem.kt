@@ -8,6 +8,7 @@ open class TrackItem(
     @PrimaryKey
     @Required                           // optional, but recommended
     var id: String,
+    var templateId: String,             // id of template
     var deleted: Boolean,
     var name: String,
     var image: Int,
@@ -21,6 +22,7 @@ open class TrackItem(
 ) : RealmObject() {
     // constructor used by Realm
     constructor() : this(
+        "",
         "",
         false,
         "",

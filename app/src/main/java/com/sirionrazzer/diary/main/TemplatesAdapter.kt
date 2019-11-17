@@ -1,8 +1,6 @@
 package com.sirionrazzer.diary.main
 
 import android.content.Context
-import com.google.android.material.textfield.TextInputLayout
-import androidx.appcompat.app.AlertDialog
 import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +10,8 @@ import android.widget.BaseAdapter
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import com.google.android.material.textfield.TextInputLayout
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
 import com.squareup.picasso.Picasso
@@ -21,7 +21,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
     BaseAdapter() {
 
     override fun getItem(position: Int): TrackItem {
-        return mainViewModel.currentTrackItems[position]
+        return mainViewModel.currentTrackItems.value!!.get(position)
     }
 
     override fun getItemId(position: Int): Long {
@@ -29,7 +29,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
     }
 
     override fun getCount(): Int {
-        return mainViewModel.currentTrackItems.size
+        return mainViewModel.currentTrackItems.value!!.size
     }
 
     override fun getView(position: Int, itemView: View?, parent: ViewGroup?): View {
@@ -52,18 +52,18 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             holder = itemView.tag as ViewHolder
         }
 
-        if (!mainViewModel.currentTrackItems[position].deleted) {
+        if (!mainViewModel.currentTrackItems.value?.get(position)!!.deleted) {
 
-            holder.status = mainViewModel.currentTrackItems[position].status
+            holder.status = mainViewModel.currentTrackItems.value?.get(position)!!.status
             Log.d(
                 "TemplatesAdapter",
                 "position: " + position + " holder.status: " + holder.status.toString()
             )
 
-            holder.tvName?.text = mainViewModel.currentTrackItems[position].name
+            holder.tvName?.text = mainViewModel.currentTrackItems.value?.get(position)!!.name
 
-            if (mainViewModel.currentTemplateItems[position].hasTextField ||
-                mainViewModel.currentTemplateItems[position].hasNumberField
+            if (mainViewModel.currentTemplateItems.value?.get(position)!!.hasTextField ||
+                mainViewModel.currentTemplateItems.value?.get(position)!!.hasNumberField
             ) {
                 holder.ivPencil?.visibility = View.VISIBLE
                 //Picasso.get().load(R.drawable.ic_pencil).into(holder.ivPencil)
@@ -72,13 +72,13 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
                 holder.ivPencil?.visibility = View.INVISIBLE
             }
 
-            if (!mainViewModel.currentTrackItems[position].status) {
-                Picasso.get().load(mainViewModel.currentTrackItems[position].image)
+            if (!mainViewModel.currentTrackItems.value?.get(position)!!.status) {
+                Picasso.get().load(mainViewModel.currentTrackItems.value?.get(position)!!.image)
                     .into(holder.ivImage)
                 holder.ivImage?.alpha = 0.4f
                 holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimary))
             } else {
-                Picasso.get().load(mainViewModel.currentTrackItems[position].image)
+                Picasso.get().load(mainViewModel.currentTrackItems.value?.get(position)!!.image)
                     .into(holder.ivImage)
                 holder.ivImage?.alpha = 1f
                 holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimary))
@@ -88,17 +88,17 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
                 if (!holder.status) {
 
                     when {
-                        mainViewModel.currentTemplateItems[position].hasTextField -> {
+                        mainViewModel.currentTemplateItems.value?.get(position)!!.hasTextField -> {
                             showDialogWithTextInput(
                                 position,
-                                mainViewModel.currentTrackItems[position].name,
+                                mainViewModel.currentTrackItems.value?.get(position)!!.name,
                                 holder
                             )
                         }
-                        mainViewModel.currentTemplateItems[position].hasNumberField -> {
+                        mainViewModel.currentTemplateItems.value?.get(position)!!.hasNumberField -> {
                             showDialogWithNumberInput(
                                 position,
-                                mainViewModel.currentTrackItems[position].name,
+                                mainViewModel.currentTrackItems.value?.get(position)!!.name,
                                 holder
                             )
                         }
@@ -106,7 +106,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
                     }
 
                 } else {
-                    Picasso.get().load(mainViewModel.currentTrackItems[position].image)
+                    Picasso.get().load(mainViewModel.currentTrackItems.value?.get(position)!!.image)
                         .into(holder.ivImage)
                     holder.status = false
                     holder.ivImage?.alpha = 0.4f
@@ -115,11 +115,11 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
                         "TemplatesAdapter",
                         "Clicked: " + position + ". track item, the state was true and now is " + holder.status.toString()
                     )
-                    mainViewModel.currentTrackItems[position].status = false
-                    mainViewModel.currentTrackItems[position].hasTextField = false
-                    mainViewModel.currentTrackItems[position].hasNumberField = false
-                    mainViewModel.currentTrackItems[position].textField = ""
-                    mainViewModel.currentTrackItems[position].numberField = 0f
+                    mainViewModel.currentTrackItems.value?.get(position)!!.status = false
+                    mainViewModel.currentTrackItems.value?.get(position)!!.hasTextField = false
+                    mainViewModel.currentTrackItems.value?.get(position)!!.hasNumberField = false
+                    mainViewModel.currentTrackItems.value?.get(position)!!.textField = ""
+                    mainViewModel.currentTrackItems.value?.get(position)!!.numberField = 0f
                 }
             }
         } else {
@@ -130,7 +130,8 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
     }
 
     private fun enableItemStatus(position: Int, holder: ViewHolder) {
-        Picasso.get().load(mainViewModel.currentTrackItems[position].image).into(holder.ivImage)
+        Picasso.get().load(mainViewModel.currentTrackItems.value?.get(position)!!.image)
+            .into(holder.ivImage)
         holder.status = true
         holder.ivImage?.alpha = 1.0f
         holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimary))
@@ -139,7 +140,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             "Clicked: " + position + ". track item, the state was false and now is " + holder.status.toString()
         )
 
-        mainViewModel.currentTrackItems[position].status = true
+        mainViewModel.currentTrackItems.value?.get(position)!!.status = true
     }
 
     private inner class ViewHolder {
@@ -169,8 +170,9 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             .setView(textInputLayout)
             .setPositiveButton(context.resources.getString(R.string.submit)) { dialog, _ ->
 
-                mainViewModel.currentTrackItems[itemPosition].textField = input.text.toString()
-                mainViewModel.currentTrackItems[itemPosition].hasTextField = true
+                mainViewModel.currentTrackItems.value?.get(itemPosition)!!.textField =
+                    input.text.toString()
+                mainViewModel.currentTrackItems.value?.get(itemPosition)!!.hasTextField = true
                 enableItemStatus(itemPosition, holder)
 
                 dialog.cancel()
@@ -208,11 +210,12 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             .setPositiveButton(context.resources.getString(R.string.submit)) { dialog, _ ->
 
                 val stringNum = input.text.toString()
-                mainViewModel.currentTrackItems[itemPosition].hasNumberField = true
+                mainViewModel.currentTrackItems.value?.get(itemPosition)!!.hasNumberField = true
                 if (stringNum.isNotEmpty()) {
-                    mainViewModel.currentTrackItems[itemPosition].numberField = stringNum.toFloat()
+                    mainViewModel.currentTrackItems.value?.get(itemPosition)!!.numberField =
+                        stringNum.toFloat()
                 } else {
-                    mainViewModel.currentTrackItems[itemPosition].numberField = 0f
+                    mainViewModel.currentTrackItems.value?.get(itemPosition)!!.numberField = 0f
                 }
                 enableItemStatus(itemPosition, holder)
 

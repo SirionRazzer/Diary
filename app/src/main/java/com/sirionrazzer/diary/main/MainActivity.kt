@@ -30,12 +30,14 @@ class MainActivity : AppCompatActivity() {
 
         Diary.app.appComponent.inject(this)
 
-        mainViewModel = createViewModel()
-
         toolbar.setTitle(R.string.title_my_day)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
+
+        mainViewModel = createViewModel()
+        mainViewModel.editedIds = intent.getStringArrayListExtra("trackItemsIds")
+        mainViewModel.setupTrackAndTemplateItems()
 
         if (userStorage.userSettings.firstTime) {
             mainViewModel.createDefaultTrackItems()
@@ -73,8 +75,8 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode != 1) { // templates are changed
-            mainViewModel.initTrackAndTemplateItems()
+        if (resultCode == TemplateItemViewerActivity.CHANGE) { // templates are changed
+            mainViewModel.setupTrackAndTemplateItems()
             adapter.notifyDataSetChanged()
 
             val snackbar =

@@ -1,8 +1,6 @@
 package com.sirionrazzer.diary.models
 
-import androidx.lifecycle.LiveData
 import io.realm.Realm
-import io.realm.RealmResults
 
 class TrackItemTemplateDao(val realm: Realm) {
 
@@ -21,9 +19,8 @@ class TrackItemTemplateDao(val realm: Realm) {
         }
     }
 
-    fun getTemplate(id: String): LiveData<RealmResults<TrackItemTemplate>> {
-        var result = realm.where(TrackItemTemplate::class.java).equalTo("id", id).findAllAsync()
-        return RealmLiveData<TrackItemTemplate>(result)
+    fun getTemplate(id: String): TrackItemTemplate? {
+        return realm.where(TrackItemTemplate::class.java).equalTo("id", id).findFirst()
     }
 
     fun getTemplateByName(name: String): TrackItemTemplate? {
@@ -39,7 +36,7 @@ class TrackItemTemplateDao(val realm: Realm) {
 
     fun getAllTemplates(): MutableList<TrackItemTemplate> {
         realm.beginTransaction()
-        var items = realm.where(TrackItemTemplate::class.java).findAll().sort("position")
+        val items = realm.where(TrackItemTemplate::class.java).findAll().sort("position")
         realm.commitTransaction()
         val list = items.map { item -> item as TrackItemTemplate }
         return list.toMutableList()
@@ -47,7 +44,9 @@ class TrackItemTemplateDao(val realm: Realm) {
 
     fun getAllUndeletedTemplates(): MutableList<TrackItemTemplate> {
         realm.beginTransaction()
-        var items = realm.where(TrackItemTemplate::class.java).equalTo("deleted", false).sort("position").findAll()
+        val items =
+            realm.where(TrackItemTemplate::class.java).equalTo("deleted", false).sort("position")
+                .findAll()
         realm.commitTransaction()
         val list = items.map { item -> item as TrackItemTemplate }
         return list.toMutableList()
@@ -55,12 +54,13 @@ class TrackItemTemplateDao(val realm: Realm) {
 
     fun getAllDeletedTemplates(): MutableList<TrackItemTemplate> {
         realm.beginTransaction()
-        var items = realm.where(TrackItemTemplate::class.java).equalTo("deleted", true).sort("position").findAll()
+        val items =
+            realm.where(TrackItemTemplate::class.java).equalTo("deleted", true).sort("position")
+                .findAll()
         realm.commitTransaction()
         val list = items.map { item -> item as TrackItemTemplate }
         return list.toMutableList()
     }
-
 
     fun deleteAllTemplates() {
         realm.executeTransactionAsync {

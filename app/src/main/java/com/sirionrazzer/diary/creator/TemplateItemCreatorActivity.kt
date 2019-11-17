@@ -1,18 +1,19 @@
 package com.sirionrazzer.diary.creator
 
 import android.content.Intent
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProviders
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.UserStorage
+import com.sirionrazzer.diary.viewer.TemplateItemViewerActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_templateitem_creator.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -69,7 +70,7 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
 
     override fun onResume() {
         super.onResume()
-        if (viewModel.hasChanged && createViewModel().template.value != null) {
+        if (viewModel.hasChanged.value != null && viewModel.hasChanged.value!! && createViewModel().template.value != null) {
             if (viewModel.template.value!!.hasTextField) spExtra.setSelection(TEXT_EXTRA)
             if (viewModel.template.value!!.hasNumberField) spExtra.setSelection(NUMBER_EXTRA)
             Picasso.get().load(viewModel.template.value!!.image).into(ibImage)
@@ -93,37 +94,35 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.mCreateTemplate) {
-            viewModel.template.value?.name = etName.text.toString()
-            viewModel.saveNewTemplate()
-
-            val intent = Intent()
-            if (viewModel.hasChanged) {
-                setResult(1, intent)
+            if (!etName.text.toString().isBlank()) {
+                viewModel.template.value?.name = etName.text.toString()
+                viewModel.hasChanged.value = true
+                viewModel.saveNewTemplate()
+                val intent = Intent()
+                setResult(TemplateItemViewerActivity.CHANGE, intent)
+                finish()
             } else {
-                setResult(0, intent)
+                // TODO show warning
             }
-
-            finish()
         } else {
             onBackPressed()
         }
-
         return true
     }
 
     override fun onBackPressed() {
-        if (viewModel.hasChanged || etName.text!!.toString().isNotEmpty()) {
+        if ((viewModel.hasChanged.value != null && viewModel.hasChanged.value!!) || etName.text!!.toString().isNotEmpty()) {
             alert(
                 getString(R.string.message_leave_without_save),
                 getString(R.string.caption_activity_not_saved)
             ) {
                 yesButton {
-                    setResult(0, intent)
+                    setResult(TemplateItemViewerActivity.NOCHANGE, intent)
                     super.onBackPressed()
                 }
             }.show()
         } else {
-            setResult(1, intent)
+            setResult(TemplateItemViewerActivity.NOCHANGE, intent)
             super.onBackPressed()
         }
     }
@@ -138,12 +137,12 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
             TEXT_EXTRA -> {
                 viewModel.template.value?.hasNumberField = false
                 viewModel.template.value?.hasTextField = true
-                viewModel.hasChanged = true
+                viewModel.hasChanged.value = true
             }
             NUMBER_EXTRA -> {
                 viewModel.template.value?.hasNumberField = true
                 viewModel.template.value?.hasTextField = false
-                viewModel.hasChanged = true
+                viewModel.hasChanged.value = true
             }
             else -> {
                 viewModel.template.value?.hasNumberField = false
@@ -157,6 +156,6 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
         if (createViewModel().template.value != null) {
             Picasso.get().load(viewModel.template.value!!.image).into(ibImage)
         }
-        viewModel.hasChanged = true
+        viewModel.hasChanged.value = true
     }
 }

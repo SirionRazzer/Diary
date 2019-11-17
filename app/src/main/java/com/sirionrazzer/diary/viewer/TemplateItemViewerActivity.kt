@@ -1,12 +1,12 @@
 package com.sirionrazzer.diary.viewer
 
-import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
@@ -21,8 +21,12 @@ import com.sirionrazzer.diary.models.TrackItemTemplate
 import kotlinx.android.synthetic.main.activity_templateitem_viewer.*
 import kotlinx.android.synthetic.main.toolbar.*
 
-
 class TemplateItemViewerActivity : AppCompatActivity() {
+
+    companion object {
+        val CHANGE = 1
+        val NOCHANGE = 0
+    }
 
     lateinit var tiViewModel: TemplateItemViewerViewModel
     lateinit var adapter: TemplateAdapter
@@ -174,7 +178,7 @@ class TemplateItemViewerActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.mAddTemplate) {
             val intent = Intent(this, TemplateItemCreatorActivity::class.java)
-            startActivityForResult(intent, 1)
+            startActivityForResult(intent, CHANGE)
         } else {
             onBackPressed()
         }
@@ -184,7 +188,7 @@ class TemplateItemViewerActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode != 1) { // templates are changed
+        if (requestCode == resultCode) { // template was added
             tiViewModel.refreshTemplateList()
             tiViewModel.hasChanged = true
             adapter.refresh()
@@ -198,10 +202,8 @@ class TemplateItemViewerActivity : AppCompatActivity() {
 
         val intent = Intent()
 
-        if (tiViewModel.hasChanged) {
-            setResult(0, intent)
-        } else {
-            setResult(1, intent)
+        if (tiViewModel.hasChanged) setResult(CHANGE, intent) else {
+            setResult(NOCHANGE, intent)
         }
         finish()
     }
