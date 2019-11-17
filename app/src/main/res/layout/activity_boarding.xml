@@ -1,120 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:background="@color/grey_lt"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark">
+        android:layout_width="match_parent">
 
-
-        <include layout="@layout/toolbar" />
 
         <ImageView
+            android:contentDescription="@string/app_logo"
             android:id="@+id/ivLogo"
-            android:layout_width="140dp"
-            android:layout_height="110dp"
             android:layout_centerHorizontal="true"
+            android:layout_height="110dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="50dp"
-            android:layout_marginBottom="20dp"
-            android:contentDescription="@string/app_logo"
-            android:src="@drawable/ic_td_logo" />
+            android:layout_width="200dp"
+            android:src="@drawable/ic_logo" />
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/ivLogo"
             android:background="@drawable/background_white_sheet_rounded"
             android:elevation="40dp"
-            android:paddingStart="16dp"
-
-            android:paddingTop="36dp"
+            android:layout_below="@id/ivLogo"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:paddingBottom="16dp"
 
             android:paddingEnd="16dp"
-            android:paddingBottom="16dp">
 
-            <TextView
-                android:id="@+id/tvHeading"
-                style="@style/TextAppearance.MaterialComponents.Headline3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="16dp"
-                android:text="@string/welcome"
-                android:textColor="@color/primaryText" />
-
-            <TextView
-                android:id="@+id/tvSubtitle"
-                style="@style/TextAppearance.MaterialComponents.Body1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvHeading"
-                android:layout_centerHorizontal="false"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/new_credentials_or_existing_account_message"
-                android:textColor="@color/secondaryText" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilEmail"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvSubtitle"
-                android:layout_marginBottom="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="-8dp"
-                    android:drawableEnd="@drawable/ic_mail_outline_black_24dp"
-                    android:hint="@string/hint_your_email"
-                    android:inputType="textEmailAddress"
-                    android:textColor="@color/primaryText"
-                    android:textColorHint="@color/hintText" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilPassword"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tilEmail"
-                android:layout_marginBottom="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="-8dp"
-                    android:drawableEnd="@drawable/ic_lock_outline_black_24dp"
-                    android:hint="@string/hint_your_password"
-                    android:inputType="textPassword"
-                    android:textColor="@color/primaryText"
-                    android:textColorHint="@color/hintText" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+            android:paddingStart="16dp"
+            android:paddingTop="36dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tilPassword"
-                android:layout_alignParentEnd="true"
                 android:gravity="center_horizontal"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/tilPassword"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="1">
 
                 <Button
+                    android:background="@drawable/button_background"
                     android:id="@+id/signIn"
-                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="0.5"
-                    android:background="@drawable/button_background"
+                    android:layout_width="0dp"
                     android:text="@string/sign_in"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
@@ -122,14 +57,80 @@
 
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/skipSignIn"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="0dp"
+                    android:id="@+id/skipSignIn"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
+                    android:layout_width="0dp"
                     android:text="@string/skip_now" />
             </LinearLayout>
 
+            <TextView
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:id="@+id/tvSubtitle"
+                android:layout_below="@id/tvHeading"
+                android:layout_centerHorizontal="false"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:text="@string/new_credentials_or_existing_account_message"
+                android:textColor="@color/secondaryText" />
+
+            <TextView
+                style="@style/TextAppearance.MaterialComponents.Headline3"
+                android:id="@+id/tvHeading"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_width="wrap_content"
+                android:text="@string/welcome"
+                android:textColor="@color/primaryText" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:id="@+id/tilPassword"
+                android:layout_below="@id/tilEmail"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_width="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:drawableEnd="@drawable/ic_lock_outline_black_24dp"
+                    android:hint="@string/hint_your_password"
+                    android:id="@+id/etPassword"
+                    android:inputType="textPassword"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="-8dp"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/primaryText"
+                    android:textColorHint="@color/hintText" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:id="@+id/tilEmail"
+                android:layout_below="@id/tvSubtitle"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_width="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:drawableEnd="@drawable/ic_mail_outline_black_24dp"
+                    android:hint="@string/hint_your_email"
+                    android:id="@+id/etEmail"
+                    android:inputType="textEmailAddress"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="-8dp"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/primaryText"
+                    android:textColorHint="@color/hintText" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
         </RelativeLayout>
+
+        <include layout="@layout/toolbar" />
     </RelativeLayout>
 </ScrollView>
