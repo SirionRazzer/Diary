@@ -7,8 +7,9 @@ import androidx.lifecycle.ViewModel
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.*
-import com.sirionrazzer.diary.util.DateUtils
+import com.sirionrazzer.diary.util.DateUtils.Factory.DAY_MILLISECONDS
 import io.realm.Realm
+import org.threeten.bp.LocalDate
 import java.util.*
 import javax.inject.Inject
 
@@ -29,11 +30,7 @@ class MainViewModel : ViewModel() {
 
     var editedIds: ArrayList<String>? = null
 
-    var date: Long?
-        get() = DateUtils.persistDate(Calendar.getInstance().time)
-        set(value) {
-            date = value
-        }
+    var date: LocalDate
 
     init {
         Diary.app.appComponent.inject(this)
@@ -42,6 +39,8 @@ class MainViewModel : ViewModel() {
         deletedTrackItems.value = mutableListOf()
         currentTemplateItems.value = mutableListOf()
         deletedTemplateItems.value = mutableListOf()
+
+        date = LocalDate.now()
     }
 
     fun saveTrackItems() {
@@ -51,12 +50,12 @@ class MainViewModel : ViewModel() {
         )
 
         currentTrackItems.value?.forEach {
-            it.date = date!!
+            it.date = date.toEpochDay() * DAY_MILLISECONDS
             realm.trackItemsDao.addTrackItem(it)
         }
 
         deletedTrackItems.value?.forEach {
-            it.date = date!!
+            it.date = date.toEpochDay() * DAY_MILLISECONDS
             realm.trackItemsDao.addTrackItem(it)
         }
 
@@ -213,7 +212,7 @@ class MainViewModel : ViewModel() {
             status = false,
             textField = "",
             numberField = 0f,
-            date = 0,   // TODO
+            date = date.toEpochDay() * DAY_MILLISECONDS,   // TODO
             position = it.position
         )
         currentTrackItems.value?.add(trackItem)
@@ -248,7 +247,7 @@ class MainViewModel : ViewModel() {
                         status = it.status,
                         textField = it.textField,
                         numberField = it.numberField,
-                        date = it.date, // TODO
+                        date = date.toEpochDay() * DAY_MILLISECONDS,
                         position = it.position
                     )
                     mergeToCurrent(trackItem)

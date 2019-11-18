@@ -90,4 +90,8 @@ dependencies {
     // drag'n'drop recyclerview
     implementation 'com.ernestoyaquello.dragdropswiperecyclerview:drag-drop-swipe-recyclerview:0.2.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    // ThreeTen Android Backport JSR-310
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
+
 }

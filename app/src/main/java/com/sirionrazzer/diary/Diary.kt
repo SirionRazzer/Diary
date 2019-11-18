@@ -1,6 +1,7 @@
 package com.sirionrazzer.diary
 
 import android.app.Application
+import com.jakewharton.threetenabp.AndroidThreeTen
 import com.sirionrazzer.diary.system.dagger.ApiModule
 import com.sirionrazzer.diary.system.dagger.AppComponent
 import com.sirionrazzer.diary.system.dagger.DaggerAppComponent
@@ -22,6 +23,7 @@ class Diary : Application() {
 
         //init realmdb this covers all use of realm within the project.
         Realm.init(this)
+        AndroidThreeTen.init(this);
 
         app = this
     }

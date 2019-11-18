@@ -7,6 +7,8 @@ class DateUtils {
 
     companion object Factory {
 
+        val DAY_MILLISECONDS = 86400000L
+
         /**
          * Converts from Date to Long date representation
          *

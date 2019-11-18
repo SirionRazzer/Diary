@@ -11,9 +11,13 @@ import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.UserStorage
 import com.sirionrazzer.diary.util.DateUtils
+import com.sirionrazzer.diary.util.DateUtils.Factory.DAY_MILLISECONDS
 import com.sirionrazzer.diary.viewer.TemplateItemViewerActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
+import org.threeten.bp.Instant
+import org.threeten.bp.LocalDate
+import org.threeten.bp.ZoneId
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -36,6 +40,10 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
         mainViewModel = createViewModel()
+        val dateLong =
+            intent.getLongExtra("editDate", LocalDate.now().toEpochDay() * DAY_MILLISECONDS)
+        mainViewModel.date =
+            Instant.ofEpochMilli(dateLong).atZone(ZoneId.systemDefault()).toLocalDate();
         mainViewModel.editedIds = intent.getStringArrayListExtra("trackItemsIds")
         mainViewModel.setupTrackAndTemplateItems()
 
@@ -59,7 +67,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        tvDate.text = DateUtils.smartDate(DateUtils.dateFromMillis(mainViewModel.date), false)
+        tvDate.text = DateUtils.smartDate(
+            DateUtils.dateFromMillis(mainViewModel.date.toEpochDay() * DAY_MILLISECONDS),
+            false
+        )
 
         when (DateUtils.dayInWeek()) {
             2 -> tvMonday.setTextColor(resources.getColor(R.color.colorAccent))

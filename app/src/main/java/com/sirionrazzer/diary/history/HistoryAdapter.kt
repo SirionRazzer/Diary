@@ -42,6 +42,7 @@ class HistoryAdapter(
         val historyItem = holder.historyItemLayout
         val date = historyViewModel.dates[position]
         val allTrackItems = historyViewModel.trackItemsByDate[date]
+        val dateLong = allTrackItems?.first()?.date
 
         val gridLayout = historyItem.findViewById<GridView>(R.id.trackItemWithoutText)
         val recyclerView = historyItem.findViewById<RecyclerView>(R.id.trackItemWithText)
@@ -77,6 +78,7 @@ class HistoryAdapter(
         val editButton: ImageButton = historyItem.findViewById(R.id.btnEditHistoryItem)
         editButton.setOnClickListener {
             val intent = Intent(context, MainActivity::class.java)
+            dateLong?.let { intent.putExtra("editDate", it) }
             intent.putExtra("trackItemsIds", trackItemsIds)
             context.startActivity(intent)
         }
