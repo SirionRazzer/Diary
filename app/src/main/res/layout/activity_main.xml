@@ -116,7 +116,6 @@
 
         </androidx.cardview.widget.CardView>
 
-
         <View
             android:id="@+id/vline"
             android:layout_width="match_parent"
@@ -129,7 +128,6 @@
             android:id="@+id/gwTemplates"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/btnManageActivities"
             android:layout_below="@id/vline"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
@@ -139,16 +137,6 @@
             android:stretchMode="columnWidth"
             android:verticalSpacing="10dip" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnManageActivities"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom|end"
-
-            android:text="@string/manage_activities" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

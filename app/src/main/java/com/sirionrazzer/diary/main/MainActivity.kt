@@ -56,13 +56,6 @@ class MainActivity : AppCompatActivity() {
 
         adapter = TemplatesAdapter(this, mainViewModel)
         gwTemplates.adapter = adapter
-
-        btnManageActivities.setOnClickListener {
-            //startActivity<TemplateItemViewerActivity>()
-            val intent = Intent(this, TemplateItemViewerActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivityForResult(intent, 1)
-        }
     }
 
     override fun onResume() {
@@ -118,6 +111,10 @@ class MainActivity : AppCompatActivity() {
         if (item?.itemId == R.id.mSaveLog) {
             save()
             finish()
+        } else if (item?.itemId == R.id.mManageActivities) {
+            val intent = Intent(this, TemplateItemViewerActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivityForResult(intent, 1)
         } else {
             onBackPressed()
         }
