@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/white"
+    android:background="@color/colorPrimaryLight"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
     <RelativeLayout
-        android:background="@color/grey_lt"
+        android:background="@color/white"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
 
@@ -75,7 +75,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_width="wrap_content"
                 android:text="@string/new_credentials_or_existing_account_message"
-                android:textColor="@color/secondaryText" />
+                android:textColor="@color/primaryText" />
 
             <TextView
                 style="@style/TextAppearance.MaterialComponents.Headline3"
