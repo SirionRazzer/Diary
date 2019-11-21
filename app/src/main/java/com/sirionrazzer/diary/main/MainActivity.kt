@@ -15,6 +15,7 @@ import com.sirionrazzer.diary.util.DateUtils.Factory.DAY_MILLISECONDS
 import com.sirionrazzer.diary.viewer.TemplateItemViewerActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
+import main.java.com.sirionrazzer.diary.main.DatePickerFragment
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
 import org.threeten.bp.ZoneId
@@ -56,6 +57,10 @@ class MainActivity : AppCompatActivity() {
 
         adapter = TemplatesAdapter(this, mainViewModel)
         gwTemplates.adapter = adapter
+
+        tvDate.setOnClickListener {
+            DatePickerFragment().show(fragmentManager, "timePicker")
+        }
     }
 
     override fun onResume() {
