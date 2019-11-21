@@ -97,8 +97,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0-beta02'
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
-    implementation 'com.google.firebase:firebase-auth:16.2.1'
-    implementation 'com.google.firebase:firebase-storage:16.1.0'
+    implementation 'com.google.firebase:firebase-auth:19.1.0'
+    implementation 'com.google.firebase:firebase-storage:19.1.0'
 
     // drawable toolbox
     implementation 'com.github.duanhong169:drawabletoolbox:1.0.7'
