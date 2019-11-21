@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/grey_lt"
     tools:context="com.sirionrazzer.diary.creator.TemplateItemCreatorActivity">
 
     <include layout="@layout/toolbar" />
@@ -13,18 +13,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
-        android:layout_marginTop="16dp"
+        android:background="@drawable/background_white_sheet_rounded"
+        android:elevation="4dp"
         android:padding="16dp">
 
         <ImageButton
             android:id="@+id/ibImage"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:scaleType="centerInside"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="30dp"
             android:background="@color/transparent"
             android:contentDescription="@string/app_logo"
+            android:scaleType="centerInside"
             android:src="@drawable/z_circlecolor_dumptruck" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -39,10 +42,10 @@
                 android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="-8dp"
                 android:drawableEnd="@drawable/ic_label"
                 android:hint="@string/activity_name"
                 android:textColor="@color/primaryText"
-                android:layout_marginBottom="-8dp"
                 android:textColorHint="@color/hintText" />
 
         </com.google.android.material.textfield.TextInputLayout>
