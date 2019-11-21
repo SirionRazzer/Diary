@@ -1,18 +1,27 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "org.jetbrains.kotlin.android.extensions"
 apply plugin: 'kotlin-kapt'
+apply plugin: 'io.fabric'
 apply plugin: 'realm-android'
 apply plugin: 'com.google.gms.google-services'
+
+// manually setup versioning
+ext.versionMajor = 0
+ext.versionMinor = 11
+ext.versionPatch = 0
+ext.minimumSdkVersion = 23
 
 android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.sirionrazzer.diary"
-        minSdkVersion 23
+        minSdkVersion project.ext.minimumSdkVersion
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode generateVersionCode()
+        versionName generateVersionName()
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -24,74 +33,122 @@ android {
     dataBinding {
         enabled = true
     }
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src']
+            res.srcDirs = ['src/main/res']
+            assets.srcDirs = ['src/main/assets']
+            jniLibs.srcDirs = ['libs/armeabi']
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+private Integer generateVersionCode() {
+    return ext.minimumSdkVersion * 10000000 + ext.versionMajor * 10000 + ext.versionMinor * 100 + ext.versionPatch
+}
+
+private String generateVersionName() {
+    String versionName = "${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
+    return versionName
 }
 
 dependencies {
+    def coroutines_version = "1.3.2"
+    def retrofit_version = "2.6.2"
+    def okhttp_version = "4.2.2"
+    def multidex_version = "2.0.1"
+    def annotation_version = "1.1.0"
+    def appcompat_version = "1.1.0"
+    def core_version = "1.1.0"
+    def dagger_version = "2.25.2"
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.android.material:material:1.0.0'
 
-    def lifecycle_version = "1.1.1"
+    // AndroidX
+    implementation "androidx.annotation:annotation:$annotation_version"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "androidx.appcompat:appcompat-resources:$appcompat_version"
+    implementation "androidx.core:core-ktx:$core_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$androidx_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata:$androidx_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$androidx_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime:$androidx_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle_version"
 
-    // ViewModel and LiveData
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.0.0' // use -ktx for Kotlin
-    implementation 'androidx.lifecycle:lifecycle-livedata:2.0.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime:2.0.0'
+    implementation "androidx.multidex:multidex:$multidex_version"
+
+    implementation "androidx.constraintlayout:constraintlayout:1.1.3"
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    kapt "androidx.lifecycle:lifecycle-compiler:$androidx_lifecycle_version"
+
+    implementation 'androidx.preference:preference:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0-beta02'
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.google.firebase:firebase-auth:16.2.1'
     implementation 'com.google.firebase:firebase-storage:16.1.0'
-    implementation 'androidx.preference:preference:1.1.0-alpha04'
-    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.0.0'
-    implementation 'androidx.lifecycle:lifecycle-reactivestreams:2.0.0'
 
     // drawable toolbox
     implementation 'com.github.duanhong169:drawabletoolbox:1.0.7'
 
-    // rxjava
-    implementation "io.reactivex.rxjava2:rxjava:2.1.17"
-    implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
+    // RxJava
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.17'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
-    // retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation "com.squareup.retrofit2:converter-gson:2.4.0"
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofit_version"
 
-    // okhttp
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    // OkHttp
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
     // firebase
-    implementation 'com.google.firebase:firebase-core:16.0.8'
-    implementation 'com.google.firebase:firebase-messaging:17.6.0'
-    implementation 'com.google.firebase:firebase-database:16.1.0'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
+    implementation 'com.google.firebase:firebase-core:17.2.1'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+    implementation 'com.google.firebase:firebase-database:19.2.0'
 
-    // dagger
-    implementation "com.google.dagger:dagger:2.16"
-    implementation "com.google.dagger:dagger-android:2.16"
-    implementation "com.google.dagger:dagger-android-support:2.16"
-    kapt "com.google.dagger:dagger-compiler:2.16"
-    kapt "com.google.dagger:dagger-android-processor:2.16"
+    // Dagger
+    implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
     // tests
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'androidx.cardview:cardview:1.0.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
 
-    // anko
-    implementation 'org.jetbrains.anko:anko-commons:0.10.8'
-    implementation 'org.jetbrains.anko:anko-design:0.10.8'
+
+    // Anko
+    implementation "org.jetbrains.anko:anko-commons:$anko_version"
+    implementation "org.jetbrains.anko:anko-design:$anko_version"
 
     // picassso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
     // drag'n'drop recyclerview
-    implementation 'com.ernestoyaquello.dragdropswiperecyclerview:drag-drop-swipe-recyclerview:0.2.0'
+    implementation 'com.ernestoyaquello.dragdropswiperecyclerview:drag-drop-swipe-recyclerview:0.5.1'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     // ThreeTen Android Backport JSR-310
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 }

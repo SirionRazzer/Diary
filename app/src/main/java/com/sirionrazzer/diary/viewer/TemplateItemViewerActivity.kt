@@ -153,6 +153,10 @@ class TemplateItemViewerActivity : AppCompatActivity() {
     }
 
     private val onListScrollListener = object : OnListScrollListener {
+        override fun onListScrollStateChanged(scrollState: OnListScrollListener.ScrollState) {
+            //not needed
+        }
+
         override fun onListScrolled(
             scrollDirection: OnListScrollListener.ScrollDirection,
             distance: Int
