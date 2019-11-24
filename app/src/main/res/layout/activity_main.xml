@@ -29,90 +29,123 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        <androidx.cardview.widget.CardView
             android:id="@+id/cvDateArea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:orientation="horizontal"
-            card_view:cardCornerRadius="5dp"
-            card_view:cardElevation="0dp"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent">
+            app:cardCornerRadius="5dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <RelativeLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/relativeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
+                android:gravity="center_horizontal">
 
-                <LinearLayout
-                    android:id="@+id/upperDate"
+                <ImageView
+                    android:id="@+id/ivCalendar"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/ic_calendar"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDate"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvDate" />
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    style="@style/TextAppearance.MaterialComponents.Headline4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="8dp"
-                    android:orientation="horizontal">
+                    android:layout_marginStart="8dp"
+                    android:text="24/11"
+                    android:textColor="@color/secondaryText"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/ivCalendar"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/tvDate"
-                        style="@style/TextAppearance.MaterialComponents.Headline6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_calendar"
-                        android:drawablePadding="4dp"
-                        android:text="19/3"
-                        android:textColor="@color/primaryText"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tvMonday"
+                    style="@style/DayField"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/upperDate"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
+                    android:layout_marginStart="8dp"
+                    android:text="@string/mon"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tvTuesday"
+                    app:layout_constraintStart_toEndOf="@id/tvDate" />
 
-                    <TextView
-                        android:id="@+id/tvMonday"
-                        style="@style/DayField"
-                        android:text="@string/mon" />
+                <TextView
+                    android:id="@+id/tvTuesday"
+                    style="@style/DayField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:text="@string/tue"
+                    app:layout_constraintBaseline_toBaselineOf="@id/tvDate"
+                    app:layout_constraintStart_toEndOf="@+id/tvMonday" />
 
-                    <TextView
-                        android:id="@+id/tvTuesday"
-                        style="@style/DayField"
-                        android:text="@string/tue" />
+                <TextView
+                    android:id="@+id/tvWednesday"
+                    style="@style/DayField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:text="@string/wed"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tvTuesday"
+                    app:layout_constraintStart_toEndOf="@+id/tvTuesday" />
 
-                    <TextView
-                        android:id="@+id/tvWednesday"
-                        style="@style/DayField"
-                        android:text="@string/wed" />
+                <TextView
+                    android:id="@+id/tvThursday"
+                    style="@style/DayField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:text="@string/thu"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tvWednesday"
+                    app:layout_constraintStart_toEndOf="@+id/tvWednesday" />
 
-                    <TextView
-                        android:id="@+id/tvThursday"
-                        style="@style/DayField"
-                        android:text="@string/thu" />
+                <TextView
+                    android:id="@+id/tvFriday"
+                    style="@style/DayField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:text="@string/fri"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tvThursday"
+                    app:layout_constraintStart_toEndOf="@+id/tvThursday" />
 
-                    <TextView
-                        android:id="@+id/tvFriday"
-                        style="@style/DayField"
-                        android:text="@string/fri" />
+                <TextView
+                    android:id="@+id/tvSaturday"
+                    style="@style/DayField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:text="@string/sat"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tvFriday"
+                    app:layout_constraintStart_toEndOf="@+id/tvFriday" />
 
-                    <TextView
-                        android:id="@+id/tvSaturday"
-                        style="@style/DayField"
-                        android:text="@string/sat" />
+                <TextView
+                    android:id="@+id/tvSunday"
+                    style="@style/DayField"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:text="@string/sun"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tvSaturday"
+                    app:layout_constraintStart_toEndOf="@+id/tvSaturday" />
 
-                    <TextView
-                        android:id="@+id/tvSunday"
-                        style="@style/DayField"
-                        android:text="@string/sun" />
-                </LinearLayout>
-            </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 

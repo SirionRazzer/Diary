@@ -17,6 +17,7 @@ import com.sirionrazzer.diary.viewer.TemplateItemViewerActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 import main.java.com.sirionrazzer.diary.main.DatePickerFragment
+import org.threeten.bp.DayOfWeek
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
 import org.threeten.bp.ZoneId
@@ -47,6 +48,18 @@ class MainActivity : AppCompatActivity() {
                 DateUtils.dateFromMillis(it.toEpochDay() * DAY_MILLISECONDS),
                 false
             )
+
+            revertDayColors()
+            when (it.dayOfWeek) {
+                DayOfWeek.MONDAY -> tvMonday.setTextColor(resources.getColor(R.color.colorPrimary))
+                DayOfWeek.TUESDAY -> tvTuesday.setTextColor(resources.getColor(R.color.colorPrimary))
+                DayOfWeek.WEDNESDAY -> tvWednesday.setTextColor(resources.getColor(R.color.colorPrimary))
+                DayOfWeek.THURSDAY -> tvThursday.setTextColor(resources.getColor(R.color.colorPrimary))
+                DayOfWeek.FRIDAY -> tvFriday.setTextColor(resources.getColor(R.color.colorPrimary))
+                DayOfWeek.SATURDAY -> tvSaturday.setTextColor(resources.getColor(R.color.colorPrimary))
+                DayOfWeek.SUNDAY -> tvSunday.setTextColor(resources.getColor(R.color.colorPrimary))
+                else -> tvMonday.setTextColor(resources.getColor(R.color.colorPrimary))
+            }
         })
 
         val dateLong =
@@ -67,21 +80,24 @@ class MainActivity : AppCompatActivity() {
         gwTemplates.adapter = adapter
     }
 
+    private fun revertDayColors() {
+        tvMonday.setTextColor(resources.getColor(R.color.secondaryText))
+        tvTuesday.setTextColor(resources.getColor(R.color.secondaryText))
+        tvWednesday.setTextColor(resources.getColor(R.color.secondaryText))
+        tvThursday.setTextColor(resources.getColor(R.color.secondaryText))
+        tvFriday.setTextColor(resources.getColor(R.color.secondaryText))
+        tvSaturday.setTextColor(resources.getColor(R.color.secondaryText))
+        tvSunday.setTextColor(resources.getColor(R.color.secondaryText))
+    }
+
     override fun onResume() {
         super.onResume()
 
-        when (DateUtils.dayInWeek()) {
-            2 -> tvMonday.setTextColor(resources.getColor(R.color.colorAccent))
-            3 -> tvTuesday.setTextColor(resources.getColor(R.color.colorAccent))
-            4 -> tvWednesday.setTextColor(resources.getColor(R.color.colorAccent))
-            5 -> tvThursday.setTextColor(resources.getColor(R.color.colorAccent))
-            6 -> tvFriday.setTextColor(resources.getColor(R.color.colorAccent))
-            0 -> tvSaturday.setTextColor(resources.getColor(R.color.colorAccent))
-            1 -> tvSunday.setTextColor(resources.getColor(R.color.colorAccent))
-        }
-
         tvDate.setOnClickListener {
-            DatePickerFragment().show(fragmentManager, "timePicker")
+            showDatePicker()
+        }
+        ivCalendar.setOnClickListener {
+            showDatePicker()
         }
     }
 
@@ -114,6 +130,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_save_log, menu)
         return true
+    }
+
+    fun showDatePicker() {
+        DatePickerFragment().show(fragmentManager, "timePicker")
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
