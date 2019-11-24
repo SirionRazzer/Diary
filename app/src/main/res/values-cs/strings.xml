@@ -41,7 +41,7 @@
     <string name="activity_name">Název aktivity</string>
     <string name="extra_input">Další vstup</string>
     <string name="creator_new_activity_will_be_in_new_records">Aktivita se objeví ve všech nových záznamech</string>
-    <string name="creator_instructions">Uspořádejte, zakažte nebo přidejte nové aktivity</string>
+    <string name="creator_instructions">Přeskládejte aktivity, vytvořte vlastní nebo odeberte staré.</string>
     <string name="changes_won_t_harm_your_old_entries">Změny neovlivní uložená data ☺</string>
     <string name="cancel">Zrušit</string>
     <string name="submit">Potvrdit</string>
@@ -57,21 +57,21 @@
     <string name="sat">so</string>
     <string name="sun">ne</string>
     <string name="pick_activity_image">Zvolte obrázek aktivity</string>
-    <string name="title_activity_options">Nastaveni</string>
-    <string name="settings">Nastaveni</string>
+    <string name="title_activity_options">Nastavení</string>
+    <string name="settings">Nastavení</string>
     <string name="user">Uživatel</string>
-    <string name="your_name"> Tvoje Jmeno</string>
-    <string name="sync_automatically">Automaticka synchroniazace</string>
-    <string name="title_activity_settings">Nastaveni</string>
-    <string name="other_settings">Dalsi Nastaveni</string>
-    <string name="deleteHistoryButton">Vymaz historii</string>
-    <string name="history_deleted">Historia bola uspesne vymazana.</string>
+    <string name="your_name">Tvoje jméno</string>
+    <string name="sync_automatically">Automatická synchronizace</string>
+    <string name="title_activity_settings">Nastavení</string>
+    <string name="other_settings">Další nastavení</string>
+    <string name="deleteHistoryButton">Vymaž historii</string>
+    <string name="history_deleted">Historie byla vymazána.</string>
     <string name="statistics">Statistky</string>
     <string name="choose_activity">Vyber aktivitu</string>
     <string name="this_time_unit">Tenhle</string>
-    <string name="last_time_unit">Minuly</string>
-    <string name="month">mesic</string>
-    <string name="week">tyden</string>
+    <string name="last_time_unit">Minulý</string>
+    <string name="month">měsíc</string>
+    <string name="week">týden</string>
     <string name="select_time_unit">Vyberte časovou jednotku</string>
     <string name="select_grouping_operation">Vyberte operaci seskupení</string>
     <string name="overall_average">Celkový průměr:</string>
@@ -82,7 +82,6 @@
     <string name="sum_each_week">součet pro každý týden</string>
     <string name="entry_list">Seznam záznamú</string>
     <string name="no_entries">Žádné záznamy.</string>
-
 
     <string-array name="input_fields">
         <item>Žádný</item>
