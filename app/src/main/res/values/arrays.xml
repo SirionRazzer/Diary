@@ -23,6 +23,33 @@
         <item>Dumptruck</item>
         <item>Eco Fuel</item>
         <item>Email</item>
+        <item>eReader</item>
+        <item>Football</item>
+        <item>Forest 2</item>
+        <item>Graduate</item>
+        <item>idCard</item>
+        <item>Learning</item>
+        <item>Library</item>
+        <item>Light Bulb</item>
+        <item>Map</item>
+        <item>Mountain</item>
+        <item>Mountains</item>
+        <item>Painting Palette</item>
+        <item>Photocamera</item>
+        <item>Planet Earth</item>
+        <item>Recycling</item>
+        <item>Reindeer</item>
+        <item>River</item>
+        <item>Route</item>
+        <item>Smartphone</item>
+        <item>Sprout</item>
+        <item>Tablet</item>
+        <item>Tractor</item>
+        <item>Violin</item>
+        <item>Waste</item>
+        <item>Whale</item>
+        <item>Workspace</item>
+        <item>Writing</item>
     </array>
 
     <array name="time_unit_array">
@@ -55,5 +82,32 @@
         <item>@drawable/z_circlecolor_dumptruck</item>
         <item>@drawable/z_circlecolor_eco_fuel</item>
         <item>@drawable/z_circlecolor_email</item>
+        <item>@drawable/z_circlecolor_ereader</item>
+        <item>@drawable/z_circlecolor_football</item>
+        <item>@drawable/z_circlecolor_forest_2</item>
+        <item>@drawable/z_circlecolor_graduate</item>
+        <item>@drawable/z_circlecolor_idcard</item>
+        <item>@drawable/z_circlecolor_learning</item>
+        <item>@drawable/z_circlecolor_library</item>
+        <item>@drawable/z_circlecolor_light_bulb</item>
+        <item>@drawable/z_circlecolor_map</item>
+        <item>@drawable/z_circlecolor_mountain</item>
+        <item>@drawable/z_circlecolor_mountains</item>
+        <item>@drawable/z_circlecolor_painting_palette</item>
+        <item>@drawable/z_circlecolor_photocamera</item>
+        <item>@drawable/z_circlecolor_planetearth</item>
+        <item>@drawable/z_circlecolor_recycling</item>
+        <item>@drawable/z_circlecolor_reindeer</item>
+        <item>@drawable/z_circlecolor_river</item>
+        <item>@drawable/z_circlecolor_route</item>
+        <item>@drawable/z_circlecolor_smartphone</item>
+        <item>@drawable/z_circlecolor_sprout</item>
+        <item>@drawable/z_circlecolor_tablet</item>
+        <item>@drawable/z_circlecolor_tractor</item>
+        <item>@drawable/z_circlecolor_violin</item>
+        <item>@drawable/z_circlecolor_waste</item>
+        <item>@drawable/z_circlecolor_whale</item>
+        <item>@drawable/z_circlecolor_workspace</item>
+        <item>@drawable/z_circlecolor_writing</item>
     </array>
 </resources>
