@@ -61,7 +61,6 @@ class HistoryAdapter(
                 } else {
                     trackItemsWithoutText.add(it)
                 }
-
             }
         }
 

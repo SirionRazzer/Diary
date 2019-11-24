@@ -50,8 +50,9 @@
 
                 <ImageView
                     android:id="@+id/ivCalendar"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/ic_calendar"
                     app:layout_constraintBottom_toBottomOf="@+id/tvDate"
                     app:layout_constraintStart_toStartOf="parent"
