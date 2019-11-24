@@ -142,7 +142,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
 
     // drag'n'drop recyclerview
-    implementation 'com.ernestoyaquello.dragdropswiperecyclerview:drag-drop-swipe-recyclerview:0.5.1'
+    implementation 'com.ernestoyaquello.dragdropswiperecyclerview:drag-drop-swipe-recyclerview:0.2.0' // newer version breaks long press to delete
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     // ThreeTen Android Backport JSR-310

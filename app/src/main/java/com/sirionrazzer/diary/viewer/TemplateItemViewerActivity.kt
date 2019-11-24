@@ -55,7 +55,7 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         rvTemplates.orientation?.removeSwipeDirectionFlag(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.LEFT)
         rvTemplates.swipeListener = onItemSwipeListener
         rvTemplates.dragListener = onItemDragListener
-        rvTemplates.scrollListener = onListScrollListener
+        //rvTemplates.scrollListener = onListScrollListener
 
         tiViewModel.currentTemplateItems.observe(this, Observer { updated ->
 //            if (tiViewModel.currentTemplateItems.value != null) {
@@ -152,18 +152,18 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         }
     }
 
-    private val onListScrollListener = object : OnListScrollListener {
-        override fun onListScrollStateChanged(scrollState: OnListScrollListener.ScrollState) {
-            //not needed
-        }
-
-        override fun onListScrolled(
-            scrollDirection: OnListScrollListener.ScrollDirection,
-            distance: Int
-        ) {
-            // Handle scrolling
-        }
-    }
+//    private val onListScrollListener = object : OnListScrollListener {
+//        override fun onListScrollStateChanged(scrollState: OnListScrollListener.ScrollState) {
+//            //not needed
+//        }
+//
+//        override fun onListScrolled(
+//            scrollDirection: OnListScrollListener.ScrollDirection,
+//            distance: Int
+//        ) {
+//            // Handle scrolling
+//        }
+//    }
 
     override fun onResume() {
         super.onResume()
