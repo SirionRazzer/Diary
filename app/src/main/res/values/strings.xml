@@ -12,11 +12,11 @@
     <string name="backup_diary_data">Backup Diary data</string>
     <string name="restore_diary_data">Restore Diary data</string>
     <string name="error_backup_upload">Something went wrong. Upload failed.</string>
-    <string name="success_backup_upload">Successfully backed up!</string>
-    <string name="success_backup_download">Successfully downloaded from backup!</string>
+    <string name="success_backup_upload">Successfully backed up</string>
+    <string name="success_backup_download">Successfully downloaded from backup</string>
     <string name="error_backup_download">Something went wrong. Download failed.</string>
     <string name="logout">Logout</string>
-    <string name="please_backup">Please sign up to backup the diary.</string>
+    <string name="please_backup">Please sign up to backup the Diary.</string>
     <string name="success_logged_out">You\'ve been logged out successfully</string>
     <string name="login">Login</string>
     <string name="title_history_activity">History</string>
@@ -35,11 +35,11 @@
     <string name="new_account_or_incorrect_input">Would you like to create a new account? If you are not new, then your credentials were incorrect.</string>
     <string name="boarding_greetings">Hey there</string>
     <string name="success_signup_message">Thank you for signing up.</string>
-    <string name="success_login_message">You\'ve been successfully logged in!</string>
+    <string name="success_login_message">You\'ve been successfully logged in</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="activity_name">Activity name</string>
-    <string name="extra_input">Extra input</string>
+    <string name="extra_input">Value field</string>
     <string name="creator_new_activity_will_be_in_new_records">Activity will appear in all new records</string>
     <string name="creator_instructions">Rearrange, disable or create a new activity</string>
     <string name="changes_won_t_harm_your_old_entries">Changes won\'t harm your old entries ☺</string>
@@ -59,7 +59,7 @@
     <string name="pick_activity_image">Pick activity image</string>
     <string name="title_activity_options">Options</string>
     <string name="user">User</string>
-    <string name="your_name"> Name Your</string>
+    <string name="your_name">Vaše jméno</string>
     <string name="sync_automatically">Sync Automatically</string>
     <string name="settings">Settings</string>
     <string name="title_activity_settings">Settings</string>
