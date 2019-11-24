@@ -5,25 +5,23 @@ import android.app.Dialog
 import android.app.DialogFragment
 import android.os.Bundle
 import android.widget.DatePicker
+import com.sirionrazzer.diary.main.MainActivity
 import com.sirionrazzer.diary.util.DateUtils
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
 import org.threeten.bp.ZoneId
 
-class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
+class DatePickerFragment() : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val now = LocalDate.now().toEpochDay() * DateUtils.DAY_MILLISECONDS
-        val date = Instant.ofEpochMilli(now).atZone(ZoneId.systemDefault()).toLocalDate()
+        val date = (activity as MainActivity).mainViewModel.date.value!!
         val year = date.year
-        val month = date.month.value
+        val month = date.monthValue
         val day = date.dayOfMonth
-        return DatePickerDialog(activity, this, year, month, day)
+        return DatePickerDialog(activity, this, year, month - 1, day)
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        (activity as MainActivity).mainViewModel.date.value = LocalDate.of(year, month + 1, dayOfMonth)
     }
-
-
 }

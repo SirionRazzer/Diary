@@ -30,7 +30,7 @@ class MainViewModel : ViewModel() {
 
     var editedIds: ArrayList<String>? = null
 
-    var date: LocalDate
+    var date: MutableLiveData<LocalDate> = MutableLiveData()
 
     init {
         Diary.app.appComponent.inject(this)
@@ -40,7 +40,7 @@ class MainViewModel : ViewModel() {
         currentTemplateItems.value = mutableListOf()
         deletedTemplateItems.value = mutableListOf()
 
-        date = LocalDate.now()
+        date.value = LocalDate.now()
     }
 
     fun saveTrackItems() {
@@ -50,12 +50,12 @@ class MainViewModel : ViewModel() {
         )
 
         currentTrackItems.value?.forEach {
-            it.date = date.toEpochDay() * DAY_MILLISECONDS
+            it.date = date.value!!.toEpochDay() * DAY_MILLISECONDS
             realm.trackItemsDao.addTrackItem(it)
         }
 
         deletedTrackItems.value?.forEach {
-            it.date = date.toEpochDay() * DAY_MILLISECONDS
+            it.date = date.value!!.toEpochDay() * DAY_MILLISECONDS
             realm.trackItemsDao.addTrackItem(it)
         }
 
@@ -212,7 +212,7 @@ class MainViewModel : ViewModel() {
             status = false,
             textField = "",
             numberField = 0f,
-            date = date.toEpochDay() * DAY_MILLISECONDS,   // TODO
+            date = date.value!!.toEpochDay() * DAY_MILLISECONDS,   // TODO
             position = it.position
         )
         currentTrackItems.value?.add(trackItem)
@@ -247,7 +247,7 @@ class MainViewModel : ViewModel() {
                         status = it.status,
                         textField = it.textField,
                         numberField = it.numberField,
-                        date = date.toEpochDay() * DAY_MILLISECONDS,
+                        date = date.value!!.toEpochDay() * DAY_MILLISECONDS,
                         position = it.position
                     )
                     mergeToCurrent(trackItem)

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import com.sirionrazzer.diary.Diary
@@ -41,10 +42,17 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
         mainViewModel = createViewModel()
+        mainViewModel.date.observe(this, Observer {
+            tvDate.text = DateUtils.smartDate(
+                DateUtils.dateFromMillis(it.toEpochDay() * DAY_MILLISECONDS),
+                false
+            )
+        })
+
         val dateLong =
             intent.getLongExtra("editDate", LocalDate.now().toEpochDay() * DAY_MILLISECONDS)
-        mainViewModel.date =
-            Instant.ofEpochMilli(dateLong).atZone(ZoneId.systemDefault()).toLocalDate();
+        mainViewModel.date.value =
+            Instant.ofEpochMilli(dateLong).atZone(ZoneId.systemDefault()).toLocalDate()
         mainViewModel.editedIds = intent.getStringArrayListExtra("trackItemsIds")
         mainViewModel.setupTrackAndTemplateItems()
 
@@ -57,18 +65,10 @@ class MainActivity : AppCompatActivity() {
 
         adapter = TemplatesAdapter(this, mainViewModel)
         gwTemplates.adapter = adapter
-
-        tvDate.setOnClickListener {
-            DatePickerFragment().show(fragmentManager, "timePicker")
-        }
     }
 
     override fun onResume() {
         super.onResume()
-        tvDate.text = DateUtils.smartDate(
-            DateUtils.dateFromMillis(mainViewModel.date.toEpochDay() * DAY_MILLISECONDS),
-            false
-        )
 
         when (DateUtils.dayInWeek()) {
             2 -> tvMonday.setTextColor(resources.getColor(R.color.colorAccent))
@@ -78,6 +78,10 @@ class MainActivity : AppCompatActivity() {
             6 -> tvFriday.setTextColor(resources.getColor(R.color.colorAccent))
             0 -> tvSaturday.setTextColor(resources.getColor(R.color.colorAccent))
             1 -> tvSunday.setTextColor(resources.getColor(R.color.colorAccent))
+        }
+
+        tvDate.setOnClickListener {
+            DatePickerFragment().show(fragmentManager, "timePicker")
         }
     }
 
