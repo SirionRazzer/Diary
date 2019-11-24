@@ -12,10 +12,10 @@
     <string name="boarding_greetings">Zdravíčko</string>
     <string name="cancel">Zrušit</string>
     <string name="caption_activity_not_saved">Aktivita není uložena</string>
-    <string name="changes_won_t_harm_your_old_entries">Změny nepoškodí vaše stávající záznamy ☺</string>
+    <string name="changes_won_t_harm_your_old_entries">Změny nepoškodí stávající záznamy ☺</string>
     <string name="choose_activity">Zvolte aktivitu</string>
     <string name="choose_icon">Zvolte ikonu</string>
-    <string name="creator_instructions">Seřadte aktivity, vytvořte nové, nebo odeberte staré</string>
+    <string name="creator_instructions">Seřaďte aktivity, vytvořte nové, nebo staré odeberte</string>
     <string name="creator_new_activity_will_be_in_new_records">Aktivita bude součástí všech nových záznamů</string>
     <string name="deleteHistoryButton">Smazat historii</string>
     <string name="edit_history_item">Změnit</string>
@@ -81,6 +81,9 @@
     <string name="welcome">Vítejte!</string>
     <string name="yes">Ano</string>
     <string name="your_email">Váš email</string>
-    <string name="your_name">Pojmenujte svoje</string>
+    <string name="your_name">Vaše jméno</string>
     <string name="your_password">Heslo</string>
+    <string name="show_only_filled_items">Zobrazovat pouze vyplněné aktivity</string>
+    <string name="delete_history">Smazat historii</string>
+    <string name="compact_ui">Kompatní vzhled</string>
 </resources>
