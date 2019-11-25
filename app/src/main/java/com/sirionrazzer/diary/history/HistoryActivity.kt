@@ -54,10 +54,10 @@ class HistoryActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        reloadData()
+        refreshUI()
     }
 
-    private fun reloadData() {
+    private fun refreshUI() {
         historyViewModel.loadData()
         viewAdapter.notifyDataSetChanged()
     }
@@ -79,14 +79,13 @@ class HistoryActivity : AppCompatActivity() {
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
 
-            val filePath = "/user/${user.uid}/backup/default.realm"
-            val realmPath = historyViewModel.realm.path
+            val filePath = "/user/${user.uid}/backup/realm.json"
             when {
                 item?.itemId == R.id.sync_button -> {
                     val storageRef = FirebaseStorage.getInstance().reference
-                    val file = Uri.fromFile(File(realmPath))
+                    val byteData = historyViewModel.getJsonData()
                     val fileRef = storageRef.child(filePath)
-                    fileRef.putFile(file).addOnSuccessListener {
+                    fileRef.putBytes(byteData).addOnSuccessListener {
                         Toast.makeText(
                             this,
                             getString(R.string.success_backup_upload),
@@ -108,12 +107,11 @@ class HistoryActivity : AppCompatActivity() {
 
                     val ONE_MEGABYTE: Long = 1024 * 1024
                     file.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-                        val conf = historyViewModel.realm.configuration
-                        historyViewModel.realm.close()
-                        Realm.deleteRealm(conf)
-                        File(realmPath).writeBytes(it)
-                        reloadData()
-
+                        historyViewModel.reloadDataFromBytes(it)
+                        refreshUI()
+                        historyViewModel.userStorage.updateSettings { lus ->
+                            lus.firstTime = false
+                        }
                         Toast.makeText(
                             this,
                             getString(R.string.success_backup_download),
