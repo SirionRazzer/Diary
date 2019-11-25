@@ -89,7 +89,7 @@ class MainViewModel : ViewModel() {
             UUID.randomUUID().toString(),
             false,
             "work",
-            R.drawable.z_circlecolor_workspace,
+            R.drawable.aaa_circlecolor_workspace,
             hasTextField = false,
             hasNumberField = false,
             position = 4
@@ -98,7 +98,7 @@ class MainViewModel : ViewModel() {
             UUID.randomUUID().toString(),
             false,
             "relax",
-            R.drawable.z_circlecolor_river,
+            R.drawable.aaa_circlecolor_river,
             hasTextField = false,
             hasNumberField = false,
             position = 3
@@ -152,7 +152,7 @@ class MainViewModel : ViewModel() {
             UUID.randomUUID().toString(),
             false,
             "water",
-            R.drawable.z_circlecolor_drop,
+            R.drawable.aaa_circlecolor_drop,
             hasTextField = false,
             hasNumberField = true,
             position = 2
@@ -161,7 +161,7 @@ class MainViewModel : ViewModel() {
             UUID.randomUUID().toString(),
             false,
             "income",
-            R.drawable.z_circlecolor_cash,
+            R.drawable.aaa_circlecolor_cash,
             hasTextField = false,
             hasNumberField = true,
             position = 1
@@ -170,7 +170,7 @@ class MainViewModel : ViewModel() {
             UUID.randomUUID().toString(),
             false,
             "love",
-            R.drawable.z_circlecolor_forest_2,
+            R.drawable.aaa_circlecolor_forest_2,
             hasTextField = true,
             hasNumberField = false,
             position = 0

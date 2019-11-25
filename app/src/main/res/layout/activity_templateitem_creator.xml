@@ -28,7 +28,7 @@
             android:background="@color/transparent"
             android:contentDescription="@string/app_logo"
             android:scaleType="centerInside"
-            android:src="@drawable/z_circlecolor_dumptruck" />
+            android:src="@drawable/aaa_circlecolor_dumptruck" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilName"

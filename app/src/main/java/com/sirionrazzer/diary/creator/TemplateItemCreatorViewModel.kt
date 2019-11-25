@@ -36,7 +36,7 @@ class TemplateItemCreatorViewModel : ViewModel() {
             UUID.randomUUID().toString(),
             false,
             "",
-            R.drawable.z_circlecolor_dumptruck,
+            R.drawable.aaa_circlecolor_dumptruck,
             hasTextField = false,
             hasNumberField = false,
             position = position
