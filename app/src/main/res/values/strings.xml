@@ -1,13 +1,10 @@
 <resources>
     <string name="app_name">Diary</string>
     <string name="sign_in">Sign in</string>
-    <string name="your_email">Your email</string>
-    <string name="your_password">Password</string>
     <string name="app_logo">App logo</string>
     <string name="skip_now">skip now</string>
     <string name="title_my_day">My Day</string>
     <string name="title_manage_activities">Manage Activities</string>
-    <string name="manage_activities">Manage Activities</string>
     <string name="edit_history_item">Edit</string>
     <string name="backup_diary_data">Backup Diary data</string>
     <string name="restore_diary_data">Restore Diary data</string>
@@ -24,12 +21,10 @@
     <string name="title_stats_activity">Stats</string>
     <string name="message_leave_without_save">Do you want to leave without saving?</string>
     <string name="caption_activity_not_saved">Acivity is not saved</string>
-    <string name="hint_activity_name">Name your activity</string>
     <string name="hint_your_email">Your email</string>
     <string name="hint_your_password">Your password</string>
     <string name="new_credentials_or_existing_account_message">Enter your new credentials or use an existing account</string>
     <string name="welcome">Welcome!</string>
-    <string name="empty_pw_email">Password or Email fields are empty.</string>
     <string name="invalid_pa_email">Email of password is invalid.</string>
     <string name="short_password">Your password is too short, it needs to be at least 6 characters long.</string>
     <string name="new_account_or_incorrect_input">Would you like to create a new account? If you are not new, then your credentials were incorrect.</string>
@@ -57,7 +52,6 @@
     <string name="sat">sat</string>
     <string name="sun">sun</string>
     <string name="pick_activity_image">Pick activity image</string>
-    <string name="title_activity_options">Options</string>
     <string name="user">User</string>
     <string name="your_name">Your name</string>
     <string name="sync_automatically">Sync Automatically</string>

@@ -88,7 +88,6 @@
 
 
                     <RelativeLayout
-                        android:id="@+id/rlGroupByOperationSpinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/rlUnitSpinner"
@@ -124,7 +123,6 @@
                 card_view:contentPadding="4dp">
 
                 <RelativeLayout
-                    android:id="@+id/rlStatSpinners"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/cvBarChart"
@@ -151,7 +149,6 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/rlTotalAverage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/rlTotalSum"
