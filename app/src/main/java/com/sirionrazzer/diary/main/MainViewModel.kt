@@ -12,6 +12,7 @@ import io.realm.Realm
 import org.threeten.bp.LocalDate
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 @SuppressLint("CheckResult")
 class MainViewModel : ViewModel() {
@@ -31,6 +32,15 @@ class MainViewModel : ViewModel() {
     var editedIds: ArrayList<String>? = null
 
     var date: MutableLiveData<LocalDate> = MutableLiveData()
+
+    fun setForDate(date: LocalDate) {
+        this.date.value = date
+        val dateTrackItems = realm.trackItemsDao.getTrackItemsByDate(this.date.value!!)
+        editedIds?.clear()
+        if (editedIds == null) editedIds = ArrayList()
+        dateTrackItems.forEach { editedIds?.add(it.id) }
+        setupTrackAndTemplateItems()
+    }
 
     init {
         Diary.app.appComponent.inject(this)

@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var userStorage: UserStorage
 
     lateinit var mainViewModel: MainViewModel
-    lateinit var adapter: TemplatesAdapter
+    var adapter: TemplatesAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,14 +60,15 @@ class MainActivity : AppCompatActivity() {
                 DayOfWeek.SUNDAY -> tvSunday.setTextColor(resources.getColor(R.color.colorPrimary))
                 else -> tvMonday.setTextColor(resources.getColor(R.color.colorPrimary))
             }
+
+            adapter?.notifyDataSetChanged()
         })
 
         val dateLong =
             intent.getLongExtra("editDate", LocalDate.now().toEpochDay() * DAY_MILLISECONDS)
-        mainViewModel.date.value =
+        mainViewModel.setForDate(
             Instant.ofEpochMilli(dateLong).atZone(ZoneId.systemDefault()).toLocalDate()
-        mainViewModel.editedIds = intent.getStringArrayListExtra("trackItemsIds")
-        mainViewModel.setupTrackAndTemplateItems()
+        )
 
         if (userStorage.userSettings.firstTime) {
             mainViewModel.createDefaultTrackItems()
@@ -106,7 +107,7 @@ class MainActivity : AppCompatActivity() {
 
         if (resultCode == TemplateItemViewerActivity.CHANGE) { // templates are changed
             mainViewModel.setupTrackAndTemplateItems()
-            adapter.notifyDataSetChanged()
+            adapter?.notifyDataSetChanged()
 
             val snackbar =
                 Snackbar.make(
@@ -116,7 +117,6 @@ class MainActivity : AppCompatActivity() {
                 )
             snackbar.show()
         }
-
     }
 
     private fun save() {

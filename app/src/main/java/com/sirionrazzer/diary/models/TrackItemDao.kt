@@ -1,9 +1,11 @@
 package com.sirionrazzer.diary.models
 
 import androidx.lifecycle.LiveData
+import com.sirionrazzer.diary.util.DateUtils.Factory.DAY_MILLISECONDS
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
+import org.threeten.bp.LocalDate
 
 class TrackItemDao(val realm: Realm) {
 
@@ -96,5 +98,14 @@ class TrackItemDao(val realm: Realm) {
             val result = it.where(TrackItem::class.java).findAll()
             result.deleteAllFromRealm()
         }
+    }
+
+    fun getTrackItemsByDate(value: LocalDate): List<TrackItem> {
+        val date = value.toEpochDay() * DAY_MILLISECONDS
+        val realmItems =
+            realm.where(TrackItem::class.java).equalTo("date", date).findAll()
+                .sort("date", Sort.DESCENDING)
+
+        return realmItems.map { item -> item as TrackItem }
     }
 }

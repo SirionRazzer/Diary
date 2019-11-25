@@ -22,6 +22,6 @@ class DatePickerFragment() : DialogFragment(), DatePickerDialog.OnDateSetListene
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        (activity as MainActivity).mainViewModel.date.value = LocalDate.of(year, month + 1, dayOfMonth)
+        (activity as MainActivity).mainViewModel.setForDate(LocalDate.of(year, month + 1, dayOfMonth))
     }
 }

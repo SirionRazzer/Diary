@@ -1,5 +1,6 @@
 package com.sirionrazzer.diary.history
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
@@ -16,10 +17,12 @@ import com.sirionrazzer.diary.boarding.BoardingActivity
 import com.sirionrazzer.diary.main.MainActivity
 import com.sirionrazzer.diary.settings.SettingsActivity
 import com.sirionrazzer.diary.stats.ChooseTrackItemStatActivity
+import com.sirionrazzer.diary.util.DateUtils
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_history.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.startActivity
+import org.threeten.bp.LocalDate
 import java.io.File
 
 class HistoryActivity : AppCompatActivity() {
@@ -43,7 +46,9 @@ class HistoryActivity : AppCompatActivity() {
         rvHistoryItems.layoutManager = viewManager
 
         fab.setOnClickListener {
-            startActivity<MainActivity>()
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("editDate", LocalDate.now().toEpochDay() * DateUtils.DAY_MILLISECONDS)
+            startActivity(intent)
         }
     }
 
