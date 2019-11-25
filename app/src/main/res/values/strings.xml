@@ -76,9 +76,10 @@
     <string name="sum_each_month">sum for each month</string>
     <string name="entry_list">Entry list</string>
     <string name="no_entries">No entries.</string>
-    <string name="show_only_filled_items">Show only filled items</string>
+    <string name="show_only_filled_items">Show only filled activities</string>
     <string name="delete_history">Delete History</string>
     <string name="compact_ui">Compact UI</string>
+    <string name="creator_instructions_caption">Check Value field in the Stats overview</string>
 
     <string-array name="input_fields">
         <item>None</item>

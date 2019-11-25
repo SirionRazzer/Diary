@@ -4,7 +4,6 @@
     <!--Image icons for templates-->
     <!--Add icon's name to the img_template_names array and image itself to img_template_drawable array -->
     <array name="img_template_names">
-        <item>Abacus</item>
         <item>Guitar</item>
         <item>Alarmclock</item>
         <item>Audio</item>
@@ -63,7 +62,6 @@
 
 
     <array name="img_template_drawables">
-        <item>@drawable/z_circlecolor_abacus</item>
         <item>@drawable/z_circlecolor_acoustic_guitar</item>
         <item>@drawable/z_circlecolor_alarmclock</item>
         <item>@drawable/z_circlecolor_audio</item>

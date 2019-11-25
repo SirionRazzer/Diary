@@ -21,10 +21,10 @@
             android:id="@+id/ibImage"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="30dp"
+            android:layout_below="@id/llHeading"
             android:background="@color/transparent"
             android:contentDescription="@string/app_logo"
             android:scaleType="centerInside"
@@ -101,14 +101,42 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
+        <RelativeLayout
+            android:id="@+id/llHeading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/clExtra"
-            android:layout_marginStart="4dp"
-            android:text="@string/creator_new_activity_will_be_in_new_records"
-            android:textColor="@color/secondaryText"
-            android:textSize="14sp" />
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/background_heading_rounded"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/ivInfo"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="3dp"
+                android:src="@drawable/ic_info" />
+
+            <TextView
+                android:id="@+id/tvHeading"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_toStartOf="@+id/ivInfo"
+                android:text="@string/creator_new_activity_will_be_in_new_records"
+                android:textColor="@color/white" />
+
+            <TextView
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvHeading"
+                android:text="@string/creator_instructions_caption"
+                android:textColor="@color/colorPrimaryLight" />
+        </RelativeLayout>
 
     </RelativeLayout>
 </RelativeLayout>

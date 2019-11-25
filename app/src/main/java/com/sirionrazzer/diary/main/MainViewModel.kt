@@ -112,15 +112,6 @@ class MainViewModel : ViewModel() {
 //            hasNumberField = false,
 //            position = 8
 //        )
-//        val tit4 = TrackItemTemplate(
-//            UUID.randomUUID().toString(),
-//            false,
-//            "coding",
-//            R.drawable.z_circlecolor_abacus,
-//            hasTextField = false,
-//            hasNumberField = false,
-//            position = 7
-//        )
 //        val tit5 = TrackItemTemplate(
 //            UUID.randomUUID().toString(),
 //            false,
