@@ -127,7 +127,7 @@ class MainViewModel : ViewModel() {
             "Water",
             R.drawable.aab_bottle,
             hasTextField = false,
-            hasNumberField = false,
+            hasNumberField = true,
             position = 4
         )
         val tit5 = TrackItemTemplate(
