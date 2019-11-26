@@ -85,108 +85,76 @@ class MainViewModel : ViewModel() {
     }
 
     fun createDefaultTrackItems() {
-        val tit1 = TrackItemTemplate(
+        val tit0 = TrackItemTemplate(
             UUID.randomUUID().toString(),
             false,
-            "work",
-            R.drawable.aaa_circlecolor_workspace,
-            hasTextField = false,
-            hasNumberField = false,
-            position = 4
-        )
-        val tit2 = TrackItemTemplate(
-            UUID.randomUUID().toString(),
-            false,
-            "relax",
-            R.drawable.aaa_circlecolor_river,
-            hasTextField = false,
-            hasNumberField = false,
-            position = 3
-        )
-//        val tit3 = TrackItemTemplate(
-//            UUID.randomUUID().toString(),
-//            false,
-//            "friends",
-//            R.drawable.z_circlecolor_beach,
-//            hasTextField = false,
-//            hasNumberField = false,
-//            position = 8
-//        )
-//        val tit5 = TrackItemTemplate(
-//            UUID.randomUUID().toString(),
-//            false,
-//            "workout",
-//            R.drawable.z_circlecolor_alarmclock,
-//            hasTextField = true,
-//            hasNumberField = false,
-//            position = 6
-//        )
-//        val tit6 = TrackItemTemplate(
-//            UUID.randomUUID().toString(),
-//            false,
-//            "movie",
-//            R.drawable.z_circlecolor_photocamera,
-//            hasTextField = true,
-//            hasNumberField = false,
-//            position = 5
-//        )
-//        val tit7 = TrackItemTemplate(
-//            UUID.randomUUID().toString(),
-//            false,
-//            "book",
-//            R.drawable.z_circlecolor_library,
-//            hasTextField = true,
-//            hasNumberField = false,
-//            position = 4
-//        )
-//        val tit8 = TrackItemTemplate(
-//            UUID.randomUUID().toString(),
-//            false,
-//            "calories",
-//            R.drawable.z_circlecolor_waste,
-//            hasTextField = false,
-//            hasNumberField = true,
-//            position = 3
-//        )
-        val tit9 = TrackItemTemplate(
-            UUID.randomUUID().toString(),
-            false,
-            "water",
-            R.drawable.aaa_circlecolor_drop,
-            hasTextField = false,
-            hasNumberField = true,
-            position = 2
-        )
-        val tit10 = TrackItemTemplate(
-            UUID.randomUUID().toString(),
-            false,
-            "income",
-            R.drawable.aaa_circlecolor_cash,
-            hasTextField = false,
-            hasNumberField = true,
-            position = 1
-        )
-        val tit11 = TrackItemTemplate(
-            UUID.randomUUID().toString(),
-            false,
-            "love",
-            R.drawable.aaa_circlecolor_forest_2,
+            "Note",
+            R.drawable.aaa_circlecolor_writing,
             hasTextField = true,
             hasNumberField = false,
             position = 0
         )
-
+        val tit1 = TrackItemTemplate(
+            UUID.randomUUID().toString(),
+            false,
+            "Outcome",
+            R.drawable.aaa_circlecolor_credit_card,
+            hasTextField = false,
+            hasNumberField = true,
+            position = 1
+        )
+        val tit2 = TrackItemTemplate(
+            UUID.randomUUID().toString(),
+            false,
+            "Workout",
+            R.drawable.aab_dumbbell,
+            hasTextField = true,
+            hasNumberField = false,
+            position = 2
+        )
+        val tit3 = TrackItemTemplate(
+            UUID.randomUUID().toString(),
+            false,
+            "Calories",
+            R.drawable.aab_nofood,
+            hasTextField = false,
+            hasNumberField = true,
+            position = 3
+        )
+        val tit4 = TrackItemTemplate(
+            UUID.randomUUID().toString(),
+            false,
+            "Water",
+            R.drawable.aab_bottle,
+            hasTextField = false,
+            hasNumberField = true,
+            position = 4
+        )
+        val tit5 = TrackItemTemplate(
+            UUID.randomUUID().toString(),
+            false,
+            "Footsteps",
+            R.drawable.aab_stopclock,
+            hasTextField = false,
+            hasNumberField = true,
+            position = 5
+        )
+        val tit6 = TrackItemTemplate(
+            UUID.randomUUID().toString(),
+            false,
+            "Weight",
+            R.drawable.aab_weight,
+            hasTextField = false,
+            hasNumberField = true,
+            position = 6
+        )
+        realm.trackItemsTemplatesDao.addTemplate(tit0)
         realm.trackItemsTemplatesDao.addTemplate(tit1)
         realm.trackItemsTemplatesDao.addTemplate(tit2)
-//        realm.trackItemsTemplatesDao.addTemplate(tit3)
-//        realm.trackItemsTemplatesDao.addTemplate(tit4)
-//        realm.trackItemsTemplatesDao.addTemplate(tit5)
-//        realm.trackItemsTemplatesDao.addTemplate(tit6)
-//        realm.trackItemsTemplatesDao.addTemplate(tit7)
-//        realm.trackItemsTemplatesDao.addTemplate(tit8)
-        realm.trackItemsTemplatesDao.addTemplate(tit9)
-        realm.trackItemsTemplatesDao.addTemplate(tit10)
-        realm.trackItemsTemplatesDao.addTemplate(tit11)
+        realm.trackItemsTemplatesDao.addTemplate(tit3)
+        realm.trackItemsTemplatesDao.addTemplate(tit4)
+        realm.trackItemsTemplatesDao.addTemplate(tit5)
+        realm.trackItemsTemplatesDao.addTemplate(tit6)
 
         initTrackAndTemplateItems()
     }
