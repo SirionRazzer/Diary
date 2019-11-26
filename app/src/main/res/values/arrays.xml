@@ -46,9 +46,40 @@
         <item>Tractor</item>
         <item>Violin</item>
         <item>Waste</item>
-        <item>Whale</item>
+        <item>Shark</item>
         <item>Workspace</item>
         <item>Writing</item>
+        <item>Ballet</item>
+        <item>Ballet Girl</item>
+        <item>Basketball</item>
+        <item>Beer</item>
+        <item>Bike</item>
+        <item>Bottle</item>
+        <item>Cardiogram</item>
+        <item>Cat</item>
+        <item>Cycling</item>
+        <item>Dance</item>
+        <item>Dance 2</item>
+        <item>Dog</item>
+        <item>Dumbbell</item>
+        <item>Field</item>
+        <item>Flamenco</item>
+        <item>Hockey</item>
+        <item>Juice</item>
+        <item>Junk Food</item>
+        <item>Penalty</item>
+        <item>Pills</item>
+        <item>Pole</item>
+        <item>Rice</item>
+        <item>Rope</item>
+        <item>Running</item>
+        <item>Smartwatch</item>
+        <item>Stopclock</item>
+        <item>Swimming</item>
+        <item>Syringe</item>
+        <item>Weight</item>
+        <item>Wine</item>
+        <item>Yoga</item>
     </array>
 
     <array name="time_unit_array">
@@ -107,5 +138,37 @@
         <item>@drawable/aaa_circlecolor_whale</item>
         <item>@drawable/aaa_circlecolor_workspace</item>
         <item>@drawable/aaa_circlecolor_writing</item>
+        <item>@drawable/aab_ballet</item>
+        <item>@drawable/aab_ballet_girl</item>
+        <item>@drawable/aab_barbell</item>
+        <item>@drawable/aab_basketball</item>
+        <item>@drawable/aab_beer</item>
+        <item>@drawable/aab_bike</item>
+        <item>@drawable/aab_bottle</item>
+        <item>@drawable/aab_cardiogram</item>
+        <item>@drawable/aab_cat</item>
+        <item>@drawable/aab_cycling</item>
+        <item>@drawable/aab_dance</item>
+        <item>@drawable/aab_dance_2</item>
+        <item>@drawable/aab_dog</item>
+        <item>@drawable/aab_dumbbell</item>
+        <item>@drawable/aab_field</item>
+        <item>@drawable/aab_flamenco</item>
+        <item>@drawable/aab_hockey</item>
+        <item>@drawable/aab_juice</item>
+        <item>@drawable/aab_nofood</item>
+        <item>@drawable/aab_penalty</item>
+        <item>@drawable/aab_pills</item>
+        <item>@drawable/aab_pole</item>
+        <item>@drawable/aab_rice</item>
+        <item>@drawable/aab_rope</item>
+        <item>@drawable/aab_running</item>
+        <item>@drawable/aab_smartwatch</item>
+        <item>@drawable/aab_stopclock</item>
+        <item>@drawable/aab_swimming</item>
+        <item>@drawable/aab_syringe</item>
+        <item>@drawable/aab_weight</item>
+        <item>@drawable/aab_wine</item>
+        <item>@drawable/aab_yoga</item>
     </array>
 </resources>
