@@ -51,7 +51,7 @@ class HistoryAdapter(
         val trackItemsWithText: ArrayList<TrackItem> = arrayListOf()
         val trackItemsIds: ArrayList<String> = arrayListOf()
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        val showOnlyFilled = prefs.getBoolean("show_only_filled_items", false)
+        val showOnlyFilled = prefs.getBoolean("show_only_filled_items", true)
 
         allTrackItems!!.forEach {
             if (it.status || !showOnlyFilled) {

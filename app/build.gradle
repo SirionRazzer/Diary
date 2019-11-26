@@ -9,8 +9,8 @@ apply plugin: 'com.google.gms.google-services'
 
 // manually setup versioning
 ext.versionMajor = 0
-ext.versionMinor = 11
-ext.versionPatch = 0
+ext.versionMinor = 1
+ext.versionPatch = 2
 ext.minimumSdkVersion = 23
 
 android {
@@ -26,8 +26,13 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            applicationIdSuffix ".test"
+            versionNameSuffix "-TEST"
+            debuggable true
         }
     }
     dataBinding {
