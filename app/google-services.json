@@ -42,6 +42,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708333537487:android:f41010fc3350e2176f4fba",
+        "android_client_info": {
+          "package_name": "com.sirionrazzer.diary.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "708333537487-jkfsnno9rotaob8dhcb71qjt7t95phn8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9grTR3Jqu_II5o_PvB1UgoKe5Kr6uhrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "708333537487-jkfsnno9rotaob8dhcb71qjt7t95phn8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

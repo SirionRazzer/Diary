@@ -14,7 +14,8 @@
   ~ limitations under the License.
   -->
 
-<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory app:title="@string/user">
 
@@ -31,6 +32,8 @@
             app:key="auto_sync"
             app:title="@string/sync_automatically" />
         <SwitchPreferenceCompat
+            android:defaultValue="true"
+            app:enabled="true"
             app:key="show_only_filled_items"
             app:title="@string/show_only_filled_items" />
         <SwitchPreferenceCompat
