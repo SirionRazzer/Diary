@@ -6,10 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.textfield.TextInputLayout
 import com.sirionrazzer.diary.R
@@ -162,11 +159,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
         textInputLayout.addView(input)
 
         val alert = AlertDialog.Builder(context)
-            .setTitle(
-                context.resources.getString(R.string.activity_note_first_part) + headerText + context.resources.getString(
-                    R.string.activity_note_second_part
-                )
-            )
+            .setTitle(headerText)
             .setView(textInputLayout)
             .setPositiveButton(context.resources.getString(R.string.submit)) { dialog, _ ->
 
@@ -197,29 +190,28 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             0
         )
         val input = EditText(context)
-        input.inputType = InputType.TYPE_CLASS_NUMBER
+        input.inputType = InputType.TYPE_NUMBER_FLAG_DECIMAL
         textInputLayout.addView(input)
 
         val alert = AlertDialog.Builder(context)
-            .setTitle(
-                context.resources.getString(R.string.activity_note_first_part) + headerText + context.resources.getString(
-                    R.string.activity_note_second_part
-                )
-            )
+            .setTitle(headerText)
             .setView(textInputLayout)
             .setPositiveButton(context.resources.getString(R.string.submit)) { dialog, _ ->
-
                 val stringNum = input.text.toString()
-                mainViewModel.currentTrackItems.value?.get(itemPosition)!!.hasNumberField = true
-                if (stringNum.isNotEmpty()) {
-                    mainViewModel.currentTrackItems.value?.get(itemPosition)!!.numberField =
-                        stringNum.toFloat()
-                } else {
-                    mainViewModel.currentTrackItems.value?.get(itemPosition)!!.numberField = 0f
-                }
-                enableItemStatus(itemPosition, holder)
+                if (stringNum.toFloatOrNull() != null) {
 
-                dialog.cancel()
+                    mainViewModel.currentTrackItems.value?.get(itemPosition)!!.hasNumberField = true
+                    if (stringNum.isNotEmpty()) {
+                        mainViewModel.currentTrackItems.value?.get(itemPosition)!!.numberField =
+                            stringNum.toFloat()
+                    } else {
+                        mainViewModel.currentTrackItems.value?.get(itemPosition)!!.numberField = 0f
+                    }
+                    enableItemStatus(itemPosition, holder)
+                    dialog.cancel()
+                } else {
+                    Toast.makeText(context, "Not a number", Toast.LENGTH_SHORT).show()
+                }
             }
             .setNegativeButton(context.resources.getString(R.string.cancel)) { dialog, _ ->
                 dialog.cancel()
