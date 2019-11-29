@@ -189,6 +189,29 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
         mainViewModel.currentTrackItems.value?.get(position)!!.status = true
     }
 
+
+    private fun disableItemStatus(position: Int, holder: ViewHolder) {
+        Picasso.get()
+            .load(mainViewModel.currentTrackItems.value?.get(position)!!.image)
+            .into(holder.ivImage)
+        holder.status = false
+        holder.ivImage?.alpha = 0.4f
+        holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimary))
+        Log.d(
+            "TemplatesAdapter",
+            "Clicked: " + position + ". track item, the state was true and now is " + holder.status.toString()
+        )
+        mainViewModel.currentTrackItems.value?.get(position)!!.status = false
+        mainViewModel.currentTrackItems.value?.get(position)!!.hasTextField =
+            false
+        mainViewModel.currentTrackItems.value?.get(position)!!.hasNumberField =
+            false
+        mainViewModel.currentTrackItems.value?.get(position)!!.textField =
+            ""
+        mainViewModel.currentTrackItems.value?.get(position)!!.numberField =
+            0f
+    }
+
     private inner class ViewHolder {
         var tvName: TextView? = null
         var ivImage: ImageView? = null
@@ -219,12 +242,16 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             .setTitle(headerText)
             .setView(textInputLayout)
             .setPositiveButton(context.resources.getString(R.string.submit)) { dialog, _ ->
-
-                mainViewModel.currentTrackItems.value?.get(itemPosition)!!.textField =
-                    input.text.toString()
-                mainViewModel.currentTrackItems.value?.get(itemPosition)!!.hasTextField = true
-                enableItemStatus(itemPosition, holder)
-
+                if (input.text.toString().isNotEmpty()) {
+                    mainViewModel.currentTrackItems.value?.get(itemPosition)!!.textField =
+                        input.text.toString()
+                    mainViewModel.currentTrackItems.value?.get(itemPosition)!!.hasTextField = true
+                    enableItemStatus(itemPosition, holder)
+                } else {
+                    mainViewModel.currentTrackItems.value?.get(itemPosition)!!.textField = ""
+                    mainViewModel.currentTrackItems.value?.get(itemPosition)!!.hasTextField = false
+                    disableItemStatus(itemPosition, holder)
+                }
                 dialog.cancel()
             }
             .setNegativeButton(context.resources.getString(R.string.cancel)) { dialog, _ ->
@@ -259,19 +286,30 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             .setView(textInputLayout)
             .setPositiveButton(context.resources.getString(R.string.submit)) { dialog, _ ->
                 val stringNum = input.text.toString()
-                if (stringNum.toFloatOrNull() != null) {
-
-                    mainViewModel.currentTrackItems.value?.get(itemPosition)!!.hasNumberField = true
-                    if (stringNum.isNotEmpty()) {
-                        mainViewModel.currentTrackItems.value?.get(itemPosition)!!.numberField =
-                            stringNum.toFloat()
+                if (stringNum.isNotEmpty()) {
+                    if (stringNum.toFloatOrNull() != null) {
+                        mainViewModel.currentTrackItems.value?.get(itemPosition)!!.hasNumberField =
+                            true
+                        if (stringNum.isNotEmpty()) {
+                            mainViewModel.currentTrackItems.value?.get(itemPosition)!!.numberField =
+                                stringNum.toFloat()
+                        } else {
+                            mainViewModel.currentTrackItems.value?.get(itemPosition)!!.numberField =
+                                0f
+                        }
+                        enableItemStatus(itemPosition, holder)
+                        dialog.cancel()
                     } else {
-                        mainViewModel.currentTrackItems.value?.get(itemPosition)!!.numberField = 0f
+                        Toast.makeText(context, "Not a number", Toast.LENGTH_SHORT).show()
                     }
-                    enableItemStatus(itemPosition, holder)
-                    dialog.cancel()
                 } else {
-                    Toast.makeText(context, "Not a number", Toast.LENGTH_SHORT).show()
+                    mainViewModel.currentTrackItems.value?.get(itemPosition)!!.hasNumberField =
+                        false
+                        mainViewModel.currentTrackItems.value?.get(itemPosition)!!.numberField =
+                    0f
+
+                    disableItemStatus(itemPosition, holder)
+                    dialog.cancel()
                 }
             }
             .setNegativeButton(context.resources.getString(R.string.cancel)) { dialog, _ ->
