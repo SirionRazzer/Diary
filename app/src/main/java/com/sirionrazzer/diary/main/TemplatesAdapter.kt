@@ -1,6 +1,7 @@
 package com.sirionrazzer.diary.main
 
 import android.content.Context
+import android.text.Editable
 import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
@@ -89,34 +90,62 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
                             showDialogWithTextInput(
                                 position,
                                 mainViewModel.currentTrackItems.value?.get(position)!!.name,
-                                holder
+                                holder,
+                                null
                             )
                         }
                         mainViewModel.currentTemplateItems.value?.get(position)!!.hasNumberField -> {
                             showDialogWithNumberInput(
                                 position,
                                 mainViewModel.currentTrackItems.value?.get(position)!!.name,
-                                holder
+                                holder,
+                                null
                             )
                         }
                         else -> enableItemStatus(position, holder)
                     }
 
                 } else {
-                    Picasso.get().load(mainViewModel.currentTrackItems.value?.get(position)!!.image)
-                        .into(holder.ivImage)
-                    holder.status = false
-                    holder.ivImage?.alpha = 0.4f
-                    holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimary))
-                    Log.d(
-                        "TemplatesAdapter",
-                        "Clicked: " + position + ". track item, the state was true and now is " + holder.status.toString()
-                    )
-                    mainViewModel.currentTrackItems.value?.get(position)!!.status = false
-                    mainViewModel.currentTrackItems.value?.get(position)!!.hasTextField = false
-                    mainViewModel.currentTrackItems.value?.get(position)!!.hasNumberField = false
-                    mainViewModel.currentTrackItems.value?.get(position)!!.textField = ""
-                    mainViewModel.currentTrackItems.value?.get(position)!!.numberField = 0f
+                    when {
+                        hasFilledTextField(position) -> {
+                            showDialogWithTextInput(
+                                position,
+                                mainViewModel.currentTrackItems.value?.get(position)!!.name,
+                                holder,
+                                mainViewModel.currentTrackItems.value?.get(position)!!.textField
+                            )
+                        }
+                        hasFilledNumberField(position) -> {
+                            showDialogWithNumberInput(
+                                position,
+                                mainViewModel.currentTrackItems.value?.get(position)!!.name,
+                                holder,
+                                mainViewModel.currentTrackItems.value?.get(position)!!.numberField
+                            )
+                        }
+
+                        else -> {
+                            Picasso.get()
+                                .load(mainViewModel.currentTrackItems.value?.get(position)!!.image)
+                                .into(holder.ivImage)
+                            holder.status = false
+                            holder.ivImage?.alpha = 0.4f
+                            holder.tvName?.setTextColor(context.resources.getColor(R.color.colorPrimary))
+                            Log.d(
+                                "TemplatesAdapter",
+                                "Clicked: " + position + ". track item, the state was true and now is " + holder.status.toString()
+                            )
+                            mainViewModel.currentTrackItems.value?.get(position)!!.status = false
+                            mainViewModel.currentTrackItems.value?.get(position)!!.hasTextField =
+                                false
+                            mainViewModel.currentTrackItems.value?.get(position)!!.hasNumberField =
+                                false
+                            mainViewModel.currentTrackItems.value?.get(position)!!.textField =
+                                ""
+                            mainViewModel.currentTrackItems.value?.get(position)!!.numberField =
+                                0f
+                        }
+                    }
                 }
             }
         } else {
@@ -124,6 +153,26 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
         }
 
         return itemView
+    }
+
+    private fun hasFilledTextField(position: Int): Boolean {
+        if (mainViewModel.currentTemplateItems.value?.get(position)!!.hasTextField) {
+            val value = mainViewModel.currentTrackItems.value?.get(position)?.textField
+            value?.let {
+                return it.isNotEmpty()
+            }
+        }
+        return false
+    }
+
+    private fun hasFilledNumberField(position: Int): Boolean {
+        if (mainViewModel.currentTemplateItems.value?.get(position)!!.hasNumberField) {
+            val value = mainViewModel.currentTrackItems.value?.get(position)?.numberField
+            value?.let {
+                return (it > 0f) // TODO We don't know if the 0 wasn't stored intentionally, but this may be sufficient
+            }
+        }
+        return false
     }
 
     private fun enableItemStatus(position: Int, holder: ViewHolder) {
@@ -147,7 +196,12 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
         internal var status: Boolean = false
     }
 
-    private fun showDialogWithTextInput(itemPosition: Int, headerText: String, holder: ViewHolder) {
+    private fun showDialogWithTextInput(
+        itemPosition: Int,
+        headerText: String,
+        holder: ViewHolder,
+        value: String?
+    ) {
         val textInputLayout = TextInputLayout(context)
         textInputLayout.setPadding(
             19,
@@ -156,6 +210,9 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             0
         )
         val input = EditText(context)
+        value?.also {
+            input.text = Editable.Factory().newEditable(it)
+        }
         textInputLayout.addView(input)
 
         val alert = AlertDialog.Builder(context)
@@ -180,7 +237,8 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
     private fun showDialogWithNumberInput(
         itemPosition: Int,
         headerText: String,
-        holder: ViewHolder
+        holder: ViewHolder,
+        value: Float?
     ) {
         val textInputLayout = TextInputLayout(context)
         textInputLayout.setPadding(
@@ -191,6 +249,9 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
         )
         val input = EditText(context)
         input.inputType = InputType.TYPE_NUMBER_FLAG_DECIMAL
+        value?.also {
+            input.text = Editable.Factory().newEditable(it.toString())
+        }
         textInputLayout.addView(input)
 
         val alert = AlertDialog.Builder(context)
