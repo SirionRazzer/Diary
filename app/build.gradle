@@ -14,11 +14,11 @@ ext.versionPatch = 4
 ext.minimumSdkVersion = 23
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.sirionrazzer.diary"
         minSdkVersion project.ext.minimumSdkVersion
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode generateVersionCode()
         versionName generateVersionName()
         multiDexEnabled true
@@ -41,7 +41,7 @@ android {
     sourceSets {
         main {
             manifest.srcFile 'src/main/AndroidManifest.xml'
-            java.srcDirs = ['src']
+            java.srcDirs = ['src/main/java']
             res.srcDirs = ['src/main/res']
             assets.srcDirs = ['src/main/assets']
             jniLibs.srcDirs = ['libs/armeabi']
@@ -57,10 +57,12 @@ android {
     }
 }
 
+@SuppressWarnings("GrMethodMayBeStatic")
 private Integer generateVersionCode() {
     return ext.minimumSdkVersion * 10000000 + ext.versionMajor * 10000 + ext.versionMinor * 100 + ext.versionPatch
 }
 
+@SuppressWarnings("GrMethodMayBeStatic")
 private String generateVersionName() {
     String versionName = "${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
     return versionName
@@ -102,7 +104,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
-    implementation 'com.google.firebase:firebase-auth:19.1.0'
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.google.firebase:firebase-storage:19.1.0'
 
     // drawable toolbox

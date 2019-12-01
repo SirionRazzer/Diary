@@ -76,8 +76,8 @@ class HistoryActivity : AppCompatActivity() {
         if (user != null) {
 
             val filePath = "/user/${user.uid}/backup/realm.json"
-            when {
-                item?.itemId == R.id.sync_button -> {
+            when (item?.itemId) {
+                R.id.sync_button -> {
                     val storageRef = FirebaseStorage.getInstance().reference
                     val byteData = historyViewModel.getJsonData()
                     val fileRef = storageRef.child(filePath)
@@ -97,7 +97,7 @@ class HistoryActivity : AppCompatActivity() {
                     }
 
                 }
-                item?.itemId == R.id.download_button -> {
+                R.id.download_button -> {
                     val storageRef = FirebaseStorage.getInstance().reference
                     val file = storageRef.child(filePath)
 
@@ -121,7 +121,7 @@ class HistoryActivity : AppCompatActivity() {
                         ).show()
                     }
                 }
-                item?.itemId == R.id.logout_button -> {
+                R.id.logout_button -> {
 
                     FirebaseAuth.getInstance().signOut()
                     startActivity<BoardingActivity>()
@@ -129,10 +129,10 @@ class HistoryActivity : AppCompatActivity() {
                     Toast.makeText(this, getString(R.string.success_logged_out), Toast.LENGTH_SHORT)
                         .show()
                 }
-                item?.itemId == R.id.options_button -> {
+                R.id.options_button -> {
                     startActivity<SettingsActivity>()
                 }
-                item?.itemId == R.id.stats_button -> {
+                R.id.stats_button -> {
                     startActivity<ChooseTrackItemStatActivity>()
                 }
                 else -> Toast.makeText(
