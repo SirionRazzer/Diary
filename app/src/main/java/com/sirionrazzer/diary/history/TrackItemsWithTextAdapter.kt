@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
 import com.squareup.picasso.Picasso
@@ -17,7 +17,7 @@ class TrackItemsWithTextAdapter(
     private val clickListener: (String) -> Boolean
 ) : RecyclerView.Adapter<TrackItemsWithTextAdapter.ViewHolder>() {
 
-    class ViewHolder(val templateItemLayout: LinearLayout) :
+    class ViewHolder(val templateItemLayout: ConstraintLayout) :
         RecyclerView.ViewHolder(templateItemLayout) {
         fun bind(trackItemName: String, clickListener: (String) -> Boolean) {
             templateItemLayout.setOnLongClickListener { clickListener(trackItemName) }
@@ -33,7 +33,7 @@ class TrackItemsWithTextAdapter(
     ): TrackItemsWithTextAdapter.ViewHolder {
 
         val templateItemLayout =
-            inflater.inflate(R.layout.template_item_with_text, parent, false) as LinearLayout
+            inflater.inflate(R.layout.template_item_with_text, parent, false) as ConstraintLayout
 
         return TrackItemsWithTextAdapter.ViewHolder(templateItemLayout)
     }
