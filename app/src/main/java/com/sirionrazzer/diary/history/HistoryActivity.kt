@@ -1,15 +1,13 @@
 package com.sirionrazzer.diary.history
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import com.sirionrazzer.diary.R
@@ -18,12 +16,10 @@ import com.sirionrazzer.diary.main.MainActivity
 import com.sirionrazzer.diary.settings.SettingsActivity
 import com.sirionrazzer.diary.stats.ChooseTrackItemStatActivity
 import com.sirionrazzer.diary.util.DateUtils
-import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_history.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.startActivity
 import org.threeten.bp.LocalDate
-import java.io.File
 
 class HistoryActivity : AppCompatActivity() {
 
@@ -39,7 +35,7 @@ class HistoryActivity : AppCompatActivity() {
         toolbar.setTitle(R.string.title_history_activity)
         setSupportActionBar(toolbar)
 
-        val viewManager = LinearLayoutManager(this)
+        val viewManager = GridLayoutManager(this, 1)
         viewAdapter = HistoryAdapter(this, historyViewModel)
 
         rvHistoryItems.adapter = viewAdapter

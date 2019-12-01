@@ -60,7 +60,7 @@ class TrackItemDao(val realm: Realm) {
     }
 
     fun getAllTrackItemsSortByDate(): List<TrackItem> {
-        var items = realm.where(TrackItem::class.java).findAll().sort("date")
+        var items = realm.where(TrackItem::class.java).findAll().sort("date", Sort.DESCENDING)
         return items.map { item -> item as TrackItem }
     }
 
