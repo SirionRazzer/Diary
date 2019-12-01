@@ -10,12 +10,12 @@ Android app for tracking daily routine
 [![Build Status](https://travis-ci.org/SirionRazzer/Diary.svg?branch=master)](https://travis-ci.org/SirionRazzer/Diary)
 
 ### Features
-[checkbox:checked] Create custom activities, reorder them (drag'n'drop in Activity Manager, remove unused (longpress in Activity Manager)
-[checkbox:checked] Edit previous records
-[checkbox:checked] Create records for any date (click on date in My Day to open date picker)
-[checkbox:checked] View activity's history and statistics - longpress on activity in the History overview 
-[checkbox:checked] Backup & Restore (via Firebase)
-[checkbox:unchecked] App shortcut for launcher
-[checkbox:unchecked] Dark mode
-[checkbox:unchecked] Widget
-[checkbox:unchecked] Google Fit integration
+:heavy_check_mark: Create custom activities, reorder them (drag'n'drop in Activity Manager, remove unused (longpress in Activity Manager)
+:heavy_check_mark: Edit previous records
+:heavy_check_mark: Create records for any date (click on date in My Day to open date picker)
+:heavy_check_mark: View activity's history and statistics - longpress on activity in the History overview 
+:heavy_check_mark: Backup & Restore (via Firebase)
+:white_check_mark: App shortcut for launcher
+:white_check_mark: Dark mode
+:white_check_mark: Widget
+:white_check_mark: Google Fit integration
