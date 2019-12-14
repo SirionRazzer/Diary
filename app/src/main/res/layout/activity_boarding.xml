@@ -43,6 +43,7 @@
                     android:layout_width="match_parent">
 
                     <LinearLayout
+                        android:id="@+id/llAuthBtns"
                         android:gravity="center_horizontal"
                         android:layout_alignParentEnd="true"
                         android:layout_below="@+id/tilPassword"
@@ -53,7 +54,7 @@
 
                         <Button
                             android:background="@drawable/button_background"
-                            android:id="@+id/signIn"
+                            android:id="@+id/signInBtn"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="10dp"
                             android:layout_weight="0.5"
@@ -66,7 +67,7 @@
 
                         <com.google.android.material.button.MaterialButton
                             style="@style/Widget.MaterialComponents.Button.TextButton"
-                            android:id="@+id/skipSignIn"
+                            android:id="@+id/anonymousRegisterBtn"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
                             android:layout_width="0dp"

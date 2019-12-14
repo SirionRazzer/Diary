@@ -7,6 +7,9 @@ import com.sirionrazzer.diary.system.dagger.AppComponent
 import com.sirionrazzer.diary.system.dagger.DaggerAppComponent
 import com.sirionrazzer.diary.system.dagger.StorageModule
 import io.realm.Realm
+import io.realm.RealmConfiguration
+import main.java.com.sirionrazzer.diary.system.MyRealmMigration
+import java.io.File
 
 class Diary : Application() {
 
@@ -20,15 +23,60 @@ class Diary : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
-        //init realmdb this covers all use of realm within the project.
-        Realm.init(this)
-        AndroidThreeTen.init(this);
-
+        AndroidThreeTen.init(this)
         app = this
+    }
+
+    fun installEncryptedRealm(key: ByteArray) {
+        Realm.init(this)
+        Realm.setDefaultConfiguration(buildRealmConfiguration(key, null))
+    }
+
+    /**
+     * Keys have to be 64-byte long
+     *
+     * @param oldKey
+     * @param newKey
+     */
+    fun reencryptRealm(newKey: ByteArray) {
+//        val newName = System.currentTimeMillis().toString() + ".db"
+//        val realm = Realm.getDefaultInstance()
+//        realm.writeEncryptedCopyTo(
+//            File(
+//                applicationContext.filesDir, newName
+//            ), newKey
+//        )
+//        realm.close()
+//        realm.deleteAll()
+//        Realm.setDefaultConfiguration(buildRealmConfiguration(newKey, newName))
+////        // TODO sync db with cloud after reencryption
+    }
+
+    private fun buildRealmConfiguration(key: ByteArray, name: String?): RealmConfiguration {
+        if (name != null) {
+            return RealmConfiguration.Builder()
+                .name(name)
+                .encryptionKey(key)
+                .schemaVersion(REALM_MIGRATION_VERSION)
+                .migration(MyRealmMigration())
+                .build()
+        } else {
+            return RealmConfiguration.Builder()
+                .encryptionKey(key)
+                .schemaVersion(REALM_MIGRATION_VERSION)
+                .migration(MyRealmMigration())
+                .build()
+        }
     }
 
     companion object {
         lateinit var app: Diary
+        private const val REALM_MIGRATION_VERSION = 0L
+        fun installEncryptedRealm(key: ByteArray) {
+            app.installEncryptedRealm(key)
+        }
+        fun reencryptRealm(newKey: ByteArray) {
+            app.reencryptRealm(newKey)
+        }
     }
 }
