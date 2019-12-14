@@ -53,6 +53,7 @@ class HistoryViewModel : ViewModel() {
         }
 
         Log.d("HistoryViewModel", trackItems.size.toString())
+        realm.close()
     }
 
     fun getJsonData(): ByteArray {
@@ -62,6 +63,7 @@ class HistoryViewModel : ViewModel() {
             .map { realm.copyFromRealm(it) }
 
         val model = AppDataModel(items, templates)
+        realm.close()
         return Gson().toJson(model).toByteArray(Charset.defaultCharset())
     }
 
@@ -85,6 +87,7 @@ class HistoryViewModel : ViewModel() {
         }
         realm.trackItemDao.deleteAllTrackItems()
         hm.trackItems.forEach { realm.trackItemDao.addTrackItem(it) }
+        realm.close()
     }
 }
 

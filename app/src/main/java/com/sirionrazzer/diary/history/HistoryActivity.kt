@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -13,16 +14,19 @@ import com.google.firebase.storage.FirebaseStorage
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.boarding.BoardingActivity
 import com.sirionrazzer.diary.main.MainActivity
+import com.sirionrazzer.diary.profile.LinkAnonymousAccountActivity
 import com.sirionrazzer.diary.settings.SettingsActivity
 import com.sirionrazzer.diary.stats.ChooseTrackItemStatActivity
 import com.sirionrazzer.diary.util.DateUtils
 import kotlinx.android.synthetic.main.activity_history.*
 import kotlinx.android.synthetic.main.toolbar.*
+import main.java.com.sirionrazzer.diary.boarding.AuthViewModel
 import org.jetbrains.anko.startActivity
 import org.threeten.bp.LocalDate
 
 class HistoryActivity : AppCompatActivity() {
 
+    lateinit var authViewModel: AuthViewModel
     lateinit var historyViewModel: HistoryViewModel
     lateinit var viewAdapter: HistoryAdapter
 
@@ -30,7 +34,8 @@ class HistoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
 
-        historyViewModel = createViewModel()
+        authViewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
+        historyViewModel = ViewModelProviders.of(this).get(HistoryViewModel::class.java)
 
         toolbar.setTitle(R.string.title_history_activity)
         setSupportActionBar(toolbar)
@@ -46,6 +51,14 @@ class HistoryActivity : AppCompatActivity() {
             intent.putExtra("editDate", LocalDate.now().toEpochDay() * DateUtils.DAY_MILLISECONDS)
             startActivity(intent)
         }
+
+        // TODO FIX THIS if user was anonymouse and then created account through menu, reset menu and resync data
+//        authViewModel.isAnonymous.observe(this, Observer {
+//            if (!it) {
+//                toolbar.setTitle(R.string.title_history_activity)
+//                setSupportActionBar(toolbar)
+//            }
+//        })
     }
 
     override fun onStart() {
@@ -58,13 +71,22 @@ class HistoryActivity : AppCompatActivity() {
         viewAdapter.notifyDataSetChanged()
     }
 
-    private fun createViewModel(): HistoryViewModel {
-        return ViewModelProviders.of(this).get(HistoryViewModel::class.java)
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         if (FirebaseAuth.getInstance().currentUser != null) {
             menuInflater.inflate(R.menu.history_popup_menu, menu)
+
+            val isAnonymousUser = authViewModel.isAnonymous.value as Boolean
+            if (isAnonymousUser) {
+                menu?.findItem(R.id.logout_button)?.isEnabled = false
+                menu?.findItem(R.id.logout_button)?.isVisible = false
+                menu?.findItem(R.id.create_account_button)?.isVisible = true
+                menu?.findItem(R.id.create_account_button)?.isEnabled = true
+            } else {
+                menu?.findItem(R.id.logout_button)?.isEnabled = true
+                menu?.findItem(R.id.logout_button)?.isVisible = true
+                menu?.findItem(R.id.create_account_button)?.isVisible = false
+                menu?.findItem(R.id.create_account_button)?.isEnabled = false
+            }
         } else {
             menuInflater.inflate(R.menu.history_login_menu, menu)
         }
@@ -134,6 +156,9 @@ class HistoryActivity : AppCompatActivity() {
                 }
                 R.id.stats_button -> {
                     startActivity<ChooseTrackItemStatActivity>()
+                }
+                R.id.create_account_button -> {
+                    startActivity<LinkAnonymousAccountActivity>()
                 }
                 else -> Toast.makeText(
                     this,

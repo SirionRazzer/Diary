@@ -32,7 +32,11 @@ class AuthViewModel : ViewModel(), AuthInterface {
 
     init {
         Diary.app.appComponent.inject(this)
-        if (firebaseAuth.currentUser != null) isLoggedIn.value = true
+        val user = firebaseAuth.currentUser
+        if (user != null) {
+            isAnonymous.value = user.isAnonymous
+            isLoggedIn.value = true
+        }
     }
 
     override fun register(email: String, pw: String) {
@@ -75,9 +79,8 @@ class AuthViewModel : ViewModel(), AuthInterface {
     override fun linkAnonymousToPassword(email: String, pw: String) {
         val credential = EmailAuthProvider.getCredential(email, pw)
         firebaseAuth.currentUser?.linkWithCredential(credential)
-            ?.addOnCompleteListener {task ->
+            ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // TODO reencrypt Realm
                     storeHashedPassword(pw)
                     isAnonymous.value = false
                     isLoggedIn.value = true
@@ -125,7 +128,11 @@ class AuthViewModel : ViewModel(), AuthInterface {
             MessageDigest.getInstance("SHA-256").digest(key, 0, key.size)
             userStorage.storePasswordDigest(key)
         } else {
-            key = Base64.decode(pw, Base64.NO_WRAP)
+            val decoded = Base64.decode(pw, Base64.NO_WRAP)
+            (decoded.indices).forEach { i ->
+                key[i] = decoded[i]
+            }
+
             MessageDigest.getInstance("SHA-256").digest(key, 0, key.size)
             userStorage.storePasswordDigest(key)
         }

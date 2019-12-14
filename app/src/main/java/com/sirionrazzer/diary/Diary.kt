@@ -28,6 +28,7 @@ class Diary : Application() {
     }
 
     fun installEncryptedRealm(key: ByteArray) {
+        // TODO remove any realm if already installed and initiated
         Realm.init(this)
         Realm.setDefaultConfiguration(buildRealmConfiguration(key, null))
     }
@@ -39,17 +40,18 @@ class Diary : Application() {
      * @param newKey
      */
     fun reencryptRealm(newKey: ByteArray) {
-//        val newName = System.currentTimeMillis().toString() + ".db"
-//        val realm = Realm.getDefaultInstance()
-//        realm.writeEncryptedCopyTo(
-//            File(
-//                applicationContext.filesDir, newName
-//            ), newKey
-//        )
-//        realm.close()
-//        realm.deleteAll()
-//        Realm.setDefaultConfiguration(buildRealmConfiguration(newKey, newName))
-////        // TODO sync db with cloud after reencryption
+        val newName = System.currentTimeMillis().toString() + ".db"
+        val realm = Realm.getDefaultInstance()
+        realm.writeEncryptedCopyTo(
+            File(
+                applicationContext.filesDir, newName
+            ), newKey
+        )
+        val config = Realm.getDefaultConfiguration()
+        realm.close()
+        Realm.deleteRealm(config!!)
+        Realm.setDefaultConfiguration(buildRealmConfiguration(newKey, newName))
+        // TODO sync db with Firebase after reencryption
     }
 
     private fun buildRealmConfiguration(key: ByteArray, name: String?): RealmConfiguration {
@@ -72,11 +74,5 @@ class Diary : Application() {
     companion object {
         lateinit var app: Diary
         private const val REALM_MIGRATION_VERSION = 0L
-        fun installEncryptedRealm(key: ByteArray) {
-            app.installEncryptedRealm(key)
-        }
-        fun reencryptRealm(newKey: ByteArray) {
-            app.reencryptRealm(newKey)
-        }
     }
 }

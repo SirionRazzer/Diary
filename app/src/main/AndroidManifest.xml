@@ -38,6 +38,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".profile.LinkAnonymousAccountActivity" />
 
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"

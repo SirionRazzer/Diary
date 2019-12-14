@@ -80,6 +80,10 @@
     <string name="delete_history">Delete History</string>
     <string name="compact_ui">Compact UI</string>
     <string name="creator_instructions_caption">Check Value field in the Stats overview</string>
+    <string name="create_account">Create Account</string>
+    <string name="not_now">Not now</string>
+    <string name="link_anonymous_account">Enter your new credentials</string>
+    <string name="linkAccount">Create account</string>
 
     <string-array name="input_fields">
         <item>None</item>

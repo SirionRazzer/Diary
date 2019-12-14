@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimaryDark"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <RelativeLayout
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:padding="8dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:elevation="16dp"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            app:cardCornerRadius="4dp"
+            app:cardUseCompatPadding="true">
+
+            <RelativeLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+
+                <ImageView
+                    android:contentDescription="@string/app_logo"
+                    android:id="@+id/ivLogo"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="110dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="36dp"
+                    android:layout_width="200dp"
+                    android:src="@drawable/ic_logo" />
+
+                <RelativeLayout
+                    android:background="@color/white"
+                    android:layout_below="@id/ivLogo"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="36dp"
+                    android:layout_width="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/llAuthBtns"
+                        android:gravity="center_horizontal"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/tilPassword"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <Button
+                            android:background="@drawable/button_background"
+                            android:id="@+id/signInBtn"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="0.5"
+                            android:layout_width="0dp"
+                            android:text="@string/sign_in"
+                            android:textAllCaps="true"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+
+                        <com.google.android.material.button.MaterialButton
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:id="@+id/notNowBtn"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:layout_width="0dp"
+                            android:text="@string/not_now" />
+                    </LinearLayout>
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:id="@+id/tvSubtitle"
+                        android:layout_below="@id/tvHeading"
+                        android:layout_centerHorizontal="false"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="wrap_content"
+                        android:text="@string/link_anonymous_account"
+                        android:textColor="@color/primaryText" />
+
+                    <TextView
+                        style="@style/TextAppearance.MaterialComponents.Headline3"
+                        android:id="@+id/tvHeading"
+                        android:layout_centerHorizontal="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:layout_width="wrap_content"
+                        android:text="@string/linkAccount"
+                        android:textColor="@color/primaryText" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                        android:id="@+id/tilPassword"
+                        android:layout_below="@id/tilEmail"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:layout_width="match_parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:drawableEnd="@drawable/ic_lock_outline_black_24dp"
+                            android:hint="@string/hint_your_password"
+                            android:id="@+id/etPassword"
+                            android:inputType="textPassword"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="-8dp"
+                            android:layout_width="match_parent"
+                            android:textColor="@color/primaryText"
+                            android:textColorHint="@color/hintText" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                        android:id="@+id/tilEmail"
+                        android:layout_below="@id/tvSubtitle"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:layout_width="match_parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:drawableEnd="@drawable/ic_mail_outline_black_24dp"
+                            android:hint="@string/hint_your_email"
+                            android:id="@+id/etEmail"
+                            android:inputType="textEmailAddress"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="-8dp"
+                            android:layout_width="match_parent"
+                            android:textColor="@color/primaryText"
+                            android:textColorHint="@color/hintText" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <include layout="@layout/toolbar" />
+    </RelativeLayout>
+</ScrollView>

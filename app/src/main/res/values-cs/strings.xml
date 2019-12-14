@@ -27,7 +27,7 @@
     <string name="hint_your_email">Váš email</string>
     <string name="hint_your_password">Vaše heslo</string>
     <string name="history_deleted">Historie byla úspěšně smazána.</string>
-    <string name="invalid_pa_email">Email hesla není správný</string>
+    <string name="invalid_pa_email">Email nebo heslo není správné</string>
     <string name="last_time_unit">Poslední</string>
     <string name="login">Login</string>
     <string name="logout">Odhlášení</string>
@@ -81,4 +81,8 @@
     <string name="delete_history">Smazat historii</string>
     <string name="compact_ui">Kompatní vzhled</string>
     <string name="creator_instructions_caption">Pole hodnoty využijete ve Statistickém přehledu</string>
+    <string name="create_account">Vytvořit účet</string>
+    <string name="not_now">Nyní ne</string>
+    <string name="link_anonymous_account">Zadejte nové přihlašovací údaje</string>
+    <string name="linkAccount">Vytvořit účet</string>
 </resources>
