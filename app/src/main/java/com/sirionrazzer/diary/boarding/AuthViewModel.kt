@@ -129,7 +129,7 @@ class AuthViewModel : ViewModel(), AuthInterface {
             userStorage.storePasswordDigest(key)
         } else {
             val decoded = Base64.decode(pw, Base64.NO_WRAP)
-            (decoded.indices).forEach { i ->
+            (decoded.indices).forEach { i -> // TODO this doesn't work good
                 key[i] = decoded[i]
             }
 

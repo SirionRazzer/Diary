@@ -40,16 +40,17 @@ class Diary : Application() {
      * @param newKey
      */
     fun reencryptRealm(newKey: ByteArray) {
-        val newName = System.currentTimeMillis().toString() + ".db"
-        val realm = Realm.getDefaultInstance()
+        val newName = System.currentTimeMillis().toString() + ".realm"
+        val config = Realm.getDefaultConfiguration()
+        val realm = Realm.getInstance(config)
         realm.writeEncryptedCopyTo(
             File(
                 applicationContext.filesDir, newName
             ), newKey
         )
-        val config = Realm.getDefaultConfiguration()
         realm.close()
-        Realm.deleteRealm(config!!)
+        Realm.deleteRealm(config)
+
         Realm.setDefaultConfiguration(buildRealmConfiguration(newKey, newName))
         // TODO sync db with Firebase after reencryption
     }

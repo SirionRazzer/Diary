@@ -2,6 +2,7 @@ package com.sirionrazzer.diary.history
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -52,7 +53,7 @@ class HistoryActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // TODO FIX THIS if user was anonymouse and then created account through menu, reset menu and resync data
+        // TODO FIX THIS if user was anonymous and then created account through menu, reset menu and resync data
 //        authViewModel.isAnonymous.observe(this, Observer {
 //            if (!it) {
 //                toolbar.setTitle(R.string.title_history_activity)
@@ -64,6 +65,11 @@ class HistoryActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         refreshUI()
+    }
+
+    override fun onDestroy() {
+        Log.d(HistoryActivity::class.java.simpleName, "Desroyed")
+        super.onDestroy()
     }
 
     private fun refreshUI() {
@@ -159,6 +165,8 @@ class HistoryActivity : AppCompatActivity() {
                 }
                 R.id.create_account_button -> {
                     startActivity<LinkAnonymousAccountActivity>()
+                    historyViewModel.realm.close()
+                    finish()
                 }
                 else -> Toast.makeText(
                     this,

@@ -1,5 +1,6 @@
 package com.sirionrazzer.diary.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -8,6 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
+import com.sirionrazzer.diary.boarding.BoardingActivity
+import com.sirionrazzer.diary.history.HistoryActivity
 import com.sirionrazzer.diary.util.StringUtils
 import kotlinx.android.synthetic.main.activity_boarding.etEmail
 import kotlinx.android.synthetic.main.activity_boarding.etPassword
@@ -25,6 +28,7 @@ class LinkAnonymousAccountActivity : AppCompatActivity() {
         authViewModel.isAnonymous.observe(this, Observer {
             if (!it) {
                 Diary.app.reencryptRealm(authViewModel.getEncryptedPassword())
+                startActivity(Intent(this, HistoryActivity::class.java))
                 finish()
             }
         })
@@ -47,7 +51,14 @@ class LinkAnonymousAccountActivity : AppCompatActivity() {
         }
 
         notNowBtn.setOnClickListener {
+            startActivity(Intent(this, HistoryActivity::class.java))
             finish()
         }
+    }
+
+    override fun onBackPressed() {
+        startActivity(Intent(this, HistoryActivity::class.java))
+        finish()
+        super.onBackPressed()
     }
 }
