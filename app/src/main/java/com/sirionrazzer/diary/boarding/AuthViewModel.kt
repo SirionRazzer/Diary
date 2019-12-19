@@ -126,7 +126,6 @@ class AuthViewModel : ViewModel(), AuthInterface {
         if (pw == null) {
             SecureRandom().nextBytes(key)
             MessageDigest.getInstance("SHA-256").digest(key, 0, key.size)
-            userStorage.storePasswordDigest(key)
         } else {
             val decoded = Base64.decode(pw, Base64.NO_WRAP)
             (decoded.indices).forEach { i -> // TODO this doesn't work good
@@ -134,8 +133,8 @@ class AuthViewModel : ViewModel(), AuthInterface {
             }
 
             MessageDigest.getInstance("SHA-256").digest(key, 0, key.size)
-            userStorage.storePasswordDigest(key)
         }
+        userStorage.storePasswordDigest(key)
     }
 
     fun getEncryptedPassword(): ByteArray {

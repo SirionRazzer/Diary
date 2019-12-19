@@ -67,6 +67,12 @@ class HistoryViewModel : ViewModel() {
         return Gson().toJson(model).toByteArray(Charset.defaultCharset())
     }
 
+    // HACK to close all realms in case user reencrypts Realm (creates account, changes password)
+    fun closeRealms() {
+        realm.close()
+        _realm.close()
+    }
+
     override fun onCleared() {
         super.onCleared()
         //realm.close()

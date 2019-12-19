@@ -150,8 +150,9 @@ class HistoryActivity : AppCompatActivity() {
                     }
                 }
                 R.id.logout_button -> {
-
+                    // TODO handle realm DB renaming and recreating if another user tries to sign in (works ok for the same user)
                     FirebaseAuth.getInstance().signOut()
+                    authViewModel.isLoggedIn.value = false
                     startActivity<BoardingActivity>()
                     finish()
                     Toast.makeText(this, getString(R.string.success_logged_out), Toast.LENGTH_SHORT)
@@ -165,7 +166,7 @@ class HistoryActivity : AppCompatActivity() {
                 }
                 R.id.create_account_button -> {
                     startActivity<LinkAnonymousAccountActivity>()
-                    historyViewModel.realm.close()
+                    historyViewModel.closeRealms() // HACK to clean all realms in history view model when user possibly will reencrypt realms with new account
                     finish()
                 }
                 else -> Toast.makeText(

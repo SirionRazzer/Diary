@@ -1,6 +1,7 @@
 package com.sirionrazzer.diary
 
 import android.app.Application
+import android.content.Context
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.sirionrazzer.diary.system.dagger.ApiModule
 import com.sirionrazzer.diary.system.dagger.AppComponent
@@ -24,13 +25,15 @@ class Diary : Application() {
     override fun onCreate() {
         super.onCreate()
         AndroidThreeTen.init(this)
+        Realm.init(this)
+        Realm.removeDefaultConfiguration()
         app = this
     }
 
     fun installEncryptedRealm(key: ByteArray) {
-        // TODO remove any realm if already installed and initiated
-        Realm.init(this)
-        Realm.setDefaultConfiguration(buildRealmConfiguration(key, null))
+        // HACK: store fb filename in shared prefs.. realm somehow can't remember it
+        val realmFileName = getSharedPreferences("user_prefs", Context.MODE_PRIVATE).getString("realm_file", null) ?: "diary.realm"
+        Realm.setDefaultConfiguration(buildRealmConfiguration(key, realmFileName))
     }
 
     /**
@@ -41,35 +44,23 @@ class Diary : Application() {
      */
     fun reencryptRealm(newKey: ByteArray) {
         val newName = System.currentTimeMillis().toString() + ".realm"
-        val config = Realm.getDefaultConfiguration()
-        val realm = Realm.getInstance(config)
-        realm.writeEncryptedCopyTo(
-            File(
-                applicationContext.filesDir, newName
-            ), newKey
-        )
+        val newFile = File(applicationContext.filesDir, newName)
+        getSharedPreferences("user_prefs", Context.MODE_PRIVATE).edit().putString("realm_file", newName).apply()
+        val realm = Realm.getInstance(Realm.getDefaultConfiguration())
+        realm.writeEncryptedCopyTo(newFile, newKey)
         realm.close()
-        Realm.deleteRealm(config)
-
+        Realm.deleteRealm(Realm.getDefaultConfiguration())
+        Realm.removeDefaultConfiguration()
         Realm.setDefaultConfiguration(buildRealmConfiguration(newKey, newName))
-        // TODO sync db with Firebase after reencryption
     }
 
-    private fun buildRealmConfiguration(key: ByteArray, name: String?): RealmConfiguration {
-        if (name != null) {
-            return RealmConfiguration.Builder()
-                .name(name)
-                .encryptionKey(key)
-                .schemaVersion(REALM_MIGRATION_VERSION)
-                .migration(MyRealmMigration())
-                .build()
-        } else {
-            return RealmConfiguration.Builder()
-                .encryptionKey(key)
-                .schemaVersion(REALM_MIGRATION_VERSION)
-                .migration(MyRealmMigration())
-                .build()
-        }
+    private fun buildRealmConfiguration(key: ByteArray, name: String): RealmConfiguration {
+        return RealmConfiguration.Builder()
+            .name(name)
+            .encryptionKey(key)
+            .schemaVersion(REALM_MIGRATION_VERSION)
+            .migration(MyRealmMigration())
+            .build()
     }
 
     companion object {
