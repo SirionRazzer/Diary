@@ -85,4 +85,5 @@
     <string name="not_now">Nyní ne</string>
     <string name="link_anonymous_account">Zadejte nové přihlašovací údaje</string>
     <string name="linkAccount">Vytvořit účet</string>
+    <string name="user_change_not_allowed">Použitý email se neshoduje s uloženým, použití jiného účtu není možné</string>
 </resources>

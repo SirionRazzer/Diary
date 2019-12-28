@@ -84,6 +84,7 @@
     <string name="not_now">Not now</string>
     <string name="link_anonymous_account">Enter your new credentials</string>
     <string name="linkAccount">Create account</string>
+    <string name="user_change_not_allowed">Used email differs to the stored one, you can\'t use another account with this app</string>
 
     <string-array name="input_fields">
         <item>None</item>

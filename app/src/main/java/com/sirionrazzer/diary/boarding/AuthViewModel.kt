@@ -45,6 +45,7 @@ class AuthViewModel : ViewModel(), AuthInterface {
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     storeHashedPassword(pw)
+                    updateEmail(email)
                     isAnonymous.value = false
                     isLoggedIn.value = true
                 } else {
@@ -53,6 +54,7 @@ class AuthViewModel : ViewModel(), AuthInterface {
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
                                 storeHashedPassword(pw)
+                                updateEmail(email)
                                 isAnonymous.value = false
                                 isLoggedIn.value = true
                             }
@@ -82,6 +84,7 @@ class AuthViewModel : ViewModel(), AuthInterface {
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     storeHashedPassword(pw)
+                    updateEmail(email)
                     isAnonymous.value = false
                     isLoggedIn.value = true
                 } else {
@@ -96,6 +99,7 @@ class AuthViewModel : ViewModel(), AuthInterface {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     storeHashedPassword(pw)
+                    updateEmail(email)
                     isAnonymous.value = false
                     isLoggedIn.value = true
                 } else {
@@ -135,6 +139,12 @@ class AuthViewModel : ViewModel(), AuthInterface {
             MessageDigest.getInstance("SHA-256").digest(key, 0, key.size)
         }
         userStorage.storePasswordDigest(key)
+    }
+
+    private fun updateEmail(email: String) {
+        userStorage.updateSettings { lus ->
+            lus.email = email
+        }
     }
 
     fun getEncryptedPassword(): ByteArray {

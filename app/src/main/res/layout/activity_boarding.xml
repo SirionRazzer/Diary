@@ -64,7 +64,6 @@
                             android:textColor="@color/white"
                             android:textStyle="bold" />
 
-
                         <com.google.android.material.button.MaterialButton
                             style="@style/Widget.MaterialComponents.Button.TextButton"
                             android:id="@+id/anonymousRegisterBtn"
