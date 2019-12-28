@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -52,14 +51,6 @@ class HistoryActivity : AppCompatActivity() {
             intent.putExtra("editDate", LocalDate.now().toEpochDay() * DateUtils.DAY_MILLISECONDS)
             startActivity(intent)
         }
-
-        // TODO FIX THIS if user was anonymous and then created account through menu, reset menu and resync data
-//        authViewModel.isAnonymous.observe(this, Observer {
-//            if (!it) {
-//                toolbar.setTitle(R.string.title_history_activity)
-//                setSupportActionBar(toolbar)
-//            }
-//        })
     }
 
     override fun onStart() {
@@ -80,22 +71,27 @@ class HistoryActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         if (FirebaseAuth.getInstance().currentUser != null) {
             menuInflater.inflate(R.menu.history_popup_menu, menu)
-
-            val isAnonymousUser = authViewModel.isAnonymous.value as Boolean
-            if (isAnonymousUser) {
-                menu?.findItem(R.id.logout_button)?.isEnabled = false
-                menu?.findItem(R.id.logout_button)?.isVisible = false
-                menu?.findItem(R.id.create_account_button)?.isVisible = true
-                menu?.findItem(R.id.create_account_button)?.isEnabled = true
-            } else {
-                menu?.findItem(R.id.logout_button)?.isEnabled = true
-                menu?.findItem(R.id.logout_button)?.isVisible = true
-                menu?.findItem(R.id.create_account_button)?.isVisible = false
-                menu?.findItem(R.id.create_account_button)?.isEnabled = false
-            }
         } else {
             menuInflater.inflate(R.menu.history_login_menu, menu)
         }
+        return true
+    }
+
+    override fun onMenuOpened(featureId: Int, menu: Menu?): Boolean {
+        val isAnonymousUser = authViewModel.isAnonymous.value as Boolean
+        val logoutBtn = menu?.findItem(R.id.logout_button)
+        val createAccBtn = menu?.findItem(R.id.create_account_button)
+        val syncBtn = menu?.findItem(R.id.sync_button)
+        val downloadBtn = menu?.findItem(R.id.download_button)
+        if (isAnonymousUser) {
+            logoutBtn?.isEnabled = false
+            syncBtn?.isEnabled = false
+            downloadBtn?.isEnabled = false
+        } else {
+            createAccBtn?.isVisible = false
+            createAccBtn?.isEnabled = false
+        }
+
         return true
     }
 
