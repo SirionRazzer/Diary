@@ -87,4 +87,5 @@
     <string name="linkAccount">Vytvořit účet</string>
     <string name="user_change_not_allowed">Použitý email se neshoduje s uloženým, použití jiného účtu není možné</string>
     <string name="insert_stored_credentials">Odemkněte svoje poznámky. Přihlašovací údaje musí být stejné jako uložené.</string>
+    <string name="badges_info">Získávejte odznaky za 2+ dní dlouhé série</string>
 </resources>

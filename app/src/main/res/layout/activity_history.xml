@@ -200,7 +200,7 @@
                         android:id="@+id/tvInfoCaption"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Get more badges for 2+ days long strikes"
+                        android:text="@string/badges_info"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"

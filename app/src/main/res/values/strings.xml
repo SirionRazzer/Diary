@@ -86,6 +86,7 @@
     <string name="linkAccount">Create account</string>
     <string name="user_change_not_allowed">Used email differs to the stored one, you can\'t use another account with this app</string>
     <string name="insert_stored_credentials">Unlock your notes. Credentials must be the same as stored ones.</string>
+    <string name="badges_info">Get more badges for 2+ days long strikes</string>
 
     <string-array name="input_fields">
         <item>None</item>
