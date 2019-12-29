@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.AppBarLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
@@ -49,11 +49,11 @@ class HistoryActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListene
 
         ab.addOnOffsetChangedListener(this)
 
-        val viewManager = GridLayoutManager(this, 1)
         viewAdapter = HistoryAdapter(this, historyViewModel)
 
         rvHistoryItems.adapter = viewAdapter
-        rvHistoryItems.layoutManager = viewManager
+        rvHistoryItems.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         fab.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
