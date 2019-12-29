@@ -48,7 +48,7 @@ class BoardingActivity : AppCompatActivity() {
             if (pw.isBlank() || pw.length < 6) {
                 Toast.makeText(this, getString(R.string.short_password), Toast.LENGTH_SHORT).show()
             } else if (StringUtils.isValidEmail(email)) {
-                if (userStorage.userSettings.firstBoarding) {
+                if (!authViewModel.accountCreated.value!!) {
                     authViewModel.register(email, pw)
                 } else {
                     // TODO hack: no new user allowed, due to the db being prepared for the given user (might be fixed with new db for each new logged in account)
@@ -75,7 +75,8 @@ class BoardingActivity : AppCompatActivity() {
             authViewModel.anonymousRegister()
         }
 
-        if (!userStorage.userSettings.firstTime) {
+        if (userStorage.userSettings.accountCreated) {
+            tvSubtitle.text = getString(R.string.insert_stored_credentials)
             anonymousRegisterBtn.visibility = View.GONE
             anonymousRegisterBtn.isEnabled = false
         }

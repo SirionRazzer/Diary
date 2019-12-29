@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
-import com.sirionrazzer.diary.boarding.BoardingActivity
 import com.sirionrazzer.diary.history.HistoryActivity
 import com.sirionrazzer.diary.util.StringUtils
 import kotlinx.android.synthetic.main.activity_boarding.etEmail
@@ -30,6 +29,11 @@ class LinkAnonymousAccountActivity : AppCompatActivity() {
                 Diary.app.reencryptRealm(authViewModel.getEncryptedPassword())
                 startActivity(Intent(this, HistoryActivity::class.java))
                 finish()
+            }
+        })
+        authViewModel.authError.observe(this, Observer {
+            it?.let {
+                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
             }
         })
 

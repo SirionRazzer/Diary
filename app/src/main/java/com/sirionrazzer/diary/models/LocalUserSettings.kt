@@ -2,6 +2,6 @@ package com.sirionrazzer.diary.models
 
 class LocalUserSettings {
     var email: String? = null
-    var firstBoarding: Boolean = true
+    var accountCreated: Boolean = false
     var firstTime: Boolean = true
 }

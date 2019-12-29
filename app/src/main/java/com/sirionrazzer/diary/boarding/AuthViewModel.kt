@@ -27,7 +27,8 @@ class AuthViewModel : ViewModel(), AuthInterface {
 
     val isLoggedIn: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
     val isAnonymous: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>(false) }
-    val authError: MutableLiveData<String> by lazy { MutableLiveData<String>() }
+    val authError: MutableLiveData<String?> by lazy { MutableLiveData<String?>(null) }
+    val accountCreated: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>(false) }
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     init {
@@ -37,6 +38,7 @@ class AuthViewModel : ViewModel(), AuthInterface {
             isAnonymous.value = user.isAnonymous
             isLoggedIn.value = true
         }
+        accountCreated.value = userStorage.userSettings.accountCreated
     }
 
     override fun register(email: String, pw: String) {
@@ -46,22 +48,26 @@ class AuthViewModel : ViewModel(), AuthInterface {
                 if (it.isSuccessful) {
                     storeHashedPassword(pw)
                     updateEmail(email)
+                    userStorage.updateSettings { lus ->
+                        lus.accountCreated = true
+                    }
                     isAnonymous.value = false
                     isLoggedIn.value = true
                 } else {
                     // proceed with registration
                     firebaseAuth.createUserWithEmailAndPassword(email, pw)
-                        .addOnCompleteListener {
-                            if (it.isSuccessful) {
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
                                 storeHashedPassword(pw)
                                 updateEmail(email)
                                 isAnonymous.value = false
                                 isLoggedIn.value = true
+                            } else {
+                                failLogin(task.exception?.message)
                             }
                         }
                         .addOnFailureListener { failure ->
-                            isLoggedIn.value = false
-                            authError.value = failure.message
+                            failLogin(failure.message)
                         }
                 }
             }
@@ -74,6 +80,8 @@ class AuthViewModel : ViewModel(), AuthInterface {
                     storeHashedPassword(null)
                     isAnonymous.value = true
                     isLoggedIn.value = true
+                } else {
+                    failLogin(task.exception?.message)
                 }
             }
     }
@@ -85,12 +93,17 @@ class AuthViewModel : ViewModel(), AuthInterface {
                 if (task.isSuccessful) {
                     storeHashedPassword(pw)
                     updateEmail(email)
+                    userStorage.updateSettings { lus ->
+                        lus.accountCreated = true
+                    }
                     isAnonymous.value = false
                     isLoggedIn.value = true
                 } else {
-                    isLoggedIn.value = false
-                    authError.value = task.exception?.message
+                    failLogin(task.exception?.message)
                 }
+            }
+            ?.addOnFailureListener { failure ->
+                failLogin(failure.message)
             }
     }
 
@@ -100,13 +113,23 @@ class AuthViewModel : ViewModel(), AuthInterface {
                 if (task.isSuccessful) {
                     storeHashedPassword(pw)
                     updateEmail(email)
+                    userStorage.updateSettings { lus ->
+                        lus.accountCreated = true
+                    }
                     isAnonymous.value = false
                     isLoggedIn.value = true
                 } else {
-                    isLoggedIn.value = false
-                    authError.value = task.exception?.message
+                    failLogin(task.exception?.message)
                 }
             }
+            .addOnFailureListener { failure ->
+                failLogin(failure.message)
+            }
+    }
+
+    private fun failLogin(authError: String?) {
+        isLoggedIn.value = false
+        authError?.let { this.authError.value = authError }
     }
 
     override fun logout() {
@@ -132,7 +155,8 @@ class AuthViewModel : ViewModel(), AuthInterface {
             MessageDigest.getInstance("SHA-256").digest(key, 0, key.size)
         } else {
             val decoded = Base64.decode(pw, Base64.NO_WRAP)
-            (decoded.indices).forEach { i -> // TODO this doesn't work good
+            (decoded.indices).forEach { i ->
+                // TODO this doesn't work good
                 key[i] = decoded[i]
             }
 

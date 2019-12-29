@@ -86,4 +86,5 @@
     <string name="link_anonymous_account">Zadejte nové přihlašovací údaje</string>
     <string name="linkAccount">Vytvořit účet</string>
     <string name="user_change_not_allowed">Použitý email se neshoduje s uloženým, použití jiného účtu není možné</string>
+    <string name="insert_stored_credentials">Odemkněte svoje poznámky. Přihlašovací údaje musí být stejné jako uložené.</string>
 </resources>
