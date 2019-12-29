@@ -19,7 +19,6 @@ import com.sirionrazzer.diary.settings.SettingsActivity
 import com.sirionrazzer.diary.stats.ChooseTrackItemStatActivity
 import com.sirionrazzer.diary.util.DateUtils
 import kotlinx.android.synthetic.main.activity_history.*
-import kotlinx.android.synthetic.main.toolbar.*
 import main.java.com.sirionrazzer.diary.boarding.AuthViewModel
 import org.jetbrains.anko.startActivity
 import org.threeten.bp.LocalDate
@@ -37,8 +36,10 @@ class HistoryActivity : AppCompatActivity() {
         authViewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
         historyViewModel = ViewModelProviders.of(this).get(HistoryViewModel::class.java)
 
-        toolbar.setTitle(R.string.title_history_activity)
-        setSupportActionBar(toolbar)
+        cToolbar.setTitle(R.string.title_history_activity)
+        setSupportActionBar(cToolbar)
+        cab.title = getString(R.string.title_history_activity)
+
 
         val viewManager = GridLayoutManager(this, 1)
         viewAdapter = HistoryAdapter(this, historyViewModel)
