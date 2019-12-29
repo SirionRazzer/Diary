@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.AppBarLayout
@@ -59,6 +61,47 @@ class HistoryActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListene
             intent.putExtra("editDate", LocalDate.now().toEpochDay() * DateUtils.DAY_MILLISECONDS)
             startActivity(intent)
         }
+
+        historyViewModel.strikeLength.observe(this, Observer {
+            tvDayStrikeValue.text = it.toString()
+            when (it) {
+                in 2..4 -> {
+                    clOrange.visibility = View.VISIBLE
+                    clGreen.visibility = View.GONE
+                    clYellow.visibility = View.GONE
+                    clPurple.visibility = View.GONE
+                    clInfo.visibility = View.GONE
+                }
+                in 4..6 -> {
+                    clOrange.visibility = View.VISIBLE
+                    clGreen.visibility = View.VISIBLE
+                    clYellow.visibility = View.GONE
+                    clPurple.visibility = View.GONE
+                    clInfo.visibility = View.GONE
+                }
+                in 6..8 -> {
+                    clOrange.visibility = View.VISIBLE
+                    clGreen.visibility = View.VISIBLE
+                    clYellow.visibility = View.VISIBLE
+                    clPurple.visibility = View.GONE
+                    clInfo.visibility = View.GONE
+                }
+                in 8..Int.MAX_VALUE -> {
+                    clOrange.visibility = View.VISIBLE
+                    clGreen.visibility = View.VISIBLE
+                    clYellow.visibility = View.VISIBLE
+                    clPurple.visibility = View.VISIBLE
+                    clInfo.visibility = View.GONE
+                }
+                else -> {
+                    clInfo.visibility = View.VISIBLE
+                    clOrange.visibility = View.GONE
+                    clGreen.visibility = View.GONE
+                    clYellow.visibility = View.GONE
+                    clPurple.visibility = View.GONE
+                }
+            }
+        })
     }
 
     override fun onStart() {
