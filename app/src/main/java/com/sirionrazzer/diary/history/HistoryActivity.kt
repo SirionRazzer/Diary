@@ -7,8 +7,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.appbar.AppBarLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import com.sirionrazzer.diary.R
@@ -22,8 +24,13 @@ import kotlinx.android.synthetic.main.activity_history.*
 import main.java.com.sirionrazzer.diary.boarding.AuthViewModel
 import org.jetbrains.anko.startActivity
 import org.threeten.bp.LocalDate
+import kotlin.math.abs
 
-class HistoryActivity : AppCompatActivity() {
+
+class HistoryActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener {
+
+    private val PERCENTAGE_TO_SHOW_ABL_CONTENT = 20
+    private var maxScrollSize: Int = 0
 
     lateinit var authViewModel: AuthViewModel
     lateinit var historyViewModel: HistoryViewModel
@@ -40,6 +47,7 @@ class HistoryActivity : AppCompatActivity() {
         setSupportActionBar(cToolbar)
         cab.title = getString(R.string.title_history_activity)
 
+        ab.addOnOffsetChangedListener(this)
 
         val viewManager = GridLayoutManager(this, 1)
         viewAdapter = HistoryAdapter(this, historyViewModel)
@@ -181,5 +189,17 @@ class HistoryActivity : AppCompatActivity() {
             }
         }
         return true
+    }
+
+    override fun onOffsetChanged(abl: AppBarLayout?, i: Int) {
+        if (maxScrollSize == 0) maxScrollSize = abl!!.totalScrollRange
+        val currentScrollPercentage = (abs(i)) * 100
+        if (currentScrollPercentage >= PERCENTAGE_TO_SHOW_ABL_CONTENT) {
+            ViewCompat.animate(fab).scaleY(0f).scaleX(0f).start()
+        }
+
+        if (currentScrollPercentage < PERCENTAGE_TO_SHOW_ABL_CONTENT) {
+            ViewCompat.animate(fab).scaleY(1f).scaleX(1f).start()
+        }
     }
 }
