@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.AppBarLayout
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.storage.FirebaseStorage
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.boarding.BoardingActivity
 import com.sirionrazzer.diary.main.MainActivity
@@ -111,48 +110,58 @@ class HistoryActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListene
             val filePath = "/user/${user.uid}/backup/realm.json"
             when (item?.itemId) {
                 R.id.sync_button -> {
-                    val storageRef = FirebaseStorage.getInstance().reference
-                    val byteData = historyViewModel.getJsonData()
-                    val fileRef = storageRef.child(filePath)
-                    fileRef.putBytes(byteData).addOnSuccessListener {
-                        Toast.makeText(
-                            this,
-                            getString(R.string.success_backup_upload),
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-                    }.addOnFailureListener {
-                        Toast.makeText(
-                            this,
-                            getString(R.string.error_backup_upload),
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
+                    Toast.makeText(
+                        this,
+                        "Synchronization will be enabled in the next update, stay tuned! :) ",
+                        Toast.LENGTH_SHORT
+                    ).show()
+//                    val storageRef = FirebaseStorage.getInstance().reference
+//                    val byteData = historyViewModel.getJsonData()
+//                    val fileRef = storageRef.child(filePath)
+//                    fileRef.putBytes(byteData).addOnSuccessListener {
+//                        Toast.makeText(
+//                            this,
+//                            getString(R.string.success_backup_upload),
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//
+//                    }.addOnFailureListener {
+//                        Toast.makeText(
+//                            this,
+//                            getString(R.string.error_backup_upload),
+//                            Toast.LENGTH_LONG
+//                        ).show()
+//                    }
 
                 }
                 R.id.download_button -> {
-                    val storageRef = FirebaseStorage.getInstance().reference
-                    val file = storageRef.child(filePath)
-
-                    val ONE_MEGABYTE: Long = 1024 * 1024
-                    file.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-                        historyViewModel.reloadDataFromBytes(it)
-                        refreshUI()
-                        historyViewModel.userStorage.updateSettings { lus ->
-                            lus.firstTime = false
-                        }
-                        Toast.makeText(
-                            this,
-                            getString(R.string.success_backup_download),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }.addOnFailureListener {
-                        Toast.makeText(
-                            this,
-                            getString(R.string.error_backup_download),
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
+                    Toast.makeText(
+                        this,
+                        "Synchronization will be enabled in the next update, stay tuned! :) ",
+                        Toast.LENGTH_SHORT
+                    ).show()
+//                    val storageRef = FirebaseStorage.getInstance().reference
+//                    val file = storageRef.child(filePath)
+//
+//                    val ONE_MEGABYTE: Long = 1024 * 1024
+//                    file.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+//                        historyViewModel.reloadDataFromBytes(it)
+//                        refreshUI()
+//                        historyViewModel.userStorage.updateSettings { lus ->
+//                            lus.firstTime = false
+//                        }
+//                        Toast.makeText(
+//                            this,
+//                            getString(R.string.success_backup_download),
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    }.addOnFailureListener {
+//                        Toast.makeText(
+//                            this,
+//                            getString(R.string.error_backup_download),
+//                            Toast.LENGTH_LONG
+//                        ).show()
+//                    }
                 }
                 R.id.logout_button -> {
                     // TODO handle realm DB renaming and recreating if another user tries to sign in (works ok for the same user)
