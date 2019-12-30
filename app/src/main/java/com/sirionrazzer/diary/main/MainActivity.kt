@@ -70,13 +70,6 @@ class MainActivity : AppCompatActivity() {
             Instant.ofEpochMilli(dateLong).atZone(ZoneId.systemDefault()).toLocalDate()
         )
 
-        if (userStorage.userSettings.firstTime) {
-            mainViewModel.createDefaultTrackItems()
-            userStorage.updateSettings {
-                it.firstTime = false
-            }
-        }
-
         adapter = TemplatesAdapter(this, mainViewModel)
         gwTemplates.adapter = adapter
     }

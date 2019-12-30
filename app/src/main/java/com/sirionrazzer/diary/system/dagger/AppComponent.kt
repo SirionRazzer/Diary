@@ -2,6 +2,7 @@ package com.sirionrazzer.diary.system.dagger
 
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.boarding.BoardingActivity
+import com.sirionrazzer.diary.boarding.BoardingPickerActivity
 import com.sirionrazzer.diary.creator.TemplateItemCreatorActivity
 import com.sirionrazzer.diary.creator.TemplateItemCreatorViewModel
 import com.sirionrazzer.diary.history.HistoryActivity
@@ -27,6 +28,7 @@ interface AppComponent {
     fun inject(mainViewModel: MainViewModel)
 
     fun inject(mainActivity: MainActivity)
+    fun inject(boardingPickerActivity: BoardingPickerActivity)
     fun inject(boardingActivity: BoardingActivity)
     fun inject(historyActivity: HistoryActivity)
     fun inject(templateItemCreatorActivity: TemplateItemCreatorActivity)

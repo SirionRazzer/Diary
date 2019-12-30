@@ -32,7 +32,11 @@ class BoardingActivity : AppCompatActivity() {
         authViewModel.isLoggedIn.observe(this, Observer {
             if (it) {
                 Diary.app.installEncryptedRealm(authViewModel.getEncryptedPassword())
-                startActivity(Intent(this, HistoryActivity::class.java))
+                if (!userStorage.userSettings.boardingPickerShown) {
+                    startActivity(Intent(this, BoardingPickerActivity::class.java))
+                } else {
+                    startActivity(Intent(this, HistoryActivity::class.java))
+                }
                 finish()
             }
         })

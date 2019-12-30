@@ -88,4 +88,7 @@
     <string name="user_change_not_allowed">Použitý email se neshoduje s uloženým, použití jiného účtu není možné</string>
     <string name="insert_stored_credentials">Odemkněte svoje poznámky. Přihlašovací údaje musí být stejné jako uložené.</string>
     <string name="badges_info">Získávejte odznaky za 2+ dní dlouhé série</string>
+    <string name="create_own">Vytvořím si vlastní</string>
+    <string name="choose_selected">Vybrat zvolené</string>
+    <string name="title_popular_activities">Oblíbené aktivity</string>
 </resources>

@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sirionrazzer.diary.Diary
-import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.*
 import com.sirionrazzer.diary.util.DateUtils.Factory.DAY_MILLISECONDS
 import io.realm.Realm
@@ -84,80 +83,78 @@ class MainViewModel : ViewModel() {
         super.onCleared()
     }
 
-    fun createDefaultTrackItems() {
-        val tit0 = TrackItemTemplate(
-            UUID.randomUUID().toString(),
-            false,
-            "Note",
-            R.drawable.aaa_circlecolor_writing,
-            hasTextField = true,
-            hasNumberField = false,
-            position = 0
-        )
-        val tit1 = TrackItemTemplate(
-            UUID.randomUUID().toString(),
-            false,
-            "Outcome",
-            R.drawable.aaa_circlecolor_credit_card,
-            hasTextField = false,
-            hasNumberField = true,
-            position = 1
-        )
-        val tit2 = TrackItemTemplate(
-            UUID.randomUUID().toString(),
-            false,
-            "Workout",
-            R.drawable.aab_dumbbell,
-            hasTextField = true,
-            hasNumberField = false,
-            position = 2
-        )
-        val tit3 = TrackItemTemplate(
-            UUID.randomUUID().toString(),
-            false,
-            "Calories",
-            R.drawable.aab_nofood,
-            hasTextField = false,
-            hasNumberField = true,
-            position = 3
-        )
-        val tit4 = TrackItemTemplate(
-            UUID.randomUUID().toString(),
-            false,
-            "Water",
-            R.drawable.aab_bottle,
-            hasTextField = false,
-            hasNumberField = true,
-            position = 4
-        )
-        val tit5 = TrackItemTemplate(
-            UUID.randomUUID().toString(),
-            false,
-            "Footsteps",
-            R.drawable.aab_stopclock,
-            hasTextField = false,
-            hasNumberField = true,
-            position = 5
-        )
-        val tit6 = TrackItemTemplate(
-            UUID.randomUUID().toString(),
-            false,
-            "Weight",
-            R.drawable.aab_weight,
-            hasTextField = false,
-            hasNumberField = true,
-            position = 6
-        )
-        realm.trackItemsTemplatesDao.addTemplate(tit0)
-        realm.trackItemsTemplatesDao.addTemplate(tit1)
-        realm.trackItemsTemplatesDao.addTemplate(tit2)
-        realm.trackItemsTemplatesDao.addTemplate(tit3)
-        realm.trackItemsTemplatesDao.addTemplate(tit4)
-        realm.trackItemsTemplatesDao.addTemplate(tit5)
-        realm.trackItemsTemplatesDao.addTemplate(tit6)
-
-        initTrackAndTemplateItems()
-    }
+//    fun createDefaultTrackItems() {
+//        val tit0 = TrackItemTemplate(
+//            UUID.randomUUID().toString(),
+//            false,
+//            "Note",
+//            R.drawable.aaa_circlecolor_writing,
+//            hasTextField = true,
+//            hasNumberField = false,
+//            position = 0
+//        )
+//        val tit1 = TrackItemTemplate(
+//            UUID.randomUUID().toString(),
+//            false,
+//            "Outcome",
+//            R.drawable.aaa_circlecolor_credit_card,
+//            hasTextField = false,
+//            hasNumberField = true,
+//            position = 1
+//        )
+//        val tit2 = TrackItemTemplate(
+//            UUID.randomUUID().toString(),
+//            false,
+//            "Workout",
+//            R.drawable.aab_dumbbell,
+//            hasTextField = true,
+//            hasNumberField = false,
+//            position = 2
+//        )
+//        val tit3 = TrackItemTemplate(
+//            UUID.randomUUID().toString(),
+//            false,
+//            "Calories",
+//            R.drawable.aab_nofood,
+//            hasTextField = false,
+//            hasNumberField = true,
+//            position = 3
+//        )
+//        val tit4 = TrackItemTemplate(
+//            UUID.randomUUID().toString(),
+//            false,
+//            "Water",
+//            R.drawable.aab_bottle,
+//            hasTextField = false,
+//            hasNumberField = true,
+//            position = 4
+//        )
+//        val tit5 = TrackItemTemplate(
+//            UUID.randomUUID().toString(),
+//            false,
+//            "Footsteps",
+//            R.drawable.aab_stopclock,
+//            hasTextField = false,
+//            hasNumberField = true,
+//            position = 5
+//        )
+//        val tit6 = TrackItemTemplate(
+//            UUID.randomUUID().toString(),
+//            false,
+//            "Weight",
+//            R.drawable.aab_weight,
+//            hasTextField = false,
+//            hasNumberField = true,
+//            position = 6
+//        )
+//        realm.trackItemsTemplatesDao.addTemplate(tit0)
+//        realm.trackItemsTemplatesDao.addTemplate(tit1)
+//        realm.trackItemsTemplatesDao.addTemplate(tit2)
+//        realm.trackItemsTemplatesDao.addTemplate(tit3)
+//        realm.trackItemsTemplatesDao.addTemplate(tit4)
+//        realm.trackItemsTemplatesDao.addTemplate(tit5)
+//        realm.trackItemsTemplatesDao.addTemplate(tit6)
+//    }
 
     private fun initTrackAndTemplateItems() {
         clearAllLists()
