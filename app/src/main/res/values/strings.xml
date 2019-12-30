@@ -90,6 +90,34 @@
     <string name="create_own">I\'ll create my own</string>
     <string name="choose_selected">Choose selected</string>
     <string name="title_popular_activities">Popular Activities</string>
+    <string name="choose_popular_subtitle">Choose activities you want to track, easy as ABC</string>
+    <string name="choose_popular_caption">You can change it later, don\'t worry ☺</string>
+    <string name="example_outcome">Outcome</string>
+    <string name="example_calories">Calories</string>
+    <string name="example_workout">Workout</string>
+    <string name="example_note">Note</string>
+    <string name="example_water">Water Intake</string>
+    <string name="example_steps">Steps</string>
+    <string name="example_weight">Weight</string>
+    <string name="example_grateful">Grateful For</string>
+    <string name="example_book">Book</string>
+    <string name="example_movie">Movie</string>
+    <string name="example_friends">Friends</string>
+    <string name="example_practice">Practice</string>
+    <string name="example_relax">Relax</string>
+    <string name="example_date">Date</string>
+    <string name="example_medicine">Medicine</string>
+    <string name="example_party">Party</string>
+    <string name="example_study">Study</string>
+    <string name="example_shopping">Shopping</string>
+    <string name="example_running">Running</string>
+    <string name="example_breathing">Breathing 1m</string>
+    <string name="example_diet">Diet</string>
+    <string name="example_nojunk">No Junk</string>
+    <string name="example_meditation">Meditation</string>
+    <string name="example_heartpoints">Heart Points</string>
+    <string name="example_moveminutes">Move Minutes</string>
+    <string name="example_cycling">Cycling</string>
 
     <string-array name="input_fields">
         <item>None</item>

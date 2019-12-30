@@ -83,7 +83,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
 
     private fun createExampleTemplates(): MutableLiveData<List<ExampleTemplate>> {
         val ex0 = ExampleTemplate(
-            "Outcome",
+            getString(R.string.example_outcome),
             R.drawable.aaa_circlecolor_credit_card,
             false,
             true,
@@ -92,7 +92,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex1 = ExampleTemplate(
-            "Calories",
+            getString(R.string.example_calories),
             R.drawable.aab_rice,
             false,
             true,
@@ -101,7 +101,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex2 = ExampleTemplate(
-            "Workout",
+            getString(R.string.example_workout),
             R.drawable.aab_dumbbell,
             true,
             false,
@@ -110,7 +110,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex3 = ExampleTemplate(
-            "Note",
+            getString(R.string.example_note),
             R.drawable.aaa_circlecolor_writing,
             true,
             false,
@@ -119,7 +119,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex4 = ExampleTemplate(
-            "Water Intake",
+            getString(R.string.example_water),
             R.drawable.aab_bottle,
             false,
             true,
@@ -128,7 +128,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex5 = ExampleTemplate(
-            "Steps",
+            getString(R.string.example_steps),
             R.drawable.aab_smartwatch,
             false,
             true,
@@ -137,7 +137,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex6 = ExampleTemplate(
-            "Weight",
+            getString(R.string.example_weight),
             R.drawable.aab_weight,
             false,
             true,
@@ -146,7 +146,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex7 = ExampleTemplate(
-            "Grateful For",
+            getString(R.string.example_grateful),
             R.drawable.aaa_circlecolor_forest_2,
             true,
             false,
@@ -155,7 +155,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex8 = ExampleTemplate(
-            "Book",
+            getString(R.string.example_book),
             R.drawable.aaa_circlecolor_library,
             true,
             false,
@@ -164,7 +164,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex9 = ExampleTemplate(
-            "Movie",
+            getString(R.string.example_movie),
             R.drawable.aaa_circlecolor_planetearth,
             true,
             false,
@@ -173,7 +173,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex10 = ExampleTemplate(
-            "Friends",
+            getString(R.string.example_friends),
             R.drawable.aab_wine,
             false,
             false,
@@ -182,7 +182,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex11 = ExampleTemplate(
-            "Practice",
+            getString(R.string.example_practice),
             R.drawable.aaa_circlecolor_acoustic_guitar,
             false,
             false,
@@ -191,7 +191,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex12 = ExampleTemplate(
-            "Relax",
+            getString(R.string.example_relax),
             R.drawable.aaa_circlecolor_river,
             false,
             false,
@@ -200,7 +200,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex13 = ExampleTemplate(
-            "Date",
+            getString(R.string.example_date),
             R.drawable.aab_dance,
             false,
             false,
@@ -209,7 +209,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex14 = ExampleTemplate(
-            "Medicine",
+            getString(R.string.example_medicine),
             R.drawable.aab_pills,
             true,
             true,
@@ -218,7 +218,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex15 = ExampleTemplate(
-            "Party",
+            getString(R.string.example_party),
             R.drawable.aaa_circlecolor_beach,
             false,
             false,
@@ -227,7 +227,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex16 = ExampleTemplate(
-            "Study",
+            getString(R.string.example_study),
             R.drawable.aaa_circlecolor_graduate,
             true,
             false,
@@ -236,7 +236,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex17 = ExampleTemplate(
-            "Shopping",
+            getString(R.string.example_shopping),
             R.drawable.aaa_circlecolor_tablet,
             false,
             false,
@@ -245,7 +245,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex18 = ExampleTemplate(
-            "Running",
+            getString(R.string.example_running),
             R.drawable.aab_running,
             false,
             false,
@@ -254,7 +254,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex19 = ExampleTemplate(
-            "Cycling",
+            getString(R.string.example_cycling),
             R.drawable.aab_cycling,
             false,
             false,
@@ -263,7 +263,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex20 = ExampleTemplate(
-            "Breathing 1m",
+            getString(R.string.example_breathing),
             R.drawable.aab_stopclock,
             false,
             false,
@@ -272,7 +272,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex21 = ExampleTemplate(
-            "Diet",
+            getString(R.string.example_diet),
             R.drawable.aab_juice,
             false,
             false,
@@ -281,7 +281,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex22 = ExampleTemplate(
-            "No Junk",
+            getString(R.string.example_nojunk),
             R.drawable.aab_nofood,
             false,
             false,
@@ -290,7 +290,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex23 = ExampleTemplate(
-            "Meditation",
+            getString(R.string.example_meditation),
             R.drawable.aaa_circlecolor_sprout,
             false,
             false,
@@ -299,7 +299,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex24 = ExampleTemplate(
-            "Heart Points",
+            getString(R.string.example_heartpoints),
             R.drawable.aab_cardiogram,
             false,
             true,
@@ -308,7 +308,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
         )
 
         val ex25 = ExampleTemplate(
-            "Move Minutes",
+            getString(R.string.example_moveminutes),
             R.drawable.aab_stopclock,
             false,
             true,

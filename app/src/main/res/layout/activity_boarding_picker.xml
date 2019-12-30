@@ -48,7 +48,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:layout_toStartOf="@+id/ivInfo"
-                android:text="Choose activities you want to track, easy as ABC"
+                android:text="@string/choose_popular_subtitle"
                 android:textColor="@color/white" />
 
             <TextView
@@ -56,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvHeading"
-                android:text="You can change it later, don't worry ☺"
+                android:text="@string/choose_popular_caption"
                 android:textColor="@color/colorPrimaryLight" />
         </RelativeLayout>
 
