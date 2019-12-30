@@ -8,9 +8,9 @@ apply plugin: 'realm-android'
 apply plugin: 'com.google.gms.google-services'
 
 // manually setup versioning
-ext.versionMajor = 0
-ext.versionMinor = 1
-ext.versionPatch = 4
+ext.versionMajor = 1
+ext.versionMinor = 0
+ext.versionPatch = 0
 ext.minimumSdkVersion = 23
 
 android {

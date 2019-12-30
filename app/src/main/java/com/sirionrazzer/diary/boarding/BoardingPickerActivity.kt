@@ -133,7 +133,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             false,
             true,
             "Total steps today",
-            true
+            false
         )
 
         val ex6 = ExampleTemplate(
@@ -142,7 +142,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             false,
             true,
             "My weight progress",
-            true
+            false
         )
 
         val ex7 = ExampleTemplate(
@@ -151,7 +151,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             true,
             false,
             "What am I grateful for today",
-            true
+            false
         )
 
         val ex8 = ExampleTemplate(
@@ -160,7 +160,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             true,
             false,
             "My reading journal",
-            true
+            false
         )
 
         val ex9 = ExampleTemplate(
@@ -169,7 +169,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             true,
             false,
             "“The world isn’t split into good people and Death Eaters.” --Harry Potter",
-            true
+            false
         )
 
         val ex10 = ExampleTemplate(
@@ -178,7 +178,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             false,
             false,
             "“I would rather walk with a friend in the dark, than alone in the light.” --Helen Keller",
-            true
+            false
         )
 
         val ex11 = ExampleTemplate(
@@ -187,7 +187,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             false,
             false,
             "“You couldn't not like someone who liked the guitar.” --Stephen King",
-            true
+            false
         )
 
         val ex12 = ExampleTemplate(
@@ -196,7 +196,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             false,
             false,
             "“Ah! There is nothing like staying at home, for real comfort.” --Jane Austen",
-            true
+            false
         )
 
         val ex13 = ExampleTemplate(
@@ -205,7 +205,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             false,
             false,
             "Two people meet socially with the aim of each assessing the other's suitability as a prospective partner in an intimate relationship. --Wikipedia",
-            true
+            false
         )
 
         val ex14 = ExampleTemplate(
@@ -214,7 +214,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             true,
             true,
             "“Always laugh when you can, it is cheap medicine.” --Lord Byron",
-            true
+            false
         )
 
         val ex15 = ExampleTemplate(
@@ -223,7 +223,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             false,
             false,
             "“A party without cake is just a meeting.” --Julia Child",
-            true
+            false
         )
 
         val ex16 = ExampleTemplate(
@@ -232,7 +232,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             true,
             false,
             "“Study the past if you would define the future.” --Confucius",
-            true
+            false
         )
 
         val ex17 = ExampleTemplate(
@@ -241,7 +241,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             false,
             false,
             "My grocery list duty (maybe some nice shirts)",
-            true
+            false
         )
 
         val ex18 = ExampleTemplate(
@@ -250,7 +250,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             false,
             false,
             "My daily routine",
-            true
+            false
         )
 
         val ex19 = ExampleTemplate(
@@ -259,7 +259,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             false,
             false,
             "I need two wheels",
-            true
+            false
         )
 
         val ex20 = ExampleTemplate(
@@ -268,7 +268,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             false,
             false,
             "[Apple Watch] One minute breathing session",
-            true
+            false
         )
 
         val ex21 = ExampleTemplate(
@@ -277,7 +277,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             false,
             false,
             "Get rid of the unhealthy foods in your house",
-            true
+            false
         )
 
         val ex22 = ExampleTemplate(
@@ -286,7 +286,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             false,
             false,
             "No junk food challenge",
-            true
+            false
         )
 
         val ex23 = ExampleTemplate(
@@ -295,7 +295,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             false,
             false,
             "Train attention and awareness, become emotionally calm and stable",
-            true
+            false
         )
 
         val ex24 = ExampleTemplate(
@@ -304,7 +304,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             false,
             true,
             "[Google Fit] Activities like brisk walking, jogging, swimming, taking exercise classes, or playing tennis",
-            true
+            false
         )
 
         val ex25 = ExampleTemplate(
@@ -313,7 +313,7 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             false,
             true,
             "[Google Fit] Activities like yoga, dancing, gardening, or household chores",
-            true
+            false
         )
 
         return MutableLiveData(
