@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Diář</string>
+    <string name="app_name">Dr. Diář</string>
     <string name="activities_updated">Aktivity aktualizovány</string>
     <string name="activity_name">Název aktivity</string>
     <string name="activity_note_first_part">Vytvořit novou</string>

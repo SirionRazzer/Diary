@@ -1,4 +1,4 @@
-# Diary
+# Dr. Diary
 
 <h1 align=center>
 <img src="logo/horizontal.png" width=50%>
