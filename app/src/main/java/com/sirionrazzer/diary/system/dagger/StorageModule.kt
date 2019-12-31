@@ -16,5 +16,5 @@ class StorageModule(val app: Application) {
     @Singleton
     @Named("user_prefs")
     fun provideUserPrefs(): SharedPreferences =
-        Diary.app.getSharedPreferences("users", Context.MODE_PRIVATE)
+        Diary.app.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
 }

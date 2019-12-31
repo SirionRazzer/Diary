@@ -4,99 +4,85 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthException
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.history.HistoryActivity
+import com.sirionrazzer.diary.models.UserStorage
+import com.sirionrazzer.diary.util.StringUtils
 import kotlinx.android.synthetic.main.activity_boarding.*
 import kotlinx.android.synthetic.main.toolbar.*
-import org.jetbrains.anko.startActivity
-
+import main.java.com.sirionrazzer.diary.boarding.AuthViewModel
+import javax.inject.Inject
 
 class BoardingActivity : AppCompatActivity() {
+    private lateinit var authViewModel: AuthViewModel
+
+    @Inject
+    lateinit var userStorage: UserStorage
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val auth = FirebaseAuth.getInstance()
+        Diary.app.appComponent.inject(this)
+
+        authViewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
+        authViewModel.isLoggedIn.observe(this, Observer {
+            if (it) {
+                Diary.app.installEncryptedRealm(authViewModel.getEncryptedPassword())
+                if (!userStorage.userSettings.boardingPickerShown) {
+                    startActivity(Intent(this, BoardingPickerActivity::class.java))
+                } else {
+                    startActivity(Intent(this, HistoryActivity::class.java))
+                }
+                finish()
+            }
+        })
         setContentView(R.layout.activity_boarding)
 
-        login()
         setSupportActionBar(toolbar)
         toolbar.title = getString(R.string.app_name)
         toolbar.visibility = View.GONE
 
-        signIn.setOnClickListener {
+        signInBtn.setOnClickListener {
             val email = etEmail.text.toString()
             val pw = etPassword.text.toString()
             if (pw.isBlank() || pw.length < 6) {
                 Toast.makeText(this, getString(R.string.short_password), Toast.LENGTH_SHORT).show()
-            } else if (isValidEmail(email)) {
-                auth.signInWithEmailAndPassword(email, pw)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            login()
-                            //TODO: load stuff from firebase save
+            } else if (StringUtils.isValidEmail(email)) {
+                if (!authViewModel.accountCreated.value!!) {
+                    authViewModel.register(email, pw)
+                } else {
+                    // TODO hack: no new user allowed, due to the db being prepared for the given user (might be fixed with new db for each new logged in account)
+                    userStorage.userSettings.email.let {
+                        if (it != null && it == email) {
+                            authViewModel.register(email, pw)
                         } else {
-                            val e = task.exception as FirebaseAuthException
-                            if (e.errorCode == "ERROR_WRONG_PASSWORD") {
-                                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
-                            } else {
-                                showDialog(auth, email, pw)
-                            }
+                            Toast.makeText(
+                                this,
+                                getString(R.string.user_change_not_allowed),
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
                         }
                     }
+                }
             } else {
                 Toast.makeText(this, getString(R.string.invalid_pa_email), Toast.LENGTH_SHORT)
                     .show()
             }
         }
 
-        skipSignIn.setOnClickListener {
-            startActivity<HistoryActivity>()
-            finish()
+        anonymousRegisterBtn.setOnClickListener {
+            authViewModel.anonymousRegister()
         }
-    }
 
-    private fun showDialog(auth: FirebaseAuth, email: String, pw: String) {
-        val builder = AlertDialog.Builder(this)
-        builder.setMessage(getString(R.string.new_account_or_incorrect_input))
-            .setTitle(getString(R.string.boarding_greetings))
-            .setCancelable(false)
-            .setPositiveButton(getString(R.string.yes)) { dialog, id ->
-                auth.createUserWithEmailAndPassword(email, pw).addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        Toast.makeText(
-                            this,
-                            getString(R.string.success_signup_message),
-                            Toast.LENGTH_LONG
-                        ).show()
-                        startActivity<HistoryActivity>()
-                        finish()
-                    }
-                }.addOnFailureListener {
-                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
-                }
-            }
-            .setNegativeButton(getString(R.string.no)) { dialog, id -> dialog.cancel() }
-        val alert = builder.create()
-        alert.show()
-        builder.show()
-    }
-
-    private fun isValidEmail(email: String): Boolean {
-        return if (email.isBlank()) false else android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
-
-    private fun login() {
-        val user = FirebaseAuth.getInstance().currentUser
-        if (user != null) {
-            startActivity(Intent(this, HistoryActivity::class.java))
-            finish()
-            Toast.makeText(this, getString(R.string.success_login_message), Toast.LENGTH_SHORT)
-                .show()
+        if (userStorage.userSettings.accountCreated) {
+            tvSubtitle.text = getString(R.string.insert_stored_credentials)
+            anonymousRegisterBtn.visibility = View.GONE
+            anonymousRegisterBtn.isEnabled = false
         }
     }
 }

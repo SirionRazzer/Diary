@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Diary</string>
+    <string name="app_name">Dr. Diary</string>
     <string name="sign_in">Sign in</string>
     <string name="app_logo">App logo</string>
     <string name="skip_now">skip now</string>
@@ -80,6 +80,44 @@
     <string name="delete_history">Delete History</string>
     <string name="compact_ui">Compact UI</string>
     <string name="creator_instructions_caption">Check Value field in the Stats overview</string>
+    <string name="create_account">Create Account</string>
+    <string name="not_now">Not now</string>
+    <string name="link_anonymous_account">Enter your new credentials</string>
+    <string name="linkAccount">Create account</string>
+    <string name="user_change_not_allowed">Used email differs to the stored one, you can\'t use another account with this app</string>
+    <string name="insert_stored_credentials">Unlock your notes. Credentials must be the same as stored ones.</string>
+    <string name="badges_info">Get more badges for 2+ days long strikes</string>
+    <string name="create_own">I\'ll create my own</string>
+    <string name="choose_selected">Choose selected</string>
+    <string name="title_popular_activities">Popular Activities</string>
+    <string name="choose_popular_subtitle">Choose activities you want to track, easy as ABC</string>
+    <string name="choose_popular_caption">You can change it later, don\'t worry ☺</string>
+    <string name="example_outcome">Outcome</string>
+    <string name="example_calories">Calories</string>
+    <string name="example_workout">Workout</string>
+    <string name="example_note">Note</string>
+    <string name="example_water">Water Intake</string>
+    <string name="example_steps">Steps</string>
+    <string name="example_weight">Weight</string>
+    <string name="example_grateful">Grateful For</string>
+    <string name="example_book">Book</string>
+    <string name="example_movie">Movie</string>
+    <string name="example_friends">Friends</string>
+    <string name="example_practice">Practice</string>
+    <string name="example_relax">Relax</string>
+    <string name="example_date">Date</string>
+    <string name="example_medicine">Medicine</string>
+    <string name="example_party">Party</string>
+    <string name="example_study">Study</string>
+    <string name="example_shopping">Shopping</string>
+    <string name="example_running">Running</string>
+    <string name="example_breathing">Breathing 1m</string>
+    <string name="example_diet">Diet</string>
+    <string name="example_nojunk">No Junk</string>
+    <string name="example_meditation">Meditation</string>
+    <string name="example_heartpoints">Heart Points</string>
+    <string name="example_moveminutes">Move Minutes</string>
+    <string name="example_cycling">Cycling</string>
 
     <string-array name="input_fields">
         <item>None</item>
