@@ -281,7 +281,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             0
         )
         val input = EditText(context)
-        input.inputType = InputType.TYPE_NUMBER_FLAG_DECIMAL
+        input.inputType = InputType.TYPE_CLASS_NUMBER
         value?.also {
             input.text = Editable.Factory().newEditable(it.toString())
         }
