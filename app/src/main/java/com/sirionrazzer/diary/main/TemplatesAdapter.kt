@@ -311,8 +311,8 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
                 } else {
                     mainViewModel.currentTrackItems.value?.get(itemPosition)!!.hasNumberField =
                         false
-                        mainViewModel.currentTrackItems.value?.get(itemPosition)!!.numberField =
-                    0f
+                    mainViewModel.currentTrackItems.value?.get(itemPosition)!!.numberField =
+                        0f
 
                     disableItemStatus(itemPosition, holder)
                     dialog.cancel()
