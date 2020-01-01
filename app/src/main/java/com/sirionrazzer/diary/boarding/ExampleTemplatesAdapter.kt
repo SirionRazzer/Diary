@@ -37,10 +37,18 @@ class ExampleTemplatesAdapter(private val onCheckExampleTemplateListener: OnChec
         fun bind(item: ExampleTemplate) = with(itemView) {
             name.text = item.name
             image.setImageResource(item.resource)
-            if (item.hasNumberField || item.hasTextField) {
-                fieldImage.visibility = View.VISIBLE
-            } else {
-                fieldImage.visibility = View.GONE
+            when {
+                item.hasTextField -> {
+                    fieldImage.visibility = View.VISIBLE
+                    fieldImage.setImageResource(R.drawable.ic_edit_badge)
+                }
+                item.hasNumberField -> {
+                    fieldImage.visibility = View.VISIBLE
+                    fieldImage.setImageResource(R.drawable.ic_edit_badge_2)
+                }
+                else -> {
+                    fieldImage.visibility = View.GONE
+                }
             }
             description.text = item.description
             switch.isChecked = item.selected
