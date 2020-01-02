@@ -24,7 +24,7 @@ class BoardingPickerViewModel(app: Application) : AndroidViewModel(app) {
         }
 
     fun createTrackItems() {
-        val counter = 0
+        var counter = 0
         data.value?.indices?.forEach {
             if (data.value!!.get(it).selected) {
                 val tit = TrackItemTemplate(
@@ -37,7 +37,7 @@ class BoardingPickerViewModel(app: Application) : AndroidViewModel(app) {
                     position = counter
                 )
                 realm.trackItemsTemplatesDao.addTemplate(tit)
-                counter.inc()
+                counter += 1
             }
         }
     }
