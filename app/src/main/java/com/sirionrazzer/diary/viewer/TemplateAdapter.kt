@@ -30,13 +30,19 @@ class TemplateAdapter(
     override fun onBindViewHolder(item: TrackItemTemplate, viewHolder: ViewHolder, position: Int) {
         // Here we update the contents of the view holder's views to reflect the item's data
         Picasso.get().load(item.image).into(viewHolder.ivImage)
-        if (item.hasNumberField ||
-            item.hasTextField
-        ) {
-            viewHolder.ivPencil.visibility = View.VISIBLE
-            viewHolder.ivPencil.setImageResource(R.drawable.ic_edit_badge)
-        } else {
-            viewHolder.ivPencil.visibility = View.INVISIBLE
+        val fieldImage = viewHolder.ivPencil
+        when {
+            item.hasTextField -> {
+                fieldImage.visibility = View.VISIBLE
+                fieldImage.setImageResource(R.drawable.ic_edit_badge)
+            }
+            item.hasNumberField -> {
+                fieldImage.visibility = View.VISIBLE
+                fieldImage.setImageResource(R.drawable.ic_edit_badge_2)
+            }
+            else -> {
+                fieldImage.visibility = View.GONE
+            }
         }
         viewHolder.tvName.text = item.name
 

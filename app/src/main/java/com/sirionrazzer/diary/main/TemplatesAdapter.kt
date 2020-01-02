@@ -50,6 +50,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             holder = itemView.tag as ViewHolder
         }
 
+        val item = mainViewModel.currentTemplateItems.value?.get(position)!!
         if (!mainViewModel.currentTrackItems.value?.get(position)!!.deleted) {
 
             holder.status = mainViewModel.currentTrackItems.value?.get(position)!!.status
@@ -60,14 +61,19 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
 
             holder.tvName?.text = mainViewModel.currentTrackItems.value?.get(position)!!.name
 
-            if (mainViewModel.currentTemplateItems.value?.get(position)!!.hasTextField ||
-                mainViewModel.currentTemplateItems.value?.get(position)!!.hasNumberField
-            ) {
-                holder.ivPencil?.visibility = View.VISIBLE
-                //Picasso.get().load(R.drawable.ic_pencil).into(holder.ivPencil)
-                holder.ivPencil?.setImageResource(R.drawable.ic_edit_badge)
-            } else {
-                holder.ivPencil?.visibility = View.INVISIBLE
+            val fieldImage = holder.ivPencil
+            when {
+                item.hasTextField -> {
+                    fieldImage?.visibility = View.VISIBLE
+                    fieldImage?.setImageResource(R.drawable.ic_edit_badge)
+                }
+                item.hasNumberField -> {
+                    fieldImage?.visibility = View.VISIBLE
+                    fieldImage?.setImageResource(R.drawable.ic_edit_badge_2)
+                }
+                else -> {
+                    fieldImage?.visibility = View.GONE
+                }
             }
 
             if (!mainViewModel.currentTrackItems.value?.get(position)!!.status) {
@@ -275,7 +281,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             0
         )
         val input = EditText(context)
-        input.inputType = InputType.TYPE_NUMBER_FLAG_DECIMAL
+        input.inputType = InputType.TYPE_CLASS_NUMBER
         value?.also {
             input.text = Editable.Factory().newEditable(it.toString())
         }
@@ -305,8 +311,8 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
                 } else {
                     mainViewModel.currentTrackItems.value?.get(itemPosition)!!.hasNumberField =
                         false
-                        mainViewModel.currentTrackItems.value?.get(itemPosition)!!.numberField =
-                    0f
+                    mainViewModel.currentTrackItems.value?.get(itemPosition)!!.numberField =
+                        0f
 
                     disableItemStatus(itemPosition, holder)
                     dialog.cancel()
