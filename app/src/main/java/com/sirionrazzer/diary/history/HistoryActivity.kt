@@ -70,21 +70,21 @@ class HistoryActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListene
         historyViewModel.strikeLength.observe(this, Observer {
             tvDayStrikeValue.text = it.toString()
             when (it) {
-                in 2..4 -> {
+                in 2..3 -> {
                     clOrange.visibility = View.VISIBLE
                     clGreen.visibility = View.GONE
                     clYellow.visibility = View.GONE
                     clPurple.visibility = View.GONE
                     clInfo.visibility = View.GONE
                 }
-                in 4..6 -> {
+                in 4..5 -> {
                     clOrange.visibility = View.VISIBLE
                     clGreen.visibility = View.VISIBLE
                     clYellow.visibility = View.GONE
                     clPurple.visibility = View.GONE
                     clInfo.visibility = View.GONE
                 }
-                in 6..8 -> {
+                in 6..7 -> {
                     clOrange.visibility = View.VISIBLE
                     clGreen.visibility = View.VISIBLE
                     clYellow.visibility = View.VISIBLE

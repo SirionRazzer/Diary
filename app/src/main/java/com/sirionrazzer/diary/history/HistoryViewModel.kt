@@ -74,7 +74,6 @@ class HistoryViewModel : ViewModel() {
     }
 
     private fun computeStrikeLength(dayMillis: Long, depth: Int): Int {
-        if (depth == 8) return 0
         val key = DateUtils.smartDate(DateUtils.dateFromMillis(dayMillis), false)
         val previousDay: Long = Instant.ofEpochMilli(dayMillis)
             .atZone(ZoneId.systemDefault())
