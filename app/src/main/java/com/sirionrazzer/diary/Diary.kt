@@ -7,10 +7,15 @@ import com.sirionrazzer.diary.system.dagger.ApiModule
 import com.sirionrazzer.diary.system.dagger.AppComponent
 import com.sirionrazzer.diary.system.dagger.DaggerAppComponent
 import com.sirionrazzer.diary.system.dagger.StorageModule
+import com.sirionrazzer.diary.util.Result
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import io.realm.exceptions.RealmFileException
+import io.realm.exceptions.RealmMigrationNeededException
 import main.java.com.sirionrazzer.diary.system.MyRealmMigration
 import java.io.File
+import java.lang.IllegalStateException
+import java.lang.NullPointerException
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -49,16 +54,31 @@ class Diary : Application() {
      * @param oldKey
      * @param newKey
      */
-    fun reencryptRealm(newKey: ByteArray) {
+    fun reencryptRealm(newKey: ByteArray): Result<String> {
         val newName = System.currentTimeMillis().toString() + ".realm"
         val newFile = File(applicationContext.filesDir, newName)
         prefs.edit().putString("realm_file", newName).apply()
-        val realm = Realm.getInstance(Realm.getDefaultConfiguration())
-        realm.writeEncryptedCopyTo(newFile, newKey)
-        realm.close()
-        Realm.deleteRealm(Realm.getDefaultConfiguration())
-        Realm.removeDefaultConfiguration()
-        Realm.setDefaultConfiguration(buildRealmConfiguration(newKey, newName))
+        if (Realm.getDefaultConfiguration() != null) {
+            try {
+                val realm = Realm.getInstance(Realm.getDefaultConfiguration()!!)
+                realm.writeEncryptedCopyTo(newFile, newKey)
+                realm.close()
+                Realm.deleteRealm(Realm.getDefaultConfiguration()!!)
+                Realm.removeDefaultConfiguration()
+                Realm.setDefaultConfiguration(buildRealmConfiguration(newKey, newName))
+            } catch (e: RealmMigrationNeededException) {
+                return Result.Error(e)
+            } catch (e: RealmFileException) {
+                return Result.Error(e)
+            } catch (e: IllegalArgumentException) {
+                return Result.Error(e)
+            } catch (e: IllegalStateException) {
+                return Result.Error(e)
+            }
+            return Result.Success("Encryption OK")
+        } else {
+            return Result.Error(NullPointerException())
+        }
     }
 
     private fun buildRealmConfiguration(key: ByteArray, name: String): RealmConfiguration {

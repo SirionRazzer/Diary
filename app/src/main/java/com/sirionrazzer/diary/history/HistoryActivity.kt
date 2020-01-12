@@ -25,7 +25,7 @@ import com.sirionrazzer.diary.stats.ChooseTrackItemStatActivity
 import com.sirionrazzer.diary.util.DateUtils
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_history.*
-import main.java.com.sirionrazzer.diary.boarding.AuthViewModel
+import com.sirionrazzer.diary.boarding.AuthViewModel
 import org.jetbrains.anko.startActivity
 import org.threeten.bp.LocalDate
 import java.io.File

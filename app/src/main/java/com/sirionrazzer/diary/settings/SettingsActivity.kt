@@ -12,7 +12,7 @@ import com.sirionrazzer.diary.main.MainViewModel
 import com.sirionrazzer.diary.models.TrackItemDao
 import io.realm.Realm
 import kotlinx.android.synthetic.main.toolbar.*
-import main.java.com.sirionrazzer.diary.boarding.AuthViewModel
+import com.sirionrazzer.diary.boarding.AuthViewModel
 
 class SettingsActivity : AppCompatActivity() {
 

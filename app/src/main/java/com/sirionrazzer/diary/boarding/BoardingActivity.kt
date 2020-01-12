@@ -14,7 +14,6 @@ import com.sirionrazzer.diary.models.UserStorage
 import com.sirionrazzer.diary.util.StringUtils
 import kotlinx.android.synthetic.main.activity_boarding.*
 import kotlinx.android.synthetic.main.toolbar.*
-import main.java.com.sirionrazzer.diary.boarding.AuthViewModel
 import javax.inject.Inject
 
 class BoardingActivity : AppCompatActivity() {
@@ -31,13 +30,22 @@ class BoardingActivity : AppCompatActivity() {
         authViewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
         authViewModel.isLoggedIn.observe(this, Observer {
             if (it) {
-                Diary.app.installEncryptedRealm(authViewModel.getEncryptedPassword())
-                if (!userStorage.userSettings.boardingPickerShown) {
-                    startActivity(Intent(this, BoardingPickerActivity::class.java))
-                } else {
-                    startActivity(Intent(this, HistoryActivity::class.java))
+                try {
+                    Diary.app.installEncryptedRealm(authViewModel.getEncryptedPassword())
+
+                    if (!userStorage.userSettings.boardingPickerShown && authViewModel.isNewcomer.value!!) {
+                        startActivity(Intent(this, BoardingPickerActivity::class.java))
+                    } else {
+                        startActivity(Intent(this, HistoryActivity::class.java))
+                    }
+                    finish()
+                } catch (e: Exception) {
+                    Toast.makeText(
+                        this,
+                        "Encryption has failed, reinstall needed",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
-                finish()
             }
         })
         setContentView(R.layout.activity_boarding)
@@ -47,42 +55,68 @@ class BoardingActivity : AppCompatActivity() {
         toolbar.visibility = View.GONE
 
         signInBtn.setOnClickListener {
-            val email = etEmail.text.toString()
-            val pw = etPassword.text.toString()
-            if (pw.isBlank() || pw.length < 6) {
-                Toast.makeText(this, getString(R.string.short_password), Toast.LENGTH_SHORT).show()
-            } else if (StringUtils.isValidEmail(email)) {
-                if (!authViewModel.accountCreated.value!!) {
-                    authViewModel.register(email, pw)
-                } else {
-                    // TODO hack: no new user allowed, due to the db being prepared for the given user (might be fixed with new db for each new logged in account)
-                    userStorage.userSettings.email.let {
-                        if (it != null && it == email) {
-                            authViewModel.register(email, pw)
-                        } else {
-                            Toast.makeText(
-                                this,
-                                getString(R.string.user_change_not_allowed),
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
-                        }
-                    }
-                }
-            } else {
-                Toast.makeText(this, getString(R.string.invalid_pa_email), Toast.LENGTH_SHORT)
-                    .show()
-            }
+            login()
+        }
+
+        signUpBtn.setOnClickListener {
+            register()
         }
 
         anonymousRegisterBtn.setOnClickListener {
             authViewModel.anonymousRegister()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         if (userStorage.userSettings.accountCreated) {
             tvSubtitle.text = getString(R.string.insert_stored_credentials)
+            tvSignInCaption.visibility = View.GONE
+            signUpBtn.visibility = View.GONE
+            signUpBtn.isEnabled = false
             anonymousRegisterBtn.visibility = View.GONE
             anonymousRegisterBtn.isEnabled = false
+        }
+    }
+
+    private fun login() {
+        val email = etEmail.text.toString()
+        val pw = etPassword.text.toString()
+        if (pw.isBlank() || pw.length < 6) {
+            Toast.makeText(this, getString(R.string.short_password), Toast.LENGTH_SHORT).show()
+        } else if (StringUtils.isValidEmail(email)) {
+            userStorage.userSettings.email.let {
+                // TODO hack: no new user allowed, due to the db being prepared for the given user (might be fixed with new db for each new logged in account)
+                if (it == null || it == email) {
+                    authViewModel.login(email, pw)
+                } else {
+                    Toast.makeText(
+                        this,
+                        getString(R.string.user_change_not_allowed),
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+            }
+        } else {
+            Toast.makeText(this, getString(R.string.invalid_pa_email), Toast.LENGTH_SHORT)
+                .show()
+        }
+    }
+
+    private fun register() {
+        val email = etEmail.text.toString()
+        val pw = etPassword.text.toString()
+        if (pw.isBlank() || pw.length < 6) {
+            Toast.makeText(this, getString(R.string.short_password), Toast.LENGTH_SHORT).show()
+        } else if (StringUtils.isValidEmail(email)) {
+            if (!authViewModel.accountCreated.value!!) {
+                authViewModel.register(email, pw)
+            }
+        } else {
+            Toast.makeText(this, getString(R.string.invalid_pa_email), Toast.LENGTH_SHORT)
+                .show()
         }
     }
 }

@@ -16,7 +16,8 @@ import kotlinx.android.synthetic.main.activity_boarding.etPassword
 import kotlinx.android.synthetic.main.activity_boarding.signInBtn
 import kotlinx.android.synthetic.main.activity_link_anonymous.*
 import kotlinx.android.synthetic.main.toolbar.*
-import main.java.com.sirionrazzer.diary.boarding.AuthViewModel
+import com.sirionrazzer.diary.boarding.AuthViewModel
+import com.sirionrazzer.diary.util.Result
 
 class LinkAnonymousAccountActivity : AppCompatActivity() {
     private lateinit var authViewModel: AuthViewModel
@@ -26,9 +27,13 @@ class LinkAnonymousAccountActivity : AppCompatActivity() {
         authViewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
         authViewModel.isAnonymous.observe(this, Observer {
             if (!it) {
-                Diary.app.reencryptRealm(authViewModel.getEncryptedPassword())
-                startActivity(Intent(this, HistoryActivity::class.java))
-                finish()
+                val res = Diary.app.reencryptRealm(authViewModel.getEncryptedPassword())
+                if (res is Result.Error) {
+                    Toast.makeText(this, "Error: ${res}", Toast.LENGTH_SHORT).show()
+                } else {
+                    startActivity(Intent(this, HistoryActivity::class.java))
+                    finish()
+                }
             }
         })
         authViewModel.authError.observe(this, Observer {

@@ -48,7 +48,7 @@
     <string name="select_time_unit">Zvolte časovou jednotku</string>
     <string name="settings">Nastavení</string>
     <string name="short_password">Vaše heslo je příliš krátké, je potřeba alespon 6 znaků dlouhé.</string>
-    <string name="sign_in">Přihlásit se</string>
+    <string name="sign_in">Registrovat</string>
     <string name="skip_now">Zatím přeskočit</string>
     <string name="statistics">Statistiky</string>
     <string name="submit">Zadat</string>
@@ -119,4 +119,6 @@
     <string name="example_heartpoints">Kardio body</string>
     <string name="example_moveminutes">Minuty pohybu</string>
     <string name="example_cycling">Kolo</string>
+    <string name="sign_up">Přihlásit</string>
+    <string name="already_have_account">Již máte účet?</string>
 </resources>
