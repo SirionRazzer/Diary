@@ -68,15 +68,21 @@ class AuthViewModel : ViewModel(), AuthInterface {
             .addOnFailureListener { failure ->
                 when (failure.javaClass) {
                     FirebaseAuthWeakPasswordException::class.java -> {
+                        isLoggedIn.value = false
                         failLogin(failure.message, AuthError.ERROR_WEAK_PASSWORD)
                     }
                     FirebaseAuthInvalidCredentialsException::class.java -> {
+                        isLoggedIn.value = false
                         failLogin(failure.message, AuthError.ERROR_INVALID_CREDENTIALS)
                     }
                     FirebaseAuthUserCollisionException::class.java -> {
+                        isLoggedIn.value = false
                         failLogin(failure.message, AuthError.ERROR_CREDENTIAL_ALREADY_IN_USE)
                     }
-                    else -> failLogin(failure.message, AuthError.ERROR_NETWORK_ERROR)
+                    else -> {
+                        isLoggedIn.value = false
+                        failLogin(failure.message, AuthError.ERROR_NETWORK_ERROR)
+                    }
                 }
             }
     }
@@ -103,12 +109,17 @@ class AuthViewModel : ViewModel(), AuthInterface {
             .addOnFailureListener { failure ->
                 when (failure.javaClass) {
                     FirebaseAuthInvalidCredentialsException::class.java -> {
+                        isLoggedIn.value = false
                         failLogin(failure.message, AuthError.ERROR_INVALID_CREDENTIALS)
                     }
                     FirebaseAuthInvalidUserException::class.java -> {
+                        isLoggedIn.value = false
                         failLogin(failure.message, AuthError.ERROR_INVALID_USER)
                     }
-                    else -> failLogin(failure.message, AuthError.ERROR_NETWORK_ERROR)
+                    else -> {
+                        isLoggedIn.value = false
+                        failLogin(failure.message, AuthError.ERROR_NETWORK_ERROR)
+                    }
                 }
             }
     }
@@ -133,6 +144,7 @@ class AuthViewModel : ViewModel(), AuthInterface {
                 }
             }
             .addOnFailureListener { failure ->
+                isLoggedIn.value = false
                 failLogin(failure.message, AuthError.ERROR_NETWORK_ERROR)
             }
     }
@@ -175,7 +187,9 @@ class AuthViewModel : ViewModel(), AuthInterface {
                     FirebaseException::class.java -> {
                         failLogin(failure.message, AuthError.ERROR_FIREBASE_ERROR)
                     }
-                    else -> failLogin(failure.message, AuthError.ERROR_NETWORK_ERROR)
+                    else -> {
+                        failLogin(failure.message, AuthError.ERROR_NETWORK_ERROR)
+                    }
                 }
             }
     }
@@ -186,9 +200,8 @@ class AuthViewModel : ViewModel(), AuthInterface {
     }
 
     private fun failLogin(authError: String?, type: AuthError) {
-        isLoggedIn.value = false
-        authError?.let { this.authError.value = it }
         this.authErrorType.value = type
+        authError?.let { this.authError.value = it }
     }
 
     override fun logout() {
