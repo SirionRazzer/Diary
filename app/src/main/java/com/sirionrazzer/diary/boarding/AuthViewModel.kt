@@ -3,8 +3,8 @@ package com.sirionrazzer.diary.boarding
 import android.util.Base64
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.EmailAuthProvider
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.FirebaseException
+import com.google.firebase.auth.*
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.models.UserStorage
 import java.security.MessageDigest
@@ -29,6 +29,7 @@ class AuthViewModel : ViewModel(), AuthInterface {
     val isNewcomer: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>(false) }
     val isAnonymous: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>(false) }
     val authError: MutableLiveData<String?> by lazy { MutableLiveData<String?>(null) }
+    val authErrorType: MutableLiveData<AuthError> by lazy { MutableLiveData<AuthError>(AuthError.NONE) }
     val encrError: MutableLiveData<String?> by lazy { MutableLiveData<String?>(null) }
     val accountCreated: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>(false) }
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -62,12 +63,21 @@ class AuthViewModel : ViewModel(), AuthInterface {
                     } catch (e: Error) {
                         failedEncryption(e.message)
                     }
-                } else {
-                    failLogin(task.exception?.message)
                 }
             }
             .addOnFailureListener { failure ->
-                failLogin(failure.message)
+                when (failure.javaClass) {
+                    FirebaseAuthWeakPasswordException::class.java -> {
+                        failLogin(failure.message, AuthError.ERROR_WEAK_PASSWORD)
+                    }
+                    FirebaseAuthInvalidCredentialsException::class.java -> {
+                        failLogin(failure.message, AuthError.ERROR_INVALID_CREDENTIALS)
+                    }
+                    FirebaseAuthUserCollisionException::class.java -> {
+                        failLogin(failure.message, AuthError.ERROR_CREDENTIAL_ALREADY_IN_USE)
+                    }
+                    else -> failLogin(failure.message, AuthError.ERROR_NETWORK_ERROR)
+                }
             }
     }
 
@@ -88,12 +98,18 @@ class AuthViewModel : ViewModel(), AuthInterface {
                     } catch (e: Exception) {
                         failedEncryption(e.message)
                     }
-                } else {
-                    failLogin(task.exception?.message)
                 }
             }
             .addOnFailureListener { failure ->
-                failLogin(failure.message)
+                when (failure.javaClass) {
+                    FirebaseAuthInvalidCredentialsException::class.java -> {
+                        failLogin(failure.message, AuthError.ERROR_INVALID_CREDENTIALS)
+                    }
+                    FirebaseAuthInvalidUserException::class.java -> {
+                        failLogin(failure.message, AuthError.ERROR_INVALID_USER)
+                    }
+                    else -> failLogin(failure.message, AuthError.ERROR_NETWORK_ERROR)
+                }
             }
     }
 
@@ -114,9 +130,10 @@ class AuthViewModel : ViewModel(), AuthInterface {
                     } catch (e: Exception) {
                         failedEncryption(e.message)
                     }
-                } else {
-                    failLogin(task.exception?.message)
                 }
+            }
+            .addOnFailureListener { failure ->
+                failLogin(failure.message, AuthError.ERROR_NETWORK_ERROR)
             }
     }
 
@@ -136,23 +153,42 @@ class AuthViewModel : ViewModel(), AuthInterface {
                     } catch (e: Exception) {
                         failedEncryption(e.message)
                     }
-                } else {
-                    failLogin(task.exception?.message)
                 }
             }
             ?.addOnFailureListener { failure ->
-                failLogin(failure.message)
+                when (failure.javaClass) {
+                    FirebaseAuthWeakPasswordException::class.java -> {
+                        failLogin(failure.message, AuthError.ERROR_WEAK_PASSWORD)
+                    }
+                    FirebaseAuthInvalidCredentialsException::class.java -> {
+                        failLogin(failure.message, AuthError.ERROR_INVALID_CREDENTIALS)
+                    }
+                    FirebaseAuthUserCollisionException::class.java -> {
+                        failLogin(failure.message, AuthError.ERROR_CREDENTIAL_ALREADY_IN_USE)
+                    }
+                    FirebaseAuthInvalidUserException::class.java -> {
+                        failLogin(failure.message, AuthError.ERROR_INVALID_USER)
+                    }
+                    FirebaseAuthRecentLoginRequiredException::class.java -> {
+                        failLogin(failure.message, AuthError.ERROR_RECENT_LOGIN_REQUIRED)
+                    }
+                    FirebaseException::class.java -> {
+                        failLogin(failure.message, AuthError.ERROR_FIREBASE_ERROR)
+                    }
+                    else -> failLogin(failure.message, AuthError.ERROR_NETWORK_ERROR)
+                }
             }
     }
 
     private fun failedEncryption(encrError: String?) {
         isLoggedIn.value = false
-        encrError?.let { this.encrError.value = "Encryption error ${it}" }
+        encrError?.let { this.encrError.value = "Encryption error $it" }
     }
 
-    private fun failLogin(authError: String?) {
+    private fun failLogin(authError: String?, type: AuthError) {
         isLoggedIn.value = false
-        authError?.let { this.authError.value = "Authentication error ${it}" }
+        authError?.let { this.authError.value = it }
+        this.authErrorType.value = type
     }
 
     override fun logout() {

@@ -55,9 +55,31 @@ class BoardingActivity : AppCompatActivity() {
             }
         })
 
-//        authViewModel.authError.observe(this, Observer {
-//            Toast.makeText(this, it ?: "Authentication error", Toast.LENGTH_SHORT).show()
-//        })
+        authViewModel.authError.observe(this, Observer {
+            tilEmail.isErrorEnabled = true
+            tilPassword.isErrorEnabled = true
+            tilEmail.error = ""
+            tilEmail.error = ""
+            when (authViewModel.authErrorType.value) {
+                AuthError.ERROR_CREDENTIAL_ALREADY_IN_USE -> tilPassword.error = it ?: ""
+                AuthError.ERROR_FIREBASE_ERROR -> tilPassword.error = it ?: ""
+                AuthError.ERROR_INVALID_CREDENTIALS -> tilPassword.error = it ?: ""
+                AuthError.ERROR_INVALID_USER -> tilPassword.error = it ?: ""
+                AuthError.ERROR_NETWORK_ERROR -> tilPassword.error = it ?: ""
+                AuthError.ERROR_RECENT_LOGIN_REQUIRED -> tilPassword.error = it ?: ""
+                AuthError.ERROR_WEAK_PASSWORD -> tilPassword.error = it ?: ""
+                AuthError.NONE -> {
+                    tilEmail.isErrorEnabled = false
+                    tilPassword.isErrorEnabled = false
+                }
+                else -> {
+                    tilEmail.isErrorEnabled = true
+                    tilEmail.error = it ?: ""
+                    tilPassword.isErrorEnabled = true
+                    tilPassword.error = it ?: ""
+                }
+            }
+        })
 
         signInBtn.setOnClickListener {
             login()
@@ -89,6 +111,7 @@ class BoardingActivity : AppCompatActivity() {
         val email = etEmail.text.toString()
         val pw = etPassword.text.toString()
         if (pw.isBlank() || pw.length < 6) {
+            tilPassword.error = getString(R.string.short_password)
             Toast.makeText(this, getString(R.string.short_password), Toast.LENGTH_SHORT).show()
         } else if (StringUtils.isValidEmail(email)) {
             userStorage.userSettings.email.let {
@@ -114,6 +137,7 @@ class BoardingActivity : AppCompatActivity() {
         val email = etEmail.text.toString()
         val pw = etPassword.text.toString()
         if (pw.isBlank() || pw.length < 6) {
+            tilPassword.error = getString(R.string.short_password)
             Toast.makeText(this, getString(R.string.short_password), Toast.LENGTH_SHORT).show()
         } else if (StringUtils.isValidEmail(email)) {
             if (!authViewModel.accountCreated.value!!) {

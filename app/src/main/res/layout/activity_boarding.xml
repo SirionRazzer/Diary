@@ -37,7 +37,7 @@
                     android:layout_height="match_parent"
                     android:layout_below="@id/ivLogo"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     android:background="@color/white">
@@ -127,8 +127,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tilEmail"
+                        android:layout_marginBottom="16dp"
                         android:hint="@string/hint_your_password"
-                        android:layout_marginBottom="16dp">
+                        app:errorEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etPassword"
@@ -148,8 +149,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tvSubtitle"
+                        android:layout_marginBottom="16dp"
                         android:hint="@string/hint_your_email"
-                        android:layout_marginBottom="16dp">
+                        app:errorEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etEmail"
