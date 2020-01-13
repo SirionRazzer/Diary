@@ -21,10 +21,10 @@
             android:id="@+id/ibImage"
             android:layout_width="120dp"
             android:layout_height="120dp"
+            android:layout_below="@id/llHeading"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="30dp"
-            android:layout_below="@id/llHeading"
             android:background="@color/transparent"
             android:contentDescription="@string/app_logo"
             android:scaleType="centerInside"
@@ -36,7 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/ibImage"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            android:hint="@string/activity_name">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etName"
@@ -44,7 +45,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="-8dp"
                 android:drawableEnd="@drawable/ic_label"
-                android:hint="@string/activity_name"
                 android:textColor="@color/primaryText"
                 android:textColorHint="@color/hintText" />
 

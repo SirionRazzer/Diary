@@ -127,6 +127,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tilEmail"
+                        android:hint="@string/hint_your_password"
                         android:layout_marginBottom="16dp">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -135,7 +136,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="-8dp"
                             android:drawableEnd="@drawable/ic_lock_outline_black_24dp"
-                            android:hint="@string/hint_your_password"
                             android:inputType="textPassword"
                             android:textColor="@color/primaryText"
                             android:textColorHint="@color/hintText" />
@@ -148,6 +148,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tvSubtitle"
+                        android:hint="@string/hint_your_email"
                         android:layout_marginBottom="16dp">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -156,7 +157,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="-8dp"
                             android:drawableEnd="@drawable/ic_mail_outline_black_24dp"
-                            android:hint="@string/hint_your_email"
                             android:inputType="textEmailAddress"
                             android:textColor="@color/primaryText"
                             android:textColorHint="@color/hintText" />

@@ -27,6 +27,12 @@ class BoardingActivity : AppCompatActivity() {
 
         Diary.app.appComponent.inject(this)
 
+        setContentView(R.layout.activity_boarding)
+
+        setSupportActionBar(toolbar)
+        toolbar.title = getString(R.string.app_name)
+        toolbar.visibility = View.GONE
+
         authViewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
         authViewModel.isLoggedIn.observe(this, Observer {
             if (it) {
@@ -48,11 +54,10 @@ class BoardingActivity : AppCompatActivity() {
                 }
             }
         })
-        setContentView(R.layout.activity_boarding)
 
-        setSupportActionBar(toolbar)
-        toolbar.title = getString(R.string.app_name)
-        toolbar.visibility = View.GONE
+//        authViewModel.authError.observe(this, Observer {
+//            Toast.makeText(this, it ?: "Authentication error", Toast.LENGTH_SHORT).show()
+//        })
 
         signInBtn.setOnClickListener {
             login()
