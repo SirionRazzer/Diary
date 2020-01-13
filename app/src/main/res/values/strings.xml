@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Dr. Diary</string>
     <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
     <string name="app_logo">App logo</string>
     <string name="skip_now">skip now</string>
     <string name="title_my_day">My Day</string>
@@ -24,6 +25,7 @@
     <string name="hint_your_email">Your email</string>
     <string name="hint_your_password">Your password</string>
     <string name="new_credentials_or_existing_account_message">Enter your new credentials or use an existing account</string>
+    <string name="already_have_account">Already have an account?</string>
     <string name="welcome">Welcome!</string>
     <string name="invalid_pa_email">Email of password is invalid.</string>
     <string name="short_password">Your password is too short, it needs to be at least 6 characters long.</string>

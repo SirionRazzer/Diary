@@ -1,10 +1,10 @@
-package main.java.com.sirionrazzer.diary.boarding
+package com.sirionrazzer.diary.boarding
 
 import android.util.Base64
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.EmailAuthProvider
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.FirebaseException
+import com.google.firebase.auth.*
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.models.UserStorage
 import java.security.MessageDigest
@@ -26,8 +26,11 @@ class AuthViewModel : ViewModel(), AuthInterface {
     lateinit var userStorage: UserStorage
 
     val isLoggedIn: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
+    val isNewcomer: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>(false) }
     val isAnonymous: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>(false) }
     val authError: MutableLiveData<String?> by lazy { MutableLiveData<String?>(null) }
+    val authErrorType: MutableLiveData<AuthError> by lazy { MutableLiveData<AuthError>(AuthError.NONE) }
+    val encrError: MutableLiveData<String?> by lazy { MutableLiveData<String?>(null) }
     val accountCreated: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>(false) }
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
@@ -39,36 +42,84 @@ class AuthViewModel : ViewModel(), AuthInterface {
             isLoggedIn.value = true
         }
         accountCreated.value = userStorage.userSettings.accountCreated
+        isNewcomer.value = userStorage.userSettings.isNewcomer
     }
 
     override fun register(email: String, pw: String) {
-        // try to login in case user tries to login through registration
-        firebaseAuth.signInWithEmailAndPassword(email, pw)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    storeHashedPassword(pw)
-                    updateEmail(email)
-                    userStorage.updateSettings { lus ->
-                        lus.accountCreated = true
+        firebaseAuth.createUserWithEmailAndPassword(email, pw)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    try {
+                        storeHashedPassword(pw)
+                        updateEmail(email)
+                        userStorage.updateSettings { lus ->
+                            lus.isNewcomer = true
+                            lus.accountCreated = true
+                        }
+                        accountCreated.value = true
+                        isNewcomer.value = true
+                        isAnonymous.value = false
+                        isLoggedIn.value = true
+                    } catch (e: Error) {
+                        failedEncryption(e.message)
                     }
-                    isAnonymous.value = false
-                    isLoggedIn.value = true
-                } else {
-                    // proceed with registration
-                    firebaseAuth.createUserWithEmailAndPassword(email, pw)
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                storeHashedPassword(pw)
-                                updateEmail(email)
-                                isAnonymous.value = false
-                                isLoggedIn.value = true
-                            } else {
-                                failLogin(task.exception?.message)
-                            }
+                }
+            }
+            .addOnFailureListener { failure ->
+                when (failure.javaClass) {
+                    FirebaseAuthWeakPasswordException::class.java -> {
+                        isLoggedIn.value = false
+                        failLogin(failure.message, AuthError.ERROR_WEAK_PASSWORD)
+                    }
+                    FirebaseAuthInvalidCredentialsException::class.java -> {
+                        isLoggedIn.value = false
+                        failLogin(failure.message, AuthError.ERROR_INVALID_CREDENTIALS)
+                    }
+                    FirebaseAuthUserCollisionException::class.java -> {
+                        isLoggedIn.value = false
+                        failLogin(failure.message, AuthError.ERROR_CREDENTIAL_ALREADY_IN_USE)
+                    }
+                    else -> {
+                        isLoggedIn.value = false
+                        failLogin(failure.message, AuthError.ERROR_NETWORK_ERROR)
+                    }
+                }
+            }
+    }
+
+    override fun login(email: String, pw: String) {
+        firebaseAuth.signInWithEmailAndPassword(email, pw)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    try {
+                        storeHashedPassword(pw)
+                        updateEmail(email)
+                        userStorage.updateSettings { lus ->
+                            lus.isNewcomer = false
+                            lus.accountCreated = true
                         }
-                        .addOnFailureListener { failure ->
-                            failLogin(failure.message)
-                        }
+                        accountCreated.value = true
+                        isAnonymous.value = false
+                        isLoggedIn.value = true
+                    } catch (e: Exception) {
+                        failedEncryption(e.message)
+                    }
+                }
+            }
+            .addOnFailureListener { failure ->
+                when (failure.javaClass) {
+                    FirebaseAuthInvalidCredentialsException::class.java -> {
+                        isLoggedIn.value = false
+                        failLogin(failure.message, AuthError.ERROR_INVALID_CREDENTIALS)
+                    }
+                    FirebaseAuthInvalidUserException::class.java -> {
+                        isLoggedIn.value = false
+                        failLogin(failure.message, AuthError.ERROR_INVALID_USER)
+                    }
+                    else -> {
+                        isLoggedIn.value = false
+                        failLogin(failure.message, AuthError.ERROR_NETWORK_ERROR)
+                    }
                 }
             }
     }
@@ -77,12 +128,24 @@ class AuthViewModel : ViewModel(), AuthInterface {
         firebaseAuth.signInAnonymously()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    storeHashedPassword(null)
-                    isAnonymous.value = true
-                    isLoggedIn.value = true
-                } else {
-                    failLogin(task.exception?.message)
+                    try {
+                        storeHashedPassword(null)
+                        userStorage.updateSettings { lus ->
+                            lus.isNewcomer = true
+                            lus.accountCreated = true
+                        }
+                        accountCreated.value = true
+                        isNewcomer.value = true
+                        isAnonymous.value = true
+                        isLoggedIn.value = true
+                    } catch (e: Exception) {
+                        failedEncryption(e.message)
+                    }
                 }
+            }
+            .addOnFailureListener { failure ->
+                isLoggedIn.value = false
+                failLogin(failure.message, AuthError.ERROR_NETWORK_ERROR)
             }
     }
 
@@ -91,45 +154,54 @@ class AuthViewModel : ViewModel(), AuthInterface {
         firebaseAuth.currentUser?.linkWithCredential(credential)
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    storeHashedPassword(pw)
-                    updateEmail(email)
-                    userStorage.updateSettings { lus ->
-                        lus.accountCreated = true
+                    try {
+                        storeHashedPassword(pw)
+                        updateEmail(email)
+                        userStorage.updateSettings { lus ->
+                            lus.accountCreated = true
+                        }
+                        isAnonymous.value = false
+                        isLoggedIn.value = true
+                    } catch (e: Exception) {
+                        failedEncryption(e.message)
                     }
-                    isAnonymous.value = false
-                    isLoggedIn.value = true
-                } else {
-                    failLogin(task.exception?.message)
                 }
             }
             ?.addOnFailureListener { failure ->
-                failLogin(failure.message)
-            }
-    }
-
-    override fun login(email: String, pw: String) {
-        firebaseAuth.signInWithEmailAndPassword(email, pw)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    storeHashedPassword(pw)
-                    updateEmail(email)
-                    userStorage.updateSettings { lus ->
-                        lus.accountCreated = true
+                when (failure.javaClass) {
+                    FirebaseAuthWeakPasswordException::class.java -> {
+                        failLogin(failure.message, AuthError.ERROR_WEAK_PASSWORD)
                     }
-                    isAnonymous.value = false
-                    isLoggedIn.value = true
-                } else {
-                    failLogin(task.exception?.message)
+                    FirebaseAuthInvalidCredentialsException::class.java -> {
+                        failLogin(failure.message, AuthError.ERROR_INVALID_CREDENTIALS)
+                    }
+                    FirebaseAuthUserCollisionException::class.java -> {
+                        failLogin(failure.message, AuthError.ERROR_CREDENTIAL_ALREADY_IN_USE)
+                    }
+                    FirebaseAuthInvalidUserException::class.java -> {
+                        failLogin(failure.message, AuthError.ERROR_INVALID_USER)
+                    }
+                    FirebaseAuthRecentLoginRequiredException::class.java -> {
+                        failLogin(failure.message, AuthError.ERROR_RECENT_LOGIN_REQUIRED)
+                    }
+                    FirebaseException::class.java -> {
+                        failLogin(failure.message, AuthError.ERROR_FIREBASE_ERROR)
+                    }
+                    else -> {
+                        failLogin(failure.message, AuthError.ERROR_NETWORK_ERROR)
+                    }
                 }
             }
-            .addOnFailureListener { failure ->
-                failLogin(failure.message)
-            }
     }
 
-    private fun failLogin(authError: String?) {
+    private fun failedEncryption(encrError: String?) {
         isLoggedIn.value = false
-        authError?.let { this.authError.value = authError }
+        encrError?.let { this.encrError.value = "Encryption error $it" }
+    }
+
+    private fun failLogin(authError: String?, type: AuthError) {
+        this.authErrorType.value = type
+        authError?.let { this.authError.value = it }
     }
 
     override fun logout() {
@@ -148,21 +220,23 @@ class AuthViewModel : ViewModel(), AuthInterface {
      * Create new temporary password for anonymouse user
      * @param pw is password, if null then generate temporary password
      */
+    @Throws(java.lang.Exception::class)
     private fun storeHashedPassword(pw: String?) {
         var key = ByteArray(64)
         if (pw == null) {
             SecureRandom().nextBytes(key)
             MessageDigest.getInstance("SHA-256").digest(key, 0, key.size)
+            userStorage.storePasswordDigest(key)
         } else {
-            val decoded = Base64.decode(pw, Base64.NO_WRAP)
-            (decoded.indices).forEach { i ->
-                // TODO this doesn't work good
-                key[i] = decoded[i]
+            Base64.decode(pw, Base64.NO_WRAP).let {
+                (it.indices).forEach { i ->
+                    // TODO this doesn't work good
+                    key[i] = it[i]
+                }
             }
-
             MessageDigest.getInstance("SHA-256").digest(key, 0, key.size)
+            userStorage.storePasswordDigest(key)
         }
-        userStorage.storePasswordDigest(key)
     }
 
     private fun updateEmail(email: String) {

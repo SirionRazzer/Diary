@@ -32,7 +32,7 @@ class UserStorage @Inject constructor() {
     }
 
     fun storePasswordDigest(pw: ByteArray) {
-        prefs.edit().putString("password_digest", Base64.encodeToString(pw, Base64.NO_WRAP)).apply()
+        prefs.edit().putString("password_digest", Base64.encodeToString(pw, Base64.NO_WRAP)).commit()
     }
 
     fun clearPasswordDigest() {
