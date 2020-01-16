@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
@@ -42,6 +43,8 @@ class HistoryActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListene
     lateinit var historyViewModel: HistoryViewModel
     lateinit var viewAdapter: HistoryAdapter
 
+    private var fabVisible: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
@@ -60,6 +63,22 @@ class HistoryActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListene
         rvHistoryItems.adapter = viewAdapter
         rvHistoryItems.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvHistoryItems.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (dy > 0) {
+                    fab.hide()
+                    fabVisible = false
+                }
+                if (dy < 0) {
+                    if (!fabVisible) {
+                        fab.show()
+                        fabVisible = true
+                    }
+                }
+            }
+        })
 
         fab.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -245,12 +264,11 @@ class HistoryActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListene
     override fun onOffsetChanged(abl: AppBarLayout?, i: Int) {
         if (maxScrollSize == 0) maxScrollSize = abl!!.totalScrollRange
         val currentScrollPercentage = (abs(i)) * 100
-        if (currentScrollPercentage >= PERCENTAGE_TO_SHOW_ABL_CONTENT) {
-            ViewCompat.animate(fab).scaleY(0f).scaleX(0f).start()
-        }
 
         if (currentScrollPercentage < PERCENTAGE_TO_SHOW_ABL_CONTENT) {
-            ViewCompat.animate(fab).scaleY(1f).scaleX(1f).start()
+            //ViewCompat.animate(fab).scaleY(1f).scaleX(1f).start()
+            fab.show()
+            fabVisible = true
         }
     }
 }
