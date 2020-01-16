@@ -11,7 +11,7 @@
         android:layout_height="192dp"
         android:fitsSystemWindows="true"
         android:background="@color/grey_lt"
-        android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar">
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/cab"
@@ -218,7 +218,7 @@
                 app:layout_collapseMode="pin"
                 android:background="@color/transparent"
                 app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
-                app:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
+                app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
