@@ -9,15 +9,15 @@
         android:id="@+id/ab"
         android:layout_width="match_parent"
         android:layout_height="192dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:fitsSystemWindows="true"
+        android:background="@color/grey_lt"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/cab"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:elevation="8dp"
             android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
 
             <LinearLayout
@@ -33,8 +33,8 @@
 
                     <ImageView
                         android:id="@+id/ivDayStrike"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:src="@drawable/ic_badge"
@@ -45,10 +45,10 @@
                         android:id="@+id/tvDayStrikeValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:text="7"
+                        android:layout_marginTop="11dp"
+                        android:text="107"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@id/ivDayStrike"
                         app:layout_constraintStart_toStartOf="@id/ivDayStrike"
@@ -59,7 +59,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="strike"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/secondaryText"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@id/ivDayStrike"
@@ -76,8 +76,8 @@
 
                     <ImageView
                         android:id="@+id/ivOrange"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
                         android:src="@drawable/ic_badge_orange"
@@ -89,7 +89,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="2+"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/secondaryText"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@id/ivOrange"
@@ -106,8 +106,8 @@
 
                     <ImageView
                         android:id="@+id/ivGreen"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
                         android:src="@drawable/ic_badge_green"
@@ -119,7 +119,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="4+"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/secondaryText"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@id/ivGreen"
@@ -136,8 +136,8 @@
 
                     <ImageView
                         android:id="@+id/ivYellow"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
                         android:src="@drawable/ic_badge_yellow"
@@ -149,7 +149,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="6+"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/secondaryText"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@id/ivYellow"
@@ -166,8 +166,8 @@
 
                     <ImageView
                         android:id="@+id/ivPurple"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
                         android:src="@drawable/ic_badge_purple"
@@ -179,7 +179,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="8+"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/secondaryText"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@id/ivPurple"
@@ -216,7 +216,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
+                android:background="@color/transparent"
                 app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+                app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -227,10 +229,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/cToolbar"
-        android:clipToPadding="false"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -241,7 +239,7 @@
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_add"
-        app:layout_anchor="@id/ab"
+        app:layout_anchor="@id/rvHistoryItems"
         app:layout_anchorGravity="bottom|right|end" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

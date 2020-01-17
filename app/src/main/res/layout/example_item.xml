@@ -60,7 +60,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:text=""
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/primaryText"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/item_switch"
