@@ -9,7 +9,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -97,23 +96,23 @@ class HistoryActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListene
                     clInfo.visibility = View.GONE
                 }
                 in 4..5 -> {
-                    clOrange.visibility = View.VISIBLE
+                    clOrange.visibility = View.GONE
                     clGreen.visibility = View.VISIBLE
                     clYellow.visibility = View.GONE
                     clPurple.visibility = View.GONE
                     clInfo.visibility = View.GONE
                 }
                 in 6..7 -> {
-                    clOrange.visibility = View.VISIBLE
-                    clGreen.visibility = View.VISIBLE
+                    clOrange.visibility = View.GONE
+                    clGreen.visibility = View.GONE
                     clYellow.visibility = View.VISIBLE
                     clPurple.visibility = View.GONE
                     clInfo.visibility = View.GONE
                 }
                 in 8..Int.MAX_VALUE -> {
-                    clOrange.visibility = View.VISIBLE
-                    clGreen.visibility = View.VISIBLE
-                    clYellow.visibility = View.VISIBLE
+                    clOrange.visibility = View.GONE
+                    clGreen.visibility = View.GONE
+                    clYellow.visibility = View.GONE
                     clPurple.visibility = View.VISIBLE
                     clInfo.visibility = View.GONE
                 }
@@ -266,7 +265,6 @@ class HistoryActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListene
         val currentScrollPercentage = (abs(i)) * 100
 
         if (currentScrollPercentage < PERCENTAGE_TO_SHOW_ABL_CONTENT) {
-            //ViewCompat.animate(fab).scaleY(1f).scaleX(1f).start()
             fab.show()
             fabVisible = true
         }
