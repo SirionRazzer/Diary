@@ -57,6 +57,14 @@ android {
     }
 }
 
+androidExtensions {
+    experimental = true
+}
+
+configurations {
+    ktlint
+}
+
 @SuppressWarnings("GrMethodMayBeStatic")
 private Integer generateVersionCode() {
     return ext.minimumSdkVersion * 10000000 + ext.versionMajor * 10000 + ext.versionMinor * 100 + ext.versionPatch
@@ -80,6 +88,7 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    ktlint "com.github.shyiko:ktlint:0.31.0"
 
     // AndroidX
     implementation "androidx.annotation:annotation:$annotation_version"
@@ -98,7 +107,8 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
 
-    kapt "androidx.lifecycle:lifecycle-compiler:$androidx_lifecycle_version"
+    // kapt "androidx.lifecycle:lifecycle-compiler:$androidx_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$androidx_lifecycle_version"
 
     implementation 'androidx.preference:preference:1.1.0'
     implementation 'com.google.android.material:material:1.0.0'
@@ -159,3 +169,20 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 }
+
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    main = "com.github.shyiko.ktlint.Main"
+    classpath = configurations.ktlint
+    args "src/**/*.kt"
+}
+
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    main = "com.github.shyiko.ktlint.Main"
+    classpath = configurations.ktlint
+    args "-F", "src/**/*.kt"
+}
+
+check.dependsOn 'ktlint', 'lint'

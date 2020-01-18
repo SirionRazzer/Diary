@@ -121,4 +121,7 @@
     <string name="example_cycling">Kolo</string>
     <string name="sign_up">Registrovat</string>
     <string name="already_have_account">Již máte účet?</string>
+    <string name="description_activity_image">Aktivita</string>
+    <string name="description_activity_label">Štítek rozšíření aktivity</string>
+    <string name="description_tooltip_icon">Nápověda</string>
 </resources>

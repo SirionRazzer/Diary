@@ -2,7 +2,7 @@
 <merge xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:showIn="@layout/viewer_template_item">
+    tools:showIn="@layout/viewer_template_item_wrapper">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -13,6 +13,7 @@
             android:id="@+id/ivTemplate"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:contentDescription="@string/description_activity_image"
             android:src="@drawable/ic_mail_outline_black_24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +34,7 @@
             android:id="@+id/ivPencil"
             android:layout_width="16dp"
             android:layout_height="16dp"
+            android:contentDescription="@string/description_activity_label"
             app:layout_constraintStart_toEndOf="@+id/space"
             app:layout_constraintTop_toBottomOf="@+id/space" />
 

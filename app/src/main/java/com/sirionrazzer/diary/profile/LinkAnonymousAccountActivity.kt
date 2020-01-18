@@ -35,7 +35,7 @@ class LinkAnonymousAccountActivity : AppCompatActivity() {
             if (!it) {
                 val res = Diary.app.reencryptRealm(authViewModel.getEncryptedPassword())
                 if (res is Result.Error) {
-                    Toast.makeText(this, "Error: ${res}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Error: $res", Toast.LENGTH_SHORT).show()
                 } else {
                     startActivity(Intent(this, HistoryActivity::class.java))
                     finish()

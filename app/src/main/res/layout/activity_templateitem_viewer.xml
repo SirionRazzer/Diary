@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/rlMain"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey_lt"
     tools:context=".viewer.TemplateItemViewerActivity">
@@ -13,9 +13,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
         android:background="@drawable/background_white_sheet_rounded"
-        android:elevation="4dp"
-        android:layout_below="@id/toolbar">
+        android:elevation="4dp">
 
         <RelativeLayout
             android:id="@+id/llHeading"
@@ -33,6 +33,7 @@
                 android:id="@+id/ivInfo"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
+                android:contentDescription="@string/description_tooltip_icon"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="3dp"
                 android:src="@drawable/ic_info" />
@@ -71,7 +72,7 @@
                 android:id="@+id/rvTemplates"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:item_layout="@layout/viewer_template_item" />
+                app:item_layout="@layout/viewer_template_item_wrapper" />
 
         </LinearLayout>
     </RelativeLayout>

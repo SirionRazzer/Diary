@@ -31,13 +31,14 @@ import org.threeten.bp.LocalDate
 import java.io.File
 import kotlin.math.abs
 
-
 class HistoryActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener {
 
-    private val PERCENTAGE_TO_SHOW_ABL_CONTENT = 20
-    private var maxScrollSize: Int = 0
-    private val ONE_MEGABYTE: Long = 1024 * 1024
+    companion object {
+        private const val PERCENTAGE_TO_SHOW_ABL_CONTENT = 20
+        private const val ONE_MEGABYTE: Long = 1024 * 1024
+    }
 
+    private var maxScrollSize: Int = 0
     lateinit var authViewModel: AuthViewModel
     lateinit var historyViewModel: HistoryViewModel
     lateinit var viewAdapter: HistoryAdapter

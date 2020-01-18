@@ -178,7 +178,7 @@ class MainViewModel : ViewModel() {
             status = false,
             textField = "",
             numberField = 0f,
-            date = date.value!!.toEpochDay() * DAY_MILLISECONDS,   // TODO
+            date = date.value!!.toEpochDay() * DAY_MILLISECONDS, // TODO
             position = it.position
         )
         currentTrackItems.value?.add(trackItem)

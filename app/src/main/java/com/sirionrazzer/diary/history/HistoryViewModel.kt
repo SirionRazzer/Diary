@@ -70,7 +70,7 @@ class HistoryViewModel : ViewModel() {
             )
         }
         Log.d("HistoryViewModel", trackItems.size.toString())
-        //realm.close()
+        // realm.close()
     }
 
     private fun computeStrikeLength(dayMillis: Long, depth: Int): Int {
@@ -94,7 +94,7 @@ class HistoryViewModel : ViewModel() {
             .map { realm.copyFromRealm(it) }
 
         val model = AppDataModel(items, templates)
-        //realm.close()
+        // realm.close()
         return Gson().toJson(model).toByteArray(Charset.defaultCharset())
     }
 
@@ -106,7 +106,7 @@ class HistoryViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        //realm.close()
+        // realm.close()
     }
 
     fun reloadDataFromBytes(bytes: ByteArray?) {
@@ -124,7 +124,7 @@ class HistoryViewModel : ViewModel() {
         }
         realm.trackItemDao.deleteAllTrackItems()
         hm.trackItems.forEach { realm.trackItemDao.addTrackItem(it) }
-        //realm.close()
+        // realm.close()
     }
 }
 

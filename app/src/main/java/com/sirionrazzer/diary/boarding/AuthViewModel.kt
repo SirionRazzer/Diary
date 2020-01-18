@@ -11,7 +11,6 @@ import java.security.MessageDigest
 import java.security.SecureRandom
 import javax.inject.Inject
 
-
 interface AuthInterface {
     fun register(email: String, pw: String)
     fun anonymousRegister()
@@ -210,8 +209,7 @@ class AuthViewModel : ViewModel(), AuthInterface {
     }
 
     override fun changePassword(oldPw: String, newPw: String, newPwAgain: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
         // TODO reencrypt Realm
     }
 

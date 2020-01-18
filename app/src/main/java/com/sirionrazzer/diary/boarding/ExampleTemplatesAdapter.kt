@@ -52,7 +52,7 @@ class ExampleTemplatesAdapter(private val onCheckExampleTemplateListener: OnChec
             }
             description.text = item.description
             switch.isChecked = item.selected
-            switch.setOnCheckedChangeListener { compoundButton, b ->
+            switch.setOnCheckedChangeListener { _, b ->
                 onCheckExampleTemplateListener.onCheckExampleTemplate(layoutPosition, b)
             }
         }

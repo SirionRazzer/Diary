@@ -7,5 +7,3 @@ class StringFormatter : ValueFormatter() {
         return value.toString()
     }
 }
-
-
