@@ -6,7 +6,7 @@ import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeAdapter
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItemTemplate
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.viewer_template_item.view.*
+import kotlinx.android.synthetic.main.template_item.view.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.yesButton

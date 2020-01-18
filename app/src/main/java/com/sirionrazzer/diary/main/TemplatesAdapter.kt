@@ -39,10 +39,10 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
 
             var inflater =
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            itemView = inflater.inflate(R.layout.template_item, null, true)
+            itemView = inflater.inflate(R.layout.template_item_wrapper, null, true)
 
-            holder.ivImage = itemView!!.trackitemImage as ImageView
-            holder.tvName = itemView.trackitemName as TextView
+            holder.ivImage = itemView!!.ivTemplate as ImageView
+            holder.tvName = itemView.tvName as TextView
             holder.ivPencil = itemView.ivPencil as ImageView
 
             itemView.tag = holder

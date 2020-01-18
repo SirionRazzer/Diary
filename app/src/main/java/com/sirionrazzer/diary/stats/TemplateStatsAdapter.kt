@@ -41,10 +41,10 @@ class TemplatesStatsAdapter(
 
             val inflater =
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            view = inflater.inflate(R.layout.template_item, null, true)
+            view = inflater.inflate(R.layout.template_item_wrapper, null, true)
 
-            holder.ivImage = view!!.trackitemImage as ImageView
-            holder.tvName = view.trackitemName as TextView
+            holder.ivImage = view!!.ivTemplate as ImageView
+            holder.tvName = view.tvName as TextView
 
             view.tag = holder
         } else {
