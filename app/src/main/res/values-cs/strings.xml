@@ -131,5 +131,5 @@
     <string name="active_reminder_caption">Připomenutí denně v %1$dh %2$dm</string>
     <string name="close">Zavřít</string>
     <string name="save">Uložit</string>
-    <string name="no_active_reminder_set_time_first">No active reminder, set time first</string>
+    <string name="no_active_reminder_set_time_first">Žádná připomínka, zvolte nejprve čas</string>
 </resources>
