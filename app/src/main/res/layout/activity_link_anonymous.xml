@@ -84,7 +84,7 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginBottom="16dp"
                         android:text="@string/link_anonymous_account"
-                        android:textColor="@color/primaryText" />
+                        android:textColor="@color/primary_text" />
 
                     <TextView
                         android:id="@+id/tvHeading"
@@ -94,7 +94,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="16dp"
                         android:text="@string/linkAccount"
-                        android:textColor="@color/primaryText" />
+                        android:textColor="@color/primary_text" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/tilPassword"
@@ -113,8 +113,8 @@
                             android:layout_marginBottom="-8dp"
                             android:drawableEnd="@drawable/ic_lock_outline_black_24dp"
                             android:inputType="textPassword"
-                            android:textColor="@color/primaryText"
-                            android:textColorHint="@color/hintText" />
+                            android:textColor="@color/primary_text"
+                            android:textColorHint="@color/hint_text" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -135,8 +135,8 @@
                             android:layout_marginBottom="-8dp"
                             android:drawableEnd="@drawable/ic_mail_outline_black_24dp"
                             android:inputType="textEmailAddress"
-                            android:textColor="@color/primaryText"
-                            android:textColorHint="@color/hintText" />
+                            android:textColor="@color/primary_text"
+                            android:textColorHint="@color/hint_text" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 

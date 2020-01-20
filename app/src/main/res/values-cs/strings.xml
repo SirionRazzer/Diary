@@ -17,7 +17,7 @@
     <string name="choose_icon">Zvolte ikonu</string>
     <string name="creator_instructions">Seřaďte aktivity, vytvořte nové, nebo staré odeberte</string>
     <string name="creator_new_activity_will_be_in_new_records">Aktivita bude součástí všech nových záznamů</string>
-    <string name="deleteHistoryButton">Smazat historii</string>
+    <string name="deleteHistoryPreference">Smazat historii</string>
     <string name="edit_history_item">Změnit</string>
     <string name="entry_list">Seznam položek</string>
     <string name="error_backup_download">Něco se pokazilo. Stahování selhalo.</string>
@@ -124,4 +124,12 @@
     <string name="description_activity_image">Aktivita</string>
     <string name="description_activity_label">Štítek rozšíření aktivity</string>
     <string name="description_tooltip_icon">Nápověda</string>
+    <string name="reminder_preference_category">Připomínka</string>
+    <string name="reminderNotificationPreference">Notifikace s připomínkou</string>
+    <string name="set_reminder_notification">Notifikace s připomínkou</string>
+    <string name="reminder_notification_caption">Připomenout zapsat denní záznam</string>
+    <string name="active_reminder_caption">Připomenutí denně v %1$dh %2$dm</string>
+    <string name="close">Zavřít</string>
+    <string name="save">Uložit</string>
+    <string name="no_active_reminder_set_time_first">No active reminder, set time first</string>
 </resources>

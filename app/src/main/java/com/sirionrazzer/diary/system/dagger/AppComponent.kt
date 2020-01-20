@@ -1,6 +1,7 @@
 package com.sirionrazzer.diary.system.dagger
 
 import com.sirionrazzer.diary.Diary
+import com.sirionrazzer.diary.boarding.AuthViewModel
 import com.sirionrazzer.diary.boarding.BoardingActivity
 import com.sirionrazzer.diary.boarding.BoardingPickerActivity
 import com.sirionrazzer.diary.creator.TemplateItemCreatorActivity
@@ -9,10 +10,10 @@ import com.sirionrazzer.diary.history.HistoryActivity
 import com.sirionrazzer.diary.history.HistoryViewModel
 import com.sirionrazzer.diary.main.MainActivity
 import com.sirionrazzer.diary.main.MainViewModel
+import com.sirionrazzer.diary.settings.ReminderSettingsDialog
 import com.sirionrazzer.diary.viewer.TemplateItemViewerActivity
 import com.sirionrazzer.diary.viewer.TemplateItemViewerViewModel
 import dagger.Component
-import com.sirionrazzer.diary.boarding.AuthViewModel
 import javax.inject.Singleton
 
 @Singleton
@@ -20,6 +21,8 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun inject(diary: Diary)
+
+    fun inject(reminderSettingsDialog: ReminderSettingsDialog)
 
     fun inject(authViewModel: AuthViewModel)
     fun inject(historyViewModel: HistoryViewModel)

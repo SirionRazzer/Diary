@@ -8,11 +8,11 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.sirionrazzer.diary.R
+import com.sirionrazzer.diary.boarding.AuthViewModel
 import com.sirionrazzer.diary.main.MainViewModel
 import com.sirionrazzer.diary.models.TrackItemDao
 import io.realm.Realm
 import kotlinx.android.synthetic.main.toolbar.*
-import com.sirionrazzer.diary.boarding.AuthViewModel
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -40,6 +40,7 @@ class SettingsActivity : AppCompatActivity() {
     class SettingsFragment : PreferenceFragmentCompat() {
         private lateinit var mainViewModel: MainViewModel
         private lateinit var authViewModel: AuthViewModel
+        private lateinit var fragment: ReminderSettingsDialog
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
@@ -47,13 +48,24 @@ class SettingsActivity : AppCompatActivity() {
             mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
             authViewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
 
-            val button = findPreference<Preference>(getString(R.string.deleteHistoryButton))
-            button!!.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            val btnDeleteHistory =
+                findPreference<Preference>(getString(R.string.deleteHistoryPreference))
+            btnDeleteHistory!!.onPreferenceClickListener = Preference.OnPreferenceClickListener {
                 mainViewModel.deleteAllTrackItems()
                 Toast.makeText(context, getString(R.string.history_deleted), Toast.LENGTH_SHORT)
                     .show()
                 true
             }
+
+            val btnReminderNotification =
+                findPreference<Preference>(getString(R.string.reminderNotificationPreference))
+            btnReminderNotification!!.onPreferenceClickListener =
+                Preference.OnPreferenceClickListener {
+                    val fm = childFragmentManager
+                    this.fragment = ReminderSettingsDialog()
+                    fragment.show(fm, resources.getString(R.string.set_reminder_notification))
+                    true
+                }
 
             (authViewModel.isAnonymous.value as Boolean).let {
                 if (it) {

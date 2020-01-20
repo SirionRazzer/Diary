@@ -26,6 +26,16 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/reminder_preference_category">
+
+        <Preference
+            app:icon="@android:drawable/ic_menu_recent_history"
+            app:key="@string/reminderNotificationPreference"
+            app:summary="@string/reminder_notification_caption"
+            app:title="@string/set_reminder_notification" />
+
+    </PreferenceCategory>
+
     <PreferenceCategory app:title="@string/other_settings">
 
         <SwitchPreferenceCompat
@@ -43,7 +53,7 @@
             app:title="@string/compact_ui" />
         <Preference
             app:icon="@android:drawable/ic_menu_delete"
-            app:key="@string/deleteHistoryButton"
+            app:key="@string/deleteHistoryPreference"
             app:title="@string/delete_history" />
 
         <!--<ListPreference-->

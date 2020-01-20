@@ -45,8 +45,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="-8dp"
                 android:drawableEnd="@drawable/ic_label"
-                android:textColor="@color/primaryText"
-                android:textColorHint="@color/hintText" />
+                android:textColor="@color/primary_text"
+                android:textColorHint="@color/hint_text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,7 +68,7 @@
                 android:letterSpacing="0.03"
                 android:lineSpacingExtra="3.9sp"
                 android:text="@string/extra_input"
-                android:textColor="@color/hintText"
+                android:textColor="@color/hint_text"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

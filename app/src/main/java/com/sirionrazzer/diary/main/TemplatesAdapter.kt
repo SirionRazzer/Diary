@@ -75,12 +75,12 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
                 Picasso.get().load(mainViewModel.currentTrackItems.value?.get(position)!!.image)
                     .into(holder.ivImage)
                 holder.ivImage?.alpha = 0.4f
-                holder.tvName?.setTextColor(context.resources.getColor(R.color.primaryText))
+                holder.tvName?.setTextColor(context.resources.getColor(R.color.primary_text))
             } else {
                 Picasso.get().load(mainViewModel.currentTrackItems.value?.get(position)!!.image)
                     .into(holder.ivImage)
                 holder.ivImage?.alpha = 1f
-                holder.tvName?.setTextColor(context.resources.getColor(R.color.primaryText))
+                holder.tvName?.setTextColor(context.resources.getColor(R.color.primary_text))
             }
 
             itemView.setOnClickListener {
@@ -130,7 +130,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
                                 .into(holder.ivImage)
                             holder.status = false
                             holder.ivImage?.alpha = 0.4f
-                            holder.tvName?.setTextColor(context.resources.getColor(R.color.primaryText))
+                            holder.tvName?.setTextColor(context.resources.getColor(R.color.primary_text))
                             Log.d(
                                 "TemplatesAdapter",
                                 "Clicked: " + position + ". track item, the state was true and now is " + holder.status.toString()
@@ -180,7 +180,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             .into(holder.ivImage)
         holder.status = true
         holder.ivImage?.alpha = 1.0f
-        holder.tvName?.setTextColor(context.resources.getColor(R.color.primaryText))
+        holder.tvName?.setTextColor(context.resources.getColor(R.color.primary_text))
         Log.d(
             "TemplatesAdapter",
             "Clicked: " + position + ". track item, the state was false and now is " + holder.status.toString()
@@ -196,7 +196,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             .into(holder.ivImage)
         holder.status = false
         holder.ivImage?.alpha = 0.4f
-        holder.tvName?.setTextColor(context.resources.getColor(R.color.primaryText))
+        holder.tvName?.setTextColor(context.resources.getColor(R.color.primary_text))
         Log.d(
             "TemplatesAdapter",
             "Clicked: " + position + ". track item, the state was true and now is " + holder.status.toString()

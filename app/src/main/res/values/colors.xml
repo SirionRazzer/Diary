@@ -18,7 +18,8 @@
 
     <color name="transparent">#00FFFFFF</color>
 
-    <color name="primaryText">#212121</color>
-    <color name="hintText">#5F5F5F</color>
-    <color name="secondaryText">#757575</color>
+    <color name="primary_text">#212121</color>
+    <color name="hint_text">#5F5F5F</color>
+    <color name="secondary_text">#757575</color>
+    <color name="primary_text_disabled">#39000000</color>
 </resources>
