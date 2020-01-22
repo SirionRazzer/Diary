@@ -2,7 +2,6 @@ package com.sirionrazzer.diary.settings
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +24,8 @@ class ReminderSettingsDialog : DialogFragment() {
     private var reminderActive: Boolean = false
     private var hour: Int = 12
     private var minute: Int = 0
+    private var tmpHour: Int = 13
+    private var tmpMinute: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,6 +48,8 @@ class ReminderSettingsDialog : DialogFragment() {
         this.reminderActive = userStorage.userSettings.reminderActive
         this.hour = userStorage.userSettings.reminderTimeHour
         this.minute = userStorage.userSettings.reminderTimeMinute
+        this.tmpHour = hour
+        this.tmpMinute = minute
         if (!userStorage.userSettings.reminderAdded) {
             swReminder.isEnabled = false
             tvActiveReminderCaption.text = getString(R.string.no_active_reminder_set_time_first)
@@ -56,7 +59,6 @@ class ReminderSettingsDialog : DialogFragment() {
                 String.format(getString(R.string.active_reminder_caption), hour, minute)
         }
 
-
         if (reminderActive) {
             tvActiveReminderCaption.setTextColor(resources.getColor(R.color.primary_text))
         } else {
@@ -65,9 +67,7 @@ class ReminderSettingsDialog : DialogFragment() {
 
         swReminder.isChecked = this.reminderActive
 
-        Log.d(TAG, "reminderActive: $reminderActive")
         swReminder.setOnCheckedChangeListener { _, isChecked ->
-            Log.d(TAG, "$isChecked")
             reminderActive = isChecked
 
             if (isChecked) {
@@ -79,7 +79,6 @@ class ReminderSettingsDialog : DialogFragment() {
 
         setTimePicker()
         btnClose.setOnClickListener { dismiss() }
-        testBtn.setOnClickListener { test() }
         btnSave.setOnClickListener {
             setReminder(reminderActive)
             dismiss()
@@ -90,26 +89,26 @@ class ReminderSettingsDialog : DialogFragment() {
         reminderActive = enabled
 
         if (enabled) {
+            NotificationHelper.cancelAlarmRTC(dialog!!.context, this.hour, this.minute)
+            NotificationHelper.scheduleRepeatingRTCNotification(
+                dialog!!.context,
+                this.tmpHour,
+                this.tmpMinute
+            )
+            NotificationHelper.enableBootReceiver(dialog!!.context)
             userStorage.updateSettings { lus ->
                 lus.reminderActive = true
-                lus.reminderTimeHour = this.hour
-                lus.reminderTimeMinute = this.minute
+                lus.reminderTimeHour = this.tmpHour
+                lus.reminderTimeMinute = this.tmpMinute
                 lus.reminderAdded = true
             }
-
-            Log.d(TAG, "Reminder Enabled: [${this.hour}:${this.minute}]")
-            // TODO
         } else {
             userStorage.updateSettings { lus ->
                 lus.reminderActive = false
             }
-            Log.d(TAG, "Reminder Disabled")
-            // TODO
+            NotificationHelper.cancelAlarmRTC(dialog!!.context, this.hour, this.minute)
+            NotificationHelper.disableBootReceiver(dialog!!.context)
         }
-    }
-
-    private fun test() {
-        TODO()
     }
 
     private fun setTimePicker() {
@@ -119,13 +118,12 @@ class ReminderSettingsDialog : DialogFragment() {
         }
 
         timePicker.setOnTimeChangedListener { timePicker, hourOfDay, minute ->
-            Log.d(TAG, "${hourOfDay}:${minute}")
             swReminder.isEnabled = true
             swReminder.isChecked = true
-            this.hour = hourOfDay
-            this.minute = minute
+            this.tmpHour = hourOfDay
+            this.tmpMinute = minute
             tvActiveReminderCaption.text =
-                String.format(getString(R.string.active_reminder_caption), hour, minute)
+                String.format(getString(R.string.active_reminder_caption), tmpHour, tmpMinute)
         }
     }
 }

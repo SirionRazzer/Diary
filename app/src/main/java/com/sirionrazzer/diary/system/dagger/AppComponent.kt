@@ -10,6 +10,7 @@ import com.sirionrazzer.diary.history.HistoryActivity
 import com.sirionrazzer.diary.history.HistoryViewModel
 import com.sirionrazzer.diary.main.MainActivity
 import com.sirionrazzer.diary.main.MainViewModel
+import com.sirionrazzer.diary.settings.AlarmBootReceiver
 import com.sirionrazzer.diary.settings.ReminderSettingsDialog
 import com.sirionrazzer.diary.viewer.TemplateItemViewerActivity
 import com.sirionrazzer.diary.viewer.TemplateItemViewerViewModel
@@ -23,6 +24,8 @@ interface AppComponent {
     fun inject(diary: Diary)
 
     fun inject(reminderSettingsDialog: ReminderSettingsDialog)
+
+    fun inject(alarmBootReceiver: AlarmBootReceiver)
 
     fun inject(authViewModel: AuthViewModel)
     fun inject(historyViewModel: HistoryViewModel)

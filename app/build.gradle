@@ -9,8 +9,8 @@ apply plugin: 'com.google.gms.google-services'
 
 // manually setup versioning
 ext.versionMajor = 1
-ext.versionMinor = 2
-ext.versionPatch = 4
+ext.versionMinor = 3
+ext.versionPatch = 0
 ext.minimumSdkVersion = 21
 
 android {

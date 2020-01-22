@@ -131,6 +131,10 @@
     <string name="close">Close</string>
     <string name="save">Save</string>
     <string name="no_active_reminder_set_time_first">No active reminder, set time first</string>
+    <string name="channel_name">Dr. Diary reminder</string>
+    <string name="channel_description">Reminder to take a daily record</string>
+    <string name="reminder_title">It is time for your daily record</string>
+    <string name="reminder_text">Do it right now, don\'t waste your precious time</string>
 
     <string-array name="input_fields">
         <item>None</item>

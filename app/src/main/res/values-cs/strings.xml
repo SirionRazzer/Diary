@@ -132,4 +132,8 @@
     <string name="close">Zavřít</string>
     <string name="save">Uložit</string>
     <string name="no_active_reminder_set_time_first">Žádná připomínka, zvolte nejprve čas</string>
+    <string name="channel_name">Dr. Diary reminder</string>
+    <string name="channel_description">Reminder to take a daily record</string>
+    <string name="reminder_title">Zapsat denní záznam</string>
+    <string name="reminder_text">Neodkádej to, nemrhej svým časem</string>
 </resources>
