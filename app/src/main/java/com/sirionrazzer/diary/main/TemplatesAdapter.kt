@@ -7,13 +7,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.BaseAdapter
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.textfield.TextInputLayout
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.template_item.view.*
+import kotlinx.android.synthetic.main.template_item.view.ivPencil
+import kotlinx.android.synthetic.main.template_item.view.ivTemplate
+import kotlinx.android.synthetic.main.template_item.view.tvName
 
 class TemplatesAdapter(private val context: Context, private val mainViewModel: MainViewModel) :
     BaseAdapter() {
@@ -185,10 +191,8 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             "TemplatesAdapter",
             "Clicked: " + position + ". track item, the state was false and now is " + holder.status.toString()
         )
-
         mainViewModel.currentTrackItems.value?.get(position)!!.status = true
     }
-
 
     private fun disableItemStatus(position: Int, holder: ViewHolder) {
         Picasso.get()
