@@ -11,7 +11,6 @@ import androidx.fragment.app.DialogFragment
 import com.sirionrazzer.diary.R
 import com.squareup.picasso.Picasso
 
-
 class ImagePickerAdapter(
     private val names: Array<String>,
     private val ids: TypedArray,

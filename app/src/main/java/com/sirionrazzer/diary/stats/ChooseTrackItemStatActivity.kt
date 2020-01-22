@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.toolbar.*
 class ChooseTrackItemStatActivity : AppCompatActivity() {
 
     lateinit var mainViewModel: MainViewModel
-    lateinit var adapter: TemplatesStatsAdapter
+    lateinit var adapter: TemplateStatsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,9 +23,8 @@ class ChooseTrackItemStatActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         mainViewModel = createViewModel()
-        adapter = TemplatesStatsAdapter(this, mainViewModel)
+        adapter = TemplateStatsAdapter(this, mainViewModel)
         gwTemplateStat.adapter = adapter
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

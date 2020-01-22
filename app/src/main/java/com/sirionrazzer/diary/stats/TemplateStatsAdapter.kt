@@ -15,13 +15,13 @@ import com.sirionrazzer.diary.models.TrackItem
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.template_item.view.*
 
-class TemplatesStatsAdapter(
+class TemplateStatsAdapter(
     private val context: Context,
     private val mainViewModel: MainViewModel
 ) : BaseAdapter() {
 
     override fun getItem(position: Int): TrackItem {
-        return mainViewModel.currentTrackItems.value!!.get(position)
+        return mainViewModel.currentTrackItems.value!![position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -29,7 +29,7 @@ class TemplatesStatsAdapter(
     }
 
     override fun getCount(): Int {
-        return mainViewModel.currentTrackItems.value!!.size ?: 0
+        return mainViewModel.currentTrackItems.value?.size ?: 0
     }
 
     override fun getView(position: Int, itemView: View?, parent: ViewGroup?): View {
@@ -41,18 +41,18 @@ class TemplatesStatsAdapter(
 
             val inflater =
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            view = inflater.inflate(R.layout.template_item, null, true)
+            view = inflater.inflate(R.layout.template_item_wrapper, null, true)
 
-            holder.ivImage = view!!.trackitemImage as ImageView
-            holder.tvName = view.trackitemName as TextView
+            holder.ivImage = view!!.ivTemplate as ImageView
+            holder.tvName = view.tvName as TextView
 
             view.tag = holder
         } else {
             holder = view.tag as ViewHolder
         }
 
-        holder.tvName?.text = mainViewModel.currentTrackItems.value!!.get(position).name
-        Picasso.get().load(mainViewModel.currentTrackItems.value!!.get(position).image)
+        holder.tvName?.text = mainViewModel.currentTrackItems.value!![position].name
+        Picasso.get().load(mainViewModel.currentTrackItems.value!![position].image)
             .into(holder.ivImage)
         holder.ivImage?.alpha = 1f
         holder.tvName?.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary))
@@ -61,7 +61,7 @@ class TemplatesStatsAdapter(
             val intent = Intent(this.context, TrackItemStatsActivity::class.java)
                 .putExtra(
                     "trackItemName",
-                    mainViewModel.currentTrackItems.value!!.get(position).name
+                    mainViewModel.currentTrackItems.value!![position].name
                 )
             view.context.startActivity(intent)
         }

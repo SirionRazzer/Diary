@@ -28,7 +28,6 @@ import kotlinx.android.synthetic.main.toolbar.*
 
 class TrackItemStatsActivity : AppCompatActivity() {
 
-
     var currentTrackItems: MutableList<TrackItem> = mutableListOf()
     private lateinit var viewManager: LinearLayoutManager
     private lateinit var viewAdapter: TrackItemStatsAdapter
@@ -56,7 +55,7 @@ class TrackItemStatsActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        currentTrackItems.addAll(realm.trackItemsDao.getTrackItemsWithName(trackItemName))//TODO netusim preco to realm nefiltruje
+        currentTrackItems.addAll(realm.trackItemsDao.getTrackItemsWithName(trackItemName)) // TODO netusim preco to realm nefiltruje
 
         if (template.hasNumberField) {
             val sum = currentTrackItems.sumByDouble { it.numberField!!.toDouble() }
@@ -66,7 +65,6 @@ class TrackItemStatsActivity : AppCompatActivity() {
 
             initBarChart()
             refreshChartData()
-
         } else {
             cvBarChart.visibility = View.GONE
             cvStatInfo.visibility = View.GONE
@@ -74,7 +72,6 @@ class TrackItemStatsActivity : AppCompatActivity() {
         initSpinners()
 
         initRecyclerView()
-
     }
 
     private fun initSpinners() {
@@ -107,7 +104,6 @@ class TrackItemStatsActivity : AppCompatActivity() {
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             statGroupBySpinner.adapter = adapter
-
         }
         statGroupBySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -122,9 +118,7 @@ class TrackItemStatsActivity : AppCompatActivity() {
                 selectedGroupByOperation = position
                 refreshChartData()
             }
-
         }
-
     }
 
     private fun initBarChart() {
@@ -155,7 +149,6 @@ class TrackItemStatsActivity : AppCompatActivity() {
             } else {
                 barData.add(Pair(sum, key))
             }
-
         }
         barData.sortBy { it.second }
 
@@ -172,7 +165,6 @@ class TrackItemStatsActivity : AppCompatActivity() {
             label += getString(R.string.average_each_month)
         } else if (selectedGroupByOperation == 1 && selectedTimeUnit == 0) {
             label += getString(R.string.sum_each_week)
-
         } else if (selectedGroupByOperation == 1 && selectedTimeUnit == 1) {
             label += getString(R.string.sum_each_month)
         }
@@ -247,4 +239,3 @@ private val Realm.trackItemsTemplatesDao: TrackItemTemplateDao
     get() {
         return TrackItemTemplateDao(this)
     }
-

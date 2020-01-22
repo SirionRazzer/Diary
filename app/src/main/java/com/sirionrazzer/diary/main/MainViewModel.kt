@@ -5,7 +5,11 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sirionrazzer.diary.Diary
-import com.sirionrazzer.diary.models.*
+import com.sirionrazzer.diary.models.TrackItem
+import com.sirionrazzer.diary.models.TrackItemDao
+import com.sirionrazzer.diary.models.TrackItemTemplate
+import com.sirionrazzer.diary.models.TrackItemTemplateDao
+import com.sirionrazzer.diary.models.UserStorage
 import com.sirionrazzer.diary.util.DateUtils.Factory.DAY_MILLISECONDS
 import io.realm.Realm
 import org.threeten.bp.LocalDate
@@ -178,7 +182,7 @@ class MainViewModel : ViewModel() {
             status = false,
             textField = "",
             numberField = 0f,
-            date = date.value!!.toEpochDay() * DAY_MILLISECONDS,   // TODO
+            date = date.value!!.toEpochDay() * DAY_MILLISECONDS, // TODO
             position = it.position
         )
         currentTrackItems.value?.add(trackItem)

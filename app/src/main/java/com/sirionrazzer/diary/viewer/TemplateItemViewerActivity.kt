@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeRecyclerView
 import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemDragListener
 import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnItemSwipeListener
-import com.ernestoyaquello.dragdropswiperecyclerview.listener.OnListScrollListener
 import com.google.android.material.snackbar.Snackbar
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
@@ -55,7 +54,6 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         rvTemplates.orientation?.removeSwipeDirectionFlag(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.LEFT)
         rvTemplates.swipeListener = onItemSwipeListener
         rvTemplates.dragListener = onItemDragListener
-        //rvTemplates.scrollListener = onListScrollListener
 
         tiViewModel.currentTemplateItems.observe(this, Observer { updated ->
 //            if (tiViewModel.currentTemplateItems.value != null) {

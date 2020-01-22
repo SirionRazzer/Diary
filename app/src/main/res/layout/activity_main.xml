@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:text="24/11"
-                    android:textColor="@color/secondaryText"
+                    android:textColor="@color/secondary_text"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/ivCalendar"
                     app:layout_constraintTop_toTopOf="parent" />

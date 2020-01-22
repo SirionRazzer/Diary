@@ -5,7 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.sirionrazzer.diary.Diary
-import com.sirionrazzer.diary.models.*
+import com.sirionrazzer.diary.models.TrackItem
+import com.sirionrazzer.diary.models.TrackItemDao
+import com.sirionrazzer.diary.models.TrackItemTemplate
+import com.sirionrazzer.diary.models.TrackItemTemplateDao
+import com.sirionrazzer.diary.models.UserStorage
 import com.sirionrazzer.diary.util.DateUtils
 import io.realm.Realm
 import org.threeten.bp.Instant
@@ -70,7 +74,7 @@ class HistoryViewModel : ViewModel() {
             )
         }
         Log.d("HistoryViewModel", trackItems.size.toString())
-        //realm.close()
+        // realm.close()
     }
 
     private fun computeStrikeLength(dayMillis: Long, depth: Int): Int {
@@ -94,7 +98,7 @@ class HistoryViewModel : ViewModel() {
             .map { realm.copyFromRealm(it) }
 
         val model = AppDataModel(items, templates)
-        //realm.close()
+        // realm.close()
         return Gson().toJson(model).toByteArray(Charset.defaultCharset())
     }
 
@@ -106,7 +110,7 @@ class HistoryViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        //realm.close()
+        // realm.close()
     }
 
     fun reloadDataFromBytes(bytes: ByteArray?) {
@@ -124,7 +128,7 @@ class HistoryViewModel : ViewModel() {
         }
         realm.trackItemDao.deleteAllTrackItems()
         hm.trackItems.forEach { realm.trackItemDao.addTrackItem(it) }
-        //realm.close()
+        // realm.close()
     }
 }
 

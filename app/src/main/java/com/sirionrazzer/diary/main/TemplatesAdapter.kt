@@ -7,13 +7,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.BaseAdapter
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.textfield.TextInputLayout
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItem
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.template_item.view.*
+import kotlinx.android.synthetic.main.template_item.view.ivPencil
+import kotlinx.android.synthetic.main.template_item.view.ivTemplate
+import kotlinx.android.synthetic.main.template_item.view.tvName
 
 class TemplatesAdapter(private val context: Context, private val mainViewModel: MainViewModel) :
     BaseAdapter() {
@@ -37,12 +43,12 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
         if (itemView == null) {
             holder = ViewHolder()
 
-            var inflater =
+            val inflater =
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            itemView = inflater.inflate(R.layout.template_item, null, true)
+            itemView = inflater.inflate(R.layout.template_item_wrapper, null, true)
 
-            holder.ivImage = itemView!!.trackitemImage as ImageView
-            holder.tvName = itemView.trackitemName as TextView
+            holder.ivImage = itemView!!.ivTemplate as ImageView
+            holder.tvName = itemView.tvName as TextView
             holder.ivPencil = itemView.ivPencil as ImageView
 
             itemView.tag = holder
@@ -54,11 +60,6 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
         if (!mainViewModel.currentTrackItems.value?.get(position)!!.deleted) {
 
             holder.status = mainViewModel.currentTrackItems.value?.get(position)!!.status
-            Log.d(
-                "TemplatesAdapter",
-                "position: " + position + " holder.status: " + holder.status.toString()
-            )
-
             holder.tvName?.text = mainViewModel.currentTrackItems.value?.get(position)!!.name
 
             val fieldImage = holder.ivPencil
@@ -80,12 +81,12 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
                 Picasso.get().load(mainViewModel.currentTrackItems.value?.get(position)!!.image)
                     .into(holder.ivImage)
                 holder.ivImage?.alpha = 0.4f
-                holder.tvName?.setTextColor(context.resources.getColor(R.color.primaryText))
+                holder.tvName?.setTextColor(context.resources.getColor(R.color.primary_text))
             } else {
                 Picasso.get().load(mainViewModel.currentTrackItems.value?.get(position)!!.image)
                     .into(holder.ivImage)
                 holder.ivImage?.alpha = 1f
-                holder.tvName?.setTextColor(context.resources.getColor(R.color.primaryText))
+                holder.tvName?.setTextColor(context.resources.getColor(R.color.primary_text))
             }
 
             itemView.setOnClickListener {
@@ -110,7 +111,6 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
                         }
                         else -> enableItemStatus(position, holder)
                     }
-
                 } else {
                     when {
                         hasFilledTextField(position) -> {
@@ -136,7 +136,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
                                 .into(holder.ivImage)
                             holder.status = false
                             holder.ivImage?.alpha = 0.4f
-                            holder.tvName?.setTextColor(context.resources.getColor(R.color.primaryText))
+                            holder.tvName?.setTextColor(context.resources.getColor(R.color.primary_text))
                             Log.d(
                                 "TemplatesAdapter",
                                 "Clicked: " + position + ". track item, the state was true and now is " + holder.status.toString()
@@ -175,7 +175,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
         if (mainViewModel.currentTemplateItems.value?.get(position)!!.hasNumberField) {
             val value = mainViewModel.currentTrackItems.value?.get(position)?.numberField
             value?.let {
-                return (it > 0f) // TODO We don't know if the 0 wasn't stored intentionally, but this may be sufficient
+                return (it > 0f) // We don't know if the 0 wasn't stored intentionally, but this may be sufficient
             }
         }
         return false
@@ -186,15 +186,13 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             .into(holder.ivImage)
         holder.status = true
         holder.ivImage?.alpha = 1.0f
-        holder.tvName?.setTextColor(context.resources.getColor(R.color.primaryText))
+        holder.tvName?.setTextColor(context.resources.getColor(R.color.primary_text))
         Log.d(
             "TemplatesAdapter",
             "Clicked: " + position + ". track item, the state was false and now is " + holder.status.toString()
         )
-
         mainViewModel.currentTrackItems.value?.get(position)!!.status = true
     }
-
 
     private fun disableItemStatus(position: Int, holder: ViewHolder) {
         Picasso.get()
@@ -202,7 +200,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
             .into(holder.ivImage)
         holder.status = false
         holder.ivImage?.alpha = 0.4f
-        holder.tvName?.setTextColor(context.resources.getColor(R.color.primaryText))
+        holder.tvName?.setTextColor(context.resources.getColor(R.color.primary_text))
         Log.d(
             "TemplatesAdapter",
             "Clicked: " + position + ". track item, the state was true and now is " + holder.status.toString()

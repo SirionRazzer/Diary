@@ -60,7 +60,7 @@
     <string name="settings">Settings</string>
     <string name="title_activity_settings">Settings</string>
     <string name="other_settings">Other Settings</string>
-    <string name="deleteHistoryButton">Delete History</string>
+    <string name="deleteHistoryPreference">Delete History</string>
     <string name="history_deleted">History was successfully deleted.</string>
     <string name="statistics">Statistics</string>
     <string name="choose_activity">Choose Activity</string>
@@ -120,6 +120,21 @@
     <string name="example_heartpoints">Heart Points</string>
     <string name="example_moveminutes">Move Minutes</string>
     <string name="example_cycling">Cycling</string>
+    <string name="description_activity_image">Activity</string>
+    <string name="description_activity_label">Activity\'s extra label</string>
+    <string name="description_tooltip_icon">Tooltip icon</string>
+    <string name="reminder_preference_category">Reminder</string>
+    <string name="reminderNotificationPreference">Reminder Notification</string>
+    <string name="set_reminder_notification">Reminder Notification</string>
+    <string name="reminder_notification_caption">Set a reminder to take a daily record</string>
+    <string name="active_reminder_caption">Daily reminder at %1$dh %2$dm</string>
+    <string name="close">Close</string>
+    <string name="save">Save</string>
+    <string name="no_active_reminder_set_time_first">No active reminder, set time first</string>
+    <string name="channel_name">Dr. Diary reminder</string>
+    <string name="channel_description">Reminder to take a daily record</string>
+    <string name="reminder_title">It is time for your daily record</string>
+    <string name="reminder_text">Do it right now, don\'t waste your precious time</string>
 
     <string-array name="input_fields">
         <item>None</item>

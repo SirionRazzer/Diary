@@ -2,11 +2,13 @@ package com.sirionrazzer.diary.viewer
 
 import android.content.Context
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import com.ernestoyaquello.dragdropswiperecyclerview.DragDropSwipeAdapter
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItemTemplate
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.viewer_template_item.view.*
+import kotlinx.android.synthetic.main.template_item.view.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.yesButton
@@ -19,10 +21,9 @@ class TemplateAdapter(
     DragDropSwipeAdapter<TrackItemTemplate, TemplateAdapter.ViewHolder>(currentTemplateItems) {
 
     class ViewHolder(itemView: View) : DragDropSwipeAdapter.ViewHolder(itemView) {
-        var ivImage = itemView.ivTemplate
-        var ivPencil = itemView.ivPencil
-        var tvName = itemView.tvName
-        //var swDeleted = itemView.swDeleted
+        var ivImage: ImageView = itemView.ivTemplate
+        var ivPencil: ImageView = itemView.ivPencil
+        var tvName: TextView = itemView.tvName
     }
 
     override fun getViewHolder(itemView: View) = ViewHolder(itemView)

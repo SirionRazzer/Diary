@@ -64,7 +64,6 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
             }
 
             adapter = exampleTemplatesAdapter
-
         }
     }
 

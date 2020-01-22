@@ -1,15 +1,11 @@
-package main.java.com.sirionrazzer.diary.main
+package com.sirionrazzer.diary.main
 
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.DialogFragment
 import android.os.Bundle
 import android.widget.DatePicker
-import com.sirionrazzer.diary.main.MainActivity
-import com.sirionrazzer.diary.util.DateUtils
-import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
-import org.threeten.bp.ZoneId
 
 class DatePickerFragment() : DialogFragment(), DatePickerDialog.OnDateSetListener {
 

@@ -30,7 +30,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:drawableEnd="@drawable/ic_pencil"
-                android:textColor="@color/secondaryText" />
+                android:textColor="@color/secondary_text" />
 
             <com.sirionrazzer.diary.view.StaticGridView
                 android:id="@+id/trackItemWithoutText"

@@ -12,7 +12,7 @@
         style="@style/TextAppearance.MaterialComponents.Body1"
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:textColor">@color/secondaryText</item>
+        <item name="android:textColor">@color/secondary_text</item>
         <item name="android:layout_marginStart">2dp</item>
         <item name="android:layout_marginEnd">2dp</item>
     </style>

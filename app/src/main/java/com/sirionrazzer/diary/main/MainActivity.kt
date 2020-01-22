@@ -16,7 +16,6 @@ import com.sirionrazzer.diary.util.DateUtils.Factory.DAY_MILLISECONDS
 import com.sirionrazzer.diary.viewer.TemplateItemViewerActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
-import main.java.com.sirionrazzer.diary.main.DatePickerFragment
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
@@ -75,13 +74,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun revertDayColors() {
-        tvMonday.setTextColor(resources.getColor(R.color.secondaryText))
-        tvTuesday.setTextColor(resources.getColor(R.color.secondaryText))
-        tvWednesday.setTextColor(resources.getColor(R.color.secondaryText))
-        tvThursday.setTextColor(resources.getColor(R.color.secondaryText))
-        tvFriday.setTextColor(resources.getColor(R.color.secondaryText))
-        tvSaturday.setTextColor(resources.getColor(R.color.secondaryText))
-        tvSunday.setTextColor(resources.getColor(R.color.secondaryText))
+        tvMonday.setTextColor(resources.getColor(R.color.secondary_text))
+        tvTuesday.setTextColor(resources.getColor(R.color.secondary_text))
+        tvWednesday.setTextColor(resources.getColor(R.color.secondary_text))
+        tvThursday.setTextColor(resources.getColor(R.color.secondary_text))
+        tvFriday.setTextColor(resources.getColor(R.color.secondary_text))
+        tvSaturday.setTextColor(resources.getColor(R.color.secondary_text))
+        tvSunday.setTextColor(resources.getColor(R.color.secondary_text))
     }
 
     override fun onResume() {

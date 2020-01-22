@@ -4,13 +4,18 @@ import android.util.Base64
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.FirebaseException
-import com.google.firebase.auth.*
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.models.UserStorage
 import java.security.MessageDigest
 import java.security.SecureRandom
 import javax.inject.Inject
-
 
 interface AuthInterface {
     fun register(email: String, pw: String)
@@ -210,8 +215,7 @@ class AuthViewModel : ViewModel(), AuthInterface {
     }
 
     override fun changePassword(oldPw: String, newPw: String, newPwAgain: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
         // TODO reencrypt Realm
     }
 

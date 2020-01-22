@@ -25,7 +25,7 @@
             android:layout_height="50dp">
 
             <ImageView
-                android:id="@+id/trackitemImage"
+                android:id="@+id/ivTemplate"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -36,11 +36,11 @@
                 android:id="@+id/space"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/trackitemImage"
-                app:layout_constraintEnd_toEndOf="@+id/trackitemImage"
+                app:layout_constraintBottom_toBottomOf="@+id/ivTemplate"
+                app:layout_constraintEnd_toEndOf="@+id/ivTemplate"
                 app:layout_constraintHorizontal_bias="0.70"
-                app:layout_constraintStart_toStartOf="@+id/trackitemImage"
-                app:layout_constraintTop_toTopOf="@+id/trackitemImage"
+                app:layout_constraintStart_toStartOf="@+id/ivTemplate"
+                app:layout_constraintTop_toTopOf="@+id/ivTemplate"
                 app:layout_constraintVertical_bias="0.66" />
 
             <ImageView
@@ -54,13 +54,13 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/trackitemName"
+        android:id="@+id/tvName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:text=""
-        android:textColor="@color/primaryText"
+        android:textColor="@color/primary_text"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/item_switch"
@@ -74,11 +74,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:text="Item description text"
-        android:textColor="@color/secondaryText"
+        android:textColor="@color/secondary_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/item_switch"
         app:layout_constraintStart_toEndOf="@id/template_item"
-        app:layout_constraintTop_toBottomOf="@id/trackitemName" />
+        app:layout_constraintTop_toBottomOf="@id/tvName" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/item_switch"

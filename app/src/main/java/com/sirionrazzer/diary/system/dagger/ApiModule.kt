@@ -4,7 +4,6 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializer
-import com.sirionrazzer.diary.models.UserStorage
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -23,7 +22,7 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(gson: Gson, userStorage: UserStorage): Retrofit {
+    fun provideRetrofit(gson: Gson): Retrofit {
 
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -33,7 +32,7 @@ class ApiModule {
             .connectTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
             .addInterceptor { chain ->
-                var request = chain.request()
+                val request = chain.request()
 
                 chain.proceed(request)
             }
@@ -54,7 +53,7 @@ class ApiModule {
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .registerTypeAdapter(Boolean::class.java,
-                JsonDeserializer<Boolean> { json, typeOfT, context ->
+                JsonDeserializer<Boolean> { json, _, _ ->
                     when {
                         json.asJsonPrimitive.isNumber -> json.asInt > 0
                         json.asJsonPrimitive.isString -> json.asString == "true" || json.asString == "1"

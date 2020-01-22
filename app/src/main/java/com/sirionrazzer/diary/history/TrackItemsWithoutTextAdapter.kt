@@ -40,10 +40,10 @@ class TrackItemsWithoutTextAdapter(context: Context, private val trackItems: Arr
         val holder: ViewHolder
 
         if (templateItemView == null) {
-            templateItemView = inflater.inflate(R.layout.template_item, parent, false)
+            templateItemView = inflater.inflate(R.layout.template_item_wrapper, parent, false)
             holder = ViewHolder(
-                templateItemView!!.findViewById(R.id.trackitemName) as TextView,
-                templateItemView.findViewById(R.id.trackitemImage) as ImageView
+                templateItemView!!.findViewById(R.id.tvName) as TextView,
+                templateItemView.findViewById(R.id.ivTemplate) as ImageView
             )
             templateItemView.tag = holder
         } else {

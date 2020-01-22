@@ -7,8 +7,7 @@ class DateUtils {
 
     companion object Factory {
 
-        val DAY_MILLISECONDS = 86400000L
-        val DAY_SECONDS = 24 * 60 * 60L
+        const val DAY_MILLISECONDS = 86400000L
 
         /**
          * Converts from Date to Long date representation
@@ -42,8 +41,7 @@ class DateUtils {
         fun smartDate(editDate: Date?, specialText: Boolean): String {
             var smartDate: String
             val currentDate = Date()
-            //val df = SimpleDateFormat("d/M/YY")
-            val df = SimpleDateFormat("d/M")
+            val df = SimpleDateFormat("d/M", Locale.getDefault())
             val cal = Calendar.getInstance()
             cal.time = currentDate
 

@@ -25,8 +25,8 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
     ImagePickerDialog.ImagePickerDialogListener {
 
     companion object {
-        private val TEXT_EXTRA = 1
-        private val NUMBER_EXTRA = 2
+        private const val TEXT_EXTRA = 1
+        private const val NUMBER_EXTRA = 2
     }
 
     @Inject

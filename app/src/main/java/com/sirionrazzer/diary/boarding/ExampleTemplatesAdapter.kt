@@ -28,8 +28,8 @@ class ExampleTemplatesAdapter(private val onCheckExampleTemplateListener: OnChec
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private var name = itemView.trackitemName
-        private var image = itemView.trackitemImage
+        private var name = itemView.tvName
+        private var image = itemView.ivTemplate
         private var fieldImage = itemView.ivPencil
         private var description = itemView.item_description
         private var switch = itemView.item_switch
@@ -52,7 +52,7 @@ class ExampleTemplatesAdapter(private val onCheckExampleTemplateListener: OnChec
             }
             description.text = item.description
             switch.isChecked = item.selected
-            switch.setOnCheckedChangeListener { compoundButton, b ->
+            switch.setOnCheckedChangeListener { _, b ->
                 onCheckExampleTemplateListener.onCheckExampleTemplate(layoutPosition, b)
             }
         }

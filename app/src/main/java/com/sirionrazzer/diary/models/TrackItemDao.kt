@@ -11,7 +11,6 @@ class TrackItemDao(val realm: Realm) {
 
     fun addTrackItem(trackItem: TrackItem) {
         realm.executeTransaction {
-            //item.id = Calendar.getInstance().timeInMillis.toString() + " " + UUID.randomUUID().toString()
             val item = TrackItem(
                 id = trackItem.id,
                 templateId = trackItem.templateId,
@@ -54,13 +53,13 @@ class TrackItemDao(val realm: Realm) {
     }
 
     fun getAllTrackItems(): LiveData<RealmResults<TrackItem>> {
-        var items = realm.where(TrackItem::class.java).findAll()
+        val items = realm.where(TrackItem::class.java).findAll()
         items.sort("position")
         return RealmLiveData<TrackItem>(items.sort("position"))
     }
 
     fun getAllTrackItemsSortByDate(): List<TrackItem> {
-        var items = realm.where(TrackItem::class.java).findAll().sort("date", Sort.DESCENDING)
+        val items = realm.where(TrackItem::class.java).findAll().sort("date", Sort.DESCENDING)
         return items.map { item -> item as TrackItem }
     }
 
