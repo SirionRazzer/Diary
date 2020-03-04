@@ -35,7 +35,7 @@ class HistoryActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListene
 
     companion object {
         private const val PERCENTAGE_TO_SHOW_ABL_CONTENT = 20
-        private const val ONE_MEGABYTE: Long = 1024 * 1024
+        private const val MAX_SIZE: Long = 30 * 1024 * 1024 // 30 MB max filesize
     }
 
     private var maxScrollSize: Int = 0
@@ -198,7 +198,7 @@ class HistoryActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListene
                     val storageRef = FirebaseStorage.getInstance().reference
                     val file = storageRef.child(filePath)
 
-                    file.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+                    file.getBytes(MAX_SIZE).addOnSuccessListener {
                         val conf = historyViewModel.realm.configuration
                         historyViewModel.realm.close()
                         Realm.deleteRealm(conf)
