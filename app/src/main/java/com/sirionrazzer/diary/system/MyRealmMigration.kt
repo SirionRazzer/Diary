@@ -22,7 +22,6 @@ class MyRealmMigration : RealmMigration {
                 ?.setRequired("description", true)
                 ?.addField("hasPictureField", Boolean::class.java)
                 ?.addField("pictureField", String::class.java)
-                ?.setRequired("pictureField", false)
         }
     }
 }
