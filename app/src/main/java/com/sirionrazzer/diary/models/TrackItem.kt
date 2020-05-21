@@ -1,6 +1,5 @@
 package com.sirionrazzer.diary.models
 
-import android.media.Image
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.Required
