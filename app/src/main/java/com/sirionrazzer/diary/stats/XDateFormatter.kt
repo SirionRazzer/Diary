@@ -5,7 +5,7 @@ import com.github.mikephil.charting.charts.BarLineChartBase
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.util.DateUtils
-import java.util.*
+import java.util.Calendar
 
 class XDateFormatter(
     private val chart: BarLineChartBase<*>,

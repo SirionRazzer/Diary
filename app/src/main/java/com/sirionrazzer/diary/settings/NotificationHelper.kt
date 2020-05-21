@@ -7,7 +7,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import java.util.*
+import java.util.Calendar
 
 object NotificationHelper {
     const val ALARM_TYPE_RTC = 100 // pending intent identifier

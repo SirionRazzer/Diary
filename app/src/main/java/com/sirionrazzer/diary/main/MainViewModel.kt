@@ -13,7 +13,7 @@ import com.sirionrazzer.diary.models.UserStorage
 import com.sirionrazzer.diary.util.DateUtils.Factory.DAY_MILLISECONDS
 import io.realm.Realm
 import org.threeten.bp.LocalDate
-import java.util.*
+import java.util.UUID
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 

@@ -7,7 +7,7 @@ import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.models.TrackItemTemplate
 import com.sirionrazzer.diary.models.TrackItemTemplateDao
 import io.realm.Realm
-import java.util.*
+import java.util.UUID
 
 class TemplateItemCreatorViewModel : ViewModel() {
 

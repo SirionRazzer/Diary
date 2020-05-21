@@ -7,7 +7,7 @@ import com.sirionrazzer.diary.models.ExampleTemplate
 import com.sirionrazzer.diary.models.TrackItemTemplate
 import com.sirionrazzer.diary.models.TrackItemTemplateDao
 import io.realm.Realm
-import java.util.*
+import java.util.UUID
 
 class BoardingPickerViewModel(app: Application) : AndroidViewModel(app) {
 
