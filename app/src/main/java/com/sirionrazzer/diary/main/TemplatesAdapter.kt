@@ -57,7 +57,7 @@ class TemplatesAdapter(private val context: Context, private val mainViewModel: 
         }
 
         val item = mainViewModel.currentTemplateItems.value?.get(position)!!
-        if (!mainViewModel.currentTrackItems.value?.get(position)!!.deleted) {
+        if (!mainViewModel.currentTrackItems.value?.get(position)!!.archived) {
 
             holder.status = mainViewModel.currentTrackItems.value?.get(position)!!.status
             holder.tvName?.text = mainViewModel.currentTrackItems.value?.get(position)!!.name

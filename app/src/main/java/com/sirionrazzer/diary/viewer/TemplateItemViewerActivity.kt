@@ -96,11 +96,14 @@ class TemplateItemViewerActivity : AppCompatActivity() {
                 tiViewModel.currentTemplateItems.value?.forEach {
                     val template = TrackItemTemplate(
                         it.id,
-                        it.deleted,
+                        it.archived,
+                        it.selected,
                         it.name,
+                        it.description,
                         it.image,
                         it.hasTextField,
                         it.hasNumberField,
+                        it.hasPictureField,
                         it.position
                     )
 
@@ -122,11 +125,14 @@ class TemplateItemViewerActivity : AppCompatActivity() {
                 tiViewModel.currentTemplateItems.value?.forEach {
                     val template = TrackItemTemplate(
                         it.id,
-                        it.deleted,
+                        it.archived,
+                        it.selected,
                         it.name,
+                        it.description,
                         it.image,
                         it.hasTextField,
                         it.hasNumberField,
+                        it.hasPictureField,
                         it.position
                     )
 

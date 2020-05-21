@@ -5,13 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sirionrazzer.diary.R
-import com.sirionrazzer.diary.models.ExampleTemplate
+import com.sirionrazzer.diary.models.TrackItemTemplate
 import kotlinx.android.synthetic.main.example_item.view.*
 
 class ExampleTemplatesAdapter(private val onCheckExampleTemplateListener: OnCheckExampleTemplateListener) :
     RecyclerView.Adapter<ExampleTemplatesAdapter.ViewHolder>() {
 
-    private var items: List<ExampleTemplate> = mutableListOf()
+    private var items: List<TrackItemTemplate> = mutableListOf()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(items[position])
 
@@ -22,7 +22,7 @@ class ExampleTemplatesAdapter(private val onCheckExampleTemplateListener: OnChec
         return ViewHolder(view)
     }
 
-    fun submitList(items: List<ExampleTemplate>) {
+    fun submitList(items: List<TrackItemTemplate>) {
         this.items = items
         notifyDataSetChanged()
     }
@@ -34,9 +34,9 @@ class ExampleTemplatesAdapter(private val onCheckExampleTemplateListener: OnChec
         private var description = itemView.item_description
         private var switch = itemView.item_switch
 
-        fun bind(item: ExampleTemplate) = with(itemView) {
+        fun bind(item: TrackItemTemplate) = with(itemView) {
             name.text = item.name
-            image.setImageResource(item.resource)
+            image.setImageResource(item.image)
             when {
                 item.hasTextField -> {
                     fieldImage.visibility = View.VISIBLE

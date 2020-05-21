@@ -4,14 +4,25 @@ import io.realm.DynamicRealm
 import io.realm.RealmMigration
 
 class MyRealmMigration : RealmMigration {
-    override fun migrate(realm: DynamicRealm, oldVersion: Long, newVersion: Long) {}
+    override fun migrate(realm: DynamicRealm, oldVersion: Long, newVersion: Long) {
+        val schema = realm.schema
+        var tOldVersion = oldVersion
 
-    // HashCode and Equals are set due to the renaming, maybe can be removed now?
-    override fun hashCode(): Int {
-        return 37
-    }
+        if (tOldVersion == 0L) {
+            schema.get("TrackItemTemplate")
+                ?.renameField("deleted", "archived")
+                ?.addField("selected", Boolean::class.java)
+                ?.addField("description", String::class.java)
+                ?.setRequired("description", true)
+                ?.addField("hasPictureField", Boolean::class.java)
 
-    override fun equals(other: Any?): Boolean {
-        return other is MyRealmMigration
+            schema.get("TrackItem")
+                ?.renameField("deleted", "archived")
+                ?.addField("description", String::class.java)
+                ?.setRequired("description", true)
+                ?.addField("hasPictureField", Boolean::class.java)
+                ?.addField("pictureField", String::class.java)
+                ?.setRequired("pictureField", false)
+        }
     }
 }

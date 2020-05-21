@@ -31,14 +31,17 @@ class TemplateItemCreatorViewModel : ViewModel() {
     }
 
     private fun createNewTemplate() {
-        val position = templateDao.getAllUndeletedTemplates().size
+        val position = templateDao.getAllUnarchivedTemplates().size
         template.value = TrackItemTemplate(
             UUID.randomUUID().toString(),
             false,
-            "",
-            R.drawable.aaa_circlecolor_dumptruck,
+            selected = true,
+            name = "",
+            description = "",
+            image = R.drawable.aaa_circlecolor_dumptruck,
             hasTextField = false,
             hasNumberField = false,
+            hasPictureField = false,
             position = position
         )
     }

@@ -163,7 +163,7 @@ class MainViewModel : ViewModel() {
     private fun initTrackAndTemplateItems() {
         clearAllLists()
 
-        realm.trackItemsTemplatesDao.getAllUndeletedTemplates().let {
+        realm.trackItemsTemplatesDao.getAllUnarchivedTemplates().let {
             it.forEach { tit ->
                 addEmptyItemToCurrent(tit)
             }
@@ -174,14 +174,17 @@ class MainViewModel : ViewModel() {
         val trackItem = TrackItem(
             id = UUID.randomUUID().toString(),
             templateId = it.id,
-            deleted = it.deleted,
+            archived = it.archived,
             name = it.name,
+            description = it.description,
             image = it.image,
             hasTextField = it.hasTextField,
             hasNumberField = it.hasNumberField,
+            hasPictureField = it.hasPictureField,
             status = false,
             textField = "",
             numberField = 0f,
+            pictureField = "",
             date = date.value!!.toEpochDay() * DAY_MILLISECONDS, // TODO
             position = it.position
         )
@@ -189,11 +192,14 @@ class MainViewModel : ViewModel() {
 
         val templateItem = TrackItemTemplate(
             id = it.id,
-            deleted = it.deleted,
+            archived = it.archived,
+            selected = it.selected,
             name = it.name,
+            description = it.description,
             image = it.image,
             hasTextField = it.hasTextField,
             hasNumberField = it.hasNumberField,
+            hasPictureField = it.hasPictureField,
             position = it.position
         )
         currentTemplateItems.value?.add(templateItem)
@@ -209,14 +215,17 @@ class MainViewModel : ViewModel() {
                     val trackItem = TrackItem(
                         id = it.id,
                         templateId = it.templateId,
-                        deleted = it.deleted,
+                        archived = it.archived,
                         name = it.name,
+                        description = it.description,
                         image = it.image,
                         hasTextField = it.hasTextField,
                         hasNumberField = it.hasNumberField,
+                        hasPictureField = it.hasPictureField,
                         status = it.status,
                         textField = it.textField,
                         numberField = it.numberField,
+                        pictureField = it.pictureField,
                         date = date.value!!.toEpochDay() * DAY_MILLISECONDS,
                         position = it.position
                     )
@@ -237,7 +246,7 @@ class MainViewModel : ViewModel() {
                 if (e.templateId.equals(it.templateId)) {
                     present = true
                     e.id = it.id
-                    e.deleted = it.deleted
+                    e.archived = it.archived
                     e.hasTextField = it.hasTextField
                     e.hasNumberField = it.hasNumberField
                     e.status = it.status

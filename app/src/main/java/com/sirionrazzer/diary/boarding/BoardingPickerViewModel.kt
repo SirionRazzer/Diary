@@ -3,7 +3,6 @@ package com.sirionrazzer.diary.boarding
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.sirionrazzer.diary.models.ExampleTemplate
 import com.sirionrazzer.diary.models.TrackItemTemplate
 import com.sirionrazzer.diary.models.TrackItemTemplateDao
 import io.realm.Realm
@@ -13,7 +12,7 @@ class BoardingPickerViewModel(app: Application) : AndroidViewModel(app) {
 
     private var _realm: Realm = Realm.getDefaultInstance()
 
-    lateinit var data: LiveData<List<ExampleTemplate>>
+    lateinit var data: LiveData<List<TrackItemTemplate>>
 
     val realm: Realm
         get() {
@@ -30,10 +29,13 @@ class BoardingPickerViewModel(app: Application) : AndroidViewModel(app) {
                 val tit = TrackItemTemplate(
                     UUID.randomUUID().toString(),
                     false,
-                    data.value!!.get(it).name,
-                    data.value!!.get(it).resource,
+                    selected = data.value!!.get(it).selected,
+                    name = data.value!!.get(it).name,
+                    description = data.value!!.get(it).description,
+                    image = data.value!!.get(it).image,
                     hasTextField = data.value!!.get(it).hasTextField,
                     hasNumberField = data.value!!.get(it).hasNumberField,
+                    hasPictureField = data.value!!.get(it).hasPictureField,
                     position = counter
                 )
                 realm.trackItemsTemplatesDao.addTemplate(tit)

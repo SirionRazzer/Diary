@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sirionrazzer.diary.Diary
 import com.sirionrazzer.diary.R
 import com.sirionrazzer.diary.history.HistoryActivity
-import com.sirionrazzer.diary.models.ExampleTemplate
+import com.sirionrazzer.diary.models.TrackItemTemplate
 import com.sirionrazzer.diary.models.UserStorage
 import com.sirionrazzer.diary.util.GridDividerDecoration
 import kotlinx.android.synthetic.main.activity_boarding_picker.*
@@ -80,239 +80,343 @@ class BoardingPickerActivity : AppCompatActivity(), OnCheckExampleTemplateListen
     override fun onCheckExampleTemplate(position: Int, value: Boolean) =
         bpViewModel.checkExampleTemplate(position, value)
 
-    private fun createExampleTemplates(): MutableLiveData<List<ExampleTemplate>> {
-        val ex0 = ExampleTemplate(
+    private fun createExampleTemplates(): MutableLiveData<List<TrackItemTemplate>> {
+        val ex0 = TrackItemTemplate(
+            "",
+            false,
+            true,
             getString(R.string.example_outcome),
+            "How much did I spend today",
             R.drawable.aaa_circlecolor_credit_card,
             false,
             true,
-            "How much did I spend today",
-            true
+            false,
+            0
         )
 
-        val ex1 = ExampleTemplate(
+        val ex1 = TrackItemTemplate(
+            "",
+            false,
+            true,
             getString(R.string.example_calories),
+            "How many calories did I eat today",
             R.drawable.aab_rice,
             false,
             true,
-            "How many calories did I eat today",
-            true
+            false,
+            1
         )
 
-        val ex2 = ExampleTemplate(
+        val ex2 = TrackItemTemplate(
+            "",
+            false,
+            true,
             getString(R.string.example_workout),
+            "What did I do today",
             R.drawable.aab_dumbbell,
             true,
             false,
-            "What did I do today",
-            true
+            false,
+            2
         )
 
-        val ex3 = ExampleTemplate(
+        val ex3 = TrackItemTemplate(
+            "",
+            false,
+            true,
             getString(R.string.example_note),
+            "My thought for today",
             R.drawable.aaa_circlecolor_writing,
             true,
             false,
-            "My thought for today",
-            true
+            false,
+            3
         )
 
-        val ex4 = ExampleTemplate(
+        val ex4 = TrackItemTemplate(
+            "",
+            false,
+            true,
             getString(R.string.example_water),
+            "Water milliliters today",
             R.drawable.aab_bottle,
             false,
             true,
-            "Water milliliters today",
-            true
+            false,
+            4
         )
 
-        val ex5 = ExampleTemplate(
+        val ex5 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_steps),
+            "Total steps today",
             R.drawable.aab_smartwatch,
             false,
             true,
-            "Total steps today",
-            false
+            false,
+            5
         )
 
-        val ex6 = ExampleTemplate(
+        val ex6 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_weight),
+            "My weight progress",
             R.drawable.aab_weight,
             false,
             true,
-            "My weight progress",
-            false
+            false,
+            6
         )
 
-        val ex7 = ExampleTemplate(
+        val ex7 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_grateful),
+            "What am I grateful for today",
             R.drawable.aaa_circlecolor_forest_2,
             true,
             false,
-            "What am I grateful for today",
-            false
+            false,
+            7
         )
 
-        val ex8 = ExampleTemplate(
+        val ex8 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_book),
+            "My reading journal",
             R.drawable.aaa_circlecolor_library,
             true,
             false,
-            "My reading journal",
-            false
+            false,
+            8
         )
 
-        val ex9 = ExampleTemplate(
+        val ex9 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_movie),
+            "“The world isn’t split into good people and Death Eaters.” --Harry Potter",
             R.drawable.aaa_circlecolor_planetearth,
             true,
             false,
-            "“The world isn’t split into good people and Death Eaters.” --Harry Potter",
-            false
+            false,
+            9
         )
 
-        val ex10 = ExampleTemplate(
+        val ex10 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_friends),
+            "“I would rather walk with a friend in the dark, than alone in the light.” --Helen Keller",
             R.drawable.aab_wine,
             false,
             false,
-            "“I would rather walk with a friend in the dark, than alone in the light.” --Helen Keller",
-            false
+            false,
+            10
         )
 
-        val ex11 = ExampleTemplate(
+        val ex11 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_practice),
+            "“You couldn't not like someone who liked the guitar.” --Stephen King",
             R.drawable.aaa_circlecolor_acoustic_guitar,
             false,
             false,
-            "“You couldn't not like someone who liked the guitar.” --Stephen King",
-            false
+            false,
+            11
         )
 
-        val ex12 = ExampleTemplate(
+        val ex12 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_relax),
+            "“Ah! There is nothing like staying at home, for real comfort.” --Jane Austen",
             R.drawable.aaa_circlecolor_river,
             false,
             false,
-            "“Ah! There is nothing like staying at home, for real comfort.” --Jane Austen",
-            false
+            false,
+            12
         )
 
-        val ex13 = ExampleTemplate(
+        val ex13 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_date),
+            "Two people meet socially with the aim of each assessing the other's suitability as a prospective partner in an intimate relationship. --Wikipedia",
             R.drawable.aab_dance,
             false,
             false,
-            "Two people meet socially with the aim of each assessing the other's suitability as a prospective partner in an intimate relationship. --Wikipedia",
-            false
+            false,
+            13
         )
 
-        val ex14 = ExampleTemplate(
+        val ex14 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_medicine),
-            R.drawable.aab_pills,
-            true,
-            true,
             "“Always laugh when you can, it is cheap medicine.” --Lord Byron",
-            false
+            R.drawable.aab_pills,
+            false,
+            true,
+            false,
+            14
         )
 
-        val ex15 = ExampleTemplate(
+        val ex15 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_party),
+            "“A party without cake is just a meeting.” --Julia Child",
             R.drawable.aaa_circlecolor_beach,
             false,
             false,
-            "“A party without cake is just a meeting.” --Julia Child",
-            false
-        )
-
-        val ex16 = ExampleTemplate(
-            getString(R.string.example_study),
-            R.drawable.aaa_circlecolor_graduate,
-            true,
             false,
-            "“Study the past if you would define the future.” --Confucius",
-            false
+            15
         )
 
-        val ex17 = ExampleTemplate(
+        val ex16 = TrackItemTemplate(
+            "",
+            false,
+            false,
+            getString(R.string.example_study),
+            "“Study the past if you would define the future.” --Confucius",
+            R.drawable.aaa_circlecolor_graduate,
+            false,
+            false,
+            false,
+            16
+        )
+
+        val ex17 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_shopping),
+            "My grocery list duty (maybe some nice shirts)",
             R.drawable.aaa_circlecolor_tablet,
             false,
             false,
-            "My grocery list duty (maybe some nice shirts)",
-            false
+            false,
+            17
         )
 
-        val ex18 = ExampleTemplate(
+        val ex18 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_running),
+            "My daily routine",
             R.drawable.aab_running,
             false,
             false,
-            "My daily routine",
-            false
+            false,
+            18
         )
 
-        val ex19 = ExampleTemplate(
+        val ex19 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_cycling),
+            "I need two wheels",
             R.drawable.aab_cycling,
             false,
             false,
-            "I need two wheels",
-            false
+            false,
+            19
         )
 
-        val ex20 = ExampleTemplate(
+        val ex20 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_breathing),
+            "[Apple Watch] One minute breathing session",
             R.drawable.aab_stopclock,
             false,
             false,
-            "[Apple Watch] One minute breathing session",
-            false
+            false,
+            20
         )
 
-        val ex21 = ExampleTemplate(
+        val ex21 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_diet),
+            "Get rid of the unhealthy foods in your house",
             R.drawable.aab_juice,
             false,
             false,
-            "Get rid of the unhealthy foods in your house",
-            false
+            false,
+            21
         )
 
-        val ex22 = ExampleTemplate(
+        val ex22 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_nojunk),
+            "No junk food challenge",
             R.drawable.aab_nofood,
             false,
             false,
-            "No junk food challenge",
-            false
+            false,
+            22
         )
 
-        val ex23 = ExampleTemplate(
+        val ex23 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_meditation),
+            "Train attention and awareness, become emotionally calm and stable",
             R.drawable.aaa_circlecolor_sprout,
             false,
             false,
-            "Train attention and awareness, become emotionally calm and stable",
-            false
+            false,
+            23
         )
 
-        val ex24 = ExampleTemplate(
+        val ex24 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_heartpoints),
+            "[Google Fit] Activities like brisk walking, jogging, swimming, taking exercise classes, or playing tennis",
             R.drawable.aab_cardiogram,
             false,
             true,
-            "[Google Fit] Activities like brisk walking, jogging, swimming, taking exercise classes, or playing tennis",
-            false
+            false,
+            24
         )
 
-        val ex25 = ExampleTemplate(
+        val ex25 = TrackItemTemplate(
+            "",
+            false,
+            false,
             getString(R.string.example_moveminutes),
+            "[Google Fit] Activities like yoga, dancing, gardening, or household chores",
             R.drawable.aab_stopclock,
             false,
             true,
-            "[Google Fit] Activities like yoga, dancing, gardening, or household chores",
-            false
+            false,
+            25
         )
 
         return MutableLiveData(

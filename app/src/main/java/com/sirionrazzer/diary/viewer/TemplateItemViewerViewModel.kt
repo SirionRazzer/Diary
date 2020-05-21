@@ -29,11 +29,11 @@ class TemplateItemViewerViewModel : ViewModel() {
     }
 
     private fun getUndeletedTemplates(): MutableList<TrackItemTemplate> {
-        return templateDao.getAllUndeletedTemplates()
+        return templateDao.getAllUnarchivedTemplates()
     }
 
     private fun getDeletedTemplates(): MutableList<TrackItemTemplate> {
-        return templateDao.getAllDeletedTemplates()
+        return templateDao.getAllArchivedTemplates()
     }
 
     fun updateTemplate(template: TrackItemTemplate) {
@@ -58,7 +58,10 @@ class TemplateItemViewerViewModel : ViewModel() {
                 template.position = (item.position.dec()) // <-- this
                 template.hasTextField = item.hasTextField
                 template.hasNumberField = item.hasNumberField
-                template.deleted = item.deleted
+                template.archived = item.archived
+                template.description = item.description
+                template.hasPictureField = item.hasPictureField
+                template.selected = item.selected
 
                 updateTemplate(template)
 
@@ -78,7 +81,10 @@ class TemplateItemViewerViewModel : ViewModel() {
         template.position = (-1) * getDeletedTemplates().size // <- negative position
         template.hasTextField = item.hasTextField
         template.hasNumberField = item.hasNumberField
-        template.deleted = true // <-- this
+        template.archived = true // <-- this
+        template.description = item.description
+        template.hasPictureField = item.hasPictureField
+        template.selected = item.selected
 
         decreasePositions(item.position + 1)
         updateTemplate(template)

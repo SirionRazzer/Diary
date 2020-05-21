@@ -92,6 +92,6 @@ class Diary : Application() {
 
     companion object {
         lateinit var app: Diary
-        private const val REALM_MIGRATION_VERSION = 0L
+        private const val REALM_MIGRATION_VERSION = 1L
     }
 }

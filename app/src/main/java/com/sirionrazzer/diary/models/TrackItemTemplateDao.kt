@@ -8,11 +8,14 @@ class TrackItemTemplateDao(val realm: Realm) {
         realm.executeTransaction {
             val item = TrackItemTemplate(
                 id = trackItemTemplate.id,
-                deleted = trackItemTemplate.deleted,
+                archived = trackItemTemplate.archived,
+                selected = trackItemTemplate.selected,
                 name = trackItemTemplate.name,
+                description = trackItemTemplate.description,
                 image = trackItemTemplate.image,
                 hasTextField = trackItemTemplate.hasTextField,
                 hasNumberField = trackItemTemplate.hasNumberField,
+                hasPictureField = trackItemTemplate.hasPictureField,
                 position = trackItemTemplate.position
             )
             it.insert(item)
@@ -42,20 +45,20 @@ class TrackItemTemplateDao(val realm: Realm) {
         return list.toMutableList()
     }
 
-    fun getAllUndeletedTemplates(): MutableList<TrackItemTemplate> {
+    fun getAllUnarchivedTemplates(): MutableList<TrackItemTemplate> {
         realm.beginTransaction()
         val items =
-            realm.where(TrackItemTemplate::class.java).equalTo("deleted", false).sort("position")
+            realm.where(TrackItemTemplate::class.java).equalTo("archived", false).sort("position")
                 .findAll()
         realm.commitTransaction()
         val list = items.map { item -> item as TrackItemTemplate }
         return list.toMutableList()
     }
 
-    fun getAllDeletedTemplates(): MutableList<TrackItemTemplate> {
+    fun getAllArchivedTemplates(): MutableList<TrackItemTemplate> {
         realm.beginTransaction()
         val items =
-            realm.where(TrackItemTemplate::class.java).equalTo("deleted", true).sort("position")
+            realm.where(TrackItemTemplate::class.java).equalTo("archived", true).sort("position")
                 .findAll()
         realm.commitTransaction()
         val list = items.map { item -> item as TrackItemTemplate }

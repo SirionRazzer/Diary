@@ -14,14 +14,17 @@ class TrackItemDao(val realm: Realm) {
             val item = TrackItem(
                 id = trackItem.id,
                 templateId = trackItem.templateId,
-                deleted = trackItem.deleted,
+                archived = trackItem.archived,
                 name = trackItem.name,
+                description = trackItem.description,
                 image = trackItem.image,
                 hasTextField = trackItem.hasTextField,
                 hasNumberField = trackItem.hasNumberField,
+                hasPictureField = trackItem.hasPictureField,
                 status = trackItem.status,
                 textField = trackItem.textField,
                 numberField = trackItem.numberField,
+                pictureField = trackItem.pictureField,
                 date = trackItem.date,
                 position = trackItem.position
             )
