@@ -1,13 +1,14 @@
 # Dr. Diary
 
+[![Build Status](https://travis-ci.org/SirionRazzer/Diary.svg?branch=master)](https://travis-ci.org/SirionRazzer/Diary)
+[![GitHub release](https://img.shields.io/github/release/SirionRazzer/Diary.svg)](https://GitHub.com/SirionRazzer/Diary/releases/)
+
+
 <h1 align=center>
 <img src="visuals/feature_compilation.png" width=100%>
 </h1>
 
 Android app for tracking daily routine
-
-### Build status
-[![Build Status](https://travis-ci.org/SirionRazzer/Diary.svg?branch=master)](https://travis-ci.org/SirionRazzer/Diary)
 
 ### Features
 :heavy_check_mark: Create custom activities, reorder them (drag'n'drop in Activity Manager, remove unused (longpress in Activity Manager)
