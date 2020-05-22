@@ -1,6 +1,6 @@
 # Dr. Diary
 
-[![Build Status](https://travis-ci.org/SirionRazzer/Diary.svg?branch=master)](https://travis-ci.org/SirionRazzer/Diary)
+[![Build Status](https://travis-ci.org/SirionRazzer/Diary.svg)](https://travis-ci.org/SirionRazzer/Diary)
 [![GitHub release](https://img.shields.io/github/release/SirionRazzer/Diary.svg)](https://GitHub.com/SirionRazzer/Diary/releases/)
 
 
