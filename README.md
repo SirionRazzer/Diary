@@ -6,8 +6,8 @@
 
 Android app for tracking daily routine
 
-### Build status
 [![Build Status](https://travis-ci.org/SirionRazzer/Diary.svg?branch=master)](https://travis-ci.org/SirionRazzer/Diary)
+[![GitHub release](https://img.shields.io/github/release/SirionRazzer/Diary.svg)](https://GitHub.com/SirionRazzer/Diary/releases/)
 
 ### Features
 :heavy_check_mark: Create custom activities, reorder them (drag'n'drop in Activity Manager, remove unused (longpress in Activity Manager)
