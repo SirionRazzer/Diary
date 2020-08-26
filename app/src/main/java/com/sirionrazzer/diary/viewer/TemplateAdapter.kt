@@ -15,7 +15,7 @@ import org.jetbrains.anko.yesButton
 
 class TemplateAdapter(
     currentTemplateItems: MutableList<TrackItemTemplate>,
-    val tiViewModel: TemplateItemViewerViewModel,
+    val viewModel: TemplateItemViewerViewModel,
     val context: Context
 ) :
     DragDropSwipeAdapter<TrackItemTemplate, TemplateAdapter.ViewHolder>(currentTemplateItems) {
@@ -73,12 +73,12 @@ class TemplateAdapter(
     }
 
     private fun deleteTemplate(item: TrackItemTemplate) {
-        tiViewModel.deleteTemplate(item)
+        viewModel.deleteTemplate(item)
         refresh()
     }
 
     fun refresh() {
-        super.dataSet = tiViewModel.currentTemplateItems.value ?: mutableListOf()
+        super.dataSet = viewModel.currentTemplateItems.value ?: mutableListOf()
         super.notifyDataSetChanged()
     }
 }

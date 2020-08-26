@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.toolbar.*
 import javax.inject.Inject
 
 class BoardingActivity : AppCompatActivity() {
-    private lateinit var authViewModel: AuthViewModel
+    private lateinit var viewModel: AuthViewModel
 
     @Inject
     lateinit var userStorage: UserStorage
@@ -30,16 +30,18 @@ class BoardingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_boarding)
 
         setSupportActionBar(toolbar)
-        toolbar.title = getString(R.string.app_name)
-        toolbar.visibility = View.GONE
+        toolbar.apply {
+            title = getString(R.string.app_name)
+            visibility = View.GONE
+        }
 
-        authViewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
-        authViewModel.isLoggedIn.observe(this, Observer {
+        viewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
+        viewModel.isLoggedIn.observe(this, Observer {
             if (it) {
                 try {
-                    Diary.app.installEncryptedRealm(authViewModel.getEncryptedPassword())
+                    Diary.app.installEncryptedRealm(viewModel.getEncryptedPassword())
 
-                    if (!userStorage.userSettings.boardingPickerShown && authViewModel.isNewcomer.value!!) {
+                    if (!userStorage.userSettings.boardingPickerShown && viewModel.isNewcomer.value!!) {
                         startActivity(Intent(this, BoardingPickerActivity::class.java))
                     } else {
                         startActivity(Intent(this, HistoryActivity::class.java))
@@ -55,12 +57,12 @@ class BoardingActivity : AppCompatActivity() {
             }
         })
 
-        authViewModel.authError.observe(this, Observer {
+        viewModel.authError.observe(this, Observer {
             tilEmail.isErrorEnabled = true
             tilPassword.isErrorEnabled = true
             tilEmail.error = ""
             tilEmail.error = ""
-            when (authViewModel.authErrorType.value) {
+            when (viewModel.authErrorType.value) {
                 AuthError.ERROR_CREDENTIAL_ALREADY_IN_USE -> tilPassword.error = it ?: ""
                 AuthError.ERROR_FIREBASE_ERROR -> tilPassword.error = it ?: ""
                 AuthError.ERROR_INVALID_CREDENTIALS -> tilPassword.error = it ?: ""
@@ -90,7 +92,7 @@ class BoardingActivity : AppCompatActivity() {
         }
 
         anonymousRegisterBtn.setOnClickListener {
-            authViewModel.anonymousRegister()
+            viewModel.anonymousRegister()
         }
     }
 
@@ -116,7 +118,7 @@ class BoardingActivity : AppCompatActivity() {
             userStorage.userSettings.email.let {
                 // TODO hack: no new user allowed, due to the db being prepared for the given user (might be fixed with new db for each new logged in account)
                 if (it == null || it == email) {
-                    authViewModel.login(email, pw)
+                    viewModel.login(email, pw)
                 } else {
                     Toast.makeText(
                         this,
@@ -138,8 +140,8 @@ class BoardingActivity : AppCompatActivity() {
         if (pw.isBlank() || pw.length < 6) {
             tilPassword.error = getString(R.string.short_password)
         } else if (StringUtils.isValidEmail(email)) {
-            if (!authViewModel.accountCreated.value!!) {
-                authViewModel.register(email, pw)
+            if (!viewModel.accountCreated.value!!) {
+                viewModel.register(email, pw)
             }
         } else {
             Toast.makeText(this, getString(R.string.invalid_pa_email), Toast.LENGTH_SHORT)

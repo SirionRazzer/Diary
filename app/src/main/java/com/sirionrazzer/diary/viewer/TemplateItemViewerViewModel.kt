@@ -51,17 +51,18 @@ class TemplateItemViewerViewModel : ViewModel() {
             while (pos < currentTemplateItems.value!!.size) {
                 val item = currentTemplateItems.value!!.get(pos)
 
-                val template = TrackItemTemplate()
-                template.id = item.id
-                template.name = item.name
-                template.image = item.image
-                template.position = (item.position.dec()) // <-- this
-                template.hasTextField = item.hasTextField
-                template.hasNumberField = item.hasNumberField
-                template.archived = item.archived
-                template.description = item.description
-                template.hasPictureField = item.hasPictureField
-                template.selected = item.selected
+                val template = TrackItemTemplate().apply {
+                    id = item.id
+                    name = item.name
+                    image = item.image
+                    position = (item.position.dec()) // <-- this
+                    hasTextField = item.hasTextField
+                    hasNumberField = item.hasNumberField
+                    archived = item.archived
+                    description = item.description
+                    hasPictureField = item.hasPictureField
+                    selected = item.selected
+                }
 
                 updateTemplate(template)
 
@@ -74,17 +75,18 @@ class TemplateItemViewerViewModel : ViewModel() {
      * Deleted template has deleted == true and negative position
      */
     fun deleteTemplate(item: TrackItemTemplate) {
-        val template = TrackItemTemplate()
-        template.id = item.id
-        template.name = item.name
-        template.image = item.image
-        template.position = (-1) * getDeletedTemplates().size // <- negative position
-        template.hasTextField = item.hasTextField
-        template.hasNumberField = item.hasNumberField
-        template.archived = true // <-- this
-        template.description = item.description
-        template.hasPictureField = item.hasPictureField
-        template.selected = item.selected
+        val template = TrackItemTemplate().apply {
+            id = item.id
+            name = item.name
+            image = item.image
+            position = (-1) * getDeletedTemplates().size // <- negative position
+            hasTextField = item.hasTextField
+            hasNumberField = item.hasNumberField
+            archived = true // <-- this
+            description = item.description
+            hasPictureField = item.hasPictureField
+            selected = item.selected
+        }
 
         decreasePositions(item.position + 1)
         updateTemplate(template)
