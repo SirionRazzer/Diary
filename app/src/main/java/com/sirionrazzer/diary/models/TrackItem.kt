@@ -26,20 +26,20 @@ open class TrackItem(
 ) : RealmObject() {
     // constructor used by Realm
     constructor() : this(
-        "",
-        "",
-        false,
-        "",
-        "",
-        0,
-        false,
-        false,
-        false,
-        false,
-        "",
-        0f,
-        "",
-        0,
-        0
+        id = "",
+        templateId = "",
+        archived = false,
+        name = "",
+        description = "",
+        image = 0,
+        hasTextField = false,
+        hasNumberField = false,
+        hasPictureField = false,
+        status = false,
+        textField = "",
+        numberField = 0f,
+        pictureField = "",
+        date = 0,
+        position = 0
     )
 }

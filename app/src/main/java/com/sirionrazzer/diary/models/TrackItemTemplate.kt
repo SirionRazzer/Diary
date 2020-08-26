@@ -19,5 +19,16 @@ open class TrackItemTemplate(
     open var position: Int // relative position in layout, for displaying items in some order
 ) : RealmObject() {
     // constructor used by Realm
-    constructor() : this("", false, false, "", "", 0, false, false, false, 0)
+    constructor() : this(
+        id = "",
+        archived = false,
+        selected = false,
+        name = "",
+        description = "",
+        image = 0,
+        hasTextField = false,
+        hasNumberField = false,
+        hasPictureField = false,
+        position = 0
+    )
 }

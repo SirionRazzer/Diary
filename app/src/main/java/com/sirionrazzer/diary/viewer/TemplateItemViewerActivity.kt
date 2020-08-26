@@ -23,11 +23,11 @@ import kotlinx.android.synthetic.main.toolbar.*
 class TemplateItemViewerActivity : AppCompatActivity() {
 
     companion object {
-        val CHANGE = 1
-        val NOCHANGE = 0
+        const val CHANGE = 1
+        const val NOCHANGE = 0
     }
 
-    lateinit var tiViewModel: TemplateItemViewerViewModel
+    lateinit var viewModel: TemplateItemViewerViewModel
     lateinit var adapter: TemplateAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,26 +36,28 @@ class TemplateItemViewerActivity : AppCompatActivity() {
 
         Diary.app.appComponent.inject(this)
 
-        tiViewModel = createViewModel()
+        viewModel = createViewModel()
 
         toolbar.setTitle(R.string.title_manage_activities)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
-        if (tiViewModel.currentTemplateItems.value != null) {
-            adapter = TemplateAdapter(tiViewModel.currentTemplateItems.value!!, tiViewModel, this)
+        if (viewModel.currentTemplateItems.value != null) {
+            adapter = TemplateAdapter(viewModel.currentTemplateItems.value!!, viewModel, this)
             rvTemplates.layoutManager = GridLayoutManager(this, 4, RecyclerView.VERTICAL, false)
             rvTemplates.adapter = adapter
         }
-        rvTemplates.orientation =
-            DragDropSwipeRecyclerView.ListOrientation.GRID_LIST_WITH_HORIZONTAL_SWIPING
-        rvTemplates.orientation?.removeSwipeDirectionFlag(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.RIGHT)
-        rvTemplates.orientation?.removeSwipeDirectionFlag(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.LEFT)
-        rvTemplates.swipeListener = onItemSwipeListener
-        rvTemplates.dragListener = onItemDragListener
+        rvTemplates.apply {
+            orientation =
+                DragDropSwipeRecyclerView.ListOrientation.GRID_LIST_WITH_HORIZONTAL_SWIPING
+            orientation?.removeSwipeDirectionFlag(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.RIGHT)
+            orientation?.removeSwipeDirectionFlag(DragDropSwipeRecyclerView.ListOrientation.DirectionFlag.LEFT)
+            swipeListener = onItemSwipeListener
+            dragListener = onItemDragListener
+        }
 
-        tiViewModel.currentTemplateItems.observe(this, Observer { updated ->
+        viewModel.currentTemplateItems.observe(this, Observer { updated ->
 //            if (tiViewModel.currentTemplateItems.value != null) {
 //                if (updated != null) adapter.refresh(updated)
 //            }
@@ -93,7 +95,7 @@ class TemplateItemViewerActivity : AppCompatActivity() {
 
             // Move items between initial and final position by -1
             if (initialPosition < finalPosition) {
-                tiViewModel.currentTemplateItems.value?.forEach {
+                viewModel.currentTemplateItems.value?.forEach {
                     val template = TrackItemTemplate(
                         it.id,
                         it.archived,
@@ -115,14 +117,14 @@ class TemplateItemViewerActivity : AppCompatActivity() {
                         template.position = it.position - 1
                     }
 
-                    tiViewModel.updateTemplate(template)
+                    viewModel.updateTemplate(template)
                 }
-                tiViewModel.hasChanged = true
+                viewModel.hasChanged = true
             }
 
             // Move items between initial and final position by +1
             if (initialPosition > finalPosition) {
-                tiViewModel.currentTemplateItems.value?.forEach {
+                viewModel.currentTemplateItems.value?.forEach {
                     val template = TrackItemTemplate(
                         it.id,
                         it.archived,
@@ -144,13 +146,13 @@ class TemplateItemViewerActivity : AppCompatActivity() {
                         template.position = it.position + 1
                     }
 
-                    tiViewModel.updateTemplate(template)
+                    viewModel.updateTemplate(template)
                 }
-                tiViewModel.hasChanged = true
+                viewModel.hasChanged = true
             }
 
-            if (tiViewModel.hasChanged && initialPosition != finalPosition) {
-                tiViewModel.refreshTemplateList()
+            if (viewModel.hasChanged && initialPosition != finalPosition) {
+                viewModel.refreshTemplateList()
                 rvTemplates.adapter?.notifyDataSetChanged()
             }
         }
@@ -174,7 +176,7 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         adapter.notifyDataSetChanged()
     }
 
-    fun createViewModel(): TemplateItemViewerViewModel {
+    private fun createViewModel(): TemplateItemViewerViewModel {
         return ViewModelProviders.of(this).get(TemplateItemViewerViewModel::class.java)
     }
 
@@ -197,8 +199,8 @@ class TemplateItemViewerActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == resultCode) { // template was added
-            tiViewModel.refreshTemplateList()
-            tiViewModel.hasChanged = true
+            viewModel.refreshTemplateList()
+            viewModel.hasChanged = true
             adapter.refresh()
             val snackbar = Snackbar.make(rlMain, "Activity added", Snackbar.LENGTH_SHORT)
             snackbar.show()
@@ -210,7 +212,7 @@ class TemplateItemViewerActivity : AppCompatActivity() {
 
         val intent = Intent()
 
-        if (tiViewModel.hasChanged) setResult(CHANGE, intent) else {
+        if (viewModel.hasChanged) setResult(CHANGE, intent) else {
             setResult(NOCHANGE, intent)
         }
         finish()

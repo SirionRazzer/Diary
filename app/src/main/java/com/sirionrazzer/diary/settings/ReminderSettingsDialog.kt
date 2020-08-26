@@ -96,15 +96,19 @@ class ReminderSettingsDialog : DialogFragment() {
                 this.tmpMinute
             )
             NotificationHelper.enableBootReceiver(dialog!!.context)
-            userStorage.updateSettings { lus ->
-                lus.reminderActive = true
-                lus.reminderTimeHour = this.tmpHour
-                lus.reminderTimeMinute = this.tmpMinute
-                lus.reminderAdded = true
+            userStorage.updateSettings {
+                it.apply {
+                    reminderActive = true
+                    reminderTimeHour = tmpHour
+                    reminderTimeMinute = tmpMinute
+                    reminderAdded = true
+                }
             }
         } else {
-            userStorage.updateSettings { lus ->
-                lus.reminderActive = false
+            userStorage.updateSettings {
+                it.apply {
+                    reminderActive = false
+                }
             }
             NotificationHelper.cancelAlarmRTC(dialog!!.context, this.hour, this.minute)
             NotificationHelper.disableBootReceiver(dialog!!.context)
@@ -113,8 +117,10 @@ class ReminderSettingsDialog : DialogFragment() {
 
     private fun setTimePicker() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            timePicker.hour = this.hour
-            timePicker.minute = this.minute
+            timePicker.apply {
+                hour = this.hour
+                minute = this.minute
+            }
         }
 
         timePicker.setOnTimeChangedListener { timePicker, hourOfDay, minute ->

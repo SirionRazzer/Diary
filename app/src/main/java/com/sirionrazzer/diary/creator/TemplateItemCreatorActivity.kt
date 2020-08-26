@@ -111,7 +111,9 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
     }
 
     override fun onBackPressed() {
-        if ((viewModel.hasChanged.value != null && viewModel.hasChanged.value!!) || etName.text!!.toString().isNotEmpty()) {
+        if ((viewModel.hasChanged.value != null && viewModel.hasChanged.value!!) || etName.text!!.toString()
+                .isNotEmpty()
+        ) {
             alert(
                 getString(R.string.message_leave_without_save),
                 getString(R.string.caption_activity_not_saved)
@@ -128,25 +130,33 @@ class TemplateItemCreatorActivity : AppCompatActivity(), AdapterView.OnItemSelec
     }
 
     override fun onNothingSelected(parent: AdapterView<*>) {
-        viewModel.template.value?.hasNumberField = false
-        viewModel.template.value?.hasTextField = false
+        viewModel.apply {
+            template.value?.hasNumberField = false
+            template.value?.hasTextField = false
+        }
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         when (position) {
             TEXT_EXTRA -> {
-                viewModel.template.value?.hasNumberField = false
-                viewModel.template.value?.hasTextField = true
-                viewModel.hasChanged.value = true
+                viewModel.apply {
+                    template.value?.hasNumberField = false
+                    template.value?.hasTextField = true
+                    hasChanged.value = true
+                }
             }
             NUMBER_EXTRA -> {
-                viewModel.template.value?.hasNumberField = true
-                viewModel.template.value?.hasTextField = false
-                viewModel.hasChanged.value = true
+                viewModel.apply {
+                    template.value?.hasNumberField = true
+                    template.value?.hasTextField = false
+                    hasChanged.value = true
+                }
             }
             else -> {
-                viewModel.template.value?.hasNumberField = false
-                viewModel.template.value?.hasTextField = false
+                viewModel.apply {
+                    template.value?.hasNumberField = false
+                    template.value?.hasTextField = false
+                }
             }
         }
     }

@@ -4,19 +4,19 @@ import io.realm.Realm
 
 class TrackItemTemplateDao(val realm: Realm) {
 
-    fun addTemplate(trackItemTemplate: TrackItemTemplate) {
+    fun addTemplate(template: TrackItemTemplate) {
         realm.executeTransaction {
             val item = TrackItemTemplate(
-                id = trackItemTemplate.id,
-                archived = trackItemTemplate.archived,
-                selected = trackItemTemplate.selected,
-                name = trackItemTemplate.name,
-                description = trackItemTemplate.description,
-                image = trackItemTemplate.image,
-                hasTextField = trackItemTemplate.hasTextField,
-                hasNumberField = trackItemTemplate.hasNumberField,
-                hasPictureField = trackItemTemplate.hasPictureField,
-                position = trackItemTemplate.position
+                id = template.id,
+                archived = template.archived,
+                selected = template.selected,
+                name = template.name,
+                description = template.description,
+                image = template.image,
+                hasTextField = template.hasTextField,
+                hasNumberField = template.hasNumberField,
+                hasPictureField = template.hasPictureField,
+                position = template.position
             )
             it.insert(item)
         }
