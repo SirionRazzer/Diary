@@ -1,8 +1,8 @@
 # Dr. Diary
 
 [![Build Status](https://travis-ci.org/SirionRazzer/Diary.svg)](https://travis-ci.org/SirionRazzer/Diary)
-[![GitHub release](https://img.shields.io/github/release/SirionRazzer/Diary.svg)](https://GitHub.com/SirionRazzer/Diary/releases/)
-
+[![GitHub Release](https://img.shields.io/github/release/SirionRazzer/Diary.svg)](https://GitHub.com/SirionRazzer/Diary/releases/)
+![GitHub Release Date](https://img.shields.io/github/release-date/SirionRazzer/Diary)
 
 <h1 align=center>
 <img src="visuals/feature_compilation.png" width=100%>
