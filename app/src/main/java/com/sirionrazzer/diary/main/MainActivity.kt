@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.date.observe(this, Observer {
             tvDate.text = DateUtils.smartDate(
                 DateUtils.dateFromMillis(it.toEpochDay() * DAY_MILLISECONDS),
+                false,
                 false
             )
 

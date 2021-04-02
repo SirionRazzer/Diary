@@ -36,7 +36,7 @@ class TrackItemStatsAdapter(private val stats: List<TrackItem>) :
 
         fun bind(item: TrackItem) {
 
-            date.text = DateUtils.smartDate(DateUtils.dateFromMillis(item.date), false)
+            date.text = DateUtils.smartDate(DateUtils.dateFromMillis(item.date), false, true)
             if (item.hasNumberField) {
                 tvNumber.text = item.numberField.toString()
             } else {

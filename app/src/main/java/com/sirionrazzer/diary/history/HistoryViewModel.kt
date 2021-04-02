@@ -51,7 +51,7 @@ class HistoryViewModel : ViewModel() {
         }
 
         trackItems.forEach {
-            val date = DateUtils.smartDate(DateUtils.dateFromMillis(it.date), false)
+            val date = DateUtils.smartDate(DateUtils.dateFromMillis(it.date), false, true)
 
             if (!trackItemsByDate.containsKey(date)) {
                 trackItemsByDate[date] = arrayListOf()
@@ -64,7 +64,7 @@ class HistoryViewModel : ViewModel() {
         // compute strikeLength also
         val today = LocalDateTime.now()
         val todayLong: Long = today.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
-        val todayKey = DateUtils.smartDate(DateUtils.dateFromMillis(todayLong), false)
+        val todayKey = DateUtils.smartDate(DateUtils.dateFromMillis(todayLong), false, true)
         if (trackItemsByDate.containsKey(todayKey)) {
             strikeLength.value = computeStrikeLength(todayLong, 1)
         } else {
@@ -78,7 +78,7 @@ class HistoryViewModel : ViewModel() {
     }
 
     private fun computeStrikeLength(dayMillis: Long, depth: Int): Int {
-        val key = DateUtils.smartDate(DateUtils.dateFromMillis(dayMillis), false)
+        val key = DateUtils.smartDate(DateUtils.dateFromMillis(dayMillis), false, true)
         val previousDay: Long = Instant.ofEpochMilli(dayMillis)
             .atZone(ZoneId.systemDefault())
             .toLocalDate()

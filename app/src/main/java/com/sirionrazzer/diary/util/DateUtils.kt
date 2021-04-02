@@ -38,12 +38,16 @@ class DateUtils {
          *
          * @param editDate is original edit date
          * @param specialText is true if special string events (Today, Recently) should be used
+         * @param withYear is true if pattern should contain year also
          * @return appropriate text (ie. "Recently" ot "Today") or HH:mm DD/mm for older notes
          */
-        fun smartDate(editDate: Date?, specialText: Boolean): String {
+        fun smartDate(editDate: Date?, specialText: Boolean, withYear: Boolean): String {
             var smartDate: String
             val currentDate = Date()
-            val df = SimpleDateFormat("d/M", Locale.getDefault())
+            var df = SimpleDateFormat("d/M", Locale.getDefault())
+            if (withYear) {
+                df = SimpleDateFormat("d/M/yy", Locale.getDefault())
+            }
             val cal = Calendar.getInstance()
             cal.time = currentDate
 
