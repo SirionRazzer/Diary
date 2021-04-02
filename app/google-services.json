@@ -23,6 +23,51 @@
           }
         },
         {
+          "client_id": "708333537487-l963jg0l54vltd0nckpvbj9m9h2ecrte.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sirionrazzer.diary",
+            "certificate_hash": "e5a3b7cc828dd1ef1853966d0d79ceffc9f52fa2"
+          }
+        },
+        {
+          "client_id": "708333537487-jkfsnno9rotaob8dhcb71qjt7t95phn8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9grTR3Jqu_II5o_PvB1UgoKe5Kr6uhrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "708333537487-jkfsnno9rotaob8dhcb71qjt7t95phn8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708333537487:android:7946d30195149d236f4fba",
+        "android_client_info": {
+          "package_name": "com.sirionrazzer.diary.beta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "708333537487-ihtieccrmp1kkj2p4jpqa4hl5f6eh8kc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sirionrazzer.diary.beta",
+            "certificate_hash": "802c5f58c8d27c0c6c8db4520a54e16a444a6c63"
+          }
+        },
+        {
           "client_id": "708333537487-jkfsnno9rotaob8dhcb71qjt7t95phn8.apps.googleusercontent.com",
           "client_type": 3
         }
